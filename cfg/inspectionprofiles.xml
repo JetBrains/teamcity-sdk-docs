@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE inspections
+    SYSTEM "http://helpserver.labs.intellij.net/help/inspectionprofiles.dtd">
+<inspections>
+    <inspection id="TXP00001">
+        <message>Link from "%1" to article "%2" that is outside of current build.</message>
+        <severity>warning</severity>
+    </inspection>
+    <inspection id="TXP00002">
+        <message>Link from "%1" to article "%2" that does not exist.</message>
+        <severity>warning</severity>
+    </inspection>
+    <inspection id="TXP00003">
+        <message>Trying to rel from one side block to another via "%1"</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00004">
+        <message>Shortcut key "%1" has no mapping in current keymap.</message>
+        <severity>warning</severity>
+    </inspection>
+    <inspection id="TXP00005">
+        <message>Cannot include element with include-id "%1" from article "%2" to article "%3" because it cannot be found.</message>
+        <severity>warning</severity>
+    </inspection>
+    <inspection id="TXP00006">
+        <message>Hard-coded shortcut "%1".</message>
+        <severity>warning</severity>
+    </inspection>
+    <inspection id="TXP00007">
+        <message>Attempt to include "%1" from article "%2" to %3 yields empty content.</message>
+        <severity>warning</severity>
+    </inspection>
+    <inspection id="TXP00008">
+        <message>Include-id "%1" matches nothing in "%2".</message>
+        <severity>warning</severity>
+    </inspection>
+    <inspection id="TXP00009">
+        <message>Image "%1" cannot be found.</message>
+        <severity>warning</severity>
+    </inspection>
+    <inspection id="TXP00010">
+        <message>Link to "%1" in "%2" uses anchor "%3" that does not exist.</message>
+        <severity>warning</severity>
+    </inspection>
+    <inspection id="TXP00011">
+        <message>Include-id "%1" matches more than one fragment in "%2".</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00014">
+        <message>At least one topic file must be included in build. Possibly "%1.tree" is corrupted.</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00015">
+        <message>"%1" is included in build, but cannot be found.</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00016">
+        <message>"%1" exists, but is not a valid XML file.</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00017">
+        <message>Element id "%1" occurs %2 times instead of 1.</message>
+        <severity>warning</severity>
+    </inspection>
+    <inspection id="TXP00020">
+        <message>Color "%1" does not exist, defaulting to #000000.</message>
+        <severity>warning</severity>
+    </inspection>
+    <inspection id="TXP00021">
+        <message>Bad web-path syntax on %1 in project.ihp</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00030">
+        <message>Toc element "%1" cannot have both anchor and content-based children.</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00031">
+        <message>Toc element "%1%2" cannot display content-based children because it already points to one of them.
+        </message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00032">
+        <message>Toc element "%1" content-based children nesting %2 exceeds recommended max of 3.</message>
+        <severity>warning</severity>
+    </inspection>
+    <inspection id="TXP00033">
+        <message>Wrapper toc element "%1" cannot have accepts-web-file-names attribute because it does not produce any content.</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00034">
+        <message>Wrapper toc element "%1" cannot have custom-auxiliary-id attribute because it does not produce any content.</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00035">
+        <message>Duplicate toc item id "%1" while processing element "%2"</message>
+        <severity>warning</severity>
+    </inspection>
+    <inspection id="TXP00036">
+        <message>Toc element "%1" toc-title matches its default title, "%2"</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00037">
+        <message>More than 7 content-based children "%1" at level %2.</message>
+        <severity>warning</severity>
+    </inspection>
+    <inspection id="TXP00038">
+        <message>Toc element "%1" custom-title matches its default title, "%2"</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00039">
+        <message>Toc element "%1" toc-title matches its custom-title, "%2"</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00040">
+        <message>Wrapper toc element "%1" toc-title matches its custom-title, "%2"</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00046">
+        <message>Wrapper toc element "%1" cannot have custom-web-file-name attribute because it does not produce any content.</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00047">
+        <message>Wrapper toc element "%1" cannot have accepts-web-file-names-ref attribute because it does not produce any content.</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00048">
+        <message>Accepted file name "%1" on "%2" must include .html extension.</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00049">
+        <message>Semicolon cannot be used as delimiter in accepts-web-file-names on toc element "%1"</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00050">
+        <message>"%1" on topic "%2" points to article built from "%3", and cannot be used in accepts-web-file-names.</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00060">
+        <message>Cannot include "%1" because it doesn't exist.</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00061">
+        <message>Cannot include "%1" because it is corrupted.</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00062">
+        <message>include-id "%1" does not exist in "%2".</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00063">
+        <message>ref "%1" on "%2" points to a rule that does not exist.</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00064">
+        <message>Toc element "%1" cannot have both accepts-web-file-names and accepts-web-file-names-ref attributes.</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00065">
+        <message>Toc element "%1" custom web file name must not include extension.</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00071">
+        <message>Article for toc element "%1" has no content elements matching "%2"</message>
+        <severity>warning</severity>
+    </inspection>
+    <inspection id="TXP00091">
+        <message> Redirection target "%1" appears on too many toc elements (%2): %3.</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00098">
+        <message>Duplicate toc item id "%1" while processing element "%2" from "%3"</message>
+        <severity>fatal</severity>
+    </inspection>
+    <inspection id="TXP00099">
+        <message>Toc element "%1" is not unique, occurs %2 times.</message>
+        <severity>fatal</severity>
+    </inspection>
+</inspections>

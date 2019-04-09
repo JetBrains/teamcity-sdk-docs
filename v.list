@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE vars
+        SYSTEM "http://helpserver.labs.intellij.net/help/vars.dtd">
+
+<vars>
+    <var name="product"
+         value="$p1//product-profile[@id=$p2]/@name"
+         type="xpath"
+    />
+
+    <var name="MainDocPath" value="https://www.jetbrains.com/help/teamcity/?" type="string"/>
+
+</vars>

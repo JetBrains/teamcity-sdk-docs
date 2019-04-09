@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE product-profile
+        SYSTEM "http://helpserver.labs.intellij.net/help/product-profile.dtd">
+<product-profile xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                 id="tc" name="TeamCity Plugin Development" 
+                 start-page="developing-teamcity-plugins.md" status="eap">
+    
+    <toc-element id="developing-teamcity-plugins.md">
+        <toc-element id="getting-started-with-plugin-development.md"/>
+        <toc-element id="typical-plugins.md">
+            <toc-element id="build-runner-plugin.md"/>
+            <toc-element id="risk-tests-reordering-in-custom-test-runner.md"/>
+            <toc-element id="custom-build-trigger.md"/>
+            <toc-element id="extending-notification-templates-model.md"/>
+            <toc-element id="issue-tracker-integration-plugin.md"/>
+            <toc-element id="version-control-system-plugin.md"/>
+            <toc-element id="version-control-system-plugin-old-style-prior-to-4.5.md"/>
+            <toc-element id="custom-authentication-module.md"/>
+            <toc-element id="custom-notifier.md"/>
+            <toc-element id="custom-statistics.md"/>
+            <toc-element id="custom-server-health-report.md"/>
+            <toc-element id="extending-highlighting-for-web-diff-view.md"/>
+            <toc-element id="external-storage-implementation-guide.md"/>
+        </toc-element>
+        <toc-element id="bundled-development-package.md"/>
+        <toc-element id="open-api-changes.md"/>
+        <toc-element id="plugin-types-in-teamcity.md"/>
+        <toc-element id="plugins-packaging.md"/>
+        <toc-element id="server-side-object-model.md"/>
+        <toc-element id="agent-side-object-model.md"/>
+        <toc-element id="extensions.md"/>
+        <toc-element id="web-ui-extensions.md"/>
+        <toc-element id="plugin-settings.md"/>
+        <toc-element id="development-environment.md"/>
+        <toc-element id="developing-plugins-using-maven.md"/>
+        <toc-element id="plugin-development-faq.md"/>
+    </toc-element>
+
+</product-profile>
