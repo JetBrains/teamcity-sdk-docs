@@ -5,6 +5,7 @@
         <search-scope/>
         <fallback-url/>
         <help-app-version>2</help-app-version>
+        <help-app-prefix>https://www.jetbrains.com</help-app-prefix>
         <config-feedbackRequireEmail>false</config-feedbackRequireEmail>
         <config-showDownloadButton>true</config-showDownloadButton>
         <config-disqus-id>jetbrains</config-disqus-id>
