@@ -27,7 +27,7 @@ We'll generate a Maven project [from an archetype](developing-plugins-using-mave
 You will be asked to enter the Maven `groudId`, `artifactId`, `version`, `package name` and `teamcity version` for your plugin.
 
 
-```shell 
+```
 
 mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepository=http://download.jetbrains.com/teamcity-repository -DarchetypeArtifactId=teamcity-server-plugin -DarchetypeGroupId=org.jetbrains.teamcity.archetypes -DarchetypeVersion=RELEASE
 
@@ -134,7 +134,7 @@ The plugin web resources (files that are accessed via hyperlinks and JSP pages) 
 1. First we'll create the directory for our jsp: go to the `demoPlugin-server\src\main\resources` directory in IDEA and create the `buildServerResources` directory.
 2. In the newly created `demoPlugin-server\src\main\resources\buildServerResources` directory, create the `Hello.jsp` file, e.g.
 
-```html
+```
 
 <html>
 <body>
@@ -155,7 +155,7 @@ Go to `\demoPlugin\demoPlugin-server\src\main\java\com\demoDomain\teamcity\demoP
 Next we need to construct the path to our JSP file. When a plugin is unpacked on the TeamCity server, the paths to its resources change. To obtain valid paths to the files after the plugin is installed, use the `jetbrains.buildServer.web.openapi.PluginDescriptor` class which implements the `getPluginResourcesPath` method; otherwise TeamCity might have difficulties finding the plugin resources.
 
 
-```shell
+```
 
 package com.demoDomain.teamcity.demoPlugin;
 
@@ -192,7 +192,7 @@ public class AppServer extends BaseController \{
 Go to the `demoPlugin-server\src\main\resources\META-INF` directory and update `build-server-plugin-demo-plugin.xml` to include our AppServer class.
 
 
-```shell
+```
 
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
@@ -209,7 +209,7 @@ Go to the `demoPlugin-server\src\main\resources\META-INF` directory and update `
 Go to the root directory of your project and run
 
 
-```shell
+```
 
 mvn package
 
