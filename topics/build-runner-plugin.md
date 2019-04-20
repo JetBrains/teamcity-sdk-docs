@@ -3,24 +3,24 @@
 
 A [build runner](https://www.jetbrains.com/help/teamcity/?build-runner) plugin consists of two parts: agent\-side and server\-side. The server side part of the plugin provides meta information about the build runner, the web UI for the build runner settings and the build runner properties validator. The agent\-side part launches builds.
 
-On this page:
+
 
 A build runner can have various settings which must be edited by the user in the web UI and passed to the agent. These settings are called __runner parameters__ (or __runner properties__) and provided as a Map&lt;String, String&gt; to the agent part of the runner.
 
 <tip>
 
-Hint: some build runners whose source code can be used as a reference:
+Some build runners whose source code can be used as a reference:
 * [Rake Runner](https://github.com/JetBrains/teamcity-rake)
 * [FxCop runner sources](https://github.com/JetBrains/teamcity-fxcop)  Other build runner [plugins](https://plugins.jetbrains.com/teamcity).
 </tip>
 
 ## Server-side part of the runner
 
-The main entry point for the runner on the server side is `jetbrains.buildServer.serverSide.RunType`. A build runner plugin must provide its' own RunType and register it in the `jetbrains.buildServer.serverSide.RunTypeRegistry`.
+The main entry point for the runner on the server side is `[jetbrains.buildServer.serverSide.RunType](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/RunType.html)`. A build runner plugin must provide its own RunType and register it in the `[jetbrains.buildServer.serverSide.RunTypeRegistry](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/RunTypeRegistry.html)`.
 
-RunType has a __type__ which must be unique among all build runners and correspond to the __type__ returned by the agent\-side part of the runner (see `jetbrains.buildServer.agent.AgentBuildRunnerInfo`).
+RunType has a __type__ which must be unique among all build runners and correspond to the __type__ returned by the agent\-side part of the runner (see `[jetbrains.buildServer.agent.AgentBuildRunnerInfo](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/agent/AgentBuildRunnerInfo.html)`).
 
-The __getEditRunnerParamsJspFilePath__ and __getViewRunnerParamsJspFilePath__ methods return paths to JSP files for editing and viewing runner settings. These JSP files must be bundled with plugin in __buildServerResources__ subfolder, [read more](plugins-packaging.md). The paths should be relative to the __buildServerResources__ folder.
+The __getEditRunnerParamsJspFilePath__ and __getViewRunnerParamsJspFilePath__ methods return paths to JSP files for editing and viewing runner settings. These JSP files must be bundled with plugin in __buildServerResources__ subfolder, [read more](plugins-packaging.md#PluginsPackaging-Webresourcespackaging). The paths should be relative to the __buildServerResources__ folder.
 
 <note>
 
@@ -33,6 +33,7 @@ TeamCity 5.0.x and earlier uses the following rule to compute a full path to the
 
 
 ```
+
  <context path>/plugins/<runType>/<returned jsp path>
 
 ```
@@ -42,10 +43,10 @@ TeamCity 5.0.x and earlier uses the following rule to compute a full path to the
 
 <tip>
 
-Hint: before writing your own JSP for a custom build runner, take a look at the JSP files of the existing runners bundled with TeamCity.
+Before writing your own JSP for a custom build runner, take a look at the JSP files of the existing runners bundled with TeamCity.
 </tip>
 
-When a user fills in your runner settings and submits the form, `jetbrains.buildServer.serverSide.PropertiesProcessor` returned by the __getRunnerPropertiesProcessor__ method will be called. This processor will be able to the verify user settings and indicate which of them are invalid.
+When a user fills in your runner settings and submits the form, `[jetbrains.buildServer.serverSide.PropertiesProcessor](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/PropertiesProcessor.html)` returned by the __getRunnerPropertiesProcessor__ method will be called. This processor will be able to the verify user settings and indicate which of them are invalid.
 
 Usually a JSP page is simple and does not provide much controls except for fields, checkboxes and so on. But if you need more control on how the page is processed on the server side, then you should register your own extension to the runner editing controller: `jetbrains.buildServer.controllers.admin.projects.EditRunTypeControllerExtension`.
 
