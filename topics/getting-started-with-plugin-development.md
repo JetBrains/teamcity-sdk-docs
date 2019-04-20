@@ -28,18 +28,14 @@ You will be asked to enter the Maven `groudId`, `artifactId`, `version`, `packag
 
 
 ```
-
 mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepository=http://download.jetbrains.com/teamcity-repository -DarchetypeArtifactId=teamcity-server-plugin -DarchetypeGroupId=org.jetbrains.teamcity.archetypes -DarchetypeVersion=RELEASE
 
 ```
 
-<br>
 
 We used the following values:
 
-<table>
-
-<tr>
+<table><tr>
 
 <td>
 `groudId`
@@ -135,7 +131,6 @@ The plugin web resources (files that are accessed via hyperlinks and JSP pages) 
 2. In the newly created `demoPlugin-server\src\main\resources\buildServerResources` directory, create the `Hello.jsp` file, e.g.
 
 ```
-
 <html>
 <body>
 Hello world
@@ -156,7 +151,6 @@ Next we need to construct the path to our JSP file. When a plugin is unpacked on
 
 
 ```
-
 package com.demoDomain.teamcity.demoPlugin;
 
 import jetbrains.buildServer.controllers.BaseController;
@@ -193,7 +187,6 @@ Go to the `demoPlugin-server\src\main\resources\META-INF` directory and update `
 
 
 ```
-
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="constructor">
@@ -210,7 +203,6 @@ Go to the root directory of your project and run
 
 
 ```
-
 mvn package
 
 ```
