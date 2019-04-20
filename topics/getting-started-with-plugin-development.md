@@ -3,40 +3,43 @@
 
 
 
-The use of plugins allows you to extend the TeamCity functionality. See the [list of existing TeamCity plugins](https://plugins.jetbrains.com/?teamcity) created by JetBrains developers and community.
+The use of plugins allows you to extend the TeamCity functionality. See the [list of existing TeamCity plugins](https://plugins.jetbrains.com/teamcity) created by JetBrains developers and community.
 
 This document provides information on how to develop and publish a server\-side plugin for TeamCity [using Maven](developing-plugins-using-maven.md). The plugin will return the "Hello World" jsp page when using a specific URL to the TeamCity Web UI.
 
-On this page:
+
 
 ## Introduction
 
-A _plugin_ in TeamCity is a `zip` archive containing a number of classes packed into a JAR file and [plugin descriptor](plugins-packaging.md) file. The TeamCity Open API can be found in the JetBrains [Maven repository](http://repository.jetbrains.com/all). The Javadoc reference for the API is available [online](http://javadoc.jetbrains.net/teamcity/openapi/current/) and locally in &lt;[TeamCity Home Directory](https://www.jetbrains.com/help/teamcity/?teamcity-home-directory)&gt;/devPackage/javadoc/openApi\-help.jar, after you install TeamCity.
+A _plugin_ in TeamCity is a `zip` archive containing a number of classes packed into a JAR file and [plugin descriptor](plugins-packaging.#Plugin Descriptor) file. The TeamCity Open API can be found in the JetBrains [Maven repository](http://repository.jetbrains.com/all). The Javadoc reference for the API is available [online](http://javadoc.jetbrains.net/teamcity/openapi/current/) and locally in &lt;[TeamCity Home Directory](https://www.jetbrains.com/help/teamcity/?teamcity-home-directory)&gt;/devPackage/javadoc/openApi-help.jar, after you install TeamCity.
 
 ## Step 1. Set up the environment
 
 To get started writing a plugin for TeamCity, set up the plugin development environment.
 1. Download and install OpenJDK 8 (e.g. by [AdoptOpenJDK](https://adoptopenjdk.net/)). Set the [JAVA_HOME](http://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/index.html) environment variable on your system. Java 1.8 is required, the 32\-bit version is recommended, the 64\-bit version [can be used](https://www.jetbrains.com/help/teamcity/?installing-and-configuring-the-teamcity-server).
-2. Download and install [TeamCity](https://www.jetbrains.com/teamcity/download/) on your development machine. Since you are going to use this machine to test your plugin, it is recommended that this TeamCity server is of the same version as your production server. We are using TeamCity 9.0.2 installed on Windows in our setup.
+2. Download and install [TeamCity](https://www.jetbrains.com/teamcity/download/) on your development machine. Since you are going to use this machine to test your plugin, it is recommended that this TeamCity server is of the same version as your production server. We are using TeamCity 10 installed on Windows in our setup.
 3. Download and install a Java IDE; we are using [Intellij IDEA Community Edition](https://www.jetbrains.com/idea/download/), which has a built\-in Maven integration.
-4. Download and install [Apache Maven](http://maven.apache.org/download.cgi). Maven 3.2.x is recommended. Set the M2\_HOME environment variable. Run `mvn \-version` to verify your setup. We are using Maven 3.2.5. in our setup.
+4. Download and install [Apache Maven](http://maven.apache.org/download.cgi). Maven 3.2.x is recommended. Set the M2\_HOME environment variable. Run `mvn -version` to verify your setup. We are using Maven 3.2.5. in our setup.
 ## Step 2. Generate a Maven project
 
-We'll generate a Maven project [from an archetype](developing-plugins-using-maven.md) residing in JetBrains Maven repository. Executing the following command will produce a project for a server\-side\-only plugin.
+We'll generate a Maven project [from an archetype](developing-plugins-using-maven.md) residing in the JetBrains Maven repository. Executing the following command will produce a project for a server\-side\-only plugin.
 
-You will be asked to enter the Maven `groudId`, `artifactId`, `version, ``package name and teamcityVersion `for your plugin.
+You will be asked to enter the Maven `groudId`, `artifactId`, `version`, `package name` and `teamcity version` for your plugin.
 
+
+```shell 
+
+mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepository=http://download.jetbrains.com/teamcity-repository -DarchetypeArtifactId=teamcity-server-plugin -DarchetypeGroupId=org.jetbrains.teamcity.archetypes -DarchetypeVersion=RELEASE
 
 ```
-mvn org.apache.maven.plugins:maven\-archetype\-plugin:2.4:generate \-DarchetypeRepository=http://download.jetbrains.com/teamcity\-repository \-DarchetypeArtifactId=teamcity\-server\-plugin \-DarchetypeGroupId=org.jetbrains.teamcity.archetypes \-DarchetypeVersion=RELEASE
 
-```
-
-
+<br>
 
 We used the following values:
 
-<table><tr>
+<table>
+
+<tr>
 
 <td>
 `groudId`
@@ -69,7 +72,7 @@ We used the following values:
 </td>
 
 <td>
-leave the default `1.0\-SNAPSHOT`
+leave the default `1.0-SNAPSHOT`
 
 
 </td></tr><tr>
@@ -110,10 +113,10 @@ When the build finishes, you'll see that the `demoPlugin` directory was created 
 The root of the `demoPlugin` directory contains the following:
 * the `readme.txt` file with minimal instructions to develop a server\-side plugin
 * the `pom.xml` file which is your Project Object Model
-* the `teamcity\-plugin.xml` file which is your [plugin descriptor](plugins-packaging.md) containing meta information about the plugin.
-* the `demoPlugin\-server` directory contains the plugin sources: * `\src\main\java\zip` contains the AppServer.java file
+* the `teamcity-plugin.xml` file which is your [plugin descriptor](plugins-packaging.md) containing meta information about the plugin.
+* the `demoPlugin-server` directory contains the plugin sources: * `\src\main\java\zip` contains the AppServer.java file
  * `src\main\resources` includes resources controlling the plugin look and feel.
- * `src\main\resources\META\-INF` folder contains `build\-server\-plugin\-demo\-plugin.xml`, the bean definition file for our plugin. TeamCity plugins are initialized in their own Spring containers and every plugin needs a Spring bean definition file describing the main services of the plugin.
+ * `src\main\resources\META-INF` folder contains `build-server-plugin-demo\-plugin.xml`, the bean definition file for our plugin. TeamCity plugins are initialized in their own Spring containers and every plugin needs a Spring bean definition file describing the main services of the plugin.
 * the `build` directory contains the xml files which define how the project output is aggregated into a single distributable archive.
 ## Step 3. Edit the plugin descriptor
 
@@ -128,10 +131,11 @@ We are going to make a controller class which will return `Hello.jsp` via a spec
 ### A. Create the plugin web-resources
 
 The plugin web resources (files that are accessed via hyperlinks and JSP pages) are to be placed into the `buildServerResources` subfolder of the plugin's resources.
-1. First we'll create the directory for our jsp: go to the `demoPlugin\-server\src\main\resources` directory in IDEA and create the `buildServerResources` directory.
-2. In the newly created `demoPlugin\-server\src\main\resources\buildServerResources` directory, create the `Hello.jsp` file, e.g.
+1. First we'll create the directory for our jsp: go to the `demoPlugin-server\src\main\resources` directory in IDEA and create the `buildServerResources` directory.
+2. In the newly created `demoPlugin-server\src\main\resources\buildServerResources` directory, create the `Hello.jsp` file, e.g.
 
-```
+```html
+
 <html>
 <body>
 Hello world
@@ -144,14 +148,15 @@ Hello world
 
 ### B. Create the controller and obtain the path to the JSP
 
-Go to `\demoPlugin\demoPlugin\-server\src\main\java\com\demoDomain\teamcity\demoPlugin` and open the `AppServer.java` file to create a custom controller:
+Go to `\demoPlugin\demoPlugin-server\src\main\java\com\demoDomain\teamcity\demoPlugin` and open the `AppServer.java` file to create a custom controller:
 1. We'll create a simple controller which extends the TeamCity `jetbrains.buildServer.controllers.BaseController` class and implements the `BaseController.doHandle(HttpServletRequest, HttpServletResponse)` method.
 2. The TeamCity open API provides the `jetbrains.buildServer.web.openapi.WebControllerManager` which allows registering custom controllers using the path to them: the path is a part of URL starting with a slash `/` appended to the URL of the server root.
 3. 
 Next we need to construct the path to our JSP file. When a plugin is unpacked on the TeamCity server, the paths to its resources change. To obtain valid paths to the files after the plugin is installed, use the `jetbrains.buildServer.web.openapi.PluginDescriptor` class which implements the `getPluginResourcesPath` method; otherwise TeamCity might have difficulties finding the plugin resources.
 
 
-```
+```shell
+
 package com.demoDomain.teamcity.demoPlugin;
 
 import jetbrains.buildServer.controllers.BaseController;
@@ -184,13 +189,14 @@ public class AppServer extends BaseController \{
 
 ### C. Update the Spring bean definition
 
-Go to the `demoPlugin\-server\src\main\resources\META\-INF` directory and update `build\-server\-plugin\-demo\-plugin.xml` to include our AppServer class.
+Go to the `demoPlugin-server\src\main\resources\META-INF` directory and update `build-server-plugin-demo-plugin.xml` to include our AppServer class.
 
 
-```
-<?xml version="1.0" encoding="UTF\-8"?>
-<!DOCTYPE beans PUBLIC "\-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring\-beans.dtd">
-<beans default\-autowire="constructor">
+```shell
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="constructor">
     <bean class="com.demoDomain.teamcity.demoPlugin.AppServer"></bean>
 </beans>
 
@@ -203,7 +209,8 @@ Go to the `demoPlugin\-server\src\main\resources\META\-INF` directory and update
 Go to the root directory of your project and run
 
 
-```
+```shell
+
 mvn package
 
 ```
