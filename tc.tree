@@ -6,7 +6,7 @@
                  start-page="developing-teamcity-plugins.md" status="eap">
     
     <toc-element id="developing-teamcity-plugins.md">
-        <toc-element id="getting-started-with-plugin-development.md" show-structure-for="h2,h3"/>
+        <toc-element id="getting-started-with-plugin-development.md" show-structure-for="h2"/>
         <toc-element id="typical-plugins.md">
             <toc-element id="build-runner-plugin.md"/>
             <toc-element id="risk-tests-reordering-in-custom-test-runner.md"/>
@@ -19,8 +19,8 @@
             <toc-element id="custom-notifier.md"/>
             <toc-element id="custom-statistics.md"/>
             <toc-element id="custom-server-health-report.md"/>
-            <toc-element id="extending-highlighting-for-web-diff-view.md" show-structure-for="h2,h3,h4"/>
-            <toc-element id="external-storage-implementation-guide.md" show-structure-for="h2,h3,h4"/>
+            <toc-element id="extending-highlighting-for-web-diff-view.md" show-structure-for="h2"/>
+            <toc-element id="external-storage-implementation-guide.md" show-structure-for="h2,h3"/>
         </toc-element>
         <toc-element id="bundled-development-package.md"/>
         <toc-element id="open-api-changes.md"/>
@@ -32,7 +32,7 @@
         <toc-element id="web-ui-extensions.md"/>
         <toc-element id="plugin-settings.md"/>
         <toc-element id="development-environment.md"/>
-        <toc-element id="developing-plugins-using-maven.md" show-structure-for="h2,h3,h4"/>
+        <toc-element id="developing-plugins-using-maven.md" show-structure-for="h2,h3"/>
         <toc-element id="plugin-development-faq.md"/>
     </toc-element>
 
