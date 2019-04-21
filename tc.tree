@@ -19,20 +19,20 @@
             <toc-element id="custom-notifier.md"/>
             <toc-element id="custom-statistics.md"/>
             <toc-element id="custom-server-health-report.md"/>
-            <toc-element id="extending-highlighting-for-web-diff-view.md"/>
-            <toc-element id="external-storage-implementation-guide.md"/>
+            <toc-element id="extending-highlighting-for-web-diff-view.md" show-structure-for="h2,h3,h4"/>
+            <toc-element id="external-storage-implementation-guide.md" show-structure-for="h2,h3,h4"/>
         </toc-element>
         <toc-element id="bundled-development-package.md"/>
         <toc-element id="open-api-changes.md"/>
         <toc-element id="plugin-types-in-teamcity.md"/>
-        <toc-element id="plugins-packaging.md"/>
+        <toc-element id="plugins-packaging.md"  show-structure-for="h2,h3,h4"/>
         <toc-element id="server-side-object-model.md"/>
         <toc-element id="agent-side-object-model.md"/>
         <toc-element id="extensions.md"/>
         <toc-element id="web-ui-extensions.md"/>
         <toc-element id="plugin-settings.md"/>
         <toc-element id="development-environment.md"/>
-        <toc-element id="developing-plugins-using-maven.md"/>
+        <toc-element id="developing-plugins-using-maven.md" show-structure-for="h2,h3,h4"/>
         <toc-element id="plugin-development-faq.md"/>
     </toc-element>
 

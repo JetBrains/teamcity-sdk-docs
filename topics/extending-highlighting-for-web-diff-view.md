@@ -16,8 +16,7 @@ As an example we are implementing a highlighting for properties files, like this
 
 
 
-```
-
+```shell
 # Comment on keys and values
 key1=value1
 foo = bar
@@ -26,7 +25,7 @@ a b c = foo bar baz
 
 ! another comment
 ! more complex cases:
-a\=\fb : x\ty\n\x\uzzzz
+a=fb : x\ty\n\x\uzzzz
 
  key = multiline value \
 still value \
@@ -47,7 +46,7 @@ The implementation consists of the following steps:
 
 
 
-To understand this step you might need to familiarize yourself with a [JFlex](http://jflex.de/) syntax.
+To understand this step, you might need to familiarize yourself with a [JFlex](http://jflex.de/) syntax.
 
 
 
@@ -55,12 +54,11 @@ There are several things you need to define in a flex file in order to generate 
 
 
 
-```
-
-public static final byte PLAIN\_STYLE = 1;
-public static final byte NAME\_STYLE = 2;
-public static final byte VALUE\_STYLE = 3;
-public static final byte COMMENT\_STYLE = 4;
+```java
+public static final byte PLAIN_STYLE = 1;
+public static final byte NAME_STYLE = 2;
+public static final byte VALUE_STYLE = 3;
+public static final byte COMMENT_STYLE = 4;
 
 ```
 
@@ -68,7 +66,7 @@ public static final byte COMMENT\_STYLE = 4;
 
 
 These constants will be mapped to the lexems in a source code and to the CSS classes, so at this moment you should decide which tokens are to be highlighted.
-We will highlight names, values of properties, comments and plain text, which is just '=' character.
+We will highlight names, values of properties, comments and plain text, which is just the '=' character.
 
 
 
@@ -76,45 +74,45 @@ Then you need to specify the states and actual parsing rules:
 
 
 
-```
+```java
 
-WhiteSpace = \[ \t\f\]
+WhiteSpace = [ \t\f]
 
-%state IN\_VALUE
+%state IN_VALUE
 
 %%
 
-/\* Rules for YYINITIAL state \*/
+/* Rules for YYINITIAL state */
 <YYINITIAL> \{
-  "\n"                           \{ return PLAIN\_STYLE; \}
+  "\n"                           \{ return PLAIN_STYLE; }
 
-  \{WhiteSpace\}                   \{ return PLAIN\_STYLE; \}
+  {WhiteSpace}                   { return PLAIN_STYLE; }
 
-  \[Extending Highlighting for Web diff view^=\n\t\f \]\+                   \{ return NAME\_STYLE; \}
+  [Extending Highlighting for Web diff view^=\n\t\f ]+                  { return NAME_STYLE; }
 
-  "="                            \{ yybegin(IN\_VALUE); return PLAIN\_STYLE; \}
+  "="                            { yybegin(IN_VALUE); return PLAIN_STYLE; }
 
-  \[#!\] \[Extending Highlighting for Web diff view^\n\]\* \n                 \{ return COMMENT\_STYLE; \}
-\}
+  [#!] [Extending Highlighting for Web diff view^\n]* \n                 { return COMMENT_STYLE; }
+}
 
-/\* Rules for IN\_VALUE state \*/
-<IN\_VALUE> \{
-  "\\\n"                         \{ return VALUE\_STYLE; \}
+/* Rules for IN_VALUE state */
+<IN_VALUE> {
+  "\\\n"                         { return VALUE_STYLE; }
 
-  "\n"                           \{ yybegin(YYINITIAL); return PLAIN\_STYLE; \}
+  "\n"                           { yybegin(YYINITIAL); return PLAIN_STYLE; }
 
-  \[Extending Highlighting for Web diff view^\\\n\]\+                       \{ return VALUE\_STYLE; \}
-\}
+  [Extending Highlighting for Web diff view^\n]+                      { return VALUE_STYLE; }
+}
 
-/\* error fallback \*/
-.|\n                             \{ return PLAIN\_STYLE; \}
+/* error fallback */
+.|\n                             { return PLAIN_STYLE; }
 
 ```
 
 
 
 
-Our simple lexer has two states: initial (YYINITIAL \- it is predefined) and IN\_VALUE. In each of these states we try to handle the next character (or a group of characters) using regexp rules.
+Our simple lexer has two states: initial (`YYINITIAL`, predefined) and `IN_VALUE`. In each of these states we try to handle the next character (or a group of characters) using regexp rules.
 The rules are applied from the top to the bottom, the first one that matches non\-empty string is used. Each rule is associated with the action to be performed on runtime. Here we have only simple actions that return the token constant and sometimes change the state.
 
 
@@ -124,7 +122,7 @@ Here's the full result code:
 
 
 
-```
+```java
 
 package com.uwyn.jhighlight.highlighter;
 
@@ -145,74 +143,74 @@ import java.io.IOException;
 
 %int
 
-%\{
-        /\* styles \*/
+%{
+        /* styles */
 
-        public static final byte PLAIN\_STYLE = 1;
-        public static final byte NAME\_STYLE = 2;
-        public static final byte VALUE\_STYLE = 3;
-        public static final byte COMMENT\_STYLE = 4;
+        public static final byte PLAIN_STYLE = 1;
+        public static final byte NAME_STYLE = 2;
+        public static final byte VALUE_STYLE = 3;
+        public static final byte COMMENT_STYLE = 4;
 
-        /\* Highlighter implementation \*/
+        /* Highlighter implementation */
 
-        public byte getStartState() \{
+        public byte getStartState() {
                 return YYINITIAL\+1;
-        \}
+        }
 
-        public byte getCurrentState() \{
+        public byte getCurrentState() {
                 return (byte) (yystate()\+1);
-        \}
+        }
 
-        public void setState(byte newState) \{
+        public void setState(byte newState) {
                 yybegin(newState\-1);
-        \}
+        }
 
-        public byte getNextToken() throws IOException \{
+        public byte getNextToken() throws IOException {
                 return (byte) yylex();
-        \}
+        }
 
-        public int getTokenLength() \{
+        public int getTokenLength() {
                 return yylength();
-        \}
+        }
 
-        public void setReader(Reader r) \{
+        public void setReader(Reader r) {
                 this.zzReader = r;
-        \}
+        }
 
-        public PropertiesHighlighter() \{
-        \}
-%\}
+        public PropertiesHighlighter() {
+        }
+%}
 
-WhiteSpace = \[ \t\f\]
+WhiteSpace = [ \t\f]
 
-%state IN\_VALUE
+%state IN_VALUE
 
 %%
 
-/\* Rules for YYINITIAL state \*/
-<YYINITIAL> \{
-  "\n"                           \{ yybegin(YYINITIAL); return PLAIN\_STYLE; \}
+/* Rules for YYINITIAL state */
+<YYINITIAL> {
+  "\n"                           { yybegin(YYINITIAL); return PLAIN_STYLE; }
 
-  \{WhiteSpace\}                   \{ return PLAIN\_STYLE; \}
+  {WhiteSpace}                   { return PLAIN_STYLE; }
 
-  \[Extending Highlighting for Web diff view^=\n\t\f \]\+                   \{ return NAME\_STYLE; \}
+  [Extending Highlighting for Web diff view^=\n\t\f ]+                  { return NAME_STYLE; }
 
-  "="                            \{ yybegin(IN\_VALUE);  return PLAIN\_STYLE; \}
+  "="                            { yybegin(IN_VALUE);  return PLAIN_STYLE; }
 
-  \[#!\] \[Extending Highlighting for Web diff view^\n\]\* \n                 \{ return COMMENT\_STYLE; \}
-\}
+  [#!] [Extending Highlighting for Web diff view^\n]* \n                 { return COMMENT_STYLE; }
+}
 
-/\* Rules for IN\_VALUE state \*/
-<IN\_VALUE> \{
-  "\\\n"                         \{ return VALUE\_STYLE; \}
+/* Rules for IN_VALUE state */
+<IN_VALUE> {
+  "\\\n"                         { return VALUE_STYLE; }
 
-  "\n"                           \{ yybegin(YYINITIAL); return PLAIN\_STYLE; \}
+  "\n"                           { yybegin(YYINITIAL); return PLAIN_STYLE; }
 
-  \[Extending Highlighting for Web diff view^\\\n\]\+                       \{ return VALUE\_STYLE; \}
-\}
+  [Extending Highlighting for Web diff view^\\\n]+                      { return VALUE_STYLE; }
+}
 
-/\* error fallback \*/
-.|\n                             \{ return PLAIN\_STYLE; \}
+/* error fallback */
+.|\n                             { return PLAIN_STYLE; }
 
 ```
 
@@ -231,10 +229,9 @@ You can compile the code above using a [JFlex tool](http://jflex.de/), or amend 
 
 
 
-```
-
-<jflex file="$\{src.dir\}/com/uwyn/jhighlight/highlighter/PropertiesHighlighter.flex"
-       destdir="$\{src.dir\}"
+```java
+<jflex file="${src.dir}/com/uwyn/jhighlight/highlighter/PropertiesHighlighter.flex"
+       destdir="${src.dir}"
        verbose="on"
        nobak="on"/>
 
@@ -243,7 +240,7 @@ You can compile the code above using a [JFlex tool](http://jflex.de/), or amend 
 
 
 
-After the compilation we'll have a java class PropertiesHighlighter implementing ExplicitStateHighlighter interface. If the previous steps are done right, you won't need to modify this file by hand.
+After compilation we'll have the java class `PropertiesHighlighter` implementing the `ExplicitStateHighlighter` interface. If the previous steps are done right, you won't need to modify this file by hand.
 
 
 
@@ -251,11 +248,11 @@ After the compilation we'll have a java class PropertiesHighlighter implementing
 
 
 
-The only JHighlight class left is the renderer corresponding to the generated lexer. This class should extend a XhtmlRenderer class and provide CSS classes correspondence along with default CSS map:
+The only JHighlight class left is the renderer corresponding to the generated lexer. This class should extend an `XhtmlRenderer` class and provide CSS classes correspondence along with default CSS map:
 
 
 
-```
+```java
 
 package com.uwyn.jhighlight.renderer;
 
@@ -265,60 +262,60 @@ import com.uwyn.jhighlight.renderer.XhtmlRenderer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PropertiesXhtmlRenderer extends XhtmlRenderer \{
+public class PropertiesXhtmlRenderer extends XhtmlRenderer {
         // Contains the default CSS styles.
-	public final static HashMap DEFAULT\_CSS = new HashMap() \{\{
-		put(".properties\_plain",
+	public final static HashMap DEFAULT_CSS = new HashMap() {{
+		put(".properties_plain",
 		    "color: rgb(0,0,0);");
 
-		put(".properties\_name",
+		put(".properties_name",
 		    "color: rgb(0,0,128); " \+
 		    "font\-weight: bold;");
 
-		put(".properties\_value",
+		put(".properties_value",
 		    "color: rgb(0,128,0); " \+
 		    "font\-weight: bold;");
 
-		put(".properties\_comment",
+		put(".properties_comment",
 		    "color: rgb(128,128,128); " \+
 		    "background\-color: rgb(247,247,247);");
-	\}\};
+	}};
 
-	protected Map getDefaultCssStyles() \{
-		return DEFAULT\_CSS;
-	\}
+	protected Map getDefaultCssStyles() {
+		return DEFAULT_CSS;
+	}
 
-        // Maps the token type with the CSS class. E.g. each token of a 'PLAIN\_STYLE' type will be rendered with 'properties\_plain' style (see above).
-	protected String getCssClass(int style) \{
-		switch (style) \{
-			case PropertiesHighlighter.PLAIN\_STYLE:
-				return "properties\_plain";
-			case PropertiesHighlighter.NAME\_STYLE:
-				return "properties\_name";
-			case PropertiesHighlighter.VALUE\_STYLE:
-				return "properties\_value";
-			case PropertiesHighlighter.COMMENT\_STYLE:
-				return "properties\_comment";
-		\}
+        // Maps the token type with the CSS class. E.g. each token of a 'PLAIN_STYLE' type will be rendered with 'properties_plain' style (see above).
+	protected String getCssClass(int style) {
+		switch (style) {
+			case PropertiesHighlighter.PLAIN_STYLE:
+				return "properties_plain";
+			case PropertiesHighlighter.NAME_STYLE:
+				return "properties_name";
+			case PropertiesHighlighter.VALUE_STYLE:
+				return "properties_value";
+			case PropertiesHighlighter.COMMENT_STYLE:
+				return "properties_comment";
+		}
 
 		return null;
-	\}
+	}
 
-	protected ExplicitStateHighlighter getHighlighter() \{
+	protected ExplicitStateHighlighter getHighlighter() {
 		return new PropertiesHighlighter();
-	\}
-\}
+	}
+}
 
 ```
 
 
 
 
-You can leave DEFAULT\_CSS empty, but in this case the styles should always be present in jhighlight.properties file. But it is essential that PropertiesHighlighter token constants are mapped to the CSS styles.
+You can leave `DEFAULT_CSS` empty, but in this case the styles should always be present in jhighlight.properties file. But it is essential that the `PropertiesHighlighter` token constants are mapped to the CSS styles.
 
 
 
-Also we need to tell the factory class that a new renderer exists: for this XhtmlRendererFactory class should be updated. We don't provide the code here as it is very simple (in fact, two lines should be added).
+We also need to tell the factory class that a new renderer exists: for this `XhtmlRendererFactory` class should be updated. We don't provide the code here as it is very simple (in fact, two lines should be added).
 
 
 
@@ -330,8 +327,7 @@ JHighlight patch is ready, let's check it out in action. Put the properties file
 
 
 
-```
-
+```shell
 ant
 java \-cp build/classes/ com.uwyn.jhighlight.JHighlight examples/
 firefox examples/test.properties.html

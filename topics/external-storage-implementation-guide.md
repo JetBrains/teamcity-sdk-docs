@@ -7,7 +7,7 @@ You can use the following plugins from JetBrains as implementation examples:
 * [S3 Artifact Storage](https://plugins.jetbrains.com/plugin/9623-s3-artifact-storage)
 * [Azure Artifact Storage](https://plugins.jetbrains.com/plugin/9617-azure-artifact-storage)
 * [Google Cloud Artifact Storage](https://plugins.jetbrains.com/plugin/9634-google-artifact-storage)
-On this page:
+
 
 ## TeamCity Artifacts Overview
 

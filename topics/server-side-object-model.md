@@ -5,11 +5,11 @@
 
 ## Project model
 
-The main entry point for project model is `jetbrains.buildServer.serverSide.ProjectManager`. With help of this class you can obtain projects and build configurations, create new projects or remove them.
+The main entry point for project model is [`jetbrains.buildServer.serverSide.ProjectManager`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/ProjectManager.html). With help of this class you can obtain projects and build configurations, create new projects or remove them.
 
-On the server side projects are represented by `jetbrains.buildServer.serverSide.SProject` interface. Project has unique id (projectId). Any change in the project will not be persisted automatically. If you need to persist project configuration on disk use SProject.persist() method.
+On the server side projects are represented by [`jetbrains.buildServer.serverSide.SProject`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SProject.html) interface. Project has unique id (projectId). Any change in the project will not be persisted automatically. If you need to persist project configuration on disk use SProject.persist() method.
 
-Build configurations are represented by `jetbrains.buildServer.serverSide.SBuildType`. As with projects any change in the build configuration settings is not saved on disk automatically. Since build configurations are stored in the projects, you should persist corresponding project after the build configuration modification.
+Build configurations are represented by [`jetbrains.buildServer.serverSide.SBuildType`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuildType.html). As with projects any change in the build configuration settings is not saved on disk automatically. Since build configurations are stored in the projects, you should persist corresponding project after the build configuration modification.
 
 <note>
 
@@ -18,17 +18,17 @@ Note: interfaces available on the server side only have prefix S in their names,
 
 ## Build lifecycle
 
-When build is triggered it is added to the build queue (`jetbrains.buildServer.serverSide.BuildQueue`). While staying in the queue and waiting for a free agent it is represented by `jetbrains.buildServer.serverSide.SQueuedBuild` interface. Builds in the queue can be reordered or removed. To add new build in the queue use addToQueue() method of the `jetbrains.buildServer.serverSide.SBuildType`.
+When build is triggered it is added to the build queue [`jetbrains.buildServer.serverSide.BuildQueue`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildQueue.html). While staying in the queue and waiting for a free agent it is represented by [`jetbrains.buildServer.serverSide.SQueuedBuild`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SQueuedBuild.html) interface. Builds in the queue can be reordered or removed. To add new build in the queue use the `addToQueue()` method of the [`jetbrains.buildServer.serverSide.SBuildType`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuildType.html).
 
-A separate thread periodically tries to start builds added to the queue on a free agent. A started build is removed from the queue and appears in the model as `jetbrains.buildServer.serverSide.SRunningBuild`. After the build finishes it becomes `jetbrains.buildServer.serverSide.SFinishedBuild` and is added to the build history. Both __SRunningBuild__ and __SFinishedBuild__ extend common interface: `jetbrains.buildServer.serverSide.SBuild`.
+A separate thread periodically tries to start builds added to the queue on a free agent. A started build is removed from the queue and appears in the model as `jetbrains.buildServer.serverSide.SRunningBuild`. After the build finishes it becomes [`jetbrains.buildServer.serverSide.SFinishedBuild`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SFinishedBuild.html) and is added to the build history. Both __SRunningBuild__ and __SFinishedBuild__ extend common interface: [`jetbrains.buildServer.serverSide.SBuild`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuild.html).
 
-There is another entity `jetbrains.buildServer.serverSide.BuildPromotion` which is associated with build during the whole build lifecycle. This entity contains all information necessary to reproduce this build, i.e. build parameters (properties and environment variables), VCS root revisions, VCS root settings with checkout rules and dependencies. __BuildPromotion__ can be obtained on the any stage: when build is in the queue, running or finished, and it always be the same object.
+There is another entity [`jetbrains.buildServer.serverSide.BuildPromotion`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildPromotion.html) which is associated with build during the whole build lifecycle. This entity contains all information necessary to reproduce this build, i.e. build parameters (properties and environment variables), VCS root revisions, VCS root settings with checkout rules and dependencies. __BuildPromotion__ can be obtained on the any stage: when build is in the queue, running or finished, and it always be the same object.
 
 ## Accessing builds
 
-A started build (running or finished) can be found by its' id (buildId). For this you should use `jetbrains.buildServer.serverSide.SBuildServer` method.
+A started build (running or finished) can be found by its' id (buildId). For this you should use [`jetbrains.buildServer.serverSide.SBuildServer#findBuildInstanceById(long)`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuildServer.html#findBuildInstanceById(long) method.
 
-It is also possible to find build in the build history, or to retrieve all builds from the history. Take a look at __SBuildType#getHistory()__ method and at `jetbrains.buildServer.serverSide.BuildHistory` service.
+It is also possible to find build in the build history, or to retrieve all builds from the history. Take a look at __SBuildType#getHistory()__ method and at [`jetbrains.buildServer.serverSide.BuildHistory`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildHistory.html) service.
 
 <note>
 
@@ -37,24 +37,24 @@ Note: if not mentioned specifically the returned collections of builds are alway
 
 ## Listening for server events
 
-A lot of events are generated by the server during its lifecycle, these are events like buildStarted, buildFinished, changeAdded and so on. Most of these events are defined in the `jetbrains.buildServer.serverSide.BuildServerListener` interface. There is corresponding adapter class `jetbrains.buildServer.serverSide.BuildServerAdapter` which you can extend.
+A lot of events are generated by the server during its lifecycle, these are events like buildStarted, buildFinished, changeAdded and so on. Most of these events are defined in the [`jetbrains.buildServer.serverSide.BuildServerListener`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildServerListener.html) interface. There is corresponding adapter class [`jetbrains.buildServer.serverSide.BuildServerAdapter`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildServerAdapter.html) which you can extend.
 
 To register your listener you should obtain reference to EventDispatcher&lt;BuildServerListener&gt;. Since this dispatcher is defined as a Spring bean, you can obtain reference with help of Spring autowiring feature.
 
 ### User model events
 
-You can also watch for events from TeamCity user model. For example, you can track new user accounts registration, removing of the users or changing of the user settings. You should use `jetbrains.buildServer.serverSide.UserModelListener` interface and register your listeners in the `jetbrains.buildServer.users.UserModel`.
+You can also watch for events from TeamCity user model. For example, you can track new user accounts registration, removing of the users or changing of the user settings. You should use [`jetbrains.buildServer.serverSide.UserModelListener`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/UserModelListener.html) interface and register your listeners in the [`jetbrains.buildServer.users.UserModel`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/users/UserModel.html).
 
 ## VCS changes
 
-TeamCity server constantly polls version control systems to determine whether a new change occurred. Polling is done per VCS root (`jetbrains.buildServer.vcs.SVcsRoot`). Each VCS root has unique id, VCS specific properties, scope (shared or project local) and version. Every change in VCS root creates a new version of the root, but VCS root id remains the same. VCS roots can be obtained from __SBuildType__ or found by id with help of `jetbrains.buildServer.vcs.VcsManager`.
+TeamCity server constantly polls version control systems to determine whether a new change occurred. Polling is done per VCS root ([`jetbrains.buildServer.vcs.SVcsRoot`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/SVcsRoot.html)). Each VCS root has unique id, VCS specific properties, scope (shared or project local) and version. Every change in VCS root creates a new version of the root, but VCS root id remains the same. VCS roots can be obtained from __SBuildType__ or found by id with help of [`jetbrains.buildServer.vcs.VcsManager`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/VcsManager.html).
 
-A change is represented by `jetbrains.buildServer.vcs.SVcsModification` class. Each detected change has unique id and is associated with concrete version of the VCS root. A change also belongs to one or more build configurations (these are build configurations where VCS root was attached when change was detected), see __getRelatedConfigurations()__ method.
+A change is represented by [`jetbrains.buildServer.vcs.SVcsModification`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/SVcsModification.html) class. Each detected change has unique id and is associated with concrete version of the VCS root. A change also belongs to one or more build configurations (these are build configurations where VCS root was attached when change was detected), see __getRelatedConfigurations()__ method.
 
 There are several methods allowing to obtain VCS changes:
 1. __SBuildType#getPendingChanges()__ \- use this method to find pending changes of the some build configuration (i.e. changes which are not yet associated with a build)
 2. __SBuild#getContainingChanges()__ \- use this method to obtain changes associated with a build, i.e. changes since previous build
-3. `jetbrains.buildServer.vcs.VcsModificationHistory` \- use this service to obtain arbitrary changes stored in the changes history, find change by id and so on.
+3. [`jetbrains.buildServer.vcs.VcsModificationHistory`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/VcsModificationHistory.html) \- use this service to obtain arbitrary changes stored in the changes history, find change by id and so on.
 <note>
 
 Note: if not mentioned specifically the returned collections of changes are always sorted in reverse order, with the most recent change coming first.
@@ -62,7 +62,7 @@ Note: if not mentioned specifically the returned collections of changes are alwa
 
 ## Agents
 
-Agent is represented by `jetbrains.buildServer.serverSide.SBuildAgent` interface. Agents have unique id and name, and can be found by name or by id with help of `jetbrains.buildServer.serverSide.BuildAgentManager`. Agent can have various states:
+Agent is represented by [`jetbrains.buildServer.serverSide.SBuildAgent`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuildAgent.html) interface. Agents have unique id and name, and can be found by name or by id with help of [`jetbrains.buildServer.serverSide.BuildAgentManager`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildAgentManager.html). Agent can have various states:
 1. __registered__ / __unregistered__: agent is registered if it is connected to the server.
 2. __authorized__ / __unauthorized__: authorized agent can run builds, unauthorized can't. It is impossible to run build on unauthorized agent even manually. A number of authorized agents depends on entered license keys.
 3. __enabled__ / __disabled__: builds won't run automatically on disabled agents, but it is possible to start build manually on such agent if user has required permission.

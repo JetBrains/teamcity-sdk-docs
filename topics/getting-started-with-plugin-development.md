@@ -142,7 +142,7 @@ The plugin web resources (files that are accessed via hyperlinks and JSP pages) 
 1. First we'll create the directory for our jsp: go to the `demoPlugin-server\src\main\resources` directory in IDEA and create the `buildServerResources` directory.
 2. In the newly created `demoPlugin-server\src\main\resources\buildServerResources` directory, create the `Hello.jsp` file, e.g.
 
-```html
+```jsp
 <html>
 <body>
 Hello world
@@ -162,7 +162,7 @@ Go to `\demoPlugin\demoPlugin-server\src\main\java\com\demoDomain\teamcity\demoP
 Next we need to construct the path to our JSP file. When a plugin is unpacked on the TeamCity server, the paths to its resources change. To obtain valid paths to the files after the plugin is installed, use the `jetbrains.buildServer.web.openapi.PluginDescriptor` class which implements the `getPluginResourcesPath` method; otherwise TeamCity might have difficulties finding the plugin resources.
 
 
-```jsp
+```java
 package com.demoDomain.teamcity.demoPlugin;
 
 import jetbrains.buildServer.controllers.BaseController;
@@ -198,7 +198,7 @@ public class AppServer extends BaseController {
 Go to the `demoPlugin-server\src\main\resources\META-INF` directory and update `build-server-plugin-demo-plugin.xml` to include our AppServer class.
 
 
-```shell
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="constructor">

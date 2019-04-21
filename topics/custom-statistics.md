@@ -3,9 +3,8 @@
 
 TeamCity provides a number of ways to customize statistics. You can add your own custom metrics to integrate your tools/processes, insert any statistical chart/report into statistic page extension places and so on.
 
-This page describes programmatic approaches to statistics customization. For user\-level customizations, please refer to the [Custom Chart](https://www.jetbrains.com/help/teamcity/?custom-chart) page.
+This page describes programmatic approaches to statistics customization. For user-level customizations, please refer to the [Custom Chart](https://www.jetbrains.com/help/teamcity/?custom-chart) page.
 
-On this page:
 
 ## Customize TeamCity Statistics Page
 
@@ -14,16 +13,16 @@ On this page:
 To add a chart to the __Statistics__ tab for a project or build configuration, use the `ChartProviderRegistry` bean:
 
 
-```
-public MyExtension(ChartProviderRegistry registry, ProjectManager manager) \{
- registry.getChartProvider("project\-graphs").registerChart(manager.findProjectByExternalId("externalId"), createGraphBean());
-// "project\-graphs" for Project Statistics Tab
-// "buildtype\-graphs" for Build Configuration Statistics Tab
-\}
+```java
+public MyExtension(ChartProviderRegistry registry, ProjectManager manager) {
+ registry.getChartProvider("project-graphs").registerChart(manager.findProjectByExternalId("externalId"), createGraphBean());
+// "project-graphs" for Project Statistics Tab
+// "buildtype-graphs" for Build Configuration Statistics Tab
+}
 
-public GraphBean createGraphBean() \{
+public GraphBean createGraphBean() {
  // creates GraphBean
-\}
+}
 
 ```
 
@@ -39,8 +38,8 @@ To add custom content to the __Statistics__ tab for a project or build configura
 To add charts to your custom JSP pages, use the `<buildGraph>` tag and a special controller accessible on `"/buildGraph.html"`. It requires the `jsp` attribute leading to your page:
 
 
-```
-new ModelAndView("/buildGraph.html?jsp=" \+ myDescriptor.getPluginResourcesPath("sampleChartPage.jsp"))'
+```jsp
+new ModelAndView("/buildGraph.html?jsp=" +myDescriptor.getPluginResourcesPath("sampleChartPage.jsp"))'
 
 ```
 
@@ -49,8 +48,8 @@ new ModelAndView("/buildGraph.html?jsp=" \+ myDescriptor.getPluginResourcesPath(
 To insert statistics chart into the `sampleChartPage.jsp`:
 
 
-```
-<%@taglib prefix="stats" tagdir="/WEB\-INF/tags/graph"%>
+```jsp
+<%@taglib prefix="stats" tagdir="/WEB-INF/tags/graph"%>
 <stats:buildGraph id="g1" valueType="BuildDuration"/>
 
 ```

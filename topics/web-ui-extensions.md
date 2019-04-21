@@ -14,34 +14,36 @@ Hint: you can use source code of the existing plugins as a reference, for exampl
 ## Getting Started
 
 The simplest way of adding your own custom tab is to derive from one of the classes:
-* `jetbrains.buildServer.web.openapi.project.ProjectTab`
-* `jetbrains.buildServer.web.openapi.buildType.BuildTypeTab`
-* `jetbrains.buildServer.web.openapi.ViewLogTab`
-* `jetbrains.buildServer.controllers.admin.AdminPage`
+
+* [`jetbrains.buildServer.web.openapi.project.ProjectTab`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/project/ProjectTab.html)
+* [`jetbrains.buildServer.web.openapi.buildType.BuildTypeTab`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/buildType/BuildTypeTab.html)
+* [`jetbrains.buildServer.web.openapi.ViewLogTab`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/ViewLogTab.html)
+* [`jetbrains.buildServer.controllers.admin.AdminPage`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/controllers/admin/AdminPage.html)
+
 This will add your tab to the project, build type (build configuration), build or administration page respectively. Here's an example of the Diagnostics admin page:
 
 
-```
-public class DiagnosticsAdminPage extends AdminPage \{
-  public DiagnosticsAdminPage(@NotNull PagePlaces pagePlaces, @NotNull PluginDescriptor descriptor) \{
+```java
+public class DiagnosticsAdminPage extends AdminPage {
+  public DiagnosticsAdminPage(@NotNull PagePlaces pagePlaces, @NotNull PluginDescriptor descriptor) {
     super(pagePlaces);
     setPluginName("diagnostics");
     setIncludeUrl(descriptor.getPluginResourcesPath("/admin/diagnosticsAdminPage.jsp"));
     setTabTitle("Diagnostics");
     setPosition(PositionConstraint.after("clouds", "email", "jabber"));
     register();
-  \}
+  }
 
   @Override
-  public boolean isAvailable(@NotNull HttpServletRequest request) \{
+  public boolean isAvailable(@NotNull HttpServletRequest request) {
     return super.isAvailable(request) && checkHasGlobalPermission(request, Permission.CHANGE\_SERVER\_SETTINGS);
-  \}
+  }
 
   @NotNull
-  public String getGroup() \{
+  public String getGroup() {
     return SERVER\_RELATED\_GROUP;
-  \}
-\}
+  }
+}
 
 ```
 
@@ -55,20 +57,20 @@ Here's another example of the project tab:
 
 
 ```
-public class CurrentProblemsTab extends ProjectTab \{
+public class CurrentProblemsTab extends ProjectTab {
   public CurrentProblemsTab(@NotNull PagePlaces pagePlaces,
                             @NotNull ProjectManager projectManager,
-                            @NotNull PluginDescriptor descriptor) \{
+                            @NotNull PluginDescriptor descriptor) {
     super("problems", "Current Problems", pagePlaces, projectManager, descriptor.getPluginResourcesPath("problems.jsp"));
     // add your CSS/JS here
-  \}
+  }
 
   @Override
   protected void fillModel(@NotNull Map<String, Object> model, @NotNull HttpServletRequest request,
-                           @NotNull SProject project, @Nullable SUser user) \{
+                           @NotNull SProject project, @Nullable SUser user) {
     // add your data here
-  \}
-\}
+  }
+}
 
 ```
 
@@ -97,23 +99,23 @@ There is a convention that a place id named as a TAB can be used with the Simple
 
 
 ```
-public class ChangedFileExtension extends SimplePageExtension \{
+public class ChangedFileExtension extends SimplePageExtension {
   public ChangedFileExtension(@NotNull PagePlaces pagePlaces,
-                              @NotNull PluginDescriptor descriptor) \{
+                              @NotNull PluginDescriptor descriptor) {
     super(pagePlaces, PlaceId.CHANGED\_FILE\_LINK, "changeViewers", descriptor.getPluginResourcesPath("changedFileLink.jsp"));
     register();
-  \}
+  }
 
   @Override
-  public boolean isAvailable(@NotNull HttpServletRequest request) \{
+  public boolean isAvailable(@NotNull HttpServletRequest request) {
     return super.isAvailable(request);
-  \}
+  }
 
   @Override
-  public void fillModel(@NotNull Map<String, Object> model, @NotNull HttpServletRequest request) \{
+  public void fillModel(@NotNull Map<String, Object> model, @NotNull HttpServletRequest request) {
     // fill model
-  \}
-\}
+  }
+}
 
 ```
 
@@ -133,24 +135,24 @@ Example:
 
 
 ```
-public class ServerConfigGeneralController extends BaseFormXmlController \{
+public class ServerConfigGeneralController extends BaseFormXmlController {
   public ServerConfigGeneralController(@NotNull SBuildServer server,
-                                       @NotNull WebControllerManager webControllerManager) \{
+                                       @NotNull WebControllerManager webControllerManager) {
     super(server);
     webControllerManager.registerController("/my/path/", this);
-  \}
+  }
 
   @Override
   @Nullable
-  protected ModelAndView doGet(@NotNull final HttpServletRequest request, @NotNull final HttpServletResponse response) \{
+  protected ModelAndView doGet(@NotNull final HttpServletRequest request, @NotNull final HttpServletResponse response) {
     return null;
-  \}
+  }
 
   @Override
-  protected void doPost(@NotNull final HttpServletRequest request, @NotNull final HttpServletResponse response, @NotNull final Element xmlResponse) \{
+  protected void doPost(@NotNull final HttpServletRequest request, @NotNull final HttpServletResponse response, @NotNull final Element xmlResponse) {
     return null;
-  \}
-\}
+  }
+}
 
 ```
 
@@ -164,8 +166,12 @@ With the custom controller you can provide completely new pages.
 
 Plugin resources are unpacked to `<TeamCity web application>/plugins` directory when server starts. However to construct paths to your JSP or images in Java it is recommended to use `jetbrains.buildServer.web.openapi.PluginDescriptor`. This descriptor can be obtained as any other Spring service.
 
-In JSP files to construct paths to your resources you can use $\{teamcityPluginResourcesPath\}. This attribute is provided by TeamCity automatically, you can use it like this:
-&lt;img src="$\{teamcityPluginResourcesPath\}your\_image.gif" height="16" width="16" border="0"&gt;
+In JSP files to construct paths to your resources you can use `${teamcityPluginResourcesPath}`. This attribute is provided by TeamCity automatically, you can use it like this:
+
+```jsp
+<img src="${teamcityPluginResourcesPath}your_image.gif" height="16" width="16" border="0">
+
+```
 
 Note: &lt;c:url/&gt; is required to construct correct URL in case if TeamCity is deployed under the non root context.
 
@@ -185,7 +191,7 @@ Description
 
 </td></tr><tr>
 
-<td>`jetbrains.buildServer.web.openapi.PlaceId`
+<td>[`jetbrains.buildServer.web.openapi.PlaceId`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/PlaceId.html)
 
 </td>
 
@@ -195,7 +201,7 @@ A list of page place identifiers / extension points
 
 </td></tr><tr>
 
-<td>`jetbrains.buildServer.web.openapi.PagePlace`
+<td>[`jetbrains.buildServer.web.openapi.PagePlace`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/PagePlace.html)
 
 </td>
 
@@ -205,7 +211,7 @@ A single page place associated with __PlaceId__, allows to add / remove extensio
 
 </td></tr><tr>
 
-<td>`jetbrains.buildServer.web.openapi.PageExtension`
+<td>[`jetbrains.buildServer.web.openapi.PageExtension`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/PageExtension.html)
 
 </td>
 
@@ -215,7 +221,7 @@ Page extension interface
 
 </td></tr><tr>
 
-<td>`jetbrains.buildServer.web.openapi.SimplePageExtension`
+<td>[`jetbrains.buildServer.web.openapi.SimplePageExtension`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/SimplePageExtension.html)
 
 </td>
 
@@ -225,7 +231,7 @@ Base class for page extensions
 
 </td></tr><tr>
 
-<td>`jetbrains.buildServer.web.openapi.CustomTab`
+<td>[`jetbrains.buildServer.web.openapi.CustomTab`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/CustomTab.html)
 
 </td>
 
@@ -235,7 +241,7 @@ Custom tab extension interface
 
 </td></tr><tr>
 
-<td>`jetbrains.buildServer.web.openapi.PagePlaces`
+<td>[`jetbrains.buildServer.web.openapi.PagePlaces`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/PagePlaces.html)
 
 </td>
 
@@ -245,7 +251,7 @@ Maintains a collection of page places and allows to locate __PagePlace__ by __Pl
 
 </td></tr><tr>
 
-<td>`jetbrains.buildServer.web.openapi.WebControllerManager`
+<td>[`jetbrains.buildServer.web.openapi.WebControllerManager`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/WebControllerManager.html)
 
 </td>
 
@@ -255,7 +261,7 @@ Maintains a collection of custom controllers, allows to register custom controll
 
 </td></tr><tr>
 
-<td>`jetbrains.buildServer.controllers.BaseController`
+<td>[`jetbrains.buildServer.controllers.BaseController`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/controllers/BaseController.html)
 
 </td>
 

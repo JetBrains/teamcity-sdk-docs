@@ -56,13 +56,15 @@ If you use a _zip file_:
 If you use a _separate folder_:
 * TeamCity will use the folder name as the plugin name
 The plugin zip archive/directory includes:
-* `teamcity-plugin.xml` containing meta information about the plugin, like its name and version, see the [section below]().
+* `teamcity-plugin.xml` containing meta information about the plugin, like its name and version, see the [section below](#Plugin Descriptor).
 * the `server` directory containing the server\-side part of the plugin, i.e, a number of jar files.
 * the `agent` directory containing `<agent plugin zip>` if your plugin affects agents too, see the [section below]().
+
 The plugin directory should have the following structure:
 
 The server\-only plugin:
-```
+
+```shell
 server
   |
   --> <server plugin jar files>
@@ -72,7 +74,7 @@ teamcity-plugin.xml
 
 The plugin affecting the server and agents:
 
-```
+```shell
 agent
   |
   --> <agent plugin zip files>
@@ -98,7 +100,7 @@ The `teamcity-plugin.xml` file must be located in the root of the plugin directo
 An example of __teamcity\-plugin.xml__:
 
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <teamcity-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:noNamespaceSchemaLocation="urn:shemas-jetbrains-com:teamcity-plugin-v1-xml">
@@ -127,6 +129,7 @@ The plugin parameters can be accessed via the `jetbrains.buildServer.web.openapi
 ## Agent-Side Plugins
 
 TeamCity build agents support the following plugin structures:
+
 * new plugins (with the `teamcity-plugin.xml` descriptor), including _tool_ plugins * tool plugins (with the `teamcity-plugin.xml` descriptor). This is a kind of plugin without any classes loaded into the runtime. Tool plugins for agents are used to only distribute binary files to agents, e.g. the NuGet plugin for TeamCity creates a tool plugin for agents to redistribute the downloaded NuGet.exe to TeamCity agents. See more at [Installing Agent Tools](https://www.jetbrains.com/help/teamcity/?installing-agent-tools).
 * deprecated plugins (with the plugin name folder in the .zip file)
 
@@ -138,7 +141,7 @@ The `agent` directory must have one file only: _&lt;agent plugin zip&gt;_ struct
 
 The old plugin structure implied that all plugin files and directories were placed into the single root directory, i.e. there had to be one root directory in the archive, the\_&lt;plugin name directory&gt;\_, and no other files at the top level. All .jar files required by the plugin on agents were placed into the `lib` subfolder:
 
-```
+```shell
 <plugin name directory>
   |
   --> lib
@@ -153,7 +156,7 @@ There must be no other items in the root of .zip but the directory with the plug
 
 Now a new, more flexible schema of packing is recommended. The plugin name root directory inside the plugin archive is no longer required. The agent plugin name now is obtained from the `PluginName.zip` file name. The archive needs to include the plugin descriptor, `teamcity\-plugin.xml`, [see below]().
 
-```
+```shell
 agent-plugin-name.zip
   |
     - teamcity-plugin.xml
@@ -173,7 +176,7 @@ It is required to have the `teamcity-plugin.xml` file under the root of the agen
 This `teamcity-plugin.xml` file provides the plugin description (same as it is done on the server\-side):
 
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <teamcity-agent-plugin 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -190,7 +193,7 @@ This `teamcity-plugin.xml` file provides the plugin description (same as it is d
 To deploy a tool, use the following `teamcity-plugin.xml` file:
 
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <teamcity-agent-plugin
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -207,7 +210,7 @@ To deploy a tool, use the following `teamcity-plugin.xml` file:
  There is experimental ability (can be removed in the future versions!) to set executable bit to some files after unpacking on the agent. Watch [TW-21673](https://youtrack.jetbrains.com/issue/TW-21673) for proper solution. To make some files of a tool executable, use the following `teamcity-plugin.xml` file:
 
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
         <teamcity-agent-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                          xsi:noNamespaceSchemaLocation="urn:shemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
@@ -237,7 +240,7 @@ To use plugin dependencies, add the \`dependencies\` tag into the plugin xml des
 Example of the server\-side plugin descriptor using plugin dependencies:
 
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <teamcity-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-plugin-v1-xml">
@@ -259,7 +262,7 @@ xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-plugin-v1-xml"
 Example of agent\-side plugin descriptor:
 
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <teamcity-agent-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
