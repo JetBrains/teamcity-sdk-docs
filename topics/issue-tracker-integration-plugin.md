@@ -13,9 +13,9 @@ To create a TeamCity plugin for custom issue tracking system (ITS), you have to 
 
 
 	
-* __[jetbrains.buildServer.issueTracker.SIssueProvider](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/notification/TemplateProcessor.html)__: represents a single provider
+* __[jetbrains.buildServer.issueTracker.SIssueProvider`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/notification/TemplateProcessor.html)__: represents a single provider
 	
-* __[jetbrains.buildServer.issueTracker.IssueProviderFactory](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/IssueProviderFactory.html)__: API for instantiation of issue tracker providers
+* __[jetbrains.buildServer.issueTracker.IssueProviderFactory`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/IssueProviderFactory.html)__: API for instantiation of issue tracker providers
 
 
 
@@ -25,7 +25,7 @@ The main entity is a _provider_ (i.e. connection to the ITS), responsible for pa
 
 
 Here is a brief description of the strategy used in TeamCity in respect to ITS integration:
-When the server is going to render the user comment (VCS commit, or build comment), it invokes all registered providers to parse the comment. This operation is performed by the `IssueProvider.getRelatedIssues() method, which analyzes the comment and returns the list of the issue mentions ([jetbrains.buildServer.issueTracker.IssueMention](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/IssueMention.html)). `IssueMention` just holds the information that is enough to render a popup arrow near the issue id. When the user points the mouse cursor on the arrow, the server requests the full data for this issue calling `IssueProvider.findIssueById() method, and then displays the data in a popup. The data can be taken from the provider's cache.
+When the server is going to render the user comment (VCS commit, or build comment), it invokes all registered providers to parse the comment. This operation is performed by the `IssueProvider.getRelatedIssues() method, which analyzes the comment and returns the list of the issue mentions ([jetbrains.buildServer.issueTracker.IssueMention`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/IssueMention.html)). `IssueMention` just holds the information that is enough to render a popup arrow near the issue id. When the user points the mouse cursor on the arrow, the server requests the full data for this issue calling `IssueProvider.findIssueById() method, and then displays the data in a popup. The data can be taken from the provider's cache.
 
 
 
@@ -45,7 +45,7 @@ A brief summary of steps to be done to create and add a plugin to TeamCity.
 
 
 	
-* Implement factory and provider interfaces ([jetbrains.buildServer.issueTracker.SIssueProvider](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/notification/TemplateProcessor.html) and [jetbrains.buildServer.issueTracker.IssueProviderFactory](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/IssueProviderFactory.html))
+* Implement factory and provider interfaces ([jetbrains.buildServer.issueTracker.SIssueProvider`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/notification/TemplateProcessor.html) and [jetbrains.buildServer.issueTracker.IssueProviderFactory`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/IssueProviderFactory.html))
 	
 * Create a JSP page for admin UI
 	
@@ -62,11 +62,11 @@ Common code of Jira, Bugzilla and YouTrack plugins can be found in `Abstract*` c
 
 
 	
-* __[jetbrains.buildServer.issueTracker.AbstractIssueProviderFactory](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/AbstractIssueProviderFactory.html)__
+* __[`jetbrains.buildServer.issueTracker.AbstractIssueProviderFactory`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/AbstractIssueProviderFactory.html)__
 	
-* __[jetbrains.buildServer.issueTracker.AbstractIssueProvider](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/AbstractIssueProvider.html)__
+* __[`jetbrains.buildServer.issueTracker.AbstractIssueProvider`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/AbstractIssueProvider.html)__
 	
-* __[jetbrains.buildServer.issueTracker.AbstractIssueFetcher](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/AbstractIssueFetcher.html)__ \- a helper entity which encapsulates fetch\-related logic
+* __[`jetbrains.buildServer.issueTracker.AbstractIssueFetcher`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/AbstractIssueFetcher.html)__ \- a helper entity which encapsulates fetch\-related logic
 
 
 

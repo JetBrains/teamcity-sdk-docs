@@ -113,7 +113,7 @@ Obtaining the current Vesion may be an expensive operation for some version cont
 
 
 
-A _Patch_ is the set of all modifications of a VCS Root made between two arbitrary Versions packed into a single unit. With Patches there is no need to retrieve all the sources from the repository each time a build starts. Patches are sent to agents where they are applied to the checkout directory. Patches in TeamCity have their own format, and should be constructed using `jetbrains.buildServer.vcs.patches.PatchBuilder` .
+A _Patch_ is the set of all modifications of a VCS Root made between two arbitrary Versions packed into a single unit. With Patches there is no need to retrieve all the sources from the repository each time a build starts. Patches are sent to agents where they are applied to the checkout directory. Patches in TeamCity have their own format, and should be constructed using [`jetbrains.buildServer.vcs.patches.PatchBuilder`](http://javadoc.jetbrains.net/teamcity/openapi/4.x/jetbrains/buildServer/vcs/patches/PatchBuilder.html).
 
 
 
@@ -138,48 +138,39 @@ Checkout rules consist of include and exclude rules. Include rule can have "from
 
 
 
-In most cases it is simpler to collect changes or build patch separately by each include rule, for this VCS plugin can implement interface `jetbrains.buildServer.CollectChangesByIncludeRule` (as well as `jetbrains.buildServer.vcs.BuildPatchByIncludeRule`) and use `jetbrains.buildServer.vcs.VcsSupportUtil` as shown below:
+In most cases it is simpler to collect changes or build patch separately by each include rule, for this VCS plugin can implement interface [`jetbrains.buildServer.CollectChangesByIncludeRule`](http://javadoc.jetbrains.net/teamcity/openapi/4.x/jetbrains/buildServer/CollectChangesByIncludeRule.html) (as well as [`jetbrains.buildServer.vcs.BuildPatchByIncludeRule`](http://javadoc.jetbrains.net/teamcity/openapi/4.x/jetbrains/buildServer/vcs/BuildPatchByIncludeRule.html)) and use [`jetbrains.buildServer.vcs.VcsSupportUtil`](jetbrains.buildServer.vcs.VcsSupportUtil) as shown below:
 
 
 
-
-```
-
+```java
 public List<ModificationData> collectBuildChanges(VcsRoot root, String fromVersion, String currentVersion, CheckoutRules checkoutRules)
-  throws VcsException \{
+  throws VcsException {
   return VcsSupportUtil.collectBuildChanges(root, fromVersion, currentVersion, checkoutRules, this);
-\}
+}
 
 public List<ModificationData> collectBuildChanges(VcsRoot root, String fromVersion, String currentVersion, IncludeRule includeRule)
-  throws VcsException \{
+  throws VcsException {
   ... changes collecting code ...
-\}
+}
 
 ```
-
-
-
 
 
 And for patch construction:
 
 
-
-
-```
-
+```java
 public void buildPatch(VcsRoot root, String fromVersion, String toVersion, PatchBuilder builder, CheckoutRules checkoutRules)
-  throws IOException, VcsException \{
+  throws IOException, VcsException {
   VcsSupportUtil.buildPatch(root, fromVersion, toVersion, builder, checkoutRules, this);
-\}
+}
 
 public void buildPatch(VcsRoot root, String fromVersion, String toVersion, PatchBuilder builder, IncludeRule includeRule)
-  throws IOException, VcsException \{
+  throws IOException, VcsException {
   ... build patch code ...
-\}
+}
 
 ```
-
 
 
 
@@ -189,23 +180,22 @@ If you want to share data between calls, this approach allows you to do it easil
 
 
 
-```
-
+```java
 public List<ModificationData> collectBuildChanges(VcsRoot root, String fromVersion, String currentVersion, CheckoutRules checkoutRules)
-  throws VcsException \{
+  throws VcsException {
   final MyConnection conn = obtainConnection(root); // get a connection to the repository
-  return VcsSupportUtil.collectBuildChanges(root, fromVersion, currentVersion, checkoutRules, new CollectChangesByIncludeRule \{
+  return VcsSupportUtil.collectBuildChanges(root, fromVersion, currentVersion, checkoutRules, new CollectChangesByIncludeRule {
     public List<ModificationData> collectBuildChanges(VcsRoot root, String fromVersion, String currentVersion, IncludeRule includeRule)
-      throws VcsException \{
+      throws VcsException {
       doCollectChange(conn, includeRule); // use the same connection for all calls
-    \}
-  \});
-\}
+    }
+  });
+}
 
 public List<ModificationData> collectBuildChanges(VcsRoot root, String fromVersion, String currentVersion, IncludeRule includeRule)
-  throws VcsException \{
+  throws VcsException {
   ... changes collecting code ...
-\}
+}
 
 ```
 
@@ -232,8 +222,7 @@ We want to monitor changes only in module1 and module2. Therefore we've configur
 
 
 
-```
-
+```shell
 \\+:module1
 
 \\+:module2
@@ -244,7 +233,7 @@ We want to monitor changes only in module1 and module2. Therefore we've configur
 
 
 
-When `collectBuildChanges(...)` is invoked it will receive a `VcsRoot` instance that corresponds to `vcs://repository/project/|| and a \{\{CheckoutRules` instance with two `IncludeRules` — one for "module1" and the other for "module2".
+When `collectBuildChanges(...)` is invoked it will receive a `VcsRoot` instance that corresponds to `vcs://repository/project/||' and a `{{CheckoutRules` instance with two `IncludeRules` — one for "module1" and the other for "module2".
 
 
 
@@ -268,7 +257,7 @@ Now let's assume we've got a couple of changes in our sample repository, made by
 
 
 
-The collection of ModificationData returned by VcsSupport.collectBuildChanges(...) should then be like this:
+The collection of ModificationData returned by VcsSupport.collectBuildChanges(...)` should then be like this:
 
 
 
@@ -321,18 +310,17 @@ All above is applicable to building patches using `VcsSupportUtil.buildPatch(...
 
 
 
-During the server startup all VCS plugins are required to register themselves in the VCS Manager (`jetbrains.buildServer.vcs.VcsManager` ). A VCS plugin can receive the __VcsManager__ instance using Spring injection:
+During the server startup all VCS plugins are required to register themselves in the VCS Manager ([`jetbrains.buildServer.vcs.VcsManager`](http://javadoc.jetbrains.net/teamcity/openapi/4.x/jetbrains/buildServer/vcs/VcsManager.html) ). A VCS plugin can receive the __VcsManager__ instance using Spring injection:
 
 
 
 
-```
-
-class SomeVcsSupport implements VcsSupport \{
+```java
+class SomeVcsSupport implements VcsSupport {
 ...
-  public SomeVcsSupport(VcsManager manager) \{
+  public SomeVcsSupport(VcsManager manager) {
     manager.registerVcsSupport(this);
-  \}
+  }
 ...
 
 ```
@@ -367,7 +355,7 @@ Agent part of VCS plugin is optional; if it is provided then checkout can also b
 
 
 
-__To create agent side checkout__, implement `jetbrains.buildServer.agent.vcs.CheckoutOnAgentVcsSupport` in the agent part of the plugin. Also server side part of your plugin must implement `jetbrains.buildServer.AgentSideCheckoutAbility` interface.
+__To create agent side checkout__, implement [`jetbrains.buildServer.agent.vcs.CheckoutOnAgentVcsSupport`](http://javadoc.jetbrains.net/teamcity/openapi/4.x/jetbrains/buildServer/agent/vcs/CheckoutOnAgentVcsSupport.html) in the agent part of the plugin. Also server side part of your plugin must implement [`jetbrains.buildServer.AgentSideCheckoutAbility`](http://javadoc.jetbrains.net/teamcity/openapi/4.x/jetbrains/buildServer/AgentSideCheckoutAbility.html) interface.
 
 
 
