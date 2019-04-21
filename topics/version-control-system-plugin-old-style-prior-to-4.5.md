@@ -211,7 +211,7 @@ When using `VcsSupportUtil` it is important to understand how it works with Chec
 
 Suppose, we have a VCS Root pointing to `vcs://repository/project/`. The project root contains the following directory structure:
 
-![vcsPluginOldStyleDiagram1.png](vcsPluginOldStyleDiagram1.png)
+![vcsPluginOldStyleDiagram1.png](images/vcsPluginOldStyleDiagram1.png)
 
 
 
