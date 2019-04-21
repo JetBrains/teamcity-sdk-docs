@@ -24,7 +24,7 @@ To get started writing a plugin for TeamCity, set up the plugin development envi
 
 We'll generate a Maven project [from an archetype](developing-plugins-using-maven.md) residing in the JetBrains Maven repository. Executing the following command will produce a project for a server\-side\-only plugin.
 
-You will be asked to enter the Maven `groudId`, `artifactId`, `version`, `package name` and `teamcity version` for your plugin.
+You will be asked to enter the Maven `groudId`, `artifactId`, `version`, `package name` and `teamcityVersion` for your plugin.
 
 
 ```shell

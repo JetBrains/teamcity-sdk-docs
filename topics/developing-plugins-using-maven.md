@@ -5,7 +5,6 @@
 
 You can easily develop TeamCity plugins with Maven.
 
-On this page:
 
 ## Supported Maven versions
 

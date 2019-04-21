@@ -15,7 +15,9 @@ With the introduction of the ability to attach a build configuration to multiple
     * addTemplate(BuildTypeTemplate, boolean), and removeTemplates(Collection&lt;? extends BuildTypeTemplate&gt;, boolean) were introduced instead
     * also setTemplates(List&lt;? extends BuildTypeTemplate&gt;, boolean) and setTemplatesOrder(List&lt;String&gt;) were added
 
-With the introduction of default templates the following changes have been made: * in SProject:  * getDefaultTemplate(boolean) has been added
+With the introduction of default templates the following changes have been made:
+* in SProject:
+    * getDefaultTemplate(boolean) has been added
  
 * in SBuildType:  
     * getOwnTemplates() has been added
@@ -61,7 +63,9 @@ Consider using some other approach. For instance, a plugin can obtain an Iterato
 ## Changes from 8.1.x to 9.0
 
 ### Server API changes
-* `jetbrains.buildServer.serverSide.dependency.Dependent#getDependencyReferences` and `jetbrains.buildServer.serverSide.dependency.Dependent#getNumberOfDependencyReferences` were moved to `jetbrains.buildServer.serverSide.SBuildType`* `jetbrains.buildServer.issueTracker.IssueProviderFactory#getDisplayName` display name for issue tracker in UI.
+* `jetbrains.buildServer.serverSide.dependency.Dependent#getDependencyReferences` and `jetbrains.buildServer.serverSide.dependency.Dependent#getNumberOfDependencyReferences` were moved to `jetbrains.buildServer.serverSide.SBuildType`
+* `jetbrains.buildServer.issueTracker.IssueProviderFactory#getDisplayName` display name for issue tracker in UI.
+
 ## Changes from 7.1.x to 8.0
 
 ### External ID -related changes
@@ -83,14 +87,17 @@ Consider using some other approach. For instance, a plugin can obtain an Iterato
 
 ### Authentication API changes
 
-* Changes in `jetbrains.buildServer.serverSide.auth.LoginConfiguration` class: * `registerLoginModule(LoginModuleDescriptor)` method is deprecated, use `registerAuthMethodType(AuthMethodType)` instead
+* Changes in `jetbrains.buildServer.serverSide.auth.LoginConfiguration` class: 
+    * `registerLoginModule(LoginModuleDescriptor)` method is deprecated, use `registerAuthMethodType(AuthMethodType)` instead
     * `getSelectedLoginModuleDescriptor()` method is deprecated, use `getConfiguredLoginModules()` instead
     * `createJAASConfiguration()` method is deprecated, use `createJAASConfiguration(AuthMethod)` instead
     * `getAuthType()` method now always returns the value `"mixed"` and is deprecated, use `getConfiguredAuthMethods(Class)` or `isAuthMethodConfigured(Class)` instead
-* Changes in `jetbrains.buildServer.serverSide.auth.LoginModuleDescriptor` class: * `jetbrains.buildServer.serverSide.auth.LoginModuleDescriptorAdapter` class was added, extend your implementation from this class to not depend on future changes in `LoginModuleDescriptor`
+* Changes in `jetbrains.buildServer.serverSide.auth.LoginModuleDescriptor` class: 
+    * `jetbrains.buildServer.serverSide.auth.LoginModuleDescriptorAdapter` class was added, extend your implementation from this class to not depend on future changes in `LoginModuleDescriptor`
     * `getOptions()` method is deprecated, you need to implement `getJAASOptions(Map)` method
     * `LoginModuleDescriptor` interface now extends `jetbrains.buildServer.serverSide.auth.AuthMethodType` interface and it contains some new methods you need to implement (or just use the adapter mentioned above)
-* Changes in `javax.security.auth.spi.LoginModule` class: * Message from `javax.security.auth.login.FailedLoginException` thrown from `javax.security.auth.spi.LoginModule` is now visible to user as is on login page
+* Changes in `javax.security.auth.spi.LoginModule` class: 
+    * Message from `javax.security.auth.login.FailedLoginException` thrown from `javax.security.auth.spi.LoginModule` is now visible to user as is on login page
     * Login module should now store own user name in TeamCity user's properties if it can differ from TeamCity's login. On login attempt login module must find existing user with the specified value of that property and return TeamCity's login for that user or return own user name if user does not exist yet. Use `jetbrains.buildServer.serverSide.auth.LoginModuleUtil#getUserModel(Map)` to get `jetbrains.buildServer.users.UserModel` in login module.
 
 You need now call `jetbrains.buildServer.serverSide.auth.ServerPrincipal#setCreatingNewUserAllowed(true)` if you want TeamCity to create the specified user in case he/she does not exist yet.
@@ -120,18 +127,33 @@ Vcs API is split into two parts: __VCS plugin api__, which is used to implement 
 * new API calls `AgentRunningBuild#stopBuild` and `AgentRunningBuild#getInterruptReason()`. (Those methods were in `AgentRunningBuildEx` since 6.5)
 * Responsibility API changes: 
 
-    * Added:  * jetbrains.buildServer.responsibility.ResponsibilityEntry   * enum RemoveMethod
-        * jetbrains.buildServer.responsibility.ResponsibilityEntry jetbrains.buildServer.serverSide.ResponsibilityInfo jetbrains.buildServer.serverSide.ResponsibilityInfoData jetbrains.buildServer.tests.TestResponsibilityData   * getRemoveMethod()
-        * jetbrains.buildServer.responsibility.ResponsibilityEntryFactory   * createEntry(BuildType)
-        * jetbrains.buildServer.responsibility.impl.BuildTypeResponsibilityEntryImpl   * constructor(BuildType)
-        * jetbrains.buildServer.web.functions.user.ResposibilityFunctions   * isUserResponsible(ResponsibilityEntry, User)
-    * Changed:  * jetbrains.buildServer.responsibility.impl.BuildTypeResponsibilityEntryImpl   * constructor(BuildType, State, User, User, Date, String, RemoveMethod)
-        * jetbrains.buildServer.responsibility.ResponsibilityEntryFactory   * createEntry(BuildType, State, User, User, Date, String, RemoveMethod)
-        * createEntry(TestName, long, State, User, User, Date, String, String, RemoveMethod)
-        * jetbrains.buildServer.BuildType   * getResponsibilityInfo() now returns ResponsibilityEntry
-        * jetbrains.buildServer.serverProxy.RemoteBuildServer   * updateResponsibility(Vector, String, String, String, String, String)
+    * Added:
+        * jetbrains.buildServer.responsibility.ResponsibilityEntry   
+            * enum RemoveMethod
+        * jetbrains.buildServer.responsibility.ResponsibilityEntry 
+        * jetbrains.buildServer.serverSide.ResponsibilityInfo 
+        * jetbrains.buildServer.serverSide.ResponsibilityInfoData 
+        *jetbrains.buildServer.tests.TestResponsibilityData
+            * getRemoveMethod()
+        * jetbrains.buildServer.responsibility.ResponsibilityEntryFactory   
+            * createEntry(BuildType)
+        * jetbrains.buildServer.responsibility.impl.BuildTypeResponsibilityEntryImpl   
+            * constructor(BuildType)
+        * jetbrains.buildServer.web.functions.user.ResposibilityFunctions   
+            * isUserResponsible(ResponsibilityEntry, User)
+    * Changed:  
+        * jetbrains.buildServer.responsibility.impl.BuildTypeResponsibilityEntryImpl   
+            * constructor(BuildType, State, User, User, Date, String, RemoveMethod)
+        * jetbrains.buildServer.responsibility.ResponsibilityEntryFactory
+            * createEntry(BuildType, State, User, User, Date, String, RemoveMethod)
+            * createEntry(TestName, long, State, User, User, Date, String, String, RemoveMethod)
+        * jetbrains.buildServer.BuildType
+            * getResponsibilityInfo() now returns ResponsibilityEntry
+        * jetbrains.buildServer.serverProxy.RemoteBuildServer
+            * updateResponsibility(Vector, String, String, String, String, String)
     * Removed (deprecated):  
-        * jetbrains.buildServer.serverSide.ResponsibilityInfo   * createInactive()
+        * jetbrains.buildServer.serverSide.ResponsibilityInfo
+            * createInactive()
             * createInactive(String, boolean, User)
             * getSince()
             * getUser()
@@ -171,10 +193,11 @@ Vcs API is split into two parts: __VCS plugin api__, which is used to implement 
 ## Changes from 6.5 to 7.0
 * new API calls: `BuildStatistics.findTestBy(TestName)` and `BuildStatistics.getAllTests()`
 * event\-method `projectCreated` of `j.b.serverSide.BuildServerListener` and `j.b.serverSide.BuildServerAdapter` now receives two parameters: `projectId` and `user`.
-* no longer publish `AntTaskExtension\*, AntUtil, TestNGUtil, ElementPatch, JavaTaskExtensionHelper` classes to openapi package. Those classes can still be found in &lt;teamcity&gt;/webapps/ROOT/WEB\-INF/plugins/ant/agent/antPlugin.zip!antPlugin/ant\-runtime.jar
+* no longer publish `AntTaskExtension*`, `AntUtil`, `TestNGUtil`, `ElementPatch`, `JavaTaskExtensionHelper` classes to the openapi package. Those classes can still be found in `<teamcity>/webapps/ROOT/WEB-INF/plugins/ant/agent/antPlugin.zip!antPlugin/ant-runtime.jar`
 * `Notificator` interface: methods `notifyResponsibleChanged` and `notifyResponsibleAssigned` changed second parameter from `j.b.serverSide.ResponsibilityInfo` to `j.b.responsibility.ResponsibilityEntry` (due to ResponsibilityInfo deprecation).
 * `j.b.serverSide.BuildServerListener` \- we've deprecated `responsibleChanged` method which used `j.b.serverSide.ResponsibilityInfo` parameter and added a similar method which uses `j.b.responsibility.ResponsibilityEntry`
-* new API calls: `j.b.agent.AgentRunningBuild.getBuildFeatures()` and `j.b.agent.AgentRunningBuild.getBuildFeaturesOfType(String)`. With help of these methods you can access build features enabled for the current build with all parameters properly resolved.* new API calls: `j.b.serverSide.BuildTypeSettings.isEnabled(String)` and `j.b.serverSide.BuildTypeSettings.setEnabled(String, boolean)`. These calls allow to enable / disable a setting with specified id (build runner, trigger or build feature), or check if it is enabled.
+* new API calls: `j.b.agent.AgentRunningBuild.getBuildFeatures()` and `j.b.agent.AgentRunningBuild.getBuildFeaturesOfType(String)`. With help of these methods you can access build features enabled for the current build with all parameters properly resolved.
+* new API calls: `j.b.serverSide.BuildTypeSettings.isEnabled(String)` and `j.b.serverSide.BuildTypeSettings.setEnabled(String, boolean)`. These calls allow to enable / disable a setting with specified id (build runner, trigger or build feature), or check if it is enabled.
 * Classes from serviceMessages.jar no longer depend on `j.b.messages.Status` class. If you used some of the classes (for example, `j.b.messages.serviceMessages.BuildStatus` class) and want to make your code compatible with TeamCity versions 6.0 \- 7.0, please use `j.b.messages.serviceMessages.ServiceMessage.asString(...)` methods.
 * new API extension point to filter all build messages: `j.b.messages.BuildMessagesTranslator`
 * `j.b.serverSide.BuildServerListener` \- we've removed `beforeBuildFinish(SRunningBuild, boolean)` method which was deprecated since TeamCity 3.1, there is another method `beforeBuildFinish(SRunningBuild)` which can be used instead.
@@ -207,9 +230,9 @@ Most methods from `j.b.agent.AgentRunningBuild` were splitted into `j.b.agent.Bu
 
 Parameters required for build runner are represented with `j.b.agent.BuildRunnerContext` interface. Every time `AgentRunningBuild` and `BuildRunnerContext` return resolved parameters back.
 
-`j.b.agent.BuildRunnerContext` represents the context of current build runner. All add\* methods modifies context for the runner. Those changes will be reverted whene context is switched to next runner.
+`j.b.agent.BuildRunnerContext` represents the context of current build runner. All `add*` methods modifies context for the runner. Those changes will be reverted whene context is switched to next runner.
 
-`j.b.agent.AgentRunningBuild` provides a context of a build (i.e. shared between all runners). All `addShared\*` methods modifies the build context (and thus all build runner contexts).
+`j.b.agent.AgentRunningBuild` provides a context of a build (i.e. shared between all runners). All `addShared*` methods modifies the build context (and thus all build runner contexts).
 
 `j.b.agent.BuildAgentConfiguration` now contains getBuildParameters() and getConfigParameters() methods to access parameters. Configuration parameters here are formed from properties from buildAgent.properties that does not start from 'system.' or 'env.' prefix. All parameters are returned with all references resolved.
 

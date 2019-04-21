@@ -6,7 +6,7 @@
                  start-page="developing-teamcity-plugins.md" status="eap">
     
     <toc-element id="developing-teamcity-plugins.md">
-        <toc-element id="getting-started-with-plugin-development.md" show-structure-for="h2,h3,h4"/>
+        <toc-element id="getting-started-with-plugin-development.md" show-structure-for="h2,h3"/>
         <toc-element id="typical-plugins.md">
             <toc-element id="build-runner-plugin.md"/>
             <toc-element id="risk-tests-reordering-in-custom-test-runner.md"/>
@@ -25,7 +25,7 @@
         <toc-element id="bundled-development-package.md"/>
         <toc-element id="open-api-changes.md"/>
         <toc-element id="plugin-types-in-teamcity.md"/>
-        <toc-element id="plugins-packaging.md"  show-structure-for="h2,h3,h4"/>
+        <toc-element id="plugins-packaging.md"  show-structure-for="h2,h3"/>
         <toc-element id="server-side-object-model.md"/>
         <toc-element id="agent-side-object-model.md"/>
         <toc-element id="extensions.md"/>
