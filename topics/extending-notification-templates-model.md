@@ -5,7 +5,7 @@ You can extend data model passed into [Customizing Notifications](https://www.je
 
 
 
-In your plugin, implement `jetbrains.buildServer.notification.TemplateProcessor` interface. The following example can be found in our sample plugin:
+In your plugin, implement `[jetbrains.buildServer.notification.TemplateProcessor](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/notification/TemplateProcessor.html)` interface. The following example can be found in our sample plugin:
 
 
 
