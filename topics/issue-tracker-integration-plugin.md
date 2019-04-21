@@ -13,9 +13,9 @@ To create a TeamCity plugin for custom issue tracking system (ITS), you have to 
 
 
 	
-* __`[jetbrains.buildServer.issueTracker.SIssueProvider](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/notification/TemplateProcessor.html)`__: represents a single provider
+* __[jetbrains.buildServer.issueTracker.SIssueProvider](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/notification/TemplateProcessor.html)__: represents a single provider
 	
-* __`[jetbrains.buildServer.issueTracker.IssueProviderFactory](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/IssueProviderFactory.html)`__: API for instantiation of issue tracker providers
+* __[jetbrains.buildServer.issueTracker.IssueProviderFactory](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/IssueProviderFactory.html)__: API for instantiation of issue tracker providers
 
 
 
@@ -25,7 +25,7 @@ The main entity is a _provider_ (i.e. connection to the ITS), responsible for pa
 
 
 Here is a brief description of the strategy used in TeamCity in respect to ITS integration:
-When the server is going to render the user comment (VCS commit, or build comment), it invokes all registered providers to parse the comment. This operation is performed by the `IssueProvider.getRelatedIssues()` method, which analyzes the comment and returns the list of the issue mentions (`[jetbrains.buildServer.issueTracker.IssueMention](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/IssueMention.html)`). `IssueMention` just holds the information that is enough to render a popup arrow near the issue id. When the user points the mouse cursor on the arrow, the server requests the full data for this issue calling `IssueProvider.findIssueById()` method, and then displays the data in a popup. The data can be taken from the provider's cache.
+When the server is going to render the user comment (VCS commit, or build comment), it invokes all registered providers to parse the comment. This operation is performed by the `IssueProvider.getRelatedIssues() method, which analyzes the comment and returns the list of the issue mentions ([jetbrains.buildServer.issueTracker.IssueMention](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/IssueMention.html)). `IssueMention` just holds the information that is enough to render a popup arrow near the issue id. When the user points the mouse cursor on the arrow, the server requests the full data for this issue calling `IssueProvider.findIssueById() method, and then displays the data in a popup. The data can be taken from the provider's cache.
 
 
 
@@ -45,7 +45,7 @@ A brief summary of steps to be done to create and add a plugin to TeamCity.
 
 
 	
-* Implement factory and provider interfaces (`[jetbrains.buildServer.issueTracker.SIssueProvider](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/notification/TemplateProcessor.html)` and `[jetbrains.buildServer.issueTracker.IssueProviderFactory](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/IssueProviderFactory.html)`)
+* Implement factory and provider interfaces ([jetbrains.buildServer.issueTracker.SIssueProvider](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/notification/TemplateProcessor.html) and [jetbrains.buildServer.issueTracker.IssueProviderFactory](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/IssueProviderFactory.html))
 	
 * Create a JSP page for admin UI
 	
@@ -58,15 +58,15 @@ A brief summary of steps to be done to create and add a plugin to TeamCity.
 
 
 
-Common code of Jira, Bugzilla and YouTrack plugins can be found in `Abstract\*` classes in the same package:
+Common code of Jira, Bugzilla and YouTrack plugins can be found in `Abstract*` classes in the same package:
 
 
 	
-* __`[jetbrains.buildServer.issueTracker.AbstractIssueProviderFactory](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/AbstractIssueProviderFactory.html)`__
+* __[jetbrains.buildServer.issueTracker.AbstractIssueProviderFactory](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/AbstractIssueProviderFactory.html)__
 	
-* __`[jetbrains.buildServer.issueTracker.AbstractIssueProvider](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/AbstractIssueProvider.html)`__
+* __[jetbrains.buildServer.issueTracker.AbstractIssueProvider](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/AbstractIssueProvider.html)__
 	
-* __`[jetbrains.buildServer.issueTracker.AbstractIssueFetcher](hhttp://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/AbstractIssueFetcher.html)`__ \- a helper entity which encapsulates fetch\-related logic
+* __[jetbrains.buildServer.issueTracker.AbstractIssueFetcher](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/AbstractIssueFetcher.html)__ \- a helper entity which encapsulates fetch\-related logic
 
 
 
@@ -75,38 +75,36 @@ Common code of Jira, Bugzilla and YouTrack plugins can be found in `Abstract\*` 
 
 
 
-```
-
-public class MyIssueProvider extends AbstractIssueProvider \{
+```java
+public class MyIssueProvider extends AbstractIssueProvider {
   // Let's name the provider simple: "myName". The plugin name should be the same.
-  public MyIssueProvider(@NotNull IssueFetcher fetcher) \{
+  public MyIssueProvider(@NotNull IssueFetcher fetcher) {
     super("myName", fetcher);
-  \}
+  }
 
   // Means that issues are in format "PREFIX\-123', like in Jira or YouTrack.
   // The prefix is configured via properties, regexp is invisible for users.
-  protected boolean useIdPrefix() \{
+  protected boolean useIdPrefix() {
     return true;
-  \}
-\}
+  }
+}
 
 ```
 
 
 
 
-Providers like Bugzilla might need to override `extractId` method, because the mention of issue id (in comment) and the id itself can differ. For instance, suppose the issues are referenced by a hash with a number, e.g. #1234; the regexp is `"#(\d\{4\})"` (configurable); but the issues in ITS are represented as plain integers. Then the provider must extract the substrings matching `"#(\d\{4\})"` and return the first groups only. You should implement it in `extractId` method:
+Providers like Bugzilla might need to override `extractId` method, because the mention of issue id (in comment) and the id itself can differ. For instance, suppose the issues are referenced by a hash with a number, e.g. #1234; the regexp is `"#(\d{4})"` (configurable); but the issues in ITS are represented as plain integers. Then the provider must extract the substrings matching `"#(\d{4})"` and return the first groups only. You should implement it in `extractId` method:
 
 
 
-```
-
+```java
 @NotNull
-protected String extractId(@NotNull String match) \{
+protected String extractId(@NotNull String match) {
   Matcher matcher = myPattern.matcher(match);
   matcher.find();
   return matcher.group(1);
-\}
+}
 
 ```
 
@@ -117,19 +115,18 @@ The factory code is very simple as well, for example:
 
 
 
-```
-
-public class MyIssueProviderFactory extends AbstractIssueProviderFactory \{
-  public MyIssueProviderFactory(@NotNull IssueFetcher fetcher) \{
+```java
+public class MyIssueProviderFactory extends AbstractIssueProviderFactory {
+  public MyIssueProviderFactory(@NotNull IssueFetcher fetcher) {
     // Type name usually starts with uppercase character because it is displayed in UI, but not necessarily.
     super(fetcher, "MyName");
-  \}
+  }
 
   @NotNull
-  public IssueProvider createProvider() \{
+  public IssueProvider createProvider() {
     return new MyIssueProvider(myFetcher);
-  \}
-\}
+  }
+}
 
 ```
 
@@ -140,26 +137,25 @@ IssueFetcher is usually the central class performing plugin\-specific logic. You
 
 
 
-```
-
+```java
 public IssueData getIssue(@NotNull String host, @NotNull String id,
-                          @Nullable final Credentials credentials) throws Exception \{
+                          @Nullable final Credentials credentials) throws Exception {
   final String url = getUrl(host, id);
-  return getFromCacheOrFetch(url, new FetchFunction() \{
+  return getFromCacheOrFetch(url, new FetchFunction() {
     @NotNull
-    public IssueData fetch() throws Exception \{
+    public IssueData fetch() throws Exception {
       InputStream body = fetchHttpFile(url, credentials);
       IssueData result = null;
-      if (body != null) \{
+      if (body != null) {
         result = parseXml(body, url);
-      \}
-      if (result == null) \{
-        throw new RuntimeException("Failed to fetch issue from \"" \+ url \+ "\"");
-      \}
+      }
+      if (result == null) {
+        throw new RuntimeException("Failed to fetch issue from \"" + url + "\"");
+      }
       return result;
-    \}
-  \});
-\}
+    }
+  });
+}
 
 ```
 

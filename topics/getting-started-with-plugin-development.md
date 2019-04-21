@@ -28,7 +28,6 @@ You will be asked to enter the Maven `groudId`, `artifactId`, `version`, `packag
 
 
 ```shell
-
 mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepository=http://download.jetbrains.com/teamcity-repository -DarchetypeArtifactId=teamcity-server-plugin -DarchetypeGroupId=org.jetbrains.teamcity.archetypes -DarchetypeVersion=RELEASE
 
 ```
@@ -37,6 +36,18 @@ mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepo
 We used the following values:
 
 <table><tr>
+       
+<td>
+Property
+
+
+</td>
+
+<td>
+Value
+
+
+</td></tr><tr>
 
 <td>
 `groudId`
@@ -113,7 +124,7 @@ The root of the `demoPlugin` directory contains the following:
 * the `teamcity-plugin.xml` file which is your [plugin descriptor](plugins-packaging.md) containing meta information about the plugin.
 * the `demoPlugin-server` directory contains the plugin sources: * `\src\main\java\zip` contains the AppServer.java file
  * `src\main\resources` includes resources controlling the plugin look and feel.
- * `src\main\resources\META-INF` folder contains `build-server-plugin-demo\-plugin.xml`, the bean definition file for our plugin. TeamCity plugins are initialized in their own Spring containers and every plugin needs a Spring bean definition file describing the main services of the plugin.
+ * `src\main\resources\META-INF` folder contains `build-server-plugin-demo-plugin.xml`, the bean definition file for our plugin. TeamCity plugins are initialized in their own Spring containers and every plugin needs a Spring bean definition file describing the main services of the plugin.
 * the `build` directory contains the xml files which define how the project output is aggregated into a single distributable archive.
 ## Step 3. Edit the plugin descriptor
 
@@ -145,13 +156,13 @@ Hello world
 ### B. Create the controller and obtain the path to the JSP
 
 Go to `\demoPlugin\demoPlugin-server\src\main\java\com\demoDomain\teamcity\demoPlugin` and open the `AppServer.java` file to create a custom controller:
-1. We'll create a simple controller which extends the TeamCity `jetbrains.buildServer.controllers.BaseController` class and implements the `BaseController.doHandle(HttpServletRequest, HttpServletResponse)` method.
+1. We'll create a simple controller which extends the TeamCity `jetbrains.buildServer.controllers.BaseController` class and implements the `BaseController.doHandle(HttpServletRequest, HttpServletResponse) method.
 2. The TeamCity open API provides the `jetbrains.buildServer.web.openapi.WebControllerManager` which allows registering custom controllers using the path to them: the path is a part of URL starting with a slash `/` appended to the URL of the server root.
 3. 
 Next we need to construct the path to our JSP file. When a plugin is unpacked on the TeamCity server, the paths to its resources change. To obtain valid paths to the files after the plugin is installed, use the `jetbrains.buildServer.web.openapi.PluginDescriptor` class which implements the `getPluginResourcesPath` method; otherwise TeamCity might have difficulties finding the plugin resources.
 
 
-```shell
+```jsp
 package com.demoDomain.teamcity.demoPlugin;
 
 import jetbrains.buildServer.controllers.BaseController;
@@ -163,20 +174,20 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AppServer extends BaseController \{
+public class AppServer extends BaseController {
     private PluginDescriptor myDescriptor;
 
-    public AppServer (WebControllerManager manager, PluginDescriptor descriptor) \{
+    public AppServer (WebControllerManager manager, PluginDescriptor descriptor) {
         manager.registerController("/demoPlugin.html",this);
         myDescriptor=descriptor;
-    \}
+    }
 
     @Nullable
     @Override
-    protected ModelAndView doHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception \{
+    protected ModelAndView doHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
         return new ModelAndView(myDescriptor.getPluginResourcesPath("Hello.jsp"));
-    \}
-\}
+    }
+}
 
 ```
 
