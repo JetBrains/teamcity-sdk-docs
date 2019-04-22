@@ -40,13 +40,15 @@ Before digging into the VCS plugin development details, it's important to unders
 
 A _Version_ is unambiguous representation of a particular snapshot within a repository pointed at by a VCS Root. The current version represents the head revision at the moment of obtaining.
 
-The current version is taken by calling [`jetbrains.buildServer.vcs.CollectSingleStatePolicy#getCurrentVersion(jetbrains.buildServer.vcs.VcsRoot)`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/CollectSingleStatePolicy.html#getCurrentVersion(jetbrains.buildServer.vcs.VcsRoot). The version here is an arbitrary text. It can be a representation of a transaction number, a revision number, a date, whatever suitable enough for getting a source snapshot in a particular VCS. Usually format of the version depends on a version control system, the only requirement which comes from TeamCity — it should be possible to sort changes by version in order of their happening (see [`jetbrains.buildServer.vcs.VcsSupportConfig#getVersionComparator()`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/VcsSupportConfig.html#getVersionComparator())).  Version is used in several places:
+The current version is taken by calling [`jetbrains.buildServer.vcs.CollectSingleStatePolicy#getCurrentVersion(jetbrains.buildServer.vcs.VcsRoot)`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/CollectSingleStatePolicy.html#getCurrentVersion(jetbrains.buildServer.vcs.VcsRoot). The version here is an arbitrary text. It can be a representation of a transaction number, a revision number, a date, whatever suitable enough for getting a source snapshot in a particular VCS. Usually the format of the version depends on a version control system; the only requirement which comes from TeamCity is that it should be possible to sort changes by version in order of their appearance (see [`jetbrains.buildServer.vcs.VcsSupportConfig#getVersionComparator()`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/VcsSupportConfig.html#getVersionComparator()). 
+
+The Version is used in several places:
 * for changes collecting
 * for patch construction
 * when content of the file is retrieved from the repository
 * for labeling / tagging
 
-TeamCity does not show Versions in the UI directly. For UI TeamCity converts a Version to its display name using [`jetbrains.buildServer.vcs.VcsSupportConfig#getVersionDisplayName(String,jetbrains.buildServer.vcs.VcsRoot)`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/VcsSupportConfig.html#getVersionDisplayName(String,jetbrains.buildServer.vcs.VcsRoot)).
+TeamCity does not show Versions in the UI directly. For the UI, TeamCity converts a Version to its display name using [`jetbrains.buildServer.vcs.VcsSupportConfig#getVersionDisplayName(String,jetbrains.buildServer.vcs.VcsRoot)`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/VcsSupportConfig.html#getVersionDisplayName(String,jetbrains.buildServer.vcs.VcsRoot).
 
 
 A _Change_ is an atomic modification of a single file within a source repository. In other words, a change corresponds to a single increment of a file version.
@@ -85,51 +87,51 @@ Checkout rules consist of include and exclude rules. Include rule can have "from
 [//]: # (See "Version Control System Plugind348e163.txt" for more information.)    
 
 
- When implementing include rule policies, it is important to understand how it works with Checkout Rules and paths. Let's consider an example with collecting changes.
+ When implementing include rule policies, it is important to understand how they work with Checkout Rules and paths. Let's consider an example with collecting changes.
 
-Suppose, we have a VCS Root pointing to `vcs://repository/project/`. The project root contains the following directory structure: ![vcsPluginOldStyleDiagram1.png](vcsPluginOldStyleDiagram1.png)
+Suppose, we have a VCS Root pointing to `vcs://repository/project/`. The project root contains the following directory structure: ![vcsPluginOldStyleDiagram1.png](images/vcsPluginOldStyleDiagram1.png)
 
 
 [//]: # (See "Version Control System Plugind348e180.txt" for more information.)    
 
 
- We want to monitor changes only in `module1` and `module2`. Therefore we've configured the following checkout rules:
+We want to monitor changes only in `module1` and `module2`. Therefore we've configured the following checkout rules:
 
 
 ```shell
-\\+:module1
+\+:module1
 
-\\+:module2
+\+:module2
 
 ```
 
 
 
-When `collectBuildChanges(...)` is invoked it will receive a `VcsRoot` instance that corresponds to `vcs://repository/project/` and a `CheckoutRules` instance with two `IncludeRules` — one for "module1" and the other for "module2". ![vcsPluginOldStyleDiagram2.png](vcsPluginOldStyleDiagram2.png)
+When `collectBuildChanges(...)` is invoked, it will receive a `VcsRoot` instance that corresponds to `vcs://repository/project/` and a `CheckoutRules` instance with two `IncludeRules`: one for "module1" and the other for "module2". ![vcsPluginOldStyleDiagram2.png](images/vcsPluginOldStyleDiagram2.png)
 
 
 [//]: # (See "Version Control System Plugind348e220.txt" for more information.)    
 
 
- If `collectBuildChanges(...)` utilizes `VcsSupportUtil.collectBuildChanges(...)` it transforms the invocation into two separate calls of `CollectChangesByIncludeRule.collectBuildChange(...)`. If you have implemented `CollectChangesByIncludeRule` in the way described in the listing above, you will have the following interaction. ![vcsPluginOldStyleDiagram3.png](vcsPluginOldStyleDiagram3.png)
+ If `collectBuildChanges(...)` utilizes `VcsSupportUtil.collectBuildChanges(...)`, it transforms the invocation into two separate calls of `CollectChangesByIncludeRule.collectBuildChange(...)`. If you have implemented `CollectChangesByIncludeRule` in the way described in the listing above, you will have the following interaction. ![vcsPluginOldStyleDiagram3.png](vcsPluginOldStyleDiagram3.png)
 
 
 [//]: # (See "Version Control System Plugind348e245.txt" for more information.)    
 
 
- Now let's assume we've got a couple of changes in our sample repository, made by different users. ![vcsPluginOldStyleDiagram4.png](vcsPluginOldStyleDiagram4.png)
+ Now let's assume we've got a couple of changes in our sample repository, made by different users. ![vcsPluginOldStyleDiagram4.png](images/vcsPluginOldStyleDiagram4.png)
 
 
 [//]: # (See "Version Control System Plugind348e258.txt" for more information.)    
 
 
- The collection of `ModificationData` returned by `VcsSupport.collectBuildChanges(...)` should then be like this: ![vcsPluginOldStyleDiagram5.png](vcsPluginOldStyleDiagram5.png)
+ The collection of `ModificationData` returned by `VcsSupport.collectBuildChanges(...)` should then be like this: ![vcsPluginOldStyleDiagram5.png](images/vcsPluginOldStyleDiagram5.png)
 
 
 [//]: # (See "Version Control System Plugind348e276.txt" for more information.)    
 
 
- But this is not a simple union of collections, returned by two calls of `CollectChangesByIncludeRule.collectBuildChange(...)`. To see why let's have a closer look at the first calls. ![vcsPluginOldStyleDiagram6.png](vcsPluginOldStyleDiagram6.png)
+ But this is not a simple union of collections, returned by two calls of `CollectChangesByIncludeRule.collectBuildChange(...)`. To see why let's have a closer look at the first calls. ![vcsPluginOldStyleDiagram6.png](images/vcsPluginOldStyleDiagram6.png)
 
 
 [//]: # (See "Version Control System Plugind348e292.txt" for more information.)    
@@ -141,13 +143,13 @@ Then after collecting all changes for all the include rules `VcsSupportUtil` tra
 
 Although being quite simple `VcsSupportUtil.collectBuildChanges(...)` has the following limitations.
 
-Assume both changes in the example above are done by the same user within the same commit transaction. Logically, both corresponding `VcsChange` objects should be included into the same `ModificationData` instance. However, it's not true if you utilize `VcsSupportUtil.collectBuildChanges(...)`, since a separate call is made for each include rule. ![vcsPluginOldStyleDiagram7.png](vcsPluginOldStyleDiagram7.png)
+Assume both changes in the example above are done by the same user within the same commit transaction. Logically, both corresponding `VcsChange` objects should be included into the same `ModificationData` instance. However, it's not true if you utilize `VcsSupportUtil.collectBuildChanges(...)`, since a separate call is made for each include rule. ![vcsPluginOldStyleDiagram7.png](images/vcsPluginOldStyleDiagram7.png)
 
 
 [//]: # (See "Version Control System Plugind348e326.txt" for more information.)    
 
 
- Changes corresponding to different include rules cannot be aggregated under the same `ModificationData` instance even if they logically relate to the same commit transaction. This means a user will see these changes in separate change lists, which may be confusing. Experience shows that it's not very common situation when a user commits to directories monitored with different include rules. However, if the duplication is extremely undesirable an implementation should not utilize `VcsSupportUtil.collectBuildChanges(...)` and control `CheckoutRules` itself.
+Changes corresponding to different include rules cannot be aggregated under the same `ModificationData` instance even if they logically relate to the same commit transaction. This means a user will see these changes in separate change lists, which may be confusing. Experience shows that it's not very common situation when a user commits to directories monitored with different include rules. However, if the duplication is extremely undesirable an implementation should not utilize `VcsSupportUtil.collectBuildChanges(...)` and control `CheckoutRules` itself.
 
 Another limitation is complete ignorance of exclude rules. As it said before this doesn't cause showing unneeded information in the UI. So an implementation can safely use `VcsSupportUtil.collectBuildChanges(...)` if this ignorance doesn't lead to significant performance problems. However, if an implementer believes the change collection speed can be significantly improved by taking into account include rules, the implementation must handle exclude rules itself.
 
