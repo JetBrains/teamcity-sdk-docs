@@ -1,0 +1,188 @@
+Index: web/web.iml
+===================================================================
+--- web/web.iml	(revision 199)
++++ web/web.iml	Wed Mar 26 11:42:25 MSK 2008
+@@ -210,6 +210,10 @@
+             <attribute name="method" value="0" />
+             <attribute name="URI" value="/WEB-INF/classes" />
+           </containerElement>
++          <containerElement type="module" name="deprecated-progress">
++            <attribute name="method" value="5" />
++            <attribute name="URI" value="/WEB-INF/lib/deprecated-progress.jar" />
++          </containerElement>
+           <containerElement type="module" name="dotNetCommon">
+             <attribute name="method" value="0" />
+             <attribute name="URI" value="/WEB-INF/classes" />
+@@ -504,10 +508,9 @@
+             <attribute name="URI" value="/WEB-INF/lib" />
+             <url>jar://$MODULE_DIR$/../lib/commons-codec-1.3.jar!/</url>
+           </containerElement>
+-          <containerElement type="library" level="module">
++          <containerElement type="library" name="log4j-1.2.12" level="project">
+             <attribute name="method" value="0" />
+             <attribute name="URI" value="/WEB-INF/lib" />
+-            <url>jar://$MODULE_DIR$/../lib/log4j-1.2.12.jar!/</url>
+           </containerElement>
+           <containerElement type="library" level="module">
+             <attribute name="method" value="1" />
+@@ -653,10 +656,6 @@
+             <attribute name="method" value="1" />
+             <attribute name="URI" value="/WEB-INF/lib" />
+           </containerElement>
+-          <containerElement type="library" name="log4j-1.2.12" level="project">
+-            <attribute name="method" value="0" />
+-            <attribute name="URI" value="/WEB-INF/lib" />
+-          </containerElement>
+           <containerElement type="library" name="packtag" level="module">
+             <attribute name="method" value="0" />
+             <attribute name="URI" value="/WEB-INF/lib" />
+@@ -731,7 +730,6 @@
+     <orderEntry type="library" name="xstream" level="project" />
+     <orderEntry type="module" module-name="patches" />
+     <orderEntry type="module" module-name="patches-impl" />
+-    <orderEntry type="library" name="IDEA-openapi" level="project" />
+     <orderEntry type="module" module-name="email-notificator" />
+     <orderEntry type="module" module-name="jabber-notificator" />
+     <orderEntry type="module" module-name="perforce" />
+@@ -744,6 +742,7 @@
+     <orderEntry type="module" module-name="license-common" />
+     <orderEntry type="module" module-name="server-side-inspections" />
+     <orderEntry type="module" module-name="coverage-server" />
++    <orderEntry type="library" name="IDEA-openapi" level="project" />
+     <orderEntry type="module" module-name="ant-runner-server" />
+     <orderEntry type="module" module-name="maven-runner-server" />
+     <orderEntry type="module" module-name="msbuild-runner-server" />
+@@ -757,7 +756,6 @@
+     <orderEntry type="module" module-name="win32-notificator" />
+     <orderEntry type="module" module-name="idea-runner-server" />
+     <orderEntry type="library" name="Tomcat-Local" level="project" />
+-    <orderEntry type="module" module-name="solution2003-runner-server" />
+     <orderEntry type="module" module-name="vss-support" />
+     <orderEntry type="module" module-name="ide-notificator" />
+     <orderEntry type="module" module-name="duplicator-server-side" />
+@@ -791,11 +789,11 @@
+     <orderEntry type="module" module-name="searchByBuildNumber" />
+     <orderEntry type="module" module-name="buildDurationStatisticsPlugin" />
+     <orderEntry type="module" module-name="feed-plugin" />
+-    <orderEntry type="module" module-name="solution2008-runner-server" />
+     <orderEntry type="library" name="Quatrz-1.6.0" level="project" />
+     <orderEntry type="module" module-name="coverage-common" />
+     <orderEntry type="module" module-name="services-util" />
+     <orderEntry type="library" name="SpringWeb" level="project" />
++    <orderEntry type="module" module-name="deprecated-progress" />
+     <orderEntryProperties />
+   </component>
+   <component name="copyright">
+Index: deprecated-progress/deprecated-progress.iml
+===================================================================
+--- deprecated-progress/deprecated-progress.iml	Thu Mar 20 11:48:59 MSK 2008
++++ deprecated-progress/deprecated-progress.iml	Thu Mar 20 11:48:59 MSK 2008
+@@ -0,0 +1,28 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module relativePaths="true" type="JAVA_MODULE" version="4">
++  <component name="FacetManager">
++    <facet type="Spring" name="Spring">
++      <configuration>
++        <options>
++          <option name="enableValidation" value="false" />
++          <option name="reportErrorsAsWarnings" value="true" />
++        </options>
++        <customNs />
++      </configuration>
++    </facet>
++  </component>
++  <component name="NewModuleRootManager" inherit-compiler-output="false">
++    <output url="file://$MODULE_DIR$/classes" />
++    <exclude-output />
++    <content url="file://$MODULE_DIR$">
++      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++    <orderEntry type="module" module-name="messages" />
++    <orderEntry type="module" module-name="server-openapi" />
++    <orderEntry type="module" module-name="utils" />
++    <orderEntryProperties />
++  </component>
++</module>
++
+Index: deprecated-progress/src/jetbrains/buildServer/serverSide/DeprecatedProgressMessagesSupport.java
+===================================================================
+--- deprecated-progress/src/jetbrains/buildServer/serverSide/DeprecatedProgressMessagesSupport.java	Thu Mar 20 11:58:52 MSK 2008
++++ deprecated-progress/src/jetbrains/buildServer/serverSide/DeprecatedProgressMessagesSupport.java	Thu Mar 20 11:58:52 MSK 2008
+@@ -0,0 +1,64 @@
++package jetbrains.buildServer.serverSide;
++
++import jetbrains.buildServer.messages.BuildMessage1;
++import jetbrains.buildServer.messages.DefaultMessagesInfo;
++import jetbrains.buildServer.messages.ServiceMessage;
++import jetbrains.buildServer.util.EventDispatcher;
++import org.jetbrains.annotations.NotNull;
++
++/**
++ * This class supports deprecated progress messages.
++ */
++public class DeprecatedProgressMessagesSupport extends BuildServerAdapter {
++  private static final String BLOCK_START_PREFIX = "##[";
++  private static final String BLOCK_END_PREFIX = "##]";
++  private static final String MESSAGE_PREFIX = "##";
++
++  public DeprecatedProgressMessagesSupport(@NotNull final EventDispatcher<BuildServerListener> dispatcher) {
++    dispatcher.addListener(this);
++  }
++
++  public void messageReceived(final SRunningBuild build, final BuildMessage1 message) {
++    super.messageReceived(build, message);
++    if (message.getTypeId().equals(DefaultMessagesInfo.MSG_TEXT)) {
++      // skip new service messages
++      if (ServiceMessage.parse(message) != null) return;
++
++      String text = (String)message.getValue();
++
++      if (text.startsWith(BLOCK_START_PREFIX)) {
++        progressStarted(build, message);
++      }
++      else if (text.startsWith(BLOCK_END_PREFIX)) {
++        progressFinished(build, message);
++      }
++      else if (text.startsWith(MESSAGE_PREFIX)) {
++        progressMessage(build, message);
++      }
++    }
++  }
++
++  private void progressMessage(final SRunningBuild build, final BuildMessage1 message) {
++    String text = (String)message.getValue();
++    BuildMessage1 progressMessage = DefaultMessagesInfo.createProgressMessage(text.substring(MESSAGE_PREFIX.length()));
++    logMessage(build, message, progressMessage);
++  }
++
++  private void progressFinished(final SRunningBuild build, final BuildMessage1 message) {
++    BuildMessage1 progressMessage = DefaultMessagesInfo.createBlockEnd("", DefaultMessagesInfo.BLOCK_TYPE_PROGRESS);
++    logMessage(build, message, progressMessage);
++  }
++
++  private void progressStarted(final SRunningBuild build, final BuildMessage1 message) {
++    String text = (String)message.getValue();
++    final String activity = text.substring(BLOCK_START_PREFIX.length());
++    BuildMessage1 progressMessage = DefaultMessagesInfo.createBlockStart(activity, DefaultMessagesInfo.BLOCK_TYPE_PROGRESS);
++    logMessage(build, message, progressMessage);
++  }
++
++  private void logMessage(final SRunningBuild build, final BuildMessage1 message, final BuildMessage1 progressMessage) {
++    progressMessage.setTimestamp(message.getTimestamp()); // take timestamp from the original message
++    progressMessage.updateFlowInformation(message.getFlowId());
++    build.addBuildMessage(progressMessage);
++  }
++}
+Index: deprecated-progress/src/META-INF/build-server-plugin.xml
+===================================================================
+--- deprecated-progress/src/META-INF/build-server-plugin.xml	Thu Mar 20 11:46:22 MSK 2008
++++ deprecated-progress/src/META-INF/build-server-plugin.xml	Thu Mar 20 11:46:22 MSK 2008
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
++
++<beans default-autowire="constructor">
++  <bean id="deprecatedProgressMessagesSupport" class="jetbrains.buildServer.serverSide.DeprecatedProgressMessagesSupport"/>
++</beans>
