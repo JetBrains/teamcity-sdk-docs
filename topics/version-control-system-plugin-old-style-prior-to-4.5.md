@@ -138,7 +138,7 @@ Checkout rules consist of include and exclude rules. Include rule can have "from
 
 
 
-In most cases it is simpler to collect changes or build patch separately by each include rule, for this VCS plugin can implement interface [`jetbrains.buildServer.CollectChangesByIncludeRule`](http://javadoc.jetbrains.net/teamcity/openapi/4.x/jetbrains/buildServer/CollectChangesByIncludeRule.html) (as well as [`jetbrains.buildServer.vcs.BuildPatchByIncludeRule`](http://javadoc.jetbrains.net/teamcity/openapi/4.x/jetbrains/buildServer/vcs/BuildPatchByIncludeRule.html)) and use [`jetbrains.buildServer.vcs.VcsSupportUtil`](jetbrains.buildServer.vcs.VcsSupportUtil) as shown below:
+In most cases it is simpler to collect changes or build patch separately by each include rule, for this VCS plugin can implement interface [`jetbrains.buildServer.CollectChangesByIncludeRule`](http://javadoc.jetbrains.net/teamcity/openapi/4.x/jetbrains/buildServer/CollectChangesByIncludeRule.html) (as well as [`jetbrains.buildServer.vcs.BuildPatchByIncludeRule`](http://javadoc.jetbrains.net/teamcity/openapi/4.x/jetbrains/buildServer/vcs/BuildPatchByIncludeRule.html)) and use [`jetbrains.buildServer.vcs.VcsSupportUtil`](http://javadoc.jetbrains.net/teamcity/openapi/4.x/jetbrains/buildServer/vcs/VcsSupportUtil.html) as shown below:
 
 
 

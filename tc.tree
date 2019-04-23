@@ -25,7 +25,7 @@
         <toc-element id="bundled-development-package.md"/>
         <toc-element id="open-api-changes.md"/>
         <toc-element id="plugin-types-in-teamcity.md"/>
-        <toc-element id="plugins-packaging.md"  show-structure-for="h2,h3"/>
+        <toc-element id="plugins-packaging.md"  show-structure-for="h2"/>
         <toc-element id="server-side-object-model.md"/>
         <toc-element id="agent-side-object-model.md"/>
         <toc-element id="extensions.md"/>
