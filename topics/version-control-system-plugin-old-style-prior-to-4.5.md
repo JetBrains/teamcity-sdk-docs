@@ -1,11 +1,7 @@
 [//]: # (title: Version Control System Plugin (old style - prior to 4.5))
 [//]: # (auxiliary-id: Version+Control+System+Plugin+%28old+style+-+prior+to+4.5%29.html)
 
-In TeamCity a plugin for Version Control System (VCS) is seen as an `jetbrains.buildServer.vcs.VcsSupport` instance. All VCS plugins must extend this class.
-
-
-
-
+In TeamCity a plugin for Version Control System (VCS) is seen as a [`jetbrains.buildServer.vcs.VcsSupport`](http://javadoc.jetbrains.net/teamcity/openapi/4.x/jetbrains/buildServer/vcs/VcsSupport.html) instance. All VCS plugins must extend this class.
 
 
 
@@ -308,7 +304,7 @@ All above is applicable to building patches using `VcsSupportUtil.buildPatch(...
 
 
 
-During the server startup all VCS plugins are required to register themselves in the VCS Manager ([`jetbrains.buildServer.vcs.VcsManager`](http://javadoc.jetbrains.net/teamcity/openapi/4.x/jetbrains/buildServer/vcs/VcsManager.html) ). A VCS plugin can receive the __VcsManager__ instance using Spring injection:
+During the server startup all VCS plugins are required to register themselves in the VCS Manager: [`jetbrains.buildServer.vcs.VcsManager`](http://javadoc.jetbrains.net/teamcity/openapi/4.x/jetbrains/buildServer/vcs/VcsManager.html). A VCS plugin can receive the __VcsManager__ instance using Spring injection:
 
 
 

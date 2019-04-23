@@ -40,7 +40,7 @@ Before digging into the VCS plugin development details, it's important to unders
 
 A _Version_ is unambiguous representation of a particular snapshot within a repository pointed at by a VCS Root. The current version represents the head revision at the moment of obtaining.
 
-The current version is taken by calling [`jetbrains.buildServer.vcs.CollectSingleStatePolicy#getCurrentVersion(jetbrains.buildServer.vcs.VcsRoot)`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/CollectSingleStatePolicy.html#getCurrentVersion(jetbrains.buildServer.vcs.VcsRoot). The version here is an arbitrary text. It can be a representation of a transaction number, a revision number, a date, whatever suitable enough for getting a source snapshot in a particular VCS. Usually the format of the version depends on a version control system; the only requirement which comes from TeamCity is that it should be possible to sort changes by version in order of their appearance (see [`jetbrains.buildServer.vcs.VcsSupportConfig#getVersionComparator()`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/VcsSupportConfig.html#getVersionComparator()). 
+The current version is taken by calling [`jetbrains.buildServer.vcs.CollectSingleStatePolicy#getCurrentVersion(jetbrains.buildServer.vcs.VcsRoot)`](jhttp://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/CollectSingleStatePolicy.html#getCurrentVersion(jetbrains.buildServer.vcs.VcsRoot)). The version here is an arbitrary text. It can be a representation of a transaction number, a revision number, a date, whatever suitable enough for getting a source snapshot in a particular VCS. Usually the format of the version depends on a version control system; the only requirement which comes from TeamCity is that it should be possible to sort changes by version in order of their appearance (see [`jetbrains.buildServer.vcs.VcsSupportConfig#getVersionComparator()`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/VcsSupportConfig.html#getVersionComparator()). 
 
 The Version is used in several places:
 * for changes collecting
@@ -48,7 +48,7 @@ The Version is used in several places:
 * when content of the file is retrieved from the repository
 * for labeling / tagging
 
-TeamCity does not show Versions in the UI directly. For the UI, TeamCity converts a Version to its display name using [`jetbrains.buildServer.vcs.VcsSupportConfig#getVersionDisplayName(String,jetbrains.buildServer.vcs.VcsRoot)`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/VcsSupportConfig.html#getVersionDisplayName(String,jetbrains.buildServer.vcs.VcsRoot).
+TeamCity does not show Versions in the UI directly. For the UI, TeamCity converts a Version to its display name using [`jetbrains.buildServer.vcs.VcsSupportConfig#getVersionDisplayName(String,jetbrains.buildServer.vcs.VcsRoot)`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/VcsSupportConfig.html#getVersionDisplayName(String,jetbrains.buildServer.vcs.VcsRoot)).
 
 
 A _Change_ is an atomic modification of a single file within a source repository. In other words, a change corresponds to a single increment of a file version.

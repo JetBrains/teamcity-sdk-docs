@@ -36,7 +36,7 @@ public class DiagnosticsAdminPage extends AdminPage {
 
   @Override
   public boolean isAvailable(@NotNull HttpServletRequest request) {
-    return super.isAvailable(request) && checkHasGlobalPermission(request, Permission.CHANGE\_SERVER\_SETTINGS);
+    return super.isAvailable(request) && checkHasGlobalPermission(request, Permission.CHANGE_SERVER_SETTINGS);
   }
 
   @NotNull
@@ -56,7 +56,7 @@ There are a couple of things to note here:
 Here's another example of the project tab:
 
 
-```
+```java
 public class CurrentProblemsTab extends ProjectTab {
   public CurrentProblemsTab(@NotNull PagePlaces pagePlaces,
                             @NotNull ProjectManager projectManager,
@@ -98,7 +98,7 @@ Don't get confused by the variety of names, it's a long story. The main thing is
 There is a convention that a place id named as a TAB can be used with the SimpleCustomTab. Others cannot, and to use them you will have to deal with low level `jetbrains.buildServer.web.openapi.SimplePageExtension`. But that's pretty much the only change, take a look at the example: 
 
 
-```
+```java
 public class ChangedFileExtension extends SimplePageExtension {
   public ChangedFileExtension(@NotNull PagePlaces pagePlaces,
                               @NotNull PluginDescriptor descriptor) {

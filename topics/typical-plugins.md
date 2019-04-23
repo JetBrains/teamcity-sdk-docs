@@ -1,5 +1,5 @@
-[//]: # ](title: Typical Plugins)
-[//]: # ](auxiliary-id: Typical+Plugins.html)
+[//]: # (title: Typical Plugins)
+[//]: # (auxiliary-id: Typical+Plugins.html)
 
 
 
@@ -21,16 +21,3 @@ This section covers:
 * [External Storage Implementation Guide](external-storage-implementation-guide.md)
 
            
-           
-            
-            
-            
-            
-            
-          
-            
-            
-            
-           
-            
-        </toc-element>
