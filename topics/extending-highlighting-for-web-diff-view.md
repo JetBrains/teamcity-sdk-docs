@@ -22,11 +22,11 @@ key1=value1
 foo = bar
 x=y
 a b c = foo bar baz
-
+ 
 ! another comment
 ! more complex cases:
-a=fb : x\ty\n\x\uzzzz
-
+a\=\fb : x\ty\n\x\uzzzz
+ 
  key = multiline value \
 still value \
 still value
@@ -77,33 +77,33 @@ Then you need to specify the states and actual parsing rules:
 ```java
 
 WhiteSpace = [ \t\f]
-
+ 
 %state IN_VALUE
-
+ 
 %%
-
+ 
 /* Rules for YYINITIAL state */
-<YYINITIAL> \{
-  "\n"                           \{ return PLAIN_STYLE; }
-
+<YYINITIAL> {
+  "\n"                           { return PLAIN_STYLE; }
+ 
   {WhiteSpace}                   { return PLAIN_STYLE; }
-
-  [Extending Highlighting for Web diff view^=\n\t\f ]+                  { return NAME_STYLE; }
-
+ 
+  [Extending Highlighting for Web diff view^=\n\t\f ]+                   { return NAME_STYLE; }
+ 
   "="                            { yybegin(IN_VALUE); return PLAIN_STYLE; }
-
+ 
   [#!] [Extending Highlighting for Web diff view^\n]* \n                 { return COMMENT_STYLE; }
 }
-
+ 
 /* Rules for IN_VALUE state */
 <IN_VALUE> {
   "\\\n"                         { return VALUE_STYLE; }
-
+ 
   "\n"                           { yybegin(YYINITIAL); return PLAIN_STYLE; }
-
-  [Extending Highlighting for Web diff view^\n]+                      { return VALUE_STYLE; }
+ 
+  [Extending Highlighting for Web diff view^\\\n]+                       { return VALUE_STYLE; }
 }
-
+ 
 /* error fallback */
 .|\n                             { return PLAIN_STYLE; }
 
@@ -112,103 +112,103 @@ WhiteSpace = [ \t\f]
 
 
 
-Our simple lexer has two states: initial (`YYINITIAL`, predefined) and `IN_VALUE`. In each of these states we try to handle the next character (or a group of characters) using regexp rules.
+Our simple lexer has two states: initial (`YYINITIAL`, predefined) and `IN_VALUE`. In each of these states we try to handle the next character (or a group of characters) using regexp rules. 
 The rules are applied from the top to the bottom, the first one that matches non\-empty string is used. Each rule is associated with the action to be performed on runtime. Here we have only simple actions that return the token constant and sometimes change the state.
 
 
 
 To end the composition of a lexer add the common part to be inserted to the Java file. It's unlikely that you need to modify it.
+
 Here's the full result code:
 
 
 
 ```java
-
 package com.uwyn.jhighlight.highlighter;
-
+ 
 import java.io.Reader;
 import java.io.IOException;
-
+ 
 %%
-
+ 
 %class PropertiesHighlighter
 %implements ExplicitStateHighlighter
-
+ 
 %unicode
 %pack
-
+ 
 %buffer 128
-
+ 
 %public
-
+ 
 %int
-
+ 
 %{
         /* styles */
-
+ 
         public static final byte PLAIN_STYLE = 1;
         public static final byte NAME_STYLE = 2;
         public static final byte VALUE_STYLE = 3;
         public static final byte COMMENT_STYLE = 4;
-
+ 
         /* Highlighter implementation */
-
+ 
         public byte getStartState() {
-                return YYINITIAL\+1;
+                return YYINITIAL+1;
         }
-
+ 
         public byte getCurrentState() {
-                return (byte) (yystate()\+1);
+                return (byte) (yystate()+1);
         }
-
+ 
         public void setState(byte newState) {
-                yybegin(newState\-1);
+                yybegin(newState-1);
         }
-
+ 
         public byte getNextToken() throws IOException {
                 return (byte) yylex();
         }
-
+ 
         public int getTokenLength() {
                 return yylength();
         }
-
+ 
         public void setReader(Reader r) {
                 this.zzReader = r;
         }
-
+ 
         public PropertiesHighlighter() {
         }
 %}
-
+ 
 WhiteSpace = [ \t\f]
-
+ 
 %state IN_VALUE
-
+ 
 %%
-
+ 
 /* Rules for YYINITIAL state */
 <YYINITIAL> {
   "\n"                           { yybegin(YYINITIAL); return PLAIN_STYLE; }
-
+ 
   {WhiteSpace}                   { return PLAIN_STYLE; }
-
-  [Extending Highlighting for Web diff view^=\n\t\f ]+                  { return NAME_STYLE; }
-
+ 
+  [Extending Highlighting for Web diff view^=\n\t\f ]+                   { return NAME_STYLE; }
+ 
   "="                            { yybegin(IN_VALUE);  return PLAIN_STYLE; }
-
+ 
   [#!] [Extending Highlighting for Web diff view^\n]* \n                 { return COMMENT_STYLE; }
 }
-
+ 
 /* Rules for IN_VALUE state */
 <IN_VALUE> {
   "\\\n"                         { return VALUE_STYLE; }
-
+ 
   "\n"                           { yybegin(YYINITIAL); return PLAIN_STYLE; }
-
-  [Extending Highlighting for Web diff view^\\\n]+                      { return VALUE_STYLE; }
+ 
+  [Extending Highlighting for Web diff view^\\\n]+                       { return VALUE_STYLE; }
 }
-
+ 
 /* error fallback */
 .|\n                             { return PLAIN_STYLE; }
 
@@ -255,57 +255,56 @@ The only JHighlight class left is the renderer corresponding to the generated le
 ```java
 
 package com.uwyn.jhighlight.renderer;
-
+ 
 import com.uwyn.jhighlight.highlighter.ExplicitStateHighlighter;
 import com.uwyn.jhighlight.highlighter.PropertiesHighlighter;
 import com.uwyn.jhighlight.renderer.XhtmlRenderer;
 import java.util.HashMap;
 import java.util.Map;
-
+ 
 public class PropertiesXhtmlRenderer extends XhtmlRenderer {
         // Contains the default CSS styles.
-	public final static HashMap DEFAULT_CSS = new HashMap() {{
-		put(".properties_plain",
-		    "color: rgb(0,0,0);");
-
-		put(".properties_name",
-		    "color: rgb(0,0,128); " \+
-		    "font\-weight: bold;");
-
-		put(".properties_value",
-		    "color: rgb(0,128,0); " \+
-		    "font\-weight: bold;");
-
-		put(".properties_comment",
-		    "color: rgb(128,128,128); " \+
-		    "background\-color: rgb(247,247,247);");
-	}};
-
-	protected Map getDefaultCssStyles() {
-		return DEFAULT_CSS;
-	}
-
+    public final static HashMap DEFAULT_CSS = new HashMap() {{
+        put(".properties_plain",
+            "color: rgb(0,0,0);");
+ 
+        put(".properties_name",
+            "color: rgb(0,0,128); " +
+            "font-weight: bold;");
+ 
+        put(".properties_value",
+            "color: rgb(0,128,0); " +
+            "font-weight: bold;");
+ 
+        put(".properties_comment",
+            "color: rgb(128,128,128); " +
+            "background-color: rgb(247,247,247);");
+    }};
+ 
+    protected Map getDefaultCssStyles() {
+        return DEFAULT_CSS;
+    }
+ 
         // Maps the token type with the CSS class. E.g. each token of a 'PLAIN_STYLE' type will be rendered with 'properties_plain' style (see above).
-	protected String getCssClass(int style) {
-		switch (style) {
-			case PropertiesHighlighter.PLAIN_STYLE:
-				return "properties_plain";
-			case PropertiesHighlighter.NAME_STYLE:
-				return "properties_name";
-			case PropertiesHighlighter.VALUE_STYLE:
-				return "properties_value";
-			case PropertiesHighlighter.COMMENT_STYLE:
-				return "properties_comment";
-		}
-
-		return null;
-	}
-
-	protected ExplicitStateHighlighter getHighlighter() {
-		return new PropertiesHighlighter();
-	}
+    protected String getCssClass(int style) {
+        switch (style) {
+            case PropertiesHighlighter.PLAIN_STYLE:
+                return "properties_plain";
+            case PropertiesHighlighter.NAME_STYLE:
+                return "properties_name";
+            case PropertiesHighlighter.VALUE_STYLE:
+                return "properties_value";
+            case PropertiesHighlighter.COMMENT_STYLE:
+                return "properties_comment";
+        }
+ 
+        return null;
+    }
+ 
+    protected ExplicitStateHighlighter getHighlighter() {
+        return new PropertiesHighlighter();
+    }
 }
-
 ```
 
 

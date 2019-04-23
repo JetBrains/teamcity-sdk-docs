@@ -13,8 +13,7 @@ There are [server-side and agent-side](plugin-types-in-teamcity.md) plugins in T
 
 There is a convention for naming the definition file:
 * __build\-server\-plugin\-&lt;plugin name&gt;__\*.xml — for server\-side plugins
-* __build\-agent\-plugin\-&lt;plugin name&gt;__\*.xml — for agent\-side plugins
-where the asterisk can be replaced with any text, for example: __build\-server\-plugin\-cvs.xml__.
+* __build\-agent\-plugin\-&lt;plugin name&gt;__\*.xml — for agent\-side plugins, where the asterisk can be replaced with any text, for example: __build\-server\-plugin\-cvs.xml__.
 
 <tip>
 

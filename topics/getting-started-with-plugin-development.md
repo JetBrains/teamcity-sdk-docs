@@ -16,6 +16,7 @@ A _plugin_ in TeamCity is a `zip` archive containing a number of classes packed 
 ## Step 1. Set up the environment
 
 To get started writing a plugin for TeamCity, set up the plugin development environment.
+
 1. Download and install OpenJDK 8 (e.g. by [AdoptOpenJDK](https://adoptopenjdk.net/)). Set the [JAVA_HOME](http://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/index.html) environment variable on your system. Java 1.8 is required, the 32\-bit version is recommended, the 64\-bit version [can be used](https://www.jetbrains.com/help/teamcity/?installing-and-configuring-the-teamcity-server).
 2. Download and install [TeamCity](https://www.jetbrains.com/teamcity/download/) on your development machine. Since you are going to use this machine to test your plugin, it is recommended that this TeamCity server is of the same version as your production server. We are using TeamCity 10 installed on Windows in our setup.
 3. Download and install a Java IDE; we are using [Intellij IDEA Community Edition](https://www.jetbrains.com/idea/download/), which has a built\-in Maven integration.
@@ -170,7 +171,7 @@ Hello world
 ### B. Create the controller and obtain the path to the JSP
 
 Go to `\demoPlugin\demoPlugin-server\src\main\java\com\demoDomain\teamcity\demoPlugin` and open the `AppServer.java` file to create a custom controller:
-1. We'll create a simple controller which extends the TeamCity `jetbrains.buildServer.controllers.BaseController` class and implements the `BaseController.doHandle(HttpServletRequest, HttpServletResponse) method.
+1. We'll create a simple controller which extends the TeamCity `jetbrains.buildServer.controllers.BaseController` class and implements the `BaseController.doHandle(HttpServletRequest, HttpServletResponse)` method.
 2. The TeamCity open API provides the `jetbrains.buildServer.web.openapi.WebControllerManager` which allows registering custom controllers using the path to them: the path is a part of URL starting with a slash `/` appended to the URL of the server root.
 3. Next we need to construct the path to our JSP file. When a plugin is unpacked on the TeamCity server, the paths to its resources change. To obtain valid paths to the files after the plugin is installed, use the `jetbrains.buildServer.web.openapi.PluginDescriptor` class which implements the `getPluginResourcesPath` method; otherwise TeamCity might have difficulties finding the plugin resources.
 
