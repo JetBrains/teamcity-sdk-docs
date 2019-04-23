@@ -8,7 +8,7 @@
     <module name="teamcity-docs"/>
     <vars src="v.list"/>
     <topics dir="topics"/>
-    <images dir="images" version="plugin-dev" teamcity-build-path="Documentation_Teamware_TeamCity"
+    <images dir="images" teamcity-build-path="Documentation_Teamware_TeamCity"
             web-path="/img/teamcity/plugin-dev/"/>
     <categories src="c.list"/>
     <tags src="g.list"/>
