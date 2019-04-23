@@ -24,13 +24,7 @@ Please refer to corresponding section for further details.
 
 ## Plugin Quick Start
 
-See [Getting Started with Plugin Development](getting-started-with-plugin-development.md) to create your first plugin with Maven. 
-
-[Developing Plugins Using Maven](developing-plugins-using-maven.md) provides more details.
-
-
-
-There are also several approaches to create plugins provided by third parties or existing out of the main TeamCity development line.
-* [Developing Plugins Using Maven](developing-plugins-using-maven.md) \- Maven archetype supported by JetBrains
-* [Gradle TeamCity plugin](https://github.com/rodm/gradle-teamcity-plugin) \- Supports agent and server\-side plugins, and helpers to download, install a TeamCity server, tasks to deploy, start and stop the server and agent.
+To create your first plugin with Maven, see [Getting Started with Plugin Development](getting-started-with-plugin-development.md)  For more details, refer to [Developing Plugins Using Maven](developing-plugins-using-maven.md) featuring a  Maven archetype supported by JetBrains
+ 
+You may also find [Gradle TeamCity plugin](https://github.com/rodm/gradle-teamcity-plugin) useful, which supports agent and server\-side plugins, and helps to download, install a TeamCity server, perform tasks to deploy, start and stop the server and agent.
 
