@@ -12,7 +12,6 @@ This section covers:
 * [Extending Notification Templates Model](extending-notification-templates-model.md)
 * [Issue Tracker Integration Plugin](issue-tracker-integration-plugin.md)
 * [Version Control System Plugin](version-control-system-plugin.md)
-* [Version Control System Plugin: (old style - prior to 4.5)](version-control-system-plugin-old-style-prior-to-4.5.md)
 * [Custom Authentication Module](custom-authentication-module.md)
 * [Custom Notifier](custom-notifier.md)
 * [Custom Statistics](custom-statistics.md)
