@@ -11,7 +11,7 @@ For plugin\-specific logging, it is recommended to log into a log category match
 
 If your plugin source code is located under the `jetbrains.buildServer` package, the logging will automatically go into `teamcity-server.log`.
 
-If you use another package, you might need to add a corresponding category handling into the `conf/teamcity-server-log4j.xml` file (mentioned at [TeamCity Server Logs](https://www.jetbrains.com/help/teamcity/?teamcity-server-logs) or the corresponding agent file.
+If you use another package, you might need to add a corresponding category handling into the `conf/teamcity-server-log4j.xml` file (mentioned at [TeamCity Server Logs](https://www.jetbrains.com/help/teamcity/?teamcity-server-logs) or the corresponding agent file).
 
 For debugging you might consider creating a customized Log4j configuration file and put it as a logging preset into [`<TeamCity Data Directory>\config\logging`](https://www.jetbrains.com/help/teamcity/?teamcity-server-logs) directory. This way one will be able to activate the preset via the __Administration__ | __Diagnostics__ page, __Troubleshooting__ tab.
 

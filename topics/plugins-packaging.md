@@ -52,8 +52,10 @@ A plugin can be a zip archive (__recommended__) or a separate folder.
 If you use a _zip file_:
 * TeamCity will use the name of the zip file as the plugin name
 * The plugin zip file will be automatically unpacked to a temporary directory on the server start\-up
+
 If you use a _separate folder_:
 * TeamCity will use the folder name as the plugin name
+
 The plugin zip archive/directory includes:
 * `teamcity-plugin.xml` containing meta information about the plugin, like its name and version, see the [section below](#Plugin Descriptor).
 * the `server` directory containing the server\-side part of the plugin, i.e, a number of jar files.
@@ -67,8 +69,8 @@ The server\-only plugin:
 
 ```shell
 |- server
-  |    `- <server plugin jar files>
-  `- teamcity-plugin.xml
+|    `- <server plugin jar files>
+`- teamcity-plugin.xml
   
 ```
 
@@ -282,7 +284,7 @@ xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-agent-plugin-v
 Using separate classloader is required (and will be enforced) to use dependencies. Transitive dependencies are not supported, you should specify all dependencies.
 </note>
 
-The names of the bundled tools and plugins are just the names of the corresponding folders in `TeamCity Home/webapps/ROOT/WEB-INF/plugins` for the server\-side plugins and `<Agent home>/plugins/` or `<Agent home>/tools/` for the agent\-side plugins and tools.
+The names of the bundled tools and plugins are just the names of the corresponding folders in `<TeamCity Home>/webapps/ROOT/WEB-INF/plugins` for the server\-side plugins and `<Agent home>/plugins/` or `<Agent home>/tools/` for the agent\-side plugins and tools.
 
 <note>
 

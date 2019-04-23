@@ -9,7 +9,7 @@ To report custom [server health](https://www.jetbrains.com/help/teamcity/?server
 
 To make a reporter, create a subclass of [`jetbrains.buildServer.serverSide.healthStatus.HealthStatusReport`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/healthStatus/HealthStatusReport.html).
 
-Particulary, you must override method [`jetbrains.buildServer.serverSide.healthStatus.HealthStatusReport#report(jetbrains.buildServer.serverSide.healthStatus.HealthStatusScope, jetbrains.buildServer.serverSide.healthStatus.HealthStatusItemConsumer)`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/healthStatus/HealthStatusReport.html#report(jetbrains.buildServer.serverSide.healthStatus.HealthStatusScope,%20jetbrains.buildServer.serverSide.healthStatus.HealthStatusItemConsumer).
+Particulary, you must override method [`jetbrains.buildServer.serverSide.healthStatus.HealthStatusReport#report(jetbrains.buildServer.serverSide.healthStatus.HealthStatusScope, jetbrains.buildServer.serverSide.healthStatus.HealthStatusItemConsumer)`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/healthStatus/HealthStatusReport.html#report(jetbrains.buildServer.serverSide.healthStatus.HealthStatusScope,%20jetbrains.buildServer.serverSide.healthStatus.HealthStatusItemConsumer)).
 
 The items should be reported according to the analysis scope passed as a parameter to this method using the appropriate method of resultConsumer. If you try to consume an object which is not in the scope of the current analysis, it will be filtered out by the consumer and will not appear in the report.
 

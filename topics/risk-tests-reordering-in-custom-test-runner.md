@@ -19,7 +19,7 @@ where `<relative file path>` is the path to a file relative to the current check
 
 <note>
 
-TeamCity will pass the __teamcity.tests.runRiskGroupTestsFirst__, __teamcity.tests.recentlyFailedTests.file__ and __teamcity.build.changedFiles.file__ properties to the build process, but if the process starts an additional JVM or other processes, these properties won't be passed to them automatically.
+TeamCity will pass the __teamcity.tests.runRiskGroupTestsFirst__, __teamcity.tests.recentlyFailedTests.file__, and __teamcity.build.changedFiles.file__ properties to the build process, but if the process starts an additional JVM or other processes, these properties won't be passed to them automatically.
 
 For example, if you are using an Ant runner, you will have access to these properties from the Ant build.xml. But if your build.xml starts a new JVM (or `<junit/>` task with `fork="yes"` attribute), and you want to access these properties from this JVM, you'll have to modify your build script and pass them explicitly.
 </note>

@@ -9,7 +9,7 @@ Build agent configuration can be read from the [`jetbrains.buildServer.agent.Bui
 
 ## Agent side events
 
-There is [`jetbrains.buildServer.agent.AgentLifeCycleListener`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/agent/AgentLifeCycleListener.html) interface and corresponding adapter class [`jetbrains.buildServer.agent.AgentLifeCycleAdapter`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/agent/AgentLifeCycleAdapter.html) which can be used to receive notifications about agent side events, like starting of the build, build finishing and so on. Your listener must be registered in the [`jetbrains.buildServer.util.EventDispatcher`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/util/EventDispatcher%3CAgentLifeCycleListener%3E.html). This service is also defined in the Spring context.
+There is [`jetbrains.buildServer.agent.AgentLifeCycleListener`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/agent/AgentLifeCycleListener.html) interface and corresponding adapter class [`jetbrains.buildServer.agent.AgentLifeCycleAdapter`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/agent/AgentLifeCycleAdapter.html) which can be used to receive notifications about agent side events, like starting of the build, build finishing and so on. Your listener must be registered in the [`jetbrains.buildServer.util.EventDispatcher`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/util/EventDispatcher.html). This service is also defined in the Spring context.
 
 ## Build
 

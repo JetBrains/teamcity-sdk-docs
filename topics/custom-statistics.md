@@ -165,7 +165,7 @@ Set to `rendererB` for a bar chart
 
 ## Add Custom Build Metrics
 
-To add a custom build metric, in addition to [the built-in methods](https://www.jetbrains.com/help/teamcity/https://www.jetbrains.com/help/teamcity/?custom-chart), you can extend `BuildValueTypeBase` to define your build metric calculation method, appearance, and key. After that you can reference this metric by its key in statistics chart/report tags.
+To add a custom build metric, in addition to [the built-in methods](https://www.jetbrains.com/help/teamcity/?custom-chart), you can extend `BuildValueTypeBase` to define your build metric calculation method, appearance, and key. After that you can reference this metric by its key in statistics chart/report tags.
 
   __See also:__
 

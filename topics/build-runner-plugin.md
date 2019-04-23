@@ -92,7 +92,9 @@ You can instruct your build runner to publish the resulting artifacts to TeamCit
 
 #### XML Report processing
 
-If your runner reports build results in a format supported by TeamCity, they can be displayed in the TeamCity web UI on the Build Results page. There are two ways to approach this:\- using the [XML Report Processing](https://www.jetbrains.com/help/teamcity/?xml-report-processing) build feature\- via [service messages ](https://www.jetbrains.com/help/teamcity/?build-script-interaction-with-teamcity)
+If your runner reports build results in a format supported by TeamCity, they can be displayed in the TeamCity web UI on the Build Results page. There are two ways to approach this:
+* using the [XML Report Processing](https://www.jetbrains.com/help/teamcity/?xml-report-processing) build feature
+* via [service messages ](https://www.jetbrains.com/help/teamcity/?build-script-interaction-with-teamcity)
 
 #### HTML Report processing
 

@@ -79,14 +79,14 @@ There is also an artifact to support plugin tests:
 ## Maven Archetypes
 
 For a quick start with a plugin, there are three [Maven archetypes](http://maven.apache.org/guides/introduction/introduction-to-archetypes.html) in the `org.jetbrains.teamcity.archetypes` group:
-* `teamcity-plugin` \- an empty plugin, includes both the server and the agent plugin parts
-* `teamcity-server-plugin` \- an empty plugin, includes the server plugin part only
-* `teamcity-sample-plugin` \- the plugin with the sample code (adds a "Click me" button to the bottom of the TeamCity project Overview page)
+* `teamcity-plugin` \– an empty plugin, includes both the server and the agent plugin parts
+* `teamcity-server-plugin` \– an empty plugin, includes the server plugin part only
+* `teamcity-sample-plugin` \– the plugin with the sample code (adds a "Click me" button to the bottom of the TeamCity project Overview page)
 Different released versions of the TeamCity server API are listed [here](https://download.jetbrains.com/teamcity-repository/org/jetbrains/teamcity/server-api/).
 
 Here is the Maven commands which will generate projects for different plugins depending on 2018.2 TeamCity version:
 
-__Server-side\-only plugin__:____
+__Server-side\-only plugin__:
 
 
 ```shell
@@ -116,7 +116,7 @@ mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepo
 
 
 
-You will be asked to enter the usual Maven `groupId`, `artifactId` and `version` for your plugin. Please note, that artifactId will be used as your plugin (internal) name. After the project is generated, you may want to update `teamcity-plugin.xml` in the root directory: enter display name, description, author e\-mail and other information.
+You will be asked to enter the usual Maven `groupId`, `artifactId`, and `version` for your plugin. Please note, that artifactId will be used as your plugin (internal) name. After the project is generated, you may want to update `teamcity-plugin.xml` in the root directory: enter display name, description, author e\-mail and other information.
 
 Finally, change the directory to the root of the generated project and run
 

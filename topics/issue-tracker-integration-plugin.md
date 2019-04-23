@@ -25,8 +25,7 @@ The main entity is a _provider_ (i.e. connection to the ITS), responsible for pa
 
 
 Here is a brief description of the strategy used in TeamCity in respect to ITS integration:
-When the server is going to render the user comment (VCS commit, or build comment), it invokes all registered providers to parse the comment. This operation is performed by the `IssueProvider.getRelatedIssues()` method, which analyzes the comment and returns the list of the issue mentions ([`jetbrains.buildServer.issueTracker.IssueMention`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/IssueMention.html)).
-`IssueMention` just holds the information that is enough to render a popup arrow near the issue id. When the user points the mouse cursor on the arrow, the server requests the full data for this issue calling `IssueProvider.findIssueById()` method, and then displays the data in a popup. The data can be taken from the provider's cache.
+When the server is going to render the user comment (VCS commit, or build comment), it invokes all registered providers to parse the comment. This operation is performed by the `IssueProvider.getRelatedIssues()` method, which analyzes the comment and returns the list of the issue mentions ([`jetbrains.buildServer.issueTracker.IssueMention`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/IssueMention.html)). `IssueMention` just holds the information that is enough to render a popup arrow near the issue id. When the user points the mouse cursor on the arrow, the server requests the full data for this issue calling the `IssueProvider.findIssueById()` method, and then displays the data in a popup. The data can be taken from the provider's cache.
 
 
 

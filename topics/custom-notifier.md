@@ -26,4 +26,8 @@ Use source code of the existing plugins as a reference:
 
   __See also:__
 
-__Concepts__: [Notifier](https://www.jetbrains.com/help/teamcity/?notifier)  __User's Guide__: [Subscribing to Notifications](https://www.jetbrains.com/help/teamcity/?subscribing-to-notifications.md) __Administrator's Guide__: [Customizing Notifications](https://www.jetbrains.com/help/teamcity/?customizing-notifications)
+__Concepts__: [Notifier](https://www.jetbrains.com/help/teamcity/?notifier)
+
+__User's Guide__: [Subscribing to Notifications](https://www.jetbrains.com/help/teamcity/?subscribing-to-notifications.md)
+
+__Administrator's Guide__: [Customizing Notifications](https://www.jetbrains.com/help/teamcity/?customizing-notifications)

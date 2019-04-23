@@ -217,7 +217,7 @@ WhiteSpace = [ \t\f]
 
 
 
-That's it: the lexer is ready. Download the latest JHighlighter sources from the [repository](https://jhighlight.dev.java.net/servlets/ProjectDocumentList) (version 1.0) and put this file to the `src/com/uwyn/jhighlight/highlighter` directory of JHighlight distribution.
+That's it: the lexer is ready. Download the latest JHighlighter sources from the [repository](https://github.com/codelibs/jhighlight) (version 1.0) and put this file to the `src/com/uwyn/jhighlight/highlighter` directory of JHighlight distribution.
 
 
 

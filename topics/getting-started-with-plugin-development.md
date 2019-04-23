@@ -30,7 +30,7 @@ You will be asked to enter the Maven `groudId`, `artifactId`, `version`, `packag
 
 
 ```shell
-mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepository=http://download.jetbrains.com/teamcity-repository -DarchetypeArtifactId=teamcity-server-plugin -DarchetypeGroupId=org.jetbrains.teamcity.archetypes -DarchetypeVersion=RELEASE
+mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepository=https://download.jetbrains.com/teamcity-repository -DarchetypeArtifactId=teamcity-server-plugin -DarchetypeGroupId=org.jetbrains.teamcity.archetypes -DarchetypeVersion=RELEASE
 
 ```
 
@@ -143,7 +143,7 @@ The root of the `demoPlugin` directory contains the following:
 * the `build` directory contains the xml files which define how the project output is aggregated into a single distributable archive.
 ## Step 3. Edit the plugin descriptor
 
-Open the teamcity\-plugin.xml file in the project root folder  with Intellij IDEA and add details, such as the plugin display name, description, vendor, and etc. by modifying [the corresponding attributes](plugins-packaging.md) in the file.
+Open the teamcity\-plugin.xml file in the project root folder  with Intellij IDEA and add details, such as the plugin display name, description, vendor, and etc. by modifying the [corresponding attributes](plugins-packaging.md) in the file.
 
 ## Step 4. Create the plugin sources
 
@@ -159,9 +159,9 @@ The plugin web resources (files that are accessed via hyperlinks and JSP pages) 
 
 ```jsp
 <html>
-<body>
-Hello world
-</body>
+  <body>
+    Hello world
+  </body>
 </html>
 
 ```

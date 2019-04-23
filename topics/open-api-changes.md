@@ -260,22 +260,22 @@ Web extensions:
 
 ### Parameters
 
-`j.b.serverSide.parameters.AbstractBuildParameterReferencesProvider` is renamed to `j.b.serverSide.parameters.AbstractBuildParametersProvider` 
-`j.b.serverSide.parameters.BuildParameterReferencesProvider` is renamed into `j.b.serverSide.parameters.BuildParametersProvider` 
-`BuildParameterReferencesProvider.getParameters(@NotNull final SBuild build)` changed signature to `getParameters(@NotNull final SBuild build, final boolean emulationMode)` 
-`j.b.agent.BuildAgentConfiguration#getCacheDirectory` now receives String as argument 
-`j.b.serverSide.buildDistribution.StartBuildPrecondition#canStart` second parameters (`Map<QueuedBuildInfo, BuildAgent>`) may contain null values for some queued builds
+* `j.b.serverSide.parameters.AbstractBuildParameterReferencesProvider` is renamed to `j.b.serverSide.parameters.AbstractBuildParametersProvider` 
+* `j.b.serverSide.parameters.BuildParameterReferencesProvider` is renamed into `j.b.serverSide.parameters.BuildParametersProvider` 
+* `BuildParameterReferencesProvider.getParameters(@NotNull final SBuild build)` changed signature to `getParameters(@NotNull final SBuild build, final boolean emulationMode)` 
+* `j.b.agent.BuildAgentConfiguration#getCacheDirectory` now receives String as argument 
+* `j.b.serverSide.buildDistribution.StartBuildPrecondition#canStart` second parameters (`Map<QueuedBuildInfo, BuildAgent>`) may contain null values for some queued builds
 
 ### Miscellaneous
 
 Added new build server events: 
-`j.b.serverSide.BuildServerListener.vcsRootRemoved(SVcsRoot)`, 
-`j.b.serverSide.BuildServerListener.responsibleChanged(SProject, TestNameResponsibilityEntry, TestNameResponsibilityEntry, boolean)`
+* `j.b.serverSide.BuildServerListener.vcsRootRemoved(SVcsRoot)` 
+* `j.b.serverSide.BuildServerListener.responsibleChanged(SProject, TestNameResponsibilityEntry, TestNameResponsibilityEntry, boolean)`
 
 Added three notification methods: 
-`j.b.notification.Notificator.notifyResponsibleAssigned(SBuildType, Set<SUser>)`, 
-`j.b.notification.Notificator.notifyResponsibleChanged(TestNameResponsibilityEntry, TestNameResponsibilityEntry, SProject, Set<SUser>)`, 
-`j.b.notification.Notificator.notifyResponsibleAssigned(TestNameResponsibilityEntry, TestNameResponsibilityEntry, SProject, Set<SUser>)`
+* `j.b.notification.Notificator.notifyResponsibleAssigned(SBuildType, Set<SUser>)` 
+* `j.b.notification.Notificator.notifyResponsibleChanged(TestNameResponsibilityEntry, TestNameResponsibilityEntry, SProject, Set<SUser>)` 
+* `j.b.notification.Notificator.notifyResponsibleAssigned(TestNameResponsibilityEntry, TestNameResponsibilityEntry, SProject, Set<SUser>)`
 
 ## Changes prior to 4.5.5
 

@@ -32,7 +32,7 @@ Extension
 
 <td>
 
-Since
+Since 
 
 
 </td>
@@ -126,41 +126,20 @@ Allows defining preconditions for starting a build on an agent, that is, you can
 
 <td>
 
-[`jetbrains.buildServer.serverSide.GeneralDataCleaner`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/GeneralDataCleaner.html)
+[`jetbrains.buildServer.serverSide.cleanup`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/cleanup/CleanupExtension.html)
 
 </td>
 
 <td>
 
-2.0
-
-
-</td>
-
-<td>
-
-This extension is called when the cleanup process is going to finish, plugins can clean their data with the help of this extension.
-
-
-</td></tr><tr>
-
-<td>
-
-[`jetbrains.buildServer.serverSide.DataCleaner`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/DataCleaner.html)
-
-</td>
-
-<td>
-
-2.0
+8.0
 
 
 </td>
 
 <td>
 
-This extension is called when the cleanup process is going to clean up data of a build, plugins can remove their data associated with this build with help of this extension.
-
+This extension is called or each build which is to be cleaned up. 
 
 </td></tr><tr>
 
@@ -173,7 +152,6 @@ This extension is called when the cleanup process is going to clean up data of a
 <td>
 
 3.0
-
 
 </td>
 

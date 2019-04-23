@@ -2,13 +2,9 @@
 [//]: # (auxiliary-id: Web+UI+Extensions.html)
 
 
-
-This section covers:
-
 <tip>
 
-You can use source code of the existing plugins as a reference, for example:
-* [Server Profiling](https://plugins.jetbrains.com/plugin/8979-server-profiling)
+You can use source code of the existing plugins as a reference, for example, [Server Profiling](https://plugins.jetbrains.com/plugin/8979-server-profiling).
 </tip>
 
 ## Getting Started
@@ -20,7 +16,7 @@ The simplest way of adding your own custom tab is to derive from one of the clas
 * [`jetbrains.buildServer.web.openapi.ViewLogTab`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/ViewLogTab.html)
 * [`jetbrains.buildServer.controllers.admin.AdminPage`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/controllers/admin/AdminPage.html)
 
-This will add your tab to the project, build type (build configuration), build or administration page respectively. Here's an example of the Diagnostics admin page:
+This will add your tab to the project, build type (build configuration), build or administration page respectively. Here's an example of the __Diagnostics__ admin page:
 
 
 ```java
@@ -81,23 +77,23 @@ That's it! Just specify your tab as a Spring bean, and you'll be able to see you
 
 <tip>
 
-We are using [Spring MVC](http://static.springframework.org/spring/docs/2.5.x/reference/mvc.html) web framework.
+We are using the [Spring MVC](http://static.springframework.org/spring/docs/2.5.x/reference/mvc.html) web framework.
 </tip>
 
 ## Under the Hood
 
 If you download and take a look at the TeamCity open API sources, you'll notice that all tabs above derive from the `jetbrains.buildServer.web.openapi.SimpleCustomTab`. And the only major difference between them all is a `jetbrains.buildServer.web.openapi.PlaceId` they specify in constructor. Here's what they use:
 
-* PlaceId.PROJECT_TAB
-* PlaceId.BUILD_CONF_TAB
-* PlaceId.BUILD_RESULTS_TAB
-* PlaceId.ADMIN_SERVER_CONFIGURATION_TAB
+* `PlaceId.PROJECT_TAB`
+* `PlaceId.BUILD_CONF_TAB`
+* `PlaceId.BUILD_RESULTS_TAB`
+* `PlaceId.ADMIN_SERVER_CONFIGURATION_TAB`
 
 Don't get confused by the variety of names, it's a long story. The main thing is there are more than 30 other place ids that you can hook into!
 
-* PlaceId.ALL_PAGES_HEADER
-* PlaceId.AGENT_DETAILS_TAB
-* PlaceId.LOGIN_PAGE
+* `PlaceId.ALL_PAGES_HEADER`
+* `PlaceId.AGENT_DETAILS_TAB`
+* `PlaceId.LOGIN_PAGE`
 * ...
 
 There is a convention that a place id named as a TAB can be used with the `SimpleCustomTab`. Others cannot, and to use them you will have to deal with low level `jetbrains.buildServer.web.openapi.SimplePageExtension`. But that's pretty much the only change, take a look at the example: 
