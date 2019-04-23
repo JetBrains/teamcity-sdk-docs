@@ -4,7 +4,7 @@
 
 <tip>
 
-TeamCity is hiring! Learn about [the available vacancies](https://www.jetbrains.com/careers/jobs/?team=TeamCity) on the JetBrains site. [Read](https://blog.jetbrains.com/blog/2015/04/22/jetbrains-is-hiring-for-teamcity-join-our-team/) about working in the TeamCity team.
+TeamCity is hiring! Learn about [the available vacancies](https://www.jetbrains.com/careers/jobs/?team=TeamCity) on the JetBrains site.
 </tip>
 
 TeamCity functionality can be significantly extended by custom plugins. TeamCity plugins are written in Java (any JVM language with Java invulnerability like Kotlin or Groovy can be used), run within the TeamCity application and have access to internal entities of the TeamCity server or agent.
