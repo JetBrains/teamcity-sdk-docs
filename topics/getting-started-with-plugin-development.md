@@ -239,14 +239,17 @@ The `target` directory of the project root will contain the `<demoPlugin>.zip` f
 
 ## Step 6. Install the plugin to TeamCity
 1. Copy the plugin zip to \<[TeamCity Data Directory](https://www.jetbrains.com/help/teamcity/?teamcity-data-directory)\> plugins directory.
-2. Restart the server and locate the TeamCity Demo Plugin in the __Administration|Plugins List__ to verify the plugin was installed correctly.
-![pluginList.PNG](pluginList.PNG)
+2. Restart the server and locate the TeamCity Demo Plugin in the __Administration | Plugins List__ to verify the plugin was installed correctly.
+![pluginList.PNG](demoPluginUpd.png)
 
 The Hello World page is available via `<TeamCity server URL>/demoPlugin.html`.
 
 ## Next Steps
 
-[Read more](web-ui-extensions.md) if you want to extend the TeamCity pages with custom elements. The detailed information on TeamCity plugin development is available [here](https://confluence.jetbrains.com/display/TCD18/Developing+TeamCity+Plugins).
+[Read more](web-ui-extensions.md) if you want to extend the TeamCity pages with custom elements. 
+
+The detailed information on TeamCity plugin development is available [here](developing-teamcity-plugins.md).
+
 
 <note>
 
