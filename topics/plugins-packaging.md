@@ -17,7 +17,7 @@ There is a convention for naming the definition file:
 
 <tip>
 
-If you want to get started with an empty plugin quickly, try the template plugin in the JetBrains Subversion repository [http://svn.jetbrains.org/teamcity/plugins/template-plugin/templateProject](http://svn.jetbrains.org/teamcity/plugins/template-plugin/templateProject). Refer to `readme.txt` for instructions.
+If you want to get started with an empty plugin quickly, try the [Template Plugin](http://svn.jetbrains.org/teamcity/plugins/template-plugin/templateProject) in the JetBrains Subversion repository. Refer to `readme.txt` for instructions.
 </tip>
 
 ## Plugins Location
@@ -63,26 +63,27 @@ The plugin directory should have the following structure:
 
 The server\-only plugin:
 
-```shell
-server
-  |
-  --> <server plugin jar files>
-teamcity-plugin.xml
 
+
+```shell
+|- server
+  |    `- <server plugin jar files>
+  `- teamcity-plugin.xml
+  
 ```
 
 The plugin affecting the server and agents:
 
-```shell
-agent
-  |
-  --> <agent plugin zip files>
-server
-  |
-  --> <server plugin jar files>
-teamcity-plugin.xml
 
+```shell
+  |- agent
+  |    `- <agent plugin zip files>
+  |- server
+  |    `- <server plugin jar files>
+  `- teamcity-plugin.xml
+  
 ```
+  
 
 #### Web Resources Packaging
 

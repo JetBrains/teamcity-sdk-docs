@@ -26,7 +26,7 @@ There is another entity [`jetbrains.buildServer.serverSide.BuildPromotion`](http
 
 ## Accessing builds
 
-A started build (running or finished) can be found by its' id (buildId). For this you should use [`jetbrains.buildServer.serverSide.SBuildServer#findBuildInstanceById(long)`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuildServer.html#findBuildInstanceById(long) method.
+A started build (running or finished) can be found by its id (buildId). For this you should use [`jetbrains.buildServer.serverSide.SBuildServer#findBuildInstanceById(long)`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuildServer.html#findBuildInstanceById(long)) method.
 
 It is also possible to find build in the build history, or to retrieve all builds from the history. Take a look at `SBuildType#getHistory()` method and at [`jetbrains.buildServer.serverSide.BuildHistory`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildHistory.html) service.
 

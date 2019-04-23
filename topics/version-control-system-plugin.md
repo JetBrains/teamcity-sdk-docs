@@ -89,7 +89,8 @@ Checkout rules consist of include and exclude rules. Include rule can have "from
 
  When implementing include rule policies, it is important to understand how they work with Checkout Rules and paths. Let's consider an example with collecting changes.
 
-Suppose, we have a VCS Root pointing to `vcs://repository/project/`. The project root contains the following directory structure: ![vcsPluginOldStyleDiagram1.png](images/vcsPluginOldStyleDiagram1.png)
+Suppose, we have a VCS Root pointing to `vcs://repository/project/`. The project root contains the following directory structure: 
+![vcsPluginOldStyleDiagram1.png](images/vcsPluginOldStyleDiagram1.png)
 
 
 [//]: # (See "Version Control System Plugind348e180.txt" for more information.)    
@@ -107,31 +108,36 @@ We want to monitor changes only in `module1` and `module2`. Therefore we've conf
 
 
 
-When `collectBuildChanges(...)` is invoked, it will receive a `VcsRoot` instance that corresponds to `vcs://repository/project/` and a `CheckoutRules` instance with two `IncludeRules`: one for "module1" and the other for "module2". ![vcsPluginOldStyleDiagram2.png](images/vcsPluginOldStyleDiagram2.png)
+When `collectBuildChanges(...)` is invoked, it will receive a `VcsRoot` instance that corresponds to `vcs://repository/project/` and a `CheckoutRules` instance with two `IncludeRules`: one for "module1" and the other for "module2". 
+![vcsPluginOldStyleDiagram2.png](images/vcsPluginOldStyleDiagram2.png)
 
 
 [//]: # (See "Version Control System Plugind348e220.txt" for more information.)    
 
 
- If `collectBuildChanges(...)` utilizes `VcsSupportUtil.collectBuildChanges(...)`, it transforms the invocation into two separate calls of `CollectChangesByIncludeRule.collectBuildChange(...)`. If you have implemented `CollectChangesByIncludeRule` in the way described in the listing above, you will have the following interaction. ![vcsPluginOldStyleDiagram3.png](vcsPluginOldStyleDiagram3.png)
+ If `collectBuildChanges(...)` utilizes `VcsSupportUtil.collectBuildChanges(...)`, it transforms the invocation into two separate calls of `CollectChangesByIncludeRule.collectBuildChange(...)`. If you have implemented `CollectChangesByIncludeRule` in the way described in the listing above, you will have the following interaction. 
+ ![vcsPluginOldStyleDiagram3.png](vcsPluginOldStyleDiagram3.png)
 
 
 [//]: # (See "Version Control System Plugind348e245.txt" for more information.)    
 
 
- Now let's assume we've got a couple of changes in our sample repository, made by different users. ![vcsPluginOldStyleDiagram4.png](images/vcsPluginOldStyleDiagram4.png)
+ Now let's assume we've got a couple of changes in our sample repository, made by different users. 
+ ![vcsPluginOldStyleDiagram4.png](images/vcsPluginOldStyleDiagram4.png)
 
 
 [//]: # (See "Version Control System Plugind348e258.txt" for more information.)    
 
 
- The collection of `ModificationData` returned by `VcsSupport.collectBuildChanges(...)` should then be like this: ![vcsPluginOldStyleDiagram5.png](images/vcsPluginOldStyleDiagram5.png)
+ The collection of `ModificationData` returned by `VcsSupport.collectBuildChanges(...)` should then be like this: 
+![vcsPluginOldStyleDiagram5.png](images/vcsPluginOldStyleDiagram5.png)
 
 
 [//]: # (See "Version Control System Plugind348e276.txt" for more information.)    
 
 
- But this is not a simple union of collections, returned by two calls of `CollectChangesByIncludeRule.collectBuildChange(...)`. To see why let's have a closer look at the first calls. ![vcsPluginOldStyleDiagram6.png](images/vcsPluginOldStyleDiagram6.png)
+ But this is not a simple union of collections, returned by two calls of `CollectChangesByIncludeRule.collectBuildChange(...)`. To see why let's have a closer look at the first calls. 
+![vcsPluginOldStyleDiagram6.png](images/vcsPluginOldStyleDiagram6.png)
 
 
 [//]: # (See "Version Control System Plugind348e292.txt" for more information.)    
@@ -143,7 +149,8 @@ Then after collecting all changes for all the include rules `VcsSupportUtil` tra
 
 Although being quite simple `VcsSupportUtil.collectBuildChanges(...)` has the following limitations.
 
-Assume both changes in the example above are done by the same user within the same commit transaction. Logically, both corresponding `VcsChange` objects should be included into the same `ModificationData` instance. However, it's not true if you utilize `VcsSupportUtil.collectBuildChanges(...)`, since a separate call is made for each include rule. ![vcsPluginOldStyleDiagram7.png](images/vcsPluginOldStyleDiagram7.png)
+Assume both changes in the example above are done by the same user within the same commit transaction. Logically, both corresponding `VcsChange` objects should be included into the same `ModificationData` instance. However, it's not true if you utilize `VcsSupportUtil.collectBuildChanges(...)`, since a separate call is made for each include rule. 
+![vcsPluginOldStyleDiagram7.png](images/vcsPluginOldStyleDiagram7.png)
 
 
 [//]: # (See "Version Control System Plugind348e326.txt" for more information.)    

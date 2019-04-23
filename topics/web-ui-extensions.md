@@ -7,8 +7,8 @@ This section covers:
 
 <tip>
 
-Hint: you can use source code of the existing plugins as a reference, for example:
-* [https://plugins.jetbrains.com/plugin/8979-server-profiling](https://plugins.jetbrains.com/plugin/8979-server-profiling)
+You can use source code of the existing plugins as a reference, for example:
+* [Server Profiling](https://plugins.jetbrains.com/plugin/8979-server-profiling)
 </tip>
 
 ## Getting Started
@@ -52,7 +52,8 @@ public class DiagnosticsAdminPage extends AdminPage {
 There are a couple of things to note here:
 * it is important to call "register" method; ProjectTab, BuildTypeTab and ViewLogTab will do that for you automatically, AdminPage won't, that's why the call is there;
 * TeamCity might have difficulties with finding your resources (JSP, CSS, JS) if you don't refer to your resources through the PluginDescriptor.
-* the page above doesn't provide any model to the JSP. If you need one, just override the "fillModel" method.
+* the page above doesn't provide any model to the JSP. If you need one, just override the `fillModel` method.
+
 Here's another example of the project tab:
 
 
@@ -86,16 +87,20 @@ We are using [Spring MVC](http://static.springframework.org/spring/docs/2.5.x/re
 ## Under the Hood
 
 If you download and take a look at the TeamCity open API sources, you'll notice that all tabs above derive from the `jetbrains.buildServer.web.openapi.SimpleCustomTab`. And the only major difference between them all is a `jetbrains.buildServer.web.openapi.PlaceId` they specify in constructor. Here's what they use:
+
 * PlaceId.PROJECT_TAB
 * PlaceId.BUILD_CONF_TAB
 * PlaceId.BUILD_RESULTS_TAB
 * PlaceId.ADMIN_SERVER_CONFIGURATION_TAB
+
 Don't get confused by the variety of names, it's a long story. The main thing is there are more than 30 other place ids that you can hook into!
+
 * PlaceId.ALL_PAGES_HEADER
 * PlaceId.AGENT_DETAILS_TAB
 * PlaceId.LOGIN_PAGE
 * ...
-There is a convention that a place id named as a TAB can be used with the SimpleCustomTab. Others cannot, and to use them you will have to deal with low level `jetbrains.buildServer.web.openapi.SimplePageExtension`. But that's pretty much the only change, take a look at the example: 
+
+There is a convention that a place id named as a TAB can be used with the `SimpleCustomTab`. Others cannot, and to use them you will have to deal with low level `jetbrains.buildServer.web.openapi.SimplePageExtension`. But that's pretty much the only change, take a look at the example: 
 
 
 ```java
@@ -124,6 +129,7 @@ public class ChangedFileExtension extends SimplePageExtension {
 This extension provides a custom HTML (usually a link) near the each file in the modification's list. We use it to add "Open in IDE", "Open in External Change Viewer", etc links. In this particular case the file itself is passed via "changedFile" attribute of the request, but this is different for different extensions.
 
 A couple of useful notes:
+
 * `isAvailable(HttpServletRequest)` method is called to determine whether page extension content should be shown or not.
 * in case `isAvailable(HttpServletRequest)` is true, the `fillModel(Map, HttpServletRequest)` method will always be called and JSP will be rendered in UI. You cannot abort the process after `isAvailable(HttpServletRequest)` is done, that's why it's usually inconvenient to handle POST requests in extensions. Use a custom controller for that (see below).
 * One more case when you might need a custom controller is when you need to process HTTP response manually, e.g. stream a file content. `fillModel(Map, HttpServletRequest)` won't allow you to do that.
@@ -135,20 +141,20 @@ Sometimes page extensions provide interaction with user and require communicatio
 Example:
 
 
-```
+```java
 public class ServerConfigGeneralController extends BaseFormXmlController {
   public ServerConfigGeneralController(@NotNull SBuildServer server,
                                        @NotNull WebControllerManager webControllerManager) {
     super(server);
     webControllerManager.registerController("/my/path/", this);
   }
-
+ 
   @Override
   @Nullable
   protected ModelAndView doGet(@NotNull final HttpServletRequest request, @NotNull final HttpServletResponse response) {
     return null;
   }
-
+ 
   @Override
   protected void doPost(@NotNull final HttpServletRequest request, @NotNull final HttpServletResponse response, @NotNull final Element xmlResponse) {
     return null;
@@ -158,8 +164,7 @@ public class ServerConfigGeneralController extends BaseFormXmlController {
 ```
 
 
-
-To simplify things your controller can extend our `jetbrains.buildServer.controllers.BaseController` class and implement `BaseController.doHandle(HttpServletRequest, HttpServletResponse)` method.
+To simplify things, your controller can extend our [`jetbrains.buildServer.controllers.BaseController`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/controllers/BaseController.html) class and implement `BaseController.doHandle(HttpServletRequest, HttpServletResponse)` method.
 
 With the custom controller you can provide completely new pages.
 

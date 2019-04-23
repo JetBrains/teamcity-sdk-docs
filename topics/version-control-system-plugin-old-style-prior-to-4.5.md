@@ -36,9 +36,9 @@ Personal builds require corresponding support in IDE. Chances are we will elimin
 
 You can use source code of the existing VCS plugins as a reference, for example:
 	
-* [https://plugins.jetbrains.com/plugin/8888-mercurial](https://plugins.jetbrains.com/plugin/8888-mercurial)
+* [Mercurial](https://plugins.jetbrains.com/plugin/8888-mercurial)
 	
-* [https://plugins.jetbrains.com/plugin/8885-accurev](https://plugins.jetbrains.com/plugin/8885-accurev)
+* [AccuRev](https://plugins.jetbrains.com/plugin/8885-accurev)
 </tip>
 
 
@@ -206,6 +206,7 @@ When using `VcsSupportUtil` it is important to understand how it works with Chec
 
 
 Suppose, we have a VCS Root pointing to `vcs://repository/project/`. The project root contains the following directory structure:
+
 
 ![vcsPluginOldStyleDiagram1.png](images/vcsPluginOldStyleDiagram1.png)
 
