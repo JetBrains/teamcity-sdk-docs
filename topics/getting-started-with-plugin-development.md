@@ -11,7 +11,7 @@ This document provides information on how to develop and publish a server\-side 
 
 ## Introduction
 
-A _plugin_ in TeamCity is a `zip` archive containing a number of classes packed into a JAR file and [plugin descriptor](plugins-packaging.md#PluginsPackaging-PluginDescriptor) file. The TeamCity Open API can be found in the JetBrains [Maven repository](http://repository.jetbrains.com/all). The Javadoc reference for the API is available [online](http://javadoc.jetbrains.net/teamcity/openapi/current/) and locally in &lt;[TeamCity Home Directory](https://www.jetbrains.com/help/teamcity/?teamcity-home-directory)&gt;/devPackage/javadoc/openApi-help.jar, after you install TeamCity.
+A _plugin_ in TeamCity is a `zip` archive containing a number of classes packed into a JAR file and [plugin descriptor](plugins-packaging.md#PluginsPackaging-PluginDescriptor) file. The TeamCity Open API can be found in the JetBrains [Maven repository](http://repository.jetbrains.com/all). The Javadoc reference for the API is available [online](http://javadoc.jetbrains.net/teamcity/openapi/current/) and locally in \<[TeamCity Home Directory](https://www.jetbrains.com/help/teamcity/?teamcity-home-directory)\>/devPackage/javadoc/openApi-help.jar, after you install TeamCity.
 
 ## Step 1. Set up the environment
 
@@ -20,6 +20,7 @@ To get started writing a plugin for TeamCity, set up the plugin development envi
 2. Download and install [TeamCity](https://www.jetbrains.com/teamcity/download/) on your development machine. Since you are going to use this machine to test your plugin, it is recommended that this TeamCity server is of the same version as your production server. We are using TeamCity 10 installed on Windows in our setup.
 3. Download and install a Java IDE; we are using [Intellij IDEA Community Edition](https://www.jetbrains.com/idea/download/), which has a built\-in Maven integration.
 4. Download and install [Apache Maven](http://maven.apache.org/download.cgi). Maven 3.2.x is recommended. Set the M2\_HOME environment variable. Run `mvn -version` to verify your setup. We are using Maven 3.2.5. in our setup.
+
 ## Step 2. Generate a Maven project
 
 We'll generate a Maven project [from an archetype](developing-plugins-using-maven.md) residing in the JetBrains Maven repository. Executing the following command will produce a project for a server\-side\-only plugin.
@@ -38,71 +39,84 @@ We used the following values:
 <table><tr>
        
 <td>
+
 Property
 
 
 </td>
 
 <td>
+
 Value
 
 
 </td></tr><tr>
 
 <td>
+
 `groudId`
 
 
 </td>
 
 <td>
+
 `com.demoDomain.teamcity.demoPlugin`
 
 
 </td></tr><tr>
 
 <td>
+
 `artifactId`
 
 
 </td>
 
 <td>
+
 `demoPlugin`
 
 
 </td></tr><tr>
 
 <td>
+
 `version`
 
 
 </td>
 
 <td>
+
 leave the default `1.0-SNAPSHOT`
 
 
 </td></tr><tr>
 
 <td>
+
 `packaging`
 
 
 </td>
 
 <td>
+
 leave the default package namе
 
 
 </td></tr><tr>
 
-<td>`teamcityVersion`
+<td>
+
+`teamcityVersion`
 
 </td>
 
 <td>
-10.0.
+
+10.0
 
 <tip>
 
@@ -158,8 +172,7 @@ Hello world
 Go to `\demoPlugin\demoPlugin-server\src\main\java\com\demoDomain\teamcity\demoPlugin` and open the `AppServer.java` file to create a custom controller:
 1. We'll create a simple controller which extends the TeamCity `jetbrains.buildServer.controllers.BaseController` class and implements the `BaseController.doHandle(HttpServletRequest, HttpServletResponse) method.
 2. The TeamCity open API provides the `jetbrains.buildServer.web.openapi.WebControllerManager` which allows registering custom controllers using the path to them: the path is a part of URL starting with a slash `/` appended to the URL of the server root.
-3. 
-Next we need to construct the path to our JSP file. When a plugin is unpacked on the TeamCity server, the paths to its resources change. To obtain valid paths to the files after the plugin is installed, use the `jetbrains.buildServer.web.openapi.PluginDescriptor` class which implements the `getPluginResourcesPath` method; otherwise TeamCity might have difficulties finding the plugin resources.
+3. Next we need to construct the path to our JSP file. When a plugin is unpacked on the TeamCity server, the paths to its resources change. To obtain valid paths to the files after the plugin is installed, use the `jetbrains.buildServer.web.openapi.PluginDescriptor` class which implements the `getPluginResourcesPath` method; otherwise TeamCity might have difficulties finding the plugin resources.
 
 
 ```java
@@ -224,7 +237,7 @@ mvn package
 The `target` directory of the project root will contain the `<demoPlugin>.zip` file. It is our plugin package, ready to be installed.
 
 ## Step 6. Install the plugin to TeamCity
-1. Copy the plugin zip to &lt;[TeamCity Data Directory](https://www.jetbrains.com/help/teamcity/?teamcity-data-directory)&gt;/plugins directory.
+1. Copy the plugin zip to \<[TeamCity Data Directory](https://www.jetbrains.com/help/teamcity/?teamcity-data-directory)\> plugins directory.
 2. Restart the server and locate the TeamCity Demo Plugin in the __Administration|Plugins List__ to verify the plugin was installed correctly.
 ![pluginList.PNG](pluginList.PNG)
 

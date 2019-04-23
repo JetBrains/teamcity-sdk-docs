@@ -13,7 +13,7 @@ __The server\-side part of a VCS plugin__ is responsible the following major ope
 
 * collecting changes between versions
 * building of a patch from version to version
-* getting content of a file (for web diff, duplicates finder and some other places)
+* getting content of a file (for web diff, duplicates finder, and some other places)
 
 There are also optional parts:
 
@@ -36,7 +36,7 @@ For more information on TeamCity plugins, please refer to the [TeamCity Plugins]
 
 Before digging into the VCS plugin development details, it's important to understand the basic terms such as a Version, Modification, Change, Patch, and Checkout Rule, which are explained below.
 
-## Basic Terms
+### Basic Terms
 
 A _Version_ is unambiguous representation of a particular snapshot within a repository pointed at by a VCS Root. The current version represents the head revision at the moment of obtaining.
 
@@ -79,7 +79,7 @@ Checkout rules consist of include and exclude rules. Include rule can have "from
 
 
 
-## Patch Building and Change Collecting Policies
+### Patch Building and Change Collecting Policies
 
 
 
@@ -161,7 +161,7 @@ All above is applicable to building patches using `VcsSupportUtil.buildPatch(...
 
 
 
-## Server-Side Caching
+### Server-Side Caching
 
 By default, the server caches clean patches created by VCS plugins, because clean patch construction can take significant time on large repositories. If clean patches created by your VCS plugin need not to be cached, you should return __true__ from the method __VcsSupport#ignoreServerCachesFor(VcsRoot)__.
 
@@ -175,8 +175,8 @@ By default, the server caches clean patches created by VCS plugins, because clea
 
 
 
-## Agent-Side Checkout
+### Agent-Side Checkout
 
-Agent part of VCS plugin is optional, if it is provided then checkout can also be performed on the agent itself. This kind of checkout usually works faster but it may require additional configuration efforts, for example, if VCS plugin uses command line client then this client must be installed on all of the agents.
+Agent part of VCS plugin is optional, if it is provided then checkout can also be performed on the agent itself. This kind of checkout usually works faster but it may require additional configuration efforts, for example, if VCS plugin uses command line client then this client must be installed on all agents.
 
 To enable agent\-side checkout, be sure to include [`jetbrains.buildServer.agent.vcs.AgentVcsSupportContext`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/agent/vcs/AgentVcsSupportContext.html) into agent plugin part and also enable agent\-side checkout via `jetbrains.buildServer.vcs.VcsSupportConfig`.

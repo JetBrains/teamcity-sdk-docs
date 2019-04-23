@@ -304,7 +304,7 @@ All above is applicable to building patches using `VcsSupportUtil.buildPatch(...
 
 
 
-## Registering In TeamCity
+### Registering In TeamCity
 
 
 
@@ -337,7 +337,7 @@ class SomeVcsSupport implements VcsSupport {
 
 
 
-## Server side caches
+### Server side caches
 
 
 
@@ -345,7 +345,7 @@ By default, server caches clean patches created by VCS plugins, because on large
 
 
 
-## Agent side checkout
+### Agent side checkout
 
 
 

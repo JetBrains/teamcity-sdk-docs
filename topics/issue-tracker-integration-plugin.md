@@ -46,7 +46,7 @@ A brief summary of steps to be done to create and add a plugin to TeamCity.
 
 
 	
-* Implement factory and provider interfaces ([jetbrains.buildServer.issueTracker.SIssueProvider`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/notification/TemplateProcessor.html) and [`jetbrains.buildServer.issueTracker.IssueProviderFactory`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/IssueProviderFactory.html))
+* Implement factory and provider interfaces ([`jetbrains.buildServer.issueTracker.SIssueProvider`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/notification/TemplateProcessor.html) and [`jetbrains.buildServer.issueTracker.IssueProviderFactory`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/IssueProviderFactory.html))
 	
 * Create a JSP page for admin UI
 	

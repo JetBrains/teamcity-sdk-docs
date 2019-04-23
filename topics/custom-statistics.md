@@ -31,8 +31,9 @@ public GraphBean createGraphBean() {
 ### Add Custom Content
 
 To add custom content to the __Statistics__ tab for a project or build configuration, use the following example [here](web-ui-extensions.md) and the appropriate `PlaceId`:
-*  * for Build Configuration Statistics tab, use `PlaceId.BUILD\_CONF\_STATISTICS\_FRAGMENT`
- * for Project Statistics tab, use `PlaceId.PROJECT\_STATS\_FRAGMENT`.
+* for Build Configuration Statistics tab, use `PlaceId.BUILD_CONF_STATISTICS_FRAGMENT`
+* for Project Statistics tab, use `PlaceId.PROJECT_STATS_FRAGMENT`.
+
 ## Add Statistics to your Custom Pages
 
 To add charts to your custom JSP pages, use the `<buildGraph>` tag and a special controller accessible on `"/buildGraph.html"`. It requires the `jsp` attribute leading to your page:
@@ -79,73 +80,85 @@ Usage
 </td></tr><tr>
 
 <td>
+
 `width`, `height`
 
 
 </td>
 
 <td>
+
 modify the chart image size
 
 
 </td>
 
 <td>
+
 Integer value
 
 
 </td></tr><tr>
 
 <td>
+
 `hideFilters`
 
 
 </td>
 
 <td>
+
 suppress filter controls
 
 
 </td>
 
 <td>
-Comma separated filters names: 'all', 'series', 'average', 'showFailed', 'range', 'yAxisType', 'forceZero' or 'yAxisRange'
+
+Comma separated filters names: `all`, `series`, `average`, `showFailed`, `range`, `yAxisType`, `forceZero`, `yAxisRange`
 
 
 </td></tr><tr>
 
 <td>
+
 `defaultFilter`
 
 
 </td>
 
 <td>
+
 default filter state
 
 
 </td>
 
 <td>
-Comma separated names: 'showFailed', 'averaged', 'logYAxis', 'autoscale'
+
+Comma separated names: `showFailed`, `averaged`, `logYAxis`, `autoscale`
 
 
 </td></tr><tr>
 
 <td>
+
 `hints`
 
 
 </td>
 
 <td>
+
 chart style
 
 
 </td>
 
 <td>
-Set to 'rendererB' for a bar chart
+
+Set to `rendererB` for a bar chart
 
 
 </td></tr></table>

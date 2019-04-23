@@ -33,9 +33,9 @@ Plugins with the same name (for example, a newer version) located in `<TeamCity 
 TeamCity creates a child Spring Framework context per plugin. There are two options to load plugins classes: __standalone__ and __shared__:
 * Standalone classloading (__recommeneded__) allows loading every plugin to a separate classloader. This approach allows a plugin to have additional libraries without the risk of affecting the server or other plugins.
 * Shared classloading allows loading all plugins into same classloader. It is not allowed to override any libraries here.
-You may specify desired the classloading mode in the `teamcity-plugin.xml` file, see the [section below]().
+You may specify desired the classloading mode in the `teamcity-plugin.xml` file, see the [section below](#Plugin Descriptor).
 
- The TeamCity plugin loader supports plugin dependencies, described [below]().
+ The TeamCity plugin loader supports plugin dependencies, described [below](#Plugin Dependencies).
 
 <note>
 
@@ -58,7 +58,7 @@ If you use a _separate folder_:
 The plugin zip archive/directory includes:
 * `teamcity-plugin.xml` containing meta information about the plugin, like its name and version, see the [section below](#Plugin Descriptor).
 * the `server` directory containing the server\-side part of the plugin, i.e, a number of jar files.
-* the `agent` directory containing `<agent plugin zip>` if your plugin affects agents too, see the [section below]().
+* the `agent` directory containing `<agent plugin zip>` if your plugin affects agents too, see the [section below](#Plugin Structure).
 
 The plugin directory should have the following structure:
 
@@ -139,7 +139,7 @@ The `agent` directory must have one file only: _&lt;agent plugin zip&gt;_ struct
 
 #### Deprecated Plugin Structure
 
-The old plugin structure implied that all plugin files and directories were placed into the single root directory, i.e. there had to be one root directory in the archive, the\_&lt;plugin name directory&gt;\_, and no other files at the top level. All .jar files required by the plugin on agents were placed into the `lib` subfolder:
+The old plugin structure implied that all plugin files and directories were placed into the single root directory, i.e. there had to be one root directory in the archive, the _&lt;plugin name directory&gt;_, and no other files at the top level. All .jar files required by the plugin on agents were placed into the `lib` subfolder:
 
 ```shell
 <plugin name directory>
@@ -154,7 +154,7 @@ There must be no other items in the root of .zip but the directory with the plug
 
 #### New Plugins
 
-Now a new, more flexible schema of packing is recommended. The plugin name root directory inside the plugin archive is no longer required. The agent plugin name now is obtained from the `PluginName.zip` file name. The archive needs to include the plugin descriptor, `teamcity\-plugin.xml`, [see below]().
+Now a new, more flexible schema of packing is recommended. The plugin name root directory inside the plugin archive is no longer required. The agent plugin name now is obtained from the `PluginName.zip` file name. The archive needs to include the plugin descriptor, `teamcity-plugin.xml`, [see below](#Plugin Descriptor).
 
 ```shell
 agent-plugin-name.zip
@@ -233,7 +233,7 @@ See [Installing Agent Tools](https://www.jetbrains.com/help/teamcity/?installing
 
 ## Plugin Dependencies
 
-Plugin dependencies are present on both the server and agent side: some components are separated from the core into separate bundled plugins: Ant runner, IDEA runner, .NET runners, JUnit, and TestNG support.If you need some functionality of one of these plugins, use the plugin dependencies feature.
+Plugin dependencies are present on both the server and agent side: some components are separated from the core into separate bundled plugins: Ant runner, IDEA runner, .NET runners, JUnit, and TestNG support. If you need some functionality of one of these plugins, use the plugin dependencies feature.
 
 To use plugin dependencies, add the \`dependencies\` tag into the plugin xml descriptor:
 

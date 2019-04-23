@@ -12,7 +12,7 @@ Consequently, depending on where the code runs, there are
 * server\-side plugins
 * agent\-side plugins.
 
-Besides that, plugins are divided into the following types :
+Besides that, plugins are divided into the following types:
 * Build runners
 * VCS plugins
 * Notifiers

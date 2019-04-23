@@ -4,6 +4,7 @@
 To report custom [server health](https://www.jetbrains.com/help/teamcity/?server-health) items, do the following:
 * Create your own reporter
 * Create a custom page extension to render items reported by you
+
 ### Reporting Server Health Items
 
 To make a reporter, create a subclass of [`jetbrains.buildServer.serverSide.healthStatus.HealthStatusReport`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/healthStatus/HealthStatusReport.html).

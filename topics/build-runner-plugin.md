@@ -11,7 +11,8 @@ A build runner can have various settings which must be edited by the user in the
 
 Some build runners whose source code can be used as a reference:
 * [Rake Runner](https://github.com/JetBrains/teamcity-rake)
-* [FxCop runner sources](https://github.com/JetBrains/teamcity-fxcop)  Other build runner [plugins](https://plugins.jetbrains.com/teamcity).
+* [FxCop runner sources](https://github.com/JetBrains/teamcity-fxcop)
+* Other build runner [plugins](https://plugins.jetbrains.com/teamcity).
 </tip>
 
 ## Server-side part of the runner
@@ -70,7 +71,7 @@ If the command line build service is not suitable for your needs, you can still 
 
 The TeamCity Ant runner, while being a plugin itself, can also be extended with the help of __jetbrains.buildServer.agent.ant.AntTaskExtension__. This extension works in the same JVM where Ant is running. Using this extension, you can watch for Ant tasks, modify/patch them and log various messages to the build log.
 
-Your class implementing __AntTaskExtension__ interface must be defined in the Spring bean and it will be picked up by the Ant runner automatically. You need to add a dependency to &lt;teamcity&gt;/webapps/ROOT/WEB\-INF/plugins/ant/agent/antPlugin.zip!antPlugin/ant\-runtime.jar jar.
+Your class implementing __AntTaskExtension__ interface must be defined in the Spring bean and it will be picked up by the Ant runner automatically. You need to add a dependency to `<teamcity>/webapps/ROOT/WEB-INF/plugins/ant/agent/antPlugin.zip!antPlugin/ant-runtime.jar`.
 
 ## Your Build Runner Results in TeamCity
 

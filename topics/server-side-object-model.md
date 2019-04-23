@@ -13,7 +13,7 @@ Build configurations are represented by [`jetbrains.buildServer.serverSide.SBuil
 
 <note>
 
-Note: interfaces available on the server side only have prefix S in their names, like SProject, SBuildType and so on.
+Interfaces available on the server side only have prefix S in their names, like SProject, SBuildType and so on.
 </note>
 
 ## Build lifecycle
@@ -63,7 +63,7 @@ Note: if not mentioned specifically the returned collections of changes are alwa
 ## Agents
 
 Agent is represented by [`jetbrains.buildServer.serverSide.SBuildAgent`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuildAgent.html) interface. Agents have unique id and name, and can be found by name or by id with help of [`jetbrains.buildServer.serverSide.BuildAgentManager`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildAgentManager.html). Agent can have various states:
-1. __registered__ / __unregistered__: agent is registered if it is connected to the server.
-2. __authorized__ / __unauthorized__: authorized agent can run builds, unauthorized can't. It is impossible to run build on unauthorized agent even manually. A number of authorized agents depends on entered license keys.
-3. __enabled__ / __disabled__: builds won't run automatically on disabled agents, but it is possible to start build manually on such agent if user has required permission.
-4. __outdated__ / __up to date__: agent is outdated if its' version does not match server version or if some of its' plugins should be updated. New builds will not start on an outdated agent until it upgrades, but already running builds will continue to run as usual.
+* __registered__ / __unregistered__: agent is registered if it is connected to the server.
+* __authorized__ / __unauthorized__: authorized agent can run builds, unauthorized can't. It is impossible to run build on unauthorized agent even manually. A number of authorized agents depends on entered license keys.
+* __enabled__ / __disabled__: builds won't run automatically on disabled agents, but it is possible to start build manually on such agent if user has required permission.
+* __outdated__ / __up to date__: agent is outdated if its' version does not match server version or if some of its' plugins should be updated. New builds will not start on an outdated agent until it upgrades, but already running builds will continue to run as usual.

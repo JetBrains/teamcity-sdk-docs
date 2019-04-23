@@ -21,7 +21,9 @@ __Prior to TeamCity 2018.2__, use the following hints to eliminate the server re
 
 * if you do not change code affecting plugin initialization and change only body of the methods, you can attach to the server process with a debugger and use Java hotswap to reload the changed classes from your IDE without web server restart. Note that the standard hotswap does not allow you to change method signatures.
 * if you make a change in some resource (jsp, js, images) you can copy the resources to `webapps/ROOT/plugins/<plugin-name>` directory to allow Tomcat to reload them.
-[//]: # (See "Development Environmentd119e72.txt" for more information.)    
+
+[//]: # (See "Development Environmentd119e72.txt" for more information.)   
+ 
 * change in build agent part of plugin will initiate build agents upgrade.
 
 If you replace a deployed plugin .zip file with changed class files while TeamCity server is running, this can lead to NoClassDefFound errors. To avoid this, set "`teamcity.development.shadowCopyClasses=true`" [internal property](https://www.jetbrains.com/help/teamcity/?configuring-teamcity-server-startup-properties). 

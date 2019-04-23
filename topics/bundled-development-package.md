@@ -37,7 +37,7 @@ Note that sometimes a part of an agent\-side plugin has to work in the same JVM 
 
 * Unpack `<TeamCity Home Directory>\devPackage\samplePlugin-src.zip` into a directory of your choice
 * Open the project in IDEA (the .idea project should work OK in IntelliJ IDEA 9 and later (including IntelliJ IDEA 9.0 Community Edition))
-* On prompt to add the path variable, set the "TeamCityDistribution" path variable to the directory where TeamCity with devPackage is installed (&lt;[TeamCity Home Directory](https://www.jetbrains.com/help/teamcity/?teamcity-home-directory)&gt;).
+* On prompt to add the path variable, set the "TeamCityDistribution" path variable to the directory where TeamCity with devPackage is installed ([`<TeamCity Home Directory>`](https://www.jetbrains.com/help/teamcity/?teamcity-home-directory)).
 * Open Project Structure and ensure you have Project SDK with name "1.6" pointing to Sun JDK version 1.6
 
 #### Running the server with plugin from IDEA

@@ -12,13 +12,13 @@ Both Maven 2 (2.2.1\+) and Maven 3 (3.0.4\+) are supported.
 
 ## Open API in Maven Repository
 
-TeamCity Open API is available as a set of Maven artifacts residing in the JetBrains Maven repository ([http://download.jetbrains.com/teamcity-repository](https://download.jetbrains.com/teamcity-repository)). Add this fragment to the `<repositories>` section of your pom file to access it:
+TeamCity Open API is available as a set of Maven artifacts residing in the JetBrains Maven repository ([https://download.jetbrains.com/teamcity-repository](https://download.jetbrains.com/teamcity-repository)). Add this fragment to the `<repositories>` section of your pom file to access it:
 
 
 ```shell
 <repository>
-  <id>jetbrains\-all</id>
-  <url>http://download.jetbrains.com/teamcity\-repository</url>
+  <id>jetbrains-all</id>
+  <url>https://download.jetbrains.com/teamcity-repository</url>
 </repository>
 
 ```
@@ -35,7 +35,7 @@ The server\-side API:
 ```shell
 <dependency>
   <groupId>org.jetbrains.teamcity</groupId>
-  <artifactId>server\-api</artifactId>
+  <artifactId>server-api</artifactId>
   <version>10.0</version>
   <scope>provided</scope>
 </dependency>
@@ -50,7 +50,7 @@ The agent\-side API:
 ```shell
 <dependency>
   <groupId>org.jetbrains.teamcity</groupId>
-  <artifactId>agent\-api</artifactId>
+  <artifactId>agent-api</artifactId>
   <version>10.0</version>
   <scope>provided</scope>
 </dependency>
@@ -67,7 +67,7 @@ There is also an artifact to support plugin tests:
 ```shell
 <dependency>
   <groupId>org.jetbrains.teamcity</groupId>
-  <artifactId>tests\-support</artifactId>
+  <artifactId>tests-support</artifactId>
   <version>10.0</version>
   <scope>test</scope>
 </dependency>
@@ -90,7 +90,7 @@ __Server-side\-only plugin__:____
 
 
 ```shell
-mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepository=http://download.jetbrains.com/teamcity-repository -DarchetypeArtifactId=teamcity-server-plugin -DarchetypeGroupId=org.jetbrains.teamcity.archetypes -DarchetypeVersion=RELEASE -DteamcityVersion=2018.2
+mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepository=https://download.jetbrains.com/teamcity-repository -DarchetypeArtifactId=teamcity-server-plugin -DarchetypeGroupId=org.jetbrains.teamcity.archetypes -DarchetypeVersion=RELEASE -DteamcityVersion=2018.2
 
 ```
 
@@ -100,7 +100,7 @@ __Plugin with both the server and agent parts__:
 
 
 ```shell
-mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepository=http://download.jetbrains.com/teamcity-repository -DarchetypeArtifactId=teamcity-plugin -DarchetypeGroupId=org.jetbrains.teamcity.archetypes -DarchetypeVersion=RELEASE -DteamcityVersion=2018.2
+mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepository=https://download.jetbrains.com/teamcity-repository -DarchetypeArtifactId=teamcity-plugin -DarchetypeGroupId=org.jetbrains.teamcity.archetypes -DarchetypeVersion=RELEASE -DteamcityVersion=2018.2
 
 ```
 
@@ -110,7 +110,7 @@ __Sample plugin__:
 
 
 ```shell
-mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepository=http://download.jetbrains.com/teamcity-repository -DarchetypeArtifactId=teamcity-sample-plugin -DarchetypeGroupId=org.jetbrains.teamcity.archetypes -DarchetypeVersion=RELEASE -DteamcityVersion=2018.2
+mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepository=https://download.jetbrains.com/teamcity-repository -DarchetypeArtifactId=teamcity-sample-plugin -DarchetypeGroupId=org.jetbrains.teamcity.archetypes -DarchetypeVersion=RELEASE -DteamcityVersion=2018.2
 
 ```
 
@@ -128,7 +128,7 @@ mvn package
 
 
 
-The `target` directory of the project root will contain the `<artifactId>.zip` file. It is your plugin package.  You can [install it to TeamCity](https://www.jetbrains.com/help/teamcity/?installing-additional-plugins) or use the TeamClity SDK Maven plugin.
+The `target` directory of the project root will contain the `<artifactId>.zip` file. It is your plugin package. You can [install it to TeamCity](https://www.jetbrains.com/help/teamcity/?installing-additional-plugins) or use the TeamClity SDK Maven plugin.
 
 ## TeamCity SDK Maven plugin 
 

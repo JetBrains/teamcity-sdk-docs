@@ -12,16 +12,13 @@ You can use the following plugins from JetBrains as implementation examples:
 ## TeamCity Artifacts Overview
 
 TeamCity provides the following artifacts\-related features:
-* 
-Artifacts upload
+* Artifacts upload
 
-* 
-Individual artifacts download and browsing of build artifacts in a web browser and via the [REST API](https://www.jetbrains.com/help/teamcity/?rest-api)
+* Individual artifacts download and browsing of build artifacts in a web browser and via the [REST API](https://www.jetbrains.com/help/teamcity/?rest-api)
 
-* 
-Ability to configure [artifact dependencies](https://www.jetbrains.com/help/teamcity/?artifact-dependencies) between builds and fetching necessary dependencies on the agent
+* Ability to configure [artifact dependencies](https://www.jetbrains.com/help/teamcity/?artifact-dependencies) between builds and fetching necessary dependencies on the agent
 
-Upload to a TeamCity server is a process of storing data created by a build, so that it is available after a TeamCity agent is disconnected. The data is uploaded from the agent to the server via HTTP multipart requests. Usually the upload process starts when a build finishes on the agent, but it is also possible to initiate the upload while the build is in progress using[ service messages](https://confluence.jetbrains.com/display/TCD10/Build+Script+Interaction+with+TeamCity#BuildScriptInteractionwithTeamCity-artPublishingPublishingArtifactswhiletheBuildisStillinProgress). Artifacts are uploaded according to [artifacts paths](https://confluence.jetbrains.com/display/TCD10/Configuring+General+Settings#ConfiguringGeneralSettings-artifactPaths). Uploaded artifacts are also cached on the build agent in case they are requested by another build on this agent via artifact dependencies.
+Upload to a TeamCity server is a process of storing data created by a build, so that it is available after a TeamCity agent is disconnected. The data is uploaded from the agent to the server via HTTP multipart requests. Usually the upload process starts when a build finishes on the agent, but it is also possible to initiate the upload while the build is in progress using [service messages](https://confluence.jetbrains.com/display/TCD10/Build+Script+Interaction+with+TeamCity#BuildScriptInteractionwithTeamCity-artPublishingPublishingArtifactswhiletheBuildisStillinProgress). Artifacts are uploaded according to [artifacts paths](https://confluence.jetbrains.com/display/TCD10/Configuring+General+Settings#ConfiguringGeneralSettings-artifactPaths). Uploaded artifacts are also cached on the build agent in case they are requested by another build on this agent via artifact dependencies.
 
 Uploaded data is displayed in the TeamCity web UI as an artifacts tree in the popups or on the Artifacts tab of the build results. It also can be accessed by [http requests](https://confluence.jetbrains.com/display/TCD10/Patterns+For+Accessing+Build+Artifacts) via the [REST API](https://confluence.jetbrains.com/display/TCD10/REST+API#RESTAPI-build_artifacts) and as an [ivy-compliant repository](https://confluence.jetbrains.com/display/TCD10/Artifact+Dependencies#ArtifactDependencies.mdConfiguringArtifactDependenciesUsingAntBuildScript).
 
@@ -55,7 +52,7 @@ Publication is done from the build agent process. The plugin should provide a sp
 
 If the external artifacts index was created during publication using `jetbrains.buildServer.agent.artifacts.AgentArtifactHelper#publishArtifactList`, it will be used by the TeamCity server when listing build artifacts, e.g. when adding nodes to the artifacts tree.
 
-To access artifact content via HTTP requests, the plugin should provide an implementation of the `jetbrains.buildServer.web.openapi.artifacts.ArtifactDownloadProcessor` interface.To access artifact content for other purposes, it should provide an implementation of the `jetbrains.buildServer.serverSide.artifacts.ArtifactContentProvider` interface.
+To access artifact content via HTTP requests, the plugin should provide an implementation of the `jetbrains.buildServer.web.openapi.artifacts.ArtifactDownloadProcessor` interface. To access artifact content for other purposes, it should provide an implementation of the `jetbrains.buildServer.serverSide.artifacts.ArtifactContentProvider` interface.
 
 ### Cleanup
 

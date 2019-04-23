@@ -41,7 +41,7 @@ public class DiagnosticsAdminPage extends AdminPage {
 
   @NotNull
   public String getGroup() {
-    return SERVER\_RELATED\_GROUP;
+    return SERVER_RELATED_GROUP;
   }
 }
 
@@ -86,14 +86,14 @@ We are using [Spring MVC](http://static.springframework.org/spring/docs/2.5.x/re
 ## Under the Hood
 
 If you download and take a look at the TeamCity open API sources, you'll notice that all tabs above derive from the `jetbrains.buildServer.web.openapi.SimpleCustomTab`. And the only major difference between them all is a `jetbrains.buildServer.web.openapi.PlaceId` they specify in constructor. Here's what they use:
-* PlaceId.PROJECT\_TAB
-* PlaceId.BUILD\_CONF\_TAB
-* PlaceId.BUILD\_RESULTS\_TAB
-* PlaceId.ADMIN\_SERVER\_CONFIGURATION\_TAB
+* PlaceId.PROJECT_TAB
+* PlaceId.BUILD_CONF_TAB
+* PlaceId.BUILD_RESULTS_TAB
+* PlaceId.ADMIN_SERVER_CONFIGURATION_TAB
 Don't get confused by the variety of names, it's a long story. The main thing is there are more than 30 other place ids that you can hook into!
-* PlaceId.ALL\_PAGES\_HEADER
-* PlaceId.AGENT\_DETAILS\_TAB
-* PlaceId.LOGIN\_PAGE
+* PlaceId.ALL_PAGES_HEADER
+* PlaceId.AGENT_DETAILS_TAB
+* PlaceId.LOGIN_PAGE
 * ...
 There is a convention that a place id named as a TAB can be used with the SimpleCustomTab. Others cannot, and to use them you will have to deal with low level `jetbrains.buildServer.web.openapi.SimplePageExtension`. But that's pretty much the only change, take a look at the example: 
 
@@ -102,7 +102,7 @@ There is a convention that a place id named as a TAB can be used with the Simple
 public class ChangedFileExtension extends SimplePageExtension {
   public ChangedFileExtension(@NotNull PagePlaces pagePlaces,
                               @NotNull PluginDescriptor descriptor) {
-    super(pagePlaces, PlaceId.CHANGED\_FILE\_LINK, "changeViewers", descriptor.getPluginResourcesPath("changedFileLink.jsp"));
+    super(pagePlaces, PlaceId.CHANGED_FILE_LINK, "changeViewers", descriptor.getPluginResourcesPath("changedFileLink.jsp"));
     register();
   }
 
@@ -127,6 +127,7 @@ A couple of useful notes:
 * `isAvailable(HttpServletRequest)` method is called to determine whether page extension content should be shown or not.
 * in case `isAvailable(HttpServletRequest)` is true, the `fillModel(Map, HttpServletRequest)` method will always be called and JSP will be rendered in UI. You cannot abort the process after `isAvailable(HttpServletRequest)` is done, that's why it's usually inconvenient to handle POST requests in extensions. Use a custom controller for that (see below).
 * One more case when you might need a custom controller is when you need to process HTTP response manually, e.g. stream a file content. `fillModel(Map, HttpServletRequest)` won't allow you to do that.
+
 ## Developing a Custom Controller
 
 Sometimes page extensions provide interaction with user and require communication with server. For example, your page extension can show a form with a "Submit" button. In this case in addition to writing your own page extension, you should provide a _controller_ which will process requests from such forms, and use path to this controller in the form action attribute (the path is a part of URL without context path and query string).
@@ -180,92 +181,118 @@ Note: &lt;c:url/&gt; is required to construct correct URL in case if TeamCity is
 <table><tr>
 
 <td>
+
 Class / Interface
 
 
 </td>
 
 <td>
+
 Description
 
 
 </td></tr><tr>
 
-<td>[`jetbrains.buildServer.web.openapi.PlaceId`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/PlaceId.html)
+<td>
+
+[`jetbrains.buildServer.web.openapi.PlaceId`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/PlaceId.html)
 
 </td>
 
 <td>
+
 A list of page place identifiers / extension points
 
 
 </td></tr><tr>
 
-<td>[`jetbrains.buildServer.web.openapi.PagePlace`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/PagePlace.html)
+<td>
+
+[`jetbrains.buildServer.web.openapi.PagePlace`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/PagePlace.html)
 
 </td>
 
 <td>
+
 A single page place associated with __PlaceId__, allows to add / remove extensions
 
 
 </td></tr><tr>
 
-<td>[`jetbrains.buildServer.web.openapi.PageExtension`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/PageExtension.html)
+<td>
+
+[`jetbrains.buildServer.web.openapi.PageExtension`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/PageExtension.html)
 
 </td>
 
 <td>
+
 Page extension interface
 
 
 </td></tr><tr>
 
-<td>[`jetbrains.buildServer.web.openapi.SimplePageExtension`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/SimplePageExtension.html)
+<td>
+
+[`jetbrains.buildServer.web.openapi.SimplePageExtension`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/SimplePageExtension.html)
 
 </td>
 
 <td>
+
 Base class for page extensions
 
 
 </td></tr><tr>
 
-<td>[`jetbrains.buildServer.web.openapi.CustomTab`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/CustomTab.html)
+<td>
+
+[`jetbrains.buildServer.web.openapi.CustomTab`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/CustomTab.html)
 
 </td>
 
 <td>
+
 Custom tab extension interface
 
 
 </td></tr><tr>
 
-<td>[`jetbrains.buildServer.web.openapi.PagePlaces`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/PagePlaces.html)
+<td>
+
+[`jetbrains.buildServer.web.openapi.PagePlaces`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/PagePlaces.html)
 
 </td>
 
 <td>
+
 Maintains a collection of page places and allows to locate __PagePlace__ by __PlaceId__
 
 
 </td></tr><tr>
 
-<td>[`jetbrains.buildServer.web.openapi.WebControllerManager`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/WebControllerManager.html)
+<td>
+
+[`jetbrains.buildServer.web.openapi.WebControllerManager`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/WebControllerManager.html)
 
 </td>
 
 <td>
+
 Maintains a collection of custom controllers, allows to register custom controllers
 
 
 </td></tr><tr>
 
-<td>[`jetbrains.buildServer.controllers.BaseController`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/controllers/BaseController.html)
+<td>
+
+[`jetbrains.buildServer.controllers.BaseController`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/controllers/BaseController.html)
 
 </td>
 
 <td>
+
 Base class for controllers
 
 

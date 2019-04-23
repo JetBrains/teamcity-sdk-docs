@@ -329,7 +329,7 @@ JHighlight patch is ready, let's check it out in action. Put the properties file
 
 ```shell
 ant
-java \-cp build/classes/ com.uwyn.jhighlight.JHighlight examples/
+java -cp build/classes/ com.uwyn.jhighlight.JHighlight examples/
 firefox examples/test.properties.html
 
 ```
@@ -355,7 +355,7 @@ TeamCity uses only public JHighlight API, that's why if your patched JHighlight 
 	
 * repack `jhighlight.jar` (call `ant jar`)
 	
-* replace `/WEB\-INF/lib/jhighlight\-njcms\-patch.jar` with it
+* replace `/WEB-INF/lib/jhighlight-njcms-patch.jar` with it
 	
 * restart TeamCity server
 
