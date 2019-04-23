@@ -9,7 +9,7 @@
     <vars src="v.list"/>
     <topics dir="topics"/>
     <images dir="images" teamcity-build-path="Documentation_Teamware_TeamCitySdkDocs"
-            web-path="/docs/teamcity"/>
+            web-path="/docs/teamcity/"/>
     <categories src="c.list"/>
     <tags src="g.list"/>
     <product src="tc.tree" web-path="/docs/teamcity/"
