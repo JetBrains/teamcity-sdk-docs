@@ -1,6 +1,6 @@
 # TeamCity Plugin Development Documentation
 
-Welcome to the source repository of the [TeamCity Plugin Development Help](https://www.jetbrains.com/help/plugin-dev/docs/teamcity/developing-teamcity-plugins.html) site.
+Welcome to the source repository of the [TeamCity Plugin Development Help](https://plugins.jetbrains.com/docs/teamcity/developing-teamcity-plugins.html) site.
 
 We are happy to receive feedback from our community and greatly appreciate your direct contribution. You can help us improve and expand the plugin documentation by submitting a pull request with changes for review.
 
