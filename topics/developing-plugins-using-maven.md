@@ -12,7 +12,7 @@ Both Maven 2 (2.2.1\+) and Maven 3 (3.0.4\+) are supported.
 
 ## Open API in Maven Repository
 
-TeamCity Open API is available as a set of Maven artifacts residing in the JetBrains Maven repository ([https://download.jetbrains.com/teamcity-repository](https://download.jetbrains.com/teamcity-repository)). Add this fragment to the `<repositories>` section of your pom file to access it:
+TeamCity Open API is available as a set of Maven artifacts residing in the [JetBrains Maven repository](https://download.jetbrains.com/teamcity-repository](https://download.jetbrains.com/teamcity-repository)). Add this fragment to the `<repositories>` section of your pom file to access it:
 
 
 ```shell
@@ -79,9 +79,9 @@ There is also an artifact to support plugin tests:
 ## Maven Archetypes
 
 For a quick start with a plugin, there are three [Maven archetypes](http://maven.apache.org/guides/introduction/introduction-to-archetypes.html) in the `org.jetbrains.teamcity.archetypes` group:
-* `teamcity-plugin` \– an empty plugin, includes both the server and the agent plugin parts
-* `teamcity-server-plugin` \– an empty plugin, includes the server plugin part only
-* `teamcity-sample-plugin` \– the plugin with the sample code (adds a "Click me" button to the bottom of the TeamCity project Overview page)
+* `teamcity-plugin`: an empty plugin, includes both the server and the agent plugin parts
+* `teamcity-server-plugin`: an empty plugin, includes the server plugin part only
+* `teamcity-sample-plugin`: the plugin with the sample code (adds a "Click me" button to the bottom of the TeamCity project Overview page)
 Different released versions of the TeamCity server API are listed [here](https://download.jetbrains.com/teamcity-repository/org/jetbrains/teamcity/server-api/).
 
 Here is the Maven commands which will generate projects for different plugins depending on 2018.2 TeamCity version:
