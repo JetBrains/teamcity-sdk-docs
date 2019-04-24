@@ -156,7 +156,7 @@ There must be no other items in the root of .zip but the directory with the plug
 
 #### New Plugins
 
-Now a new, more flexible schema of packing is recommended. The plugin name root directory inside the plugin archive is no longer required. The agent plugin name now is obtained from the `PluginName.zip` file name. The archive needs to include the plugin descriptor, `teamcity-plugin.xml`, [see below](#Plugin Descriptor).
+Now a new, more flexible schema of packing is recommended. The plugin name root directory inside the plugin archive is no longer required. The agent plugin name now is obtained from the `PluginName.zip` file name. The archive needs to include the plugin descriptor, `teamcity-plugin.xml`, [see below](plugins-packaging.md#Plugin Descriptor).
 
 ```shell
 agent-plugin-name.zip
