@@ -32,9 +32,9 @@ Plugins with the same name (for example, a newer version) located in `<TeamCity 
 TeamCity creates a child Spring Framework context per plugin. There are two options to load plugins classes: __standalone__ and __shared__:
 * Standalone classloading (__recommeneded__) allows loading every plugin to a separate classloader. This approach allows a plugin to have additional libraries without the risk of affecting the server or other plugins.
 * Shared classloading allows loading all plugins into same classloader. It is not allowed to override any libraries here.
-You may specify desired the classloading mode in the `teamcity-plugin.xml` file, see the [section below](#Plugin%20Descriptor).
+You may specify desired the classloading mode in the `teamcity-plugin.xml` file, see the [section below](#Plugin+Descriptor).
 
- The TeamCity plugin loader supports plugin dependencies, described [below](#Plugin%20Dependencies).
+ The TeamCity plugin loader supports plugin dependencies, described [below](#Plugin+Dependencies).
 
 <note>
 * The plugin zip file will be automatically unpacked to a temporary directory on the server start\-up
@@ -57,8 +57,8 @@ If you use a _separate folder_:
 * TeamCity will use the folder name as the plugin name
 
 The plugin zip archive/directory includes:
-* the `agent` directory containing `<agent plugin zip>` if your plugin affects agents too, see the [section below](#Plugin%20Structure).
-* `teamcity-plugin.xml` containing meta information about the plugin, like its name and version, see the [section below](#Plugin%20Descriptor).
+* the `agent` directory containing `<agent plugin zip>` if your plugin affects agents too, see the [section below](#Plugin+Structure).
+* `teamcity-plugin.xml` containing meta information about the plugin, like its name and version, see the [section below](#Plugin+Descriptor).
 * the `server` directory containing the server\-side part of the plugin, i.e, a number of jar files.
 
 The plugin directory should have the following structure:

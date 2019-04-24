@@ -47,7 +47,7 @@ If you use the Ultimate edition of IntelliJ IDEA, you can start TeamCity's Tomca
 * Go to the "server" run configuration settings and configure Application Server pointing it to `<TeamCity Home Directory>`
 * Run the "server" run configuration. It will run Ant create distribution task, deploy the plugin into `${user.home}/.BuildServer` directory and run the TeamCity server.
 
-If you use the Community edition, see [Building plugin with Apache Ant](#Building plugin with Apache Ant) \- you can run "deploy" Ant build target right from `Ant Build` IDEA tool window and then start TeamCity manually.
+If you use the Community edition, see [Building plugin with Apache Ant](#Building+plugin+with+Apache+Ant) \- you can run "deploy" Ant build target right from `Ant Build` IDEA tool window and then start TeamCity manually.
 
 ### Sample Plugin Functionality
 

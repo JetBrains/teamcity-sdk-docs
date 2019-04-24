@@ -3,7 +3,7 @@
         SYSTEM "http://helpserver.labs.intellij.net/help/product-profile.dtd">
 <product-profile xmlns:xs="http://www.w3.org/2001/XMLSchema"
                  id="tc" name="TeamCity Plugin Development" 
-                 start-page="developing-teamcity-plugins.md" status="eap">
+                 start-page="developing-teamcity-plugins.md" status="release">
     
     <toc-element id="developing-teamcity-plugins.md">
         <toc-element id="getting-started-with-plugin-development.md" show-structure-for="h2"/>
