@@ -5,6 +5,8 @@
         <search-scope/>
         <fallback-url/>
         <help-app-version>2</help-app-version>
+        <enable-browser-edits>true</enable-browser-edits>
+        <browser-edits-url>https://github.com/JetBrains/teamcity-sdk-docs/edit/master/topics/</browser-edits-url>
         <help-app-prefix>https://www.jetbrains.com</help-app-prefix>
         <images-prefix-override>images/</images-prefix-override>
         <config-feedbackRequireEmail>false</config-feedbackRequireEmail>
