@@ -33,5 +33,5 @@
         <toc-element id="developing-plugins-using-maven.md" show-structure-for="h2,h3"/>
         <toc-element id="plugin-development-faq.md"/>
     </toc-element>
-
+    <toc-element toc-title="Open API Javadoc" href="http://javadoc.jetbrains.net/teamcity/openapi/current/"/>
 </product-profile>
