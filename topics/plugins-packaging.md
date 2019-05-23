@@ -246,15 +246,15 @@ Example of the server\-side plugin descriptor using plugin dependencies:
 <?xml version="1.0" encoding="UTF-8"?>
 <teamcity-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-plugin-v1-xml">
-<info>
+  <info>
 
-<name>Plugin Name</name>
-<!-- Some tags skipped -->
-</info>
-<deployment use-separate-classloader="true"/>
-<dependencies>
-<plugin name="dotNetRunners"/>
-</dependencies>
+  <name>Plugin Name</name>
+  <!-- Some tags skipped -->
+  </info>
+  <deployment use-separate-classloader="true"/>
+    <dependencies>
+  <plugin name="dotNetRunners"/>
+  </dependencies>
 </teamcity-plugin>
 
 ```
@@ -267,12 +267,12 @@ Example of agent\-side plugin descriptor:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <teamcity-agent-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
-<plugin-deployment use-separate-classloader="true"/>
-<dependencies>
-<tool name="ant"/>
-<plugin name="ant-runner"/>
-</dependencies>
+ xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
+  <plugin-deployment use-separate-classloader="true"/>
+    <dependencies>
+      <tool name="ant"/>
+      <plugin name="ant-runner"/>
+    </dependencies>
 </teamcity-agent-plugin>
 
 ```
