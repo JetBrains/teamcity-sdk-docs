@@ -34,4 +34,5 @@
         <toc-element id="plugin-development-faq.md"/>
     </toc-element>
     <toc-element toc-title="Open API Javadoc" href="http://javadoc.jetbrains.net/teamcity/openapi/current/"/>
+    <toc-element toc-title="TeamCity Product Documentation" href="https://www.jetbrains.com/help/teamcity/teamcity-documentation.html"/>
 </product-profile>
