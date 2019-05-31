@@ -28,6 +28,7 @@ Build artifacts also contain a number of [internal artifacts](https://confluence
 
 Build artifacts can be cleaned up according to [Cleanup Rules](https://confluence.jetbrains.com/display/TCD10/Clean-Up#Clean-Up-ProjectClean-upRules).
 
+
 ## External Artifacts Storage Overview
 
 An implementation of an external storage should be able to upload to, download, and remove artifacts from the external storage.
@@ -46,7 +47,7 @@ To get listed on this page, the plugin will provide a spring bean implementing t
 
 ### Publication
 
-Publication is done from the build agent process. The plugin should provide a spring bean implementing the interface `jetbrains.buildServer.agent.ArtifactsPublisher` (for future compatibility we recommend extending the base implementation `jetbrains.buildServer.agent.ArtifactsPublisherBase`). The plugin should publish information about remote artifacts using `jetbrains.buildServer.agent.artifacts.AgentArtifactHelper#publishArtifactList` after a build is finished. This information will be stored in a special index file as a hidden build artifact and can be accessed later on.
+Publication is done from the build agent process. The plugin should provide a spring bean implementing the interface `jetbrains.buildServer.agent.ArtifactsPublisher` (for future compatibility we recommend extending the base implementation `jetbrains.buildServer.agent.impl.BaseArtifactsPublisher`). The plugin should publish information about remote artifacts using `jetbrains.buildServer.agent.artifacts.AgentArtifactHelper#publishArtifactList` after a build is finished. This information will be stored in a special index file as a hidden build artifact and can be accessed later on.
 
 ### View
 
