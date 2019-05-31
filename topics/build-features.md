@@ -63,7 +63,26 @@ To access build features the following methods can be used:
 * [`getBuildFeatures`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/agent/AgentRunningBuild.html#getBuildFeatures--) 
 * [`getBuildFeaturesOfType`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/agent/AgentRunningBuild.html#getBuildFeaturesOfType-java.lang.String-) 
 
-Both of these methods work similarly to methods in [`SBuild`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuild.html) - they return features 
+Both of these methods work similarly to methods in [`SBuild`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuild.html), i.e. they return features 
 with all parameters resolved and they don't return disabled features.
 
+## Useful Listeners
+
+There is no any workflow associated with build features. If build feature is configured in a build configuration, then its settings are automatically delivered
+to an agent or can be retrieved on the server side from an instance of [`SBuild`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuild.html).
+
+As such to affect build behavior one need to register listeners and watch for different events occurring in the build.
+The most commonly used listeners are:
+* [`BuildServerListener`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildServerListener.html) - this is the main place 
+where all server side events can be watched; all build related events there, like [`buildStarted`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildServerListener.html#buildStarted-jetbrains.buildServer.serverSide.SRunningBuild-) 
+or [`buildFinished`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildServerListener.html#buildFinished-jetbrains.buildServer.serverSide.SRunningBuild-) can be useful for build features
+* [`AgentLifeCycleListener`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/agent/AgentLifeCycleListener.html) - this listener can be implemented
+on the agent side; similar to server side listener there are build related events which can be useful to build features
+
+## Examples of Plugins
+
+Open source plugins providing build features:
+
+* [XML Report Processing](https://github.com/JetBrains/teamcity-xml-tests-reporting) - this plugin has a build feature which processes data on agent
+* [Commit Status Publisher](https://github.com/JetBrains/commit-status-publisher) - this plugin provides a server-side build feature
 
