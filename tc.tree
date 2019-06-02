@@ -11,6 +11,7 @@
             <toc-element id="build-runner-plugin.md"/>
             <toc-element id="risk-tests-reordering-in-custom-test-runner.md"/>
             <toc-element id="custom-build-trigger.md"/>
+            <toc-element id="build-features.md"/>
             <toc-element id="extending-notification-templates-model.md"/>
             <toc-element id="issue-tracker-integration-plugin.md"/>
             <toc-element id="version-control-system-plugin.md"/>
