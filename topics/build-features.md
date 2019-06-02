@@ -1,6 +1,8 @@
 [//]: # (title: Build Features and Failure Conditions)
 [//]: # (auxiliary-id: Build+Features.html)
 
+
+
 A [build feature](https://www.jetbrains.com/help/teamcity/adding-build-features.html) allows modifying behavior of a build on the server or on the agent side.   
 There is no specific workflow associated with a build feature; a plugin implementing a build feature can plug itself into various listeners and somehow affect the build.
 

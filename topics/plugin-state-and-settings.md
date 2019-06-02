@@ -1,15 +1,18 @@
 [//]: # (title: Storing Plugin State and Settings)
 [//]: # (auxiliary-id: Storing+Plugin+State+and+Settings.html)
 
+
+
+
 Most of the plugins need a location to store their state and settings.
 
 By __state__ we mean the internal plugin data which cannot be easily computed from scratch and is usually not visible to the users of the plugin. The state can be either global or associated with some TeamCity entity, such as a build or a build configuration.   
 
-By __settings__ we understand user-defined settings, specified either via the user interface or DSL. Settings can be global or associated with TeamCity entities, such as a build configuration or a project.   
+By __settings__ we understand user-defined settings, specified either via the user interface or DSL. The plugin settings can be global or associated with TeamCity entities, such as a build configuration or a project.   
 
 Usually both the state and settings should survive the server restart. 
 
-In most of the cases plugin settings will be serialized and deserialized automatically by the TeamCity server itself; however, to serialize the state, some dedicated code should be provided by the plugin author, except for the cases when the plugin state can be calculated based on other TeamCity entities.      
+In most cases plugin settings will be serialized and deserialized automatically by the TeamCity server itself; however, to serialize the state, some dedicated code should be provided by the plugin author, except for the cases when the plugin state can be calculated based on other TeamCity entities.      
 For instance, a plugin whose state depends on build tests can restore its state during the server startup by processing recent builds. 
 
 ## Plugin Settings
@@ -96,13 +99,15 @@ Custom data storage is a key-value storage with some `id`. Any map with String k
 
 An example how a custom data storage can be used with a build configuration (code is similar in case of project):
 
-```Shell
+
+```shell
 SBuldType bt = ...
 CustomDataStorage pluginData = bt.getCustomDataStorage("my-plugin-data");
 pluginData.putValue("some key", "some value");
 
 // optionally persist state
 pluginData.flush()
+
 ```
 
 Custom data storage is persisted into the database automatically with some periodicity or when server is stopped. But if it is important to save the state as soon as possible, then the [`flush`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/CustomDataStorage.html#flush--) method can be used.
@@ -115,11 +120,12 @@ If a plugin needs to associate some state with a build, a possible approach is t
 
 By convention, plugins should store their state under the hidden artifacts directory `.teamcity/<plugin name>`:
 
-```Shell
+```shell
 SBuild build = ...
 File artifactsDir = build.getArtifactsDirectory();
 File pluginFolder = new File(artifactsDir, jetbrains.buildServer.ArtifactsConstants.TEAMCITY_ARTIFACTS_DIR + File.separatorChar + "myPluginName");
 pluginFolder.mkdirs();
 ... some code to serialize or deserialize state ...
+
 ```
  

@@ -1,8 +1,9 @@
 [//]: # (title: Build Runner Plugin)
 [//]: # (auxiliary-id: Build+Runner+Plugin.html)
 
-A [build runner](https://www.jetbrains.com/help/teamcity/?build-runner) plugin consists of two parts: agent\-side and server\-side. The server side part of the plugin provides meta information about the build runner, the web UI for the build runner settings and the build runner properties validator. The agent\-side part launches builds.
 
+
+A [build runner](https://www.jetbrains.com/help/teamcity/?build-runner) plugin consists of two parts: agent\-side and server\-side. The server side part of the plugin provides meta information about the build runner, the web UI for the build runner settings and the build runner properties validator. The agent\-side part launches builds.
 
 
 A build runner can have various settings which must be edited by the user in the web UI and passed to the agent. These settings are called __runner parameters__ (or __runner properties__) and provided as a Map&lt;String, String&gt; to the agent part of the runner.
