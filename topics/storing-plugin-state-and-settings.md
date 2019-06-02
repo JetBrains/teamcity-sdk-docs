@@ -4,11 +4,13 @@
 
 
 
-Most of the plugins need a location to store their state and settings.
+Most of the plugins need a location to store their state and settings.   
 
-By __state__ we mean the internal plugin data which cannot be easily computed from scratch and is usually not visible to the users of the plugin. The state can be either global or associated with some TeamCity entity, such as a build or a build configuration.   
+By __state__ we mean the internal plugin data which cannot be easily computed from scratch and is usually not visible to the users of the plugin.    
+The state can be either global or associated with some TeamCity entity, such as a build or a build configuration.   
 
-By __settings__ we understand user-defined settings, specified either via the user interface or DSL. The plugin settings can be global or associated with TeamCity entities, such as a build configuration or a project.   
+By __settings__ we understand user-defined settings, specified either via the user interface or DSL.    
+The plugin settings can be global or associated with TeamCity entities, such as a build configuration or a project.   
 
 Usually both the state and settings should survive the server restart. 
 
@@ -83,6 +85,7 @@ template is saved on the disk or restored.
 
 ## Plugin State
 
+
 ### Global State
 
 If a plugin needs to save some state globally, then it should be stored under the [`<TeamCity Data Directory>/system/`](https://www.jetbrains.com/help/teamcity/2019.1/teamcity-data-directory.html#TeamCityDataDirectory-systemDir)`pluginData/<plugin name>` directory.      
@@ -128,4 +131,7 @@ pluginFolder.mkdirs();
 ... some code to serialize or deserialize state ...
 
 ```
+
+
+
  
