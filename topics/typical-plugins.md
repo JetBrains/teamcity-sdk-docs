@@ -9,6 +9,7 @@ This section covers:
 * [Build Runner Plugin ](build-runner-plugin.md)
 * [Risk Tests Reordering in Custom Test Runner ](risk-tests-reordering-in-custom-test-runner.md)
 * [Custom Build Trigger](custom-build-trigger.md)
+* [Build Features](build-features.md)
 * [Extending Notification Templates Model](extending-notification-templates-model.md)
 * [Issue Tracker Integration Plugin](issue-tracker-integration-plugin.md)
 * [Version Control System Plugin](version-control-system-plugin.md)
@@ -18,5 +19,4 @@ This section covers:
 * [Custom Server Health Report](custom-server-health-report.md)
 * [Extending Highlighting for Web diff view](extending-highlighting-for-web-diff-view.md)
 * [External Storage Implementation Guide](external-storage-implementation-guide.md)
-
            
