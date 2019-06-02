@@ -244,4 +244,4 @@ Provides a custom usage statistics.
 
   __See also:__
 
-__Extending TeamCity__: [Developing TeamCity Plugins](https://confluence.jetbrains.com/display/TCD18/Developing+TeamCity+Plugins) | [Web UI Extensions](web-ui-extensions.md)
+__Extending TeamCity__: [Developing TeamCity Plugins](developing-teamcity-plugins.md) | [Web UI Extensions](web-ui-extensions.md)

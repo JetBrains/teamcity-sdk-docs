@@ -252,7 +252,7 @@ Web extensions:
 
 * deprecated method removed: `j.b.web.openapi.WebControllerManager.addPageExtension(final WebPlace addTo, final WebExtension extension, Anchor<WebExtension> anchor)`
 * deprecated class removed: `j.b.serverSide.Anchor`
-* deprecated class removed: `j.b.notification.TemplatePatternProcessor`; `j.b.notification.TemplateProcessor` added instead, see [Extending Notification Templates Model](https://confluence.jetbrains.com/display/TCD18/Extending+Notification+Templates+Model)
+* deprecated class removed: `j.b.notification.TemplatePatternProcessor`; `j.b.notification.TemplateProcessor` added instead, see [Extending Notification Templates Model](extending-notification-templates-model.md)
 * method removed: `j.b.notification.TemplateMessageBuilder.setPatternProcessor()`
 * several methods in `j.b.serverSide.SBuildType` now return `boolean` instead of `void`. You will probably need to recompile your plugins that use the interface.
 
