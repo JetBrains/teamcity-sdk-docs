@@ -7,9 +7,9 @@
 
 The main entry point for project model is [`jetbrains.buildServer.serverSide.ProjectManager`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/ProjectManager.html). With help of this class you can obtain projects and build configurations, create new projects or remove them.
 
-On the server side projects are represented by [`jetbrains.buildServer.serverSide.SProject`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SProject.html) interface. Project has unique id (projectId). Any change in the project will not be persisted automatically. If you need to persist project configuration on disk use SProject.persist() method.
+On the server side projects are represented by [`jetbrains.buildServer.serverSide.SProject`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SProject.html) interface. Project has unique id (projectId). Any change in the project will not be persisted automatically. If you need to persist project configuration on the disk, use SProject.persist() method.
 
-Build configurations are represented by [`jetbrains.buildServer.serverSide.SBuildType`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuildType.html). As with projects any change in the build configuration settings is not saved on disk automatically. Since build configurations are stored in the projects, you should persist corresponding project after the build configuration modification.
+Build configurations are represented by [`jetbrains.buildServer.serverSide.SBuildType`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuildType.html). As with projects, any change in the build configuration settings is not saved on the disk automatically. Since build configurations are stored in projects, you should persist the corresponding project after the build configuration modification.
 
 <note>
 

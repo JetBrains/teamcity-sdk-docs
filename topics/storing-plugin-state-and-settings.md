@@ -12,7 +12,7 @@ The state can be either global or associated with some TeamCity entity, such as 
 By __settings__ we understand user-defined settings, specified either via the user interface or DSL.    
 The plugin settings can be global or associated with TeamCity entities, such as a build configuration or a project.   
 
-Usually both the state and settings should survive the server restart. 
+Usually both the state and settings should survive the server restart.    
 
 In most cases plugin settings will be serialized and deserialized automatically by the TeamCity server itself; however, to serialize the state, some dedicated code should be provided by the plugin author, except for the cases when the plugin state can be calculated based on other TeamCity entities.      
 For instance, a plugin whose state depends on build tests can restore its state during the server startup by processing recent builds. 
@@ -32,7 +32,7 @@ See also [Web UI Extensions](web-ui-extensions.md).
 In many cases, instead of having settings on a global level, it is better to associate settings with a project.
 
 Since every TeamCity installation always has __&lt;Root project&gt;__ which is the top of the projects' hierarchy, defining settings at the __&lt;Root project&gt;__ level is essentially the same as defining them globally. 
- </note>
+</note>
 
 ### Project-level Settings
 
@@ -41,12 +41,12 @@ To associate settings with a project, a plugin can use [`SProjectFeatureDescript
 A project feature is a map of parameters of type `String` with some `id` and some `type` unique among all plugins. If plugin settings can be represented as a map, then project features provide a convenient way of associating plugin settings with a project or project hierarchy. In this case, there is no need to think about serialization or deserialization of settings: they will be saved and restored automatically when the project itself is saved or restored. 
 
 
-Project features can be added/removed at any given point of time with the help of methods:
+Project features can be added/removed at any given point of time with the help of the following methods:
 * [`addFeature`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SProject.html#addFeature-java.lang.String-java.util.Map-): this method will create [`SProjectFeatureDescriptor`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SProjectFeatureDescriptor.html) instance and assign an ID to it.    
-  Note: changes won't be stored on disk automatically, the [`persist`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SProject.html#persist--) method must be called to save project settings on disk.
-* [`removeFeature`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SProject.html#removeFeature-java.lang.String-): this method can be used to remove feature from a project, as with the `addFeature` method, `persist` must be called to save settings on disk.
+  Note: changes won't be stored on the disk automatically, the [`persist`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SProject.html#persist--) method must be called to save the project settings on the disk.
+* [`removeFeature`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SProject.html#removeFeature-java.lang.String-): this method can be used to remove feature from a project, as with the `addFeature` method, `persist` must be called to save the settings  on the disk.
 
-There are also convenience methods [`updateFeature`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SProject.html#updateFeature-java.lang.String-java.lang.String-java.util.Map-) to update feature settings without recreating it, as well as different search methods:
+There are also convenience methods [`updateFeature`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SProject.html#updateFeature-java.lang.String-java.lang.String-java.util.Map-) to update feature settings without recreating them, as well as different search methods:
 * [`findFeatureById`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SProject.html#findFeatureById-java.lang.String-)
 * [`getOwnFeatures`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SProject.html#getOwnFeatures--) 
 * [`getOwnFeaturesOfType`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SProject.html#getOwnFeaturesOfType--) 
@@ -131,6 +131,8 @@ pluginFolder.mkdirs();
 ... some code to serialize or deserialize state ...
 
 ```
+
+
 
 
 

@@ -6,8 +6,7 @@
 A [build feature](https://www.jetbrains.com/help/teamcity/adding-build-features.html) allows modifying behavior of a build on the server or on the agent side.   
 There is no specific workflow associated with a build feature; a plugin implementing a build feature can plug itself into various listeners and somehow affect the build.
 
-An example of a build feature is [XML Report processing](https://github.com/JetBrains/teamcity-xml-tests-reporting) build feature. It detects various XML reports on the agent 
-while a build is running, parses them, and imports results into TeamCity server. 
+An example of a build feature is [XML Report processing](https://github.com/JetBrains/teamcity-xml-tests-reporting). This build feature detects various XML reports on the agent while a build is running, parses them, and imports results into TeamCity server. 
 
 <note>
   
@@ -16,8 +15,7 @@ Build failure conditions, such as "Fail build on metric change" or "Fail build o
 
 ## Build Feature
 
-To add a custom build feature, one should inherit it from [`jetbrains.buildServer.serverSide.BuildFeature`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/RunType.html). A build runner plugin must provide its own RunType and register it in the [`jetbrains.buildServer.serverSide.RunTypeRegistry`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildFeature.html)
-and implement abstract methods. The class should be registered as a Spring bean in the plugin spring context.
+To add a custom build feature, one should inherit it from [`jetbrains.buildServer.serverSide.BuildFeature`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/RunType.html). A build runner plugin must provide its own RunType and register it in the [`jetbrains.buildServer.serverSide.RunTypeRegistry`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildFeature.html) and implement abstract methods. The class should be registered as a Spring bean in the plugin spring context.
 
 In general, build features are similar to runners and triggers. For instance, they also have a type which should be unique among all of the features; besides, the methods working with parameters are almost the same.
 
@@ -74,18 +72,17 @@ Both of these methods work similarly to the methods in [`SBuild`](http://javadoc
 
 ## Useful Listeners
 
-There is no any workflow associated with build features. If a build feature is configured in a build configuration, then its settings are automatically delivered
-to an agent or can be retrieved on the server side from an instance of [`SBuild`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuild.html).
+There is no workflow associated with build features. If a build feature is configured in a build configuration, then its settings are automatically delivered to an agent or can be retrieved on the server side from an instance of [`SBuild`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuild.html).
 
 As such, to affect the build behavior, one needs to register listeners and watch for different events occurring in the build.   
 The most commonly used listeners are:
-* [`BuildServerListener`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildServerListener.html): this is the main place where all server-side events can be watched; all build related events there, like [`buildStarted`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildServerListener.html#buildStarted-jetbrains.buildServer.serverSide.SRunningBuild-) or [`buildFinished`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildServerListener.html#buildFinished-jetbrains.buildServer.serverSide.SRunningBuild-) can be useful for build features
+* [`BuildServerListener`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildServerListener.html): this is the main place where all server-side events can be watched; all build related events there, like [`buildStarted`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildServerListener.html#buildStarted-jetbrains.buildServer.serverSide.SRunningBuild-) or [`buildFinished`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildServerListener.html#buildFinished-jetbrains.buildServer.serverSide.SRunningBuild-), can be useful for build features
 * [`AgentLifeCycleListener`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/agent/AgentLifeCycleListener.html): this listener can be implemented on the agent side; similarly to the server-side listener, there are build related events which can be useful to build features
 
 ## Examples of Plugins
 
 Open-source plugins providing build features:
 
-* [XML Report Processing](https://github.com/JetBrains/teamcity-xml-tests-reporting): this plugin has a build feature which processes data on an agent
-* [Commit Status Publisher](https://github.com/JetBrains/commit-status-publisher): this plugin provides a server-side build feature
+* [XML Report Processing](https://github.com/JetBrains/teamcity-xml-tests-reporting) provides a build feature which processes data on an agent
+* [Commit Status Publisher](https://github.com/JetBrains/commit-status-publisher) provides a server-side build feature
 
