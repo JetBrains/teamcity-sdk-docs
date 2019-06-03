@@ -15,7 +15,8 @@ Build failure conditions, such as "Fail build on metric change" or "Fail build o
 
 ## Build Feature
 
-To add a custom build feature, one should inherit it from [`jetbrains.buildServer.serverSide.BuildFeature`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/RunType.html). A build runner plugin must provide its own RunType and register it in the [`jetbrains.buildServer.serverSide.RunTypeRegistry`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildFeature.html) and implement abstract methods. The class should be registered as a Spring bean in the plugin spring context.
+To add a custom build feature, one should inherit it from [`jetbrains.buildServer.serverSide.BuildFeature`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildFeature.html). 
+The class should be registered as a Spring bean in the plugin spring context.
 
 In general, build features are similar to runners and triggers. For instance, they also have a type which should be unique among all of the features; besides, the methods working with parameters are almost the same.
 
@@ -72,7 +73,8 @@ Both of these methods work similarly to the methods in [`SBuild`](http://javadoc
 
 ## Useful Listeners
 
-There is no workflow associated with build features. If a build feature is configured in a build configuration, then its settings are automatically delivered to an agent or can be retrieved on the server side from an instance of [`SBuild`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuild.html).
+There is no workflow associated with build features. If a build feature is configured in a build configuration and its method [`isRequiresAgent`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildFeature.html#isRequiresAgent--) returns true, 
+then its settings are automatically delivered to an agent or can be retrieved on the server side from an instance of [`SBuild`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuild.html).
 
 As such, to affect the build behavior, one needs to register listeners and watch for different events occurring in the build.   
 The most commonly used listeners are:
