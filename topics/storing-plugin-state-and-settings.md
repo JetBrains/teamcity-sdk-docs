@@ -61,7 +61,7 @@ Since project features often affect not only the project where they are defined 
 This is how `getAvailableFeatures*` methods work. The features of the current project will be the first in the collection, then there will be the features of its parent, and so on until __&lt;Root project&gt;__ is reached.
 
 On the contrary,  `getOwnFeatures*` methods will return the features of the current project only.
-
+</note>
 
 To provide a user interface for editing project feature settings, a plugin can define a custom tab by implementing the [`EditProjectTab`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/controllers/admin/projects/EditProjectTab.html) extension.    
 See also [Web UI Extensions](web-ui-extensions.md) and [TeamCity Invitations plugin](https://github.com/JetBrains/teamcity-invitations-plugin).
