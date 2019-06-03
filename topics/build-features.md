@@ -73,7 +73,8 @@ Both of these methods work similarly to the methods in [`SBuild`](http://javadoc
 
 ## Useful Listeners
 
-There is no workflow associated with build features. If a build feature is configured in a build configuration, then its settings are automatically delivered to an agent or can be retrieved on the server side from an instance of [`SBuild`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuild.html).
+There is no workflow associated with build features. If a build feature is configured in a build configuration and its method [`isRequiresAgent`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildFeature.html#isRequiresAgent--) returns true, 
+then its settings are automatically delivered to an agent or can be retrieved on the server side from an instance of [`SBuild`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuild.html).
 
 As such, to affect the build behavior, one needs to register listeners and watch for different events occurring in the build.   
 The most commonly used listeners are:
