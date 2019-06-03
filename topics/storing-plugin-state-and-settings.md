@@ -97,7 +97,7 @@ To access the directory containing state of all plugins, use the [`ServerPaths#g
 
 Both [`SProject`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SProject.html) and [`SBuildType`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuildType.html) provide access to [`CustomDataStorage`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/CustomDataStorage.html).
 
-Custom data storage is a key-value storage with some `id`. Any map with String keys and values can be stored there. There are no restrictions on the amount of data or length of keys and values, although it is not recommended to store megabytes of data there as it can affect the server performance and memory usage. 
+Custom data storage is a key-value storage with some `id`. Any map with `String` keys and values can be stored there. There are no restrictions on the amount of data or length of keys and values, although it is not recommended to store megabytes of data there as it can affect the server performance and memory usage. 
 
 
 An example how a custom data storage can be used with a build configuration (code is similar in case of project):
@@ -132,9 +132,11 @@ pluginFolder.mkdirs();
 
 ```
 
-
-
-
+<note>
+Plugin can also use `CustomDataStorage` from [`SBuildType`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuildType.html) to store data associated with a build.
+But this approach requires proper cleanup code to make sure that storages that are no longer required will be removed either when the build is finished or when the build itself is removed.
+Storing the state in the build artifacts automatically ensures that it will be cleaned up when the build is removed from history by a regular TeamCity cleanup process. 
+</note>
 
 
 
