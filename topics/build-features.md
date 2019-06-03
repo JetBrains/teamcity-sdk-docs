@@ -15,7 +15,8 @@ Build failure conditions, such as "Fail build on metric change" or "Fail build o
 
 ## Build Feature
 
-To add a custom build feature, one should inherit it from [`jetbrains.buildServer.serverSide.BuildFeature`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/RunType.html). A build runner plugin must provide its own RunType and register it in the [`jetbrains.buildServer.serverSide.RunTypeRegistry`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildFeature.html) and implement abstract methods. The class should be registered as a Spring bean in the plugin spring context.
+To add a custom build feature, one should inherit it from [`jetbrains.buildServer.serverSide.BuildFeature`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildFeature.html). 
+The class should be registered as a Spring bean in the plugin spring context.
 
 In general, build features are similar to runners and triggers. For instance, they also have a type which should be unique among all of the features; besides, the methods working with parameters are almost the same.
 
