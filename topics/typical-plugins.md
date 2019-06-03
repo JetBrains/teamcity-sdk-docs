@@ -9,7 +9,7 @@ This section covers:
 * [Build Runner Plugin ](build-runner-plugin.md)
 * [Risk Tests Reordering in Custom Test Runner ](risk-tests-reordering-in-custom-test-runner.md)
 * [Custom Build Trigger](custom-build-trigger.md)
-* [Build Features](build-features.md)
+* [Build Features and Build Failure Conditions](build-features.md)
 * [Extending Notification Templates Model](extending-notification-templates-model.md)
 * [Issue Tracker Integration Plugin](issue-tracker-integration-plugin.md)
 * [Version Control System Plugin](version-control-system-plugin.md)
