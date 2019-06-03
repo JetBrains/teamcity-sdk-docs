@@ -28,7 +28,6 @@ To provide a user interface to edit global settings, a plugin can define a custo
 See also [Web UI Extensions](web-ui-extensions.md).
 
 <note>
- 
 In many cases, instead of having settings on a global level, it is better to associate settings with a project.
 
 Since every TeamCity installation always has __&lt;Root project&gt;__ which is the top of the projects' hierarchy, defining settings at the __&lt;Root project&gt;__ level is essentially the same as defining them globally. 
@@ -133,7 +132,6 @@ pluginFolder.mkdirs();
 ```
 
 <note>
-
 Plugin can also use `CustomDataStorage` from [`SBuildType`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuildType.html) to store data associated with a build.   
 This approach requires a proper cleanup code to ensure that the storage will be removed as soon as it is no longer required: either when the build finishes or when the build is removed.   
 If the state is stored in the build artifacts, TeamCity will clean it up automatically when removing the build from the history.
