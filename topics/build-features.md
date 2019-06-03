@@ -20,7 +20,7 @@ The class should be registered as a Spring bean in the plugin spring context.
 
 In general, build features are similar to runners and triggers. For instance, they also have a type which should be unique among all features; besides, the methods working with parameters are almost the same.
 
-There are some methods that may require additional description:
+However, there are some methods that may require additional description:
 * [`isMultipleFeaturesPerBuildTypeAllowed`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildFeature.html#isMultipleFeaturesPerBuildTypeAllowed--): in most of the cases there can be only one build feature defined per build configuration, 
 but if this is not the case, then this method should return `false`
 * [`getPlaceToShow`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildFeature.html#getPlaceToShow--): this method determines in which part of the administration interface this feature should be configured, use [`FAILURE_REASON`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildFeature.PlaceToShow.html#FAILURE_REASON) if the build feature is a failure condition and should be configured where all failure conditions reside
@@ -44,11 +44,11 @@ In the API, no distinction is made between build features and failure conditions
 Build features can be enabled and disabled. The methods above always return all configured build features, regardless of the fact whether they are disabled or not.
 </note>
 
-### Parameters Resolving
+### Resolving Parameters
 
 Build features can have parameter references in their settings (for instance, `%some.path%`), but methods like [`SBuildType#getBuildFeatures`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildTypeSettings.html#getBuildFeatures--) or [`SBuildType#getBuildFeaturesOfType`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/BuildTypeSettings.html#getBuildFeaturesOfType-java.lang.String-) return build features with unresolved parameters. This is because build features parameters can depend on parameters from agents, and, in general, without an agent it is not clear how parameters resolution should be performed.
 
-It is still possible to retrieve features with all parameters resolved by taking only the server-side parameters into account via [`SBuildType#getResolvedSettings`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/ResolvedSettings.html).
+Still, it is possible to retrieve features with all parameters resolved by taking only the server-side parameters into account via [`SBuildType#getResolvedSettings`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/ResolvedSettings.html).
 
 
 <note>

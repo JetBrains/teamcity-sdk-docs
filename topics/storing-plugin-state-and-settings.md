@@ -135,7 +135,7 @@ pluginFolder.mkdirs();
 <note>
 
 Plugin can also use `CustomDataStorage` from [`SBuildType`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuildType.html) to store data associated with a build.   
-This approach demands a proper cleanup code to ensure that the storage will be removed as soon as it is no longer required: either when the build finishes or when the build is removed.   
+This approach requires a proper cleanup code to ensure that the storage will be removed as soon as it is no longer required: either when the build finishes or when the build is removed.   
 If the state is stored in the build artifacts, TeamCity will clean it up automatically when removing the build from the history.
 </note>
 
