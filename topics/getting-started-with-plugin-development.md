@@ -11,7 +11,7 @@ This document provides information on how to develop and publish a server\-side 
 
 ## Introduction
 
-A _plugin_ in TeamCity is a `zip` archive containing a number of classes packed into a JAR file and [plugin descriptor](plugins-packaging.md#PluginsPackaging-PluginDescriptor) file. The TeamCity Open API can be found in the JetBrains [Maven repository](http://repository.jetbrains.com/all). The Javadoc reference for the API is available [online](http://javadoc.jetbrains.net/teamcity/openapi/current/) and locally in \<[TeamCity Home Directory](https://www.jetbrains.com/help/teamcity/?teamcity-home-directory)\>/devPackage/javadoc/openApi-help.jar, after you install TeamCity.
+A _plugin_ in TeamCity is a `zip` archive containing a number of classes packed into a JAR file and [plugin descriptor](plugins-packaging.md#PluginsPackaging-PluginDescriptor) file. The TeamCity Open API can be found in the JetBrains [Maven repository](https://download.jetbrains.com/teamcity-repository/). The Javadoc reference for the API is available [online](http://javadoc.jetbrains.net/teamcity/openapi/current/) and locally in \<[TeamCity Home Directory](https://www.jetbrains.com/help/teamcity/?teamcity-home-directory)\>/devPackage/javadoc/openApi-help.jar, after you install TeamCity.
 
 ## Step 1. Set up the environment
 
