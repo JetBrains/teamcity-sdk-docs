@@ -37,9 +37,8 @@ You may specify desired the classloading mode in the `teamcity-plugin.xml` file,
  The TeamCity plugin loader supports plugin dependencies, described [below](#Plugin+Dependencies).
 
 <note>
-* The plugin zip file will be automatically unpacked to a temporary directory on the server start\-up
 
-Earlier, to load your plugin, the server had to be restarted. __Since TeamCity 2018.2__, no server restart is need.
+The plugin zip file will be automatically unpacked to a temporary directory on the server startup. __Since TeamCity 2018.2__, no server restart is required.
 </note>
 
 ## Server-Side Plugins
@@ -114,7 +113,7 @@ An example of __teamcity\-plugin.xml__:
     <version>0.239.42</version>
   </info>
   <requirements min-build="46654" max-build="57000" /> <!-- specify compatible TeamCity server builds -->
-  <deployment use-separate-classloader="true" allow-runtime-reload="true" /> <!-- load server plugin's classes in a separate classloader and reload plugin without the server restart.-->
+  <deployment use-separate-classloader="true" allow-runtime-reload="true" /> <!-- load server plugin's classes in a separate classloader and reload a plugin without the server restart.-->
   <parameters>
     <parameter name="key">value</parameter>
     <!-- ... -->
@@ -124,7 +123,7 @@ An example of __teamcity\-plugin.xml__:
 ```
 
 
- It is recommended to set the `use-separate-classloader="true"` parameter to `true` for server\-side plugins. To reload plugin without the server restart, use the `allow-runtime-reload="true"` parameter for deployment.
+It is recommended to set the `use-separate-classloader="true"` parameter to `true` for server\-side plugins. To reload the plugin without the server restart, use the `allow-runtime-reload="true"` parameter for deployment.
 
 The plugin parameters can be accessed via the `jetbrains.buildServer.web.openapi.PluginDescriptor#getParameterValue(String)` method.
 
