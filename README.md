@@ -15,7 +15,6 @@ Please follow these guidelines to propose changes:
 
 We will review your pull request and get back to you with our feedback as soon as possible.
 
-__Before contributing, please make sure to sign the [JetBrains Contributor License Agreement (CLA)](https://www.jetbrains.com/agreements/cla/)__. Without the signed CLA, we will have to reject your pull request.   
-Note that Google employees (members of the Google organization on GitHub) don't have to sign the JetBrains CLA before sending pull requests to public JetBrains repositories.
+__Before contributing, please make sure to sign the [JetBrains Contributor License Agreement (CLA)](https://www.jetbrains.com/agreements/cla/)__. Without the signed CLA, we will have to reject your pull request.
 
 Happy contributing!
