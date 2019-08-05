@@ -104,7 +104,7 @@ An example of __teamcity\-plugin.xml__:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <teamcity-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                 xsi:noNamespaceSchemaLocation="urn:shemas-jetbrains-com:teamcity-plugin-v1-xml">
+                 xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-plugin-v1-xml">
   <info>
 
     <name>PluginName</name> <!-- the name of plugin used in teamcity -->
@@ -181,7 +181,7 @@ This `teamcity-plugin.xml` file provides the plugin description (same as it is d
 <?xml version="1.0" encoding="UTF-8"?>
 <teamcity-agent-plugin 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="urn:shemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
+  xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
   <plugin-deployment use-separate-classloader="true"/>
 </teamcity-agent-plugin>
 
@@ -198,7 +198,7 @@ To deploy a tool, use the following `teamcity-plugin.xml` file:
 <?xml version="1.0" encoding="UTF-8"?>
 <teamcity-agent-plugin
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:noNamespaceSchemaLocation="urn:shemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
+ xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
   <tool-deployment/>
 </teamcity-agent-plugin>
 
@@ -214,7 +214,7 @@ To deploy a tool, use the following `teamcity-plugin.xml` file:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
         <teamcity-agent-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                         xsi:noNamespaceSchemaLocation="urn:shemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
+                         xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
           <tool-deployment>
             <layout>
               <executable-files>
