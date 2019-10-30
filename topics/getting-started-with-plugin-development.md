@@ -1,12 +1,9 @@
 [//]: # (title: Getting Started with Plugin Development)
 [//]: # (auxiliary-id: Getting+Started+with+Plugin+Development.html)
 
-
-
 The use of plugins allows you to extend the TeamCity functionality. See the [list of existing TeamCity plugins](https://plugins.jetbrains.com/teamcity) created by JetBrains developers and community.
 
 This document provides information on how to develop and publish a server\-side plugin for TeamCity [using Maven](developing-plugins-using-maven.md). The plugin will return the "Hello World" jsp page when using a specific URL to the TeamCity Web UI.
-
 
 
 ## Introduction
@@ -117,7 +114,7 @@ leave the default package namе
 
 <td>
 
-10.0
+2019.1
 
 <tip>
 

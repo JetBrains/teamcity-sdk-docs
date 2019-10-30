@@ -36,7 +36,7 @@ The server\-side API:
 <dependency>
   <groupId>org.jetbrains.teamcity</groupId>
   <artifactId>server-api</artifactId>
-  <version>10.0</version>
+  <version>2019.1</version>
   <scope>provided</scope>
 </dependency>
 
@@ -51,15 +51,14 @@ The agent\-side API:
 <dependency>
   <groupId>org.jetbrains.teamcity</groupId>
   <artifactId>agent-api</artifactId>
-  <version>10.0</version>
+  <version>2019.1</version>
   <scope>provided</scope>
 </dependency>
 
 ```
 
 
-
- Note that API dependencies are used with the `provided` scope. This way you will avoid adding the API and its transitive dependencies to the target distribution.
+Note that API dependencies are used with the `provided` scope. This way you will avoid adding the API and its transitive dependencies to the target distribution.
 
 There is also an artifact to support plugin tests:
 
@@ -68,7 +67,7 @@ There is also an artifact to support plugin tests:
 <dependency>
   <groupId>org.jetbrains.teamcity</groupId>
   <artifactId>tests-support</artifactId>
-  <version>10.0</version>
+  <version>2019.1</version>
   <scope>test</scope>
 </dependency>
 

@@ -57,7 +57,7 @@ To access artifact content via HTTP requests, the plugin should provide an imple
 
 ### Cleanup
 
-For cleanup, the plugin is expected to have a Spring bean implementing `jetbrains.buildServer.serverSide.cleanup.CleanupExtension`. It is recommended to make this bean [PositionAware](http://javadoc.jetbrains.net/teamcity/openapi/10.0/jetbrains/buildServer/util/positioning/PositionAware.html) and place it [first](http://javadoc.jetbrains.net/teamcity/openapi/10.0/jetbrains/buildServer/util/positioning/PositionConstraint.html#first()) to make sure the extension is called before the default TeamCity clean\-up procedures (that will remove builds and data stored on the disk).
+For cleanup, the plugin is expected to have a Spring bean implementing `jetbrains.buildServer.serverSide.cleanup.CleanupExtension`. It is recommended to make this bean [PositionAware](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/util/positioning/PositionAware.html) and place it [first](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/util/positioning/PositionConstraint.html#first()) to make sure the extension is called before the default TeamCity clean\-up procedures (that will remove builds and data stored on the disk).
 
 The implementation should use `jetbrains.buildServer.serverSide.cleanup.BuildCleanupContext#getErrorReporter` to report errors which occurred during the clean\-up, and `jetbrains.buildServer.serverSide.artifacts.ServerArtifactHelper#removeFromArtifactList` to remove artifacts which were successfully cleaned up from the storage from the artifact list stored in the TeamCity.
 
