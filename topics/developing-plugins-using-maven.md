@@ -36,7 +36,7 @@ The server\-side API:
 <dependency>
   <groupId>org.jetbrains.teamcity</groupId>
   <artifactId>server-api</artifactId>
-  <version>2019.1</version>
+  <version>2019.2</version>
   <scope>provided</scope>
 </dependency>
 
@@ -51,7 +51,7 @@ The agent\-side API:
 <dependency>
   <groupId>org.jetbrains.teamcity</groupId>
   <artifactId>agent-api</artifactId>
-  <version>2019.1</version>
+  <version>2019.2</version>
   <scope>provided</scope>
 </dependency>
 
@@ -67,7 +67,7 @@ There is also an artifact to support plugin tests:
 <dependency>
   <groupId>org.jetbrains.teamcity</groupId>
   <artifactId>tests-support</artifactId>
-  <version>2019.1</version>
+  <version>2019.2</version>
   <scope>test</scope>
 </dependency>
 
@@ -84,13 +84,13 @@ For a quick start with a plugin, there are three [Maven archetypes](http://maven
 
 Different released versions of the TeamCity server API are listed [here](https://download.jetbrains.com/teamcity-repository/org/jetbrains/teamcity/server-api/).
 
-Here is the Maven commands which will generate projects for different plugins depending on 2019.1 TeamCity version:
+Here is the Maven commands which will generate projects for different plugins depending on 2019.2 TeamCity version:
 
 __Server-side\-only plugin__:
 
 
 ```shell
-mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepository=https://download.jetbrains.com/teamcity-repository -DarchetypeArtifactId=teamcity-server-plugin -DarchetypeGroupId=org.jetbrains.teamcity.archetypes -DarchetypeVersion=RELEASE -DteamcityVersion=2019.1
+mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepository=https://download.jetbrains.com/teamcity-repository -DarchetypeArtifactId=teamcity-server-plugin -DarchetypeGroupId=org.jetbrains.teamcity.archetypes -DarchetypeVersion=RELEASE -DteamcityVersion=2019.2
 
 ```
 
@@ -100,7 +100,7 @@ __Plugin with both the server and agent parts__:
 
 
 ```shell
-mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepository=https://download.jetbrains.com/teamcity-repository -DarchetypeArtifactId=teamcity-plugin -DarchetypeGroupId=org.jetbrains.teamcity.archetypes -DarchetypeVersion=RELEASE -DteamcityVersion=2019.1
+mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepository=https://download.jetbrains.com/teamcity-repository -DarchetypeArtifactId=teamcity-plugin -DarchetypeGroupId=org.jetbrains.teamcity.archetypes -DarchetypeVersion=RELEASE -DteamcityVersion=2019.2
 
 ```
 
@@ -110,7 +110,7 @@ __Sample plugin__:
 
 
 ```shell
-mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepository=https://download.jetbrains.com/teamcity-repository -DarchetypeArtifactId=teamcity-sample-plugin -DarchetypeGroupId=org.jetbrains.teamcity.archetypes -DarchetypeVersion=RELEASE -DteamcityVersion=2019.1
+mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeRepository=https://download.jetbrains.com/teamcity-repository -DarchetypeArtifactId=teamcity-sample-plugin -DarchetypeGroupId=org.jetbrains.teamcity.archetypes -DarchetypeVersion=RELEASE -DteamcityVersion=2019.2
 
 ```
 

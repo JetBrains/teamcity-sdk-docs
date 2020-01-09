@@ -114,7 +114,7 @@ leave the default package namе
 
 <td>
 
-2019.1
+2019.2
 
 <tip>
 
