@@ -3,6 +3,11 @@
 
 
 
+## Changes from 2019.2 to 2020.1
+
+* Rename [`jetbrains.buildServer.serverSide.build.steps.StepContext`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/build/steps/StepContext.html)
+to [`jetbrains.buildServer.serverSide.SBuildStepDescriptor`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SBuildStepDescriptor.html)
+
 ## Changes from 2017.1 to 2017.2
 
 With the introduction of the ability to attach a build configuration to multiple templates the following changes have been made: 
