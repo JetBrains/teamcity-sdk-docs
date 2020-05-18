@@ -4,7 +4,7 @@
         <download-page/>
         <search-scope/>
         <fallback-url/>
-        <help-app-version>2</help-app-version>
+        <help-app-version>3</help-app-version>
         <enable-browser-edits>true</enable-browser-edits>
         <hide-last-modified>true</hide-last-modified>
         <browser-edits-url>https://github.com/JetBrains/teamcity-sdk-docs/edit/master/topics/</browser-edits-url>
