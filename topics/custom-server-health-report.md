@@ -2,14 +2,18 @@
 [//]: # (auxiliary-id: Custom+Server+Health+Report.html)
 
 To report custom [server health](https://www.jetbrains.com/help/teamcity/?server-health) items, do the following:
-* Create your own reporter
-* Create a custom page extension to render items reported by you
+* Create your own reporter.
+* Create a custom page extension to render items reported by you.
 
 ### Reporting Server Health Items
 
 To make a reporter, create a subclass of [`jetbrains.buildServer.serverSide.healthStatus.HealthStatusReport`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/healthStatus/HealthStatusReport.html).
 
-Particulary, you must override method [`jetbrains.buildServer.serverSide.healthStatus.HealthStatusReport#report(jetbrains.buildServer.serverSide.healthStatus.HealthStatusScope, jetbrains.buildServer.serverSide.healthStatus.HealthStatusItemConsumer)`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/healthStatus/HealthStatusReport.html#report(jetbrains.buildServer.serverSide.healthStatus.HealthStatusScope,%20jetbrains.buildServer.serverSide.healthStatus.HealthStatusItemConsumer)).
+Particulary, you must override the [following method](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/healthStatus/HealthStatusReport.html#report(jetbrains.buildServer.serverSide.healthStatus.HealthStatusScope,%20jetbrains.buildServer.serverSide.healthStatus.HealthStatusItemConsumer)):
+ 
+```Console
+ jetbrains.buildServer.serverSide.healthStatus.HealthStatusReport#report(jetbrains.buildServer.serverSide.healthStatus.HealthStatusScope, jetbrains.buildServer.serverSide.healthStatus.HealthStatusItemConsumer)
+```
 
 The items should be reported according to the analysis scope passed as a parameter to this method using the appropriate method of resultConsumer. If you try to consume an object which is not in the scope of the current analysis, it will be filtered out by the consumer and will not appear in the report.
 
@@ -62,13 +66,10 @@ While presenting results in-place, it might be nesessary to know the ID of an ob
 
 * on the __Edit the VCS root settings__ page
 
-
 ```JSP
 <jsp:useBean id="vcsRootId" type="java.lang.String" scope="request"/>
 
 ```
-
-
 
 * on the __Edit the Build Configuration__ setting page
 
@@ -78,14 +79,9 @@ While presenting results in-place, it might be nesessary to know the ID of an ob
 
 ```
 
-
-
 * on the __Edit the Build Configuration Template__ settings page
-
 
 ```JSP
 <jsp:useBean id="templateId" type="java.lang.String" scope="request"/>
 
 ```
-
-
