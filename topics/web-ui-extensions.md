@@ -170,7 +170,7 @@ Plugin resources are unpacked to `<TeamCity web application>/plugins` directory 
 
 In JSP files to construct paths to your resources you can use `${teamcityPluginResourcesPath}`. This attribute is provided by TeamCity automatically, you can use it like this:
 
-```jsp
+```JSP
 <img src="${teamcityPluginResourcesPath}your_image.gif" height="16" width="16" border="0">
 
 ```

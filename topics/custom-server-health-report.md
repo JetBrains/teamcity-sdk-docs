@@ -39,7 +39,7 @@ To define in what display mode a server health item is presented, use [`jetbrain
 
 Here is an example of handling the display mode in a JSP page.
 
-```jsp
+```JSP
 <jsp:useBean id="showMode" type="jetbrains.buildServer.web.openapi.healthStatus.HealthStatusItemDisplayMode" scope="request"/>
 <c:set var="inplaceMode" value="<%=HealthStatusItemDisplayMode.IN_PLACE%>"/>
 
@@ -58,12 +58,12 @@ Here is an example of handling the display mode in a JSP page.
 
 #### Presenting Results In-place
 
-While presenting results in\-place, it might be nesessary to know the ID of an object being viewed at the moment. The ID can be retrieved using the following requests:
+While presenting results in-place, it might be nesessary to know the ID of an object being viewed at the moment. The ID can be retrieved using the following requests:
 
 * on the __Edit the VCS root settings__ page
 
 
-```jsp
+```JSP
 <jsp:useBean id="vcsRootId" type="java.lang.String" scope="request"/>
 
 ```
@@ -73,7 +73,7 @@ While presenting results in\-place, it might be nesessary to know the ID of an o
 * on the __Edit the Build Configuration__ setting page
 
 
-```jsp
+```JSP
 <jsp:useBean id="buildTypeId" type="java.lang.String" scope="request"/>
 
 ```
@@ -83,7 +83,7 @@ While presenting results in\-place, it might be nesessary to know the ID of an o
 * on the __Edit the Build Configuration Template__ settings page
 
 
-```jsp
+```JSP
 <jsp:useBean id="templateId" type="java.lang.String" scope="request"/>
 
 ```

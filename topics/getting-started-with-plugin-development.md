@@ -154,7 +154,7 @@ The plugin web resources (files that are accessed via hyperlinks and JSP pages) 
 1. First we'll create the directory for our jsp: go to the `demoPlugin-server\src\main\resources` directory in IDEA and create the `buildServerResources` directory.
 2. In the newly created `demoPlugin-server\src\main\resources\buildServerResources` directory, create the `Hello.jsp` file, e.g.
 
-```jsp
+```JSP
 <html>
   <body>
     Hello world
