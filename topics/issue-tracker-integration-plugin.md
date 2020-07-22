@@ -170,7 +170,7 @@ You need to implement how to compose the server URL and how do you parse the dat
 
 
 
-The only mandatory JSP required by TeamCity is `editIssueProvider.jsp` (the full path must be `/plugins/myName/admin/editIssueProvider.jsp`, that is, the plugin should have the jsp available `/admin/editIssueProvider.jsp` of [its resources](plugins-packaging.md#PluginsPackaging-WebResourcesPackaging)). This JSP is requested when the user opens the dialog for editing (or creating) the issue provider. In most cases it just renders the provider properties, or returns the form for filling them.
+The only mandatory JSP required by TeamCity is `editIssueProvider.jsp` (the full path must be `/plugins/myName/admin/editIssueProvider.jsp`, that is, the plugin should have the jsp available `/admin/editIssueProvider.jsp` of [its resources](plugins-packaging.md#Web+Resources+Packaging)). This JSP is requested when the user opens the dialog for editing (or creating) the issue provider. In most cases it just renders the provider properties, or returns the form for filling them.
 
 
 

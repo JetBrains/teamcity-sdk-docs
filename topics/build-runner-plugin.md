@@ -22,7 +22,7 @@ The main entry point for the runner on the server side is [`jetbrains.buildServe
 
 RunType has a __type__ which must be unique among all build runners and correspond to the __type__ returned by the agent\-side part of the runner (see [`jetbrains.buildServer.agent.AgentBuildRunnerInfo`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/agent/AgentBuildRunnerInfo.html)).
 
-The __getEditRunnerParamsJspFilePath__ and __getViewRunnerParamsJspFilePath__ methods return paths to JSP files for editing and viewing runner settings. These JSP files must be bundled with plugin in __buildServerResources__ subfolder, [read more](plugins-packaging.md#PluginsPackaging-WebResourcesPackaging). The paths should be relative to the __buildServerResources__ folder.
+The __getEditRunnerParamsJspFilePath__ and __getViewRunnerParamsJspFilePath__ methods return paths to JSP files for editing and viewing runner settings. These JSP files must be bundled with plugin in __buildServerResources__ subfolder, [read more](plugins-packaging.md#Web+Resources+Packaging). The paths should be relative to the __buildServerResources__ folder.
 
 <note>
 

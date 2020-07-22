@@ -11,7 +11,7 @@ TeamCity functionality can be significantly extended by custom plugins. TeamCity
 
 Aside from this documentation, refer to the following sources:
 * [Open API Javadoc](http://javadoc.jetbrains.net/teamcity/openapi/current/)
-* bundled [sample plugin](bundled-development-package.md#BundledDevelopmentPackage-SamplePlugin)
+* bundled [sample plugin](bundled-development-package.md#Sample+Plugin)
 * [list](https://plugins.jetbrains.com/teamcity) of existing plugins and [bundled open-source plugins](https://confluence.jetbrains.com/display/TW/Open-source+Bundled+Plugins)
 
 If you need more information or have a question regarding the API, please do not hesitate to post your question into [TeamCity Plugins forum](https://teamcity-support.jetbrains.com/hc/en-us/community/topics/200366719-TeamCity-Plugin-Development). Use the search before posting to avoid possible duplication of discussions.
