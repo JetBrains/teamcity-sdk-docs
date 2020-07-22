@@ -39,7 +39,7 @@ To add custom content to the __Statistics__ tab for a project or build configura
 To add charts to your custom JSP pages, use the `<buildGraph>` tag and a special controller accessible on `"/buildGraph.html"`. It requires the `jsp` attribute leading to your page:
 
 
-```jsp
+```JSP
 new ModelAndView("/buildGraph.html?jsp=" +myDescriptor.getPluginResourcesPath("sampleChartPage.jsp"))'
 
 ```
@@ -49,7 +49,7 @@ new ModelAndView("/buildGraph.html?jsp=" +myDescriptor.getPluginResourcesPath("s
 To insert statistics chart into the `sampleChartPage.jsp`:
 
 
-```jsp
+```JSP
 <%@taglib prefix="stats" tagdir="/WEB-INF/tags/graph"%>
 <stats:buildGraph id="g1" valueType="BuildDuration"/>
 

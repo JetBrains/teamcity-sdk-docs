@@ -72,7 +72,7 @@ TeamCity provides a directory for each project where files associated with the p
 
 Use the [`getPluginDataDirectory`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/SProject.html#getPluginDataDirectory-java.lang.String-) method to access this directory.
 
-The directory location on the disk is: `<`[`TeamCity Data Directory>/config`](https://www.jetbrains.com/help/teamcity/2019.1/teamcity-data-directory.html#TeamCityDataDirectory-StructureofTeamCityDataDirectory)`/<Project external ID>/pluginData/<plugin name>`. 
+The directory location on the disk is: `<`[`TeamCity Data Directory>/config`](https://www.jetbrains.com/help/teamcity/teamcity-data-directory.html#TeamCityDataDirectory-StructureofTeamCityDataDirectory)`/<Project external ID>/pluginData/<plugin name>`. 
 It's up to the plugin author to write code to store/remove/modify and delete files under this directory. TeamCity does not provide additional API in this case.
 
 ### Build Configuration-level Settings
@@ -87,7 +87,7 @@ template is saved on the disk or restored.
 
 ### Global State
 
-If a plugin needs to save some state globally, then it should be stored under the [`<TeamCity Data Directory>/system/`](https://www.jetbrains.com/help/teamcity/2019.1/teamcity-data-directory.html#TeamCityDataDirectory-systemDir)`pluginData/<plugin name>` directory.      
+If a plugin needs to save some state globally, then it should be stored under the [`<TeamCity Data Directory>/system/`](https://www.jetbrains.com/help/teamcity/teamcity-data-directory.html#TeamCityDataDirectory-systemDir)`pluginData/<plugin name>` directory.      
 A plugin is free to use any serialization mechanism to store its state; TeamCity itself does not provide common utilities to save or access it.
 
 To access the directory containing state of all plugins, use the [`ServerPaths#getPluginDataDirectory`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/ServerPaths.html#getPluginDataDirectory--) method where [`ServerPaths`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/ServerPaths.html) is a Spring bean.

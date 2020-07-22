@@ -1,17 +1,14 @@
 [//]: # (title: Getting Started with Plugin Development)
 [//]: # (auxiliary-id: Getting+Started+with+Plugin+Development.html)
 
-
-
 The use of plugins allows you to extend the TeamCity functionality. See the [list of existing TeamCity plugins](https://plugins.jetbrains.com/teamcity) created by JetBrains developers and community.
 
 This document provides information on how to develop and publish a server\-side plugin for TeamCity [using Maven](developing-plugins-using-maven.md). The plugin will return the "Hello World" jsp page when using a specific URL to the TeamCity Web UI.
 
 
-
 ## Introduction
 
-A _plugin_ in TeamCity is a `zip` archive containing a number of classes packed into a JAR file and [plugin descriptor](plugins-packaging.md#PluginsPackaging-PluginDescriptor) file. The TeamCity Open API can be found in the JetBrains [Maven repository](http://repository.jetbrains.com/all). The Javadoc reference for the API is available [online](http://javadoc.jetbrains.net/teamcity/openapi/current/) and locally in \<[TeamCity Home Directory](https://www.jetbrains.com/help/teamcity/?teamcity-home-directory)\>/devPackage/javadoc/openApi-help.jar, after you install TeamCity.
+A _plugin_ in TeamCity is a `zip` archive containing a number of classes packed into a JAR file and [plugin descriptor](plugins-packaging.md#PluginsPackaging-PluginDescriptor) file. The TeamCity Open API can be found in the JetBrains [Maven repository](https://download.jetbrains.com/teamcity-repository/). The Javadoc reference for the API is available [online](http://javadoc.jetbrains.net/teamcity/openapi/current/) and locally in \<[TeamCity Home Directory](https://www.jetbrains.com/help/teamcity/?teamcity-home-directory)\>/devPackage/javadoc/openApi-help.jar, after you install TeamCity.
 
 ## Step 1. Set up the environment
 
@@ -117,7 +114,7 @@ leave the default package namе
 
 <td>
 
-10.0
+2020.1
 
 <tip>
 
@@ -157,7 +154,7 @@ The plugin web resources (files that are accessed via hyperlinks and JSP pages) 
 1. First we'll create the directory for our jsp: go to the `demoPlugin-server\src\main\resources` directory in IDEA and create the `buildServerResources` directory.
 2. In the newly created `demoPlugin-server\src\main\resources\buildServerResources` directory, create the `Hello.jsp` file, e.g.
 
-```jsp
+```JSP
 <html>
   <body>
     Hello world
