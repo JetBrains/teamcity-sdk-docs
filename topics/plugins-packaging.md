@@ -136,6 +136,7 @@ TeamCity build agents support the following plugin structures:
 * deprecated plugins (with the plugin name folder in the .zip file)
 
 ### Plugin Structure
+{id="plugin-structure-1"}
 
 The `agent` directory must have one file only: _&lt;agent plugin zip&gt;_ structured the following way:
 
@@ -170,6 +171,7 @@ agent-plugin-name.zip
 ```
 
 ### Plugin Descriptor
+{id="plugin-descriptor-1"}
 
 It is required to have the `teamcity-plugin.xml` file under the root of the agent plugin `.zip` file. The agent tries to validate the plugin\-provided `teamcity-plugin.xml` file against the xml schema. If `teamcity-plugin.xml` is not valid, the plugin will be loaded, but some data from the descriptor may be lost.
 

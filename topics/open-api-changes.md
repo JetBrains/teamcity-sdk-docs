@@ -79,6 +79,8 @@ Consider using some other approach. For instance, a plugin can obtain an Iterato
 * `jetbrains.buildServer.serverSide.statistics.ValueType#getColor` now returns String containing Web Color
 
 ### Server API changes
+{id="server-api-changes-1"}
+
 * Added `jetbrains.buildServer.serverSide.SProject#getPluginDataDirectory` that returns per\-project plugin data directory
 * `jetbrains.buildServer.serverSide.BuildTypeSettings#addBuildRunner` not accepts `jetbrains.buildServer.serverSide.BuildRunnerDescriptor` instead of \*S\*BuildRunnerDescriptor
 * `jetbrains.buildServer.serverSide.TeamCityProperties` no longer contains static methods to compute TeamCity Data Directory. Use `jetbrains.buildServer.serverSide.ServerPaths` spring bean instead
