@@ -14,6 +14,11 @@ To add an extension to a plugin:
 1. Inside the plugin's [ZIP package](getting-started-with-plugin-development.md#Step+5.+Build+your+project+with+Maven), create the `kotlin-dsl` directory.
 2. Inside the `kotlin-dsl` directory, create an `*.xml` file and describe a specific extension. Refer to the sections below for more information on expected syntax.
 
+>Each extension must be described in its own `*.xml` file inside the `kotlin-dsl` directory.
+
+>
+{type="tip"}
+
 This is a recommended approach which covers most use cases and can be properly processed by TeamCity.
 
 If your plugin implements a major addition to the TeamCity functionality and cannot fully rely on common TeamCity objects, you have an option to write a completely custom extension. For this, add a `*.jar` file with your code to the same `kotlin-dsl` directory.   
@@ -35,14 +40,14 @@ To declare an extension in an XML file, use the following general syntax:
 
     <function name="<function_name>">
         <description>
-            A description of a function.
+            A description of a called function.
         </description>
     </function>
 
     <params>
         <param name="<parameter_name>">
          <description>
-            Parameter's description
+            A parameter's description.
         </description>
         </param>
     </params>
@@ -182,15 +187,17 @@ A parameter name to be used in DSL.
 
 <td>
 
-* `Boolean`
+* `string`
+* `boolean`
+* `int`
 * `compound`
-* custom
+* [custom](#Custom+Types)
 
 </td>
 
 <td>
 
-For boolean values, you need to also specify `trueValue="true"` and `falseValue=""`.
+For a boolean parameter, specify the `trueValue` and `falseValue` attributes.
 
 </td>
 
@@ -204,9 +211,14 @@ For boolean values, you need to also specify `trueValue="true"` and `falseValue=
 
 <td>
 
+* `VCS_ROOT`
+* `BUILD_TYPE`
+
 </td>
 
 <td>
+
+Refer the VCS root or build configuration object.
 
 </td>
 
@@ -226,12 +238,12 @@ In general, options of a parameter are declared as follows:
 
     <option name="<optionOne>" value="<optionOne_value>">
         <description>
-            Description of Option One
+            A description of Option One.
         </description>
     </option>
     <option name="<optionTwo>" value="<optionTwo_value>">
         <description>
-            Description of Option Two
+            A description of Option Two.
         </description>
     </option>
 
@@ -247,16 +259,16 @@ To add nested parameters to an option, use the following syntax:
 
 <option name="<option_name>" value="<option_value>">
     <description>
-        Description of the option
+        A description of an option.
     </description>
     <param name="paramOne">
         <description>
-            Description of Parameter One
+            A description of Parameter One.
         </description>
     </param>
     <param name="paramTwo">
         <description>
-            Description of Parameter Two
+            A description of Parameter Two.
         </description>
     </param>   
 </option>
@@ -266,9 +278,9 @@ To add nested parameters to an option, use the following syntax:
 
 ### Custom Types
 
-You can introduce custom types with your extension. Types are usually specified after the parameters' declaration.
+You can introduce custom enum types with your extension. Types are usually specified after the parameters' declaration.
 
-For example, the following code will add multiple enum types to your extension:
+The following example code will add multiple enum types to your extension:
 
 ```XML
 
@@ -289,4 +301,24 @@ For example, the following code will add multiple enum types to your extension:
 
 </dsl-extension>
 
+```
+
+## Extension Add-ons
+
+If you want to create a DSL extension that adds functionality over an existing extension of another plugin, use the `dsl-add-on` functionality. Add-on files are stored in `.xml` files in the `kotlin-dsl` directory.
+
+Add-on syntax:
+
+```XML
+
+<dsl-add-on kind="<kind_value>">
+  <extends>
+    <dsl type="<referenced_extension_type_name>"/>
+  </extends>
+
+  <params>
+    ...
+  </params>
+
+</dsl-add-on>
 ```
