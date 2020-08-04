@@ -1,12 +1,12 @@
 [//]: # (title: Kotlin DSL Extensions)
 [//]: # (auxiliary-id: Kotlin+DSL+Extensions.html)
 
-TeamCity allows writing custom Kotlin DSL extensions for plugins. Extensions specify functionality blocks of a plugin (for example, a build runner or feature) in a DSL format. This provides the following benefits for [DSL-based projects](https://www.jetbrains.com/help/teamcity/kotlin-dsl.html):
+TeamCity allows writing custom Kotlin DSL extensions for plugins. Extensions define a plugin-specific DSL syntax for settings (of, for example, a build runner or a project feature implemented by the plugin). This provides the following benefits for [DSL-based projects](https://www.jetbrains.com/help/teamcity/kotlin-dsl.html):
 * typed parameters for each specific functionality;
 * autocompletion of parameters in IDE;
 * controlled validation and proper compilation;
 * DSL extensions are natively mapped onto the UI settings and displayed in the "View DSL" mode;
-* changes made in the UI automatically apply to the DSL code.
+* UI changes will result in versioned settings updates that use the same plugin-specific DSL syntax.
 
 With extensions, you can create a custom class library for your plugin, and TeamCity will handle the DSL generation and conversion when the plugin functionality is used in DSL-based projects.
 
@@ -21,8 +21,8 @@ To add an extension to a plugin:
 
 This is a recommended approach which covers most use cases and can be properly processed by TeamCity.
 
-If your plugin implements a major addition to the TeamCity functionality and cannot fully rely on common TeamCity objects, you have an option to write a completely custom extension. For this, add a `*.jar` file with your code to the same `kotlin-dsl` directory.   
-Note that TeamCity will not be able to parse such a code using the extension syntax; it will generate a standard Kotlin DSL instead. Use this method only if you lack flexibility of the recommended approach.
+If your plugin implements a major addition to the TeamCity functionality and requires an arbitrary DSL extension that cannot be expressed using the recommended approach, you have an option to write a completely custom extension. For this, add a `*.jar` file with your code to the same `kotlin-dsl` directory.   
+Note that TeamCity will not be able to generate DSL code using the syntax provided by your extension if you employ this approach; it will generate standard Kotlin DSL code instead. Use this method only if the recommended approach lacks flexibility for your purposes.
 
 ## Declaring DSL Extension
 
@@ -63,7 +63,8 @@ where `<kind_value>` describes what kind of functionality is introduced by the e
 * `failureCondition`
 * `projectFeature`
 * `trigger`
-* `project`
+
+and '<type_name>` is a type of the build step, build feature, trigger or any other entity implemented by your plugin.
 
 ### Extension Parameters
 
@@ -98,23 +99,23 @@ To create a composite parameter that includes other nested parameters, use the `
         <description>
             Parent parameter
         </description>
-            <param name="paramChildOne">
-                <description>
-                    First child parameter
-                </description>
-            </param>
-            <param name="paramChildTwo">
-                <description>
-                    Second child parameter
-                </description>
-            </param>
+        <param name="paramChildOne">
+            <description>
+                First child parameter
+            </description>
+        </param>
+        <param name="paramChildTwo">
+            <description>
+                Second child parameter
+            </description>
+        </param>
     </param>
 </params>
 
 ...
 ```
 
-Supported parameters' attributes are:
+Supported parameter attributes are:
 
 <table>
 
@@ -151,7 +152,7 @@ Description
 
 <td>
 
-Sets a parameter as required or optional.
+Marks a parameter as required or optional.
 
 </td>
 
@@ -280,7 +281,7 @@ To add nested parameters to an option, use the following syntax:
 
 You can introduce custom enum types with your extension. Types are usually specified after the parameters' declaration.
 
-The following example code will add multiple enum types to your extension:
+The following example code will add an enum type to your extension:
 
 ```XML
 
