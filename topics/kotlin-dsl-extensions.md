@@ -1,12 +1,12 @@
 [//]: # (title: Kotlin DSL Extensions)
 [//]: # (auxiliary-id: Kotlin+DSL+Extensions.html)
 
-TeamCity allows writing custom Kotlin DSL extensions for plugins. Extensions define a plugin-specific DSL syntax for settings (of, for example, a build runner or a project feature implemented by the plugin). This provides the following benefits for [DSL-based projects](https://www.jetbrains.com/help/teamcity/kotlin-dsl.html):
+TeamCity allows writing custom Kotlin DSL extensions for plugins. Extensions define a plugin-specific DSL syntax for settings (for example, of a build runner or a project feature implemented by the plugin). This provides the following benefits for [DSL-based projects](https://www.jetbrains.com/help/teamcity/kotlin-dsl.html):
 * typed parameters for each specific functionality;
 * autocompletion of parameters in IDE;
 * controlled validation and proper compilation;
 * DSL extensions are natively mapped onto the UI settings and displayed in the "View DSL" mode;
-* UI changes will result in versioned settings updates that use the same plugin-specific DSL syntax.
+* after each UI change, versioned settings are updated using the plugin-specific DSL syntax.
 
 With extensions, you can create a custom class library for your plugin, and TeamCity will handle the DSL generation and conversion when the plugin functionality is used in DSL-based projects.
 
@@ -64,7 +64,7 @@ where `<kind_value>` describes what kind of functionality is introduced by the e
 * `projectFeature`
 * `trigger`
 
-and '<type_name>` is a type of the build step, build feature, trigger or any other entity implemented by your plugin.
+and `<type_name>` is a type of the build step, build feature, trigger or any other entity implemented by your plugin.
 
 ### Extension Parameters
 
