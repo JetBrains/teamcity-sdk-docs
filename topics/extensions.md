@@ -1,8 +1,6 @@
 [//]: # (title: Extensions)
 [//]: # (auxiliary-id: Extensions.html)
 
-
-
 Extension in TeamCity is a point where standard TeamCity behavior can be changed. There are three marker interfaces for TeamCity extensions:
 
 * [`jetbrains.buildServer.serverSide.ServerExtension`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/serverSide/ServerExtension.html)
