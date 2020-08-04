@@ -202,6 +202,8 @@ For a boolean parameter, specify the `trueValue` and `falseValue` attributes.
 
 </td>
 
+</tr>
+
 <tr>
 
 <td>
