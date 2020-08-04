@@ -15,7 +15,6 @@ To add an extension to a plugin:
 2. Inside the `kotlin-dsl` directory, create an `*.xml` file and describe a specific extension. Refer to the sections below for more information on expected syntax.
 
 >Each extension must be described in its own `*.xml` file inside the `kotlin-dsl` directory.
-
 >
 {type="tip"}
 
