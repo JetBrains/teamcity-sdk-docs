@@ -62,32 +62,32 @@ Some of `PlaceID`'s are available only in the Sakura UI:
 
 * _Plugin constructor_ – JavaScript prototype used to create a plugin instance.
 
-* `Basic plugin` – simplest plugin. Its behaviour and reaction to the `PluginUIContext` are defined implicitly. It re-renders automatically every time `PluginUIContext` updates.
+* _Basic plugin_ – simplest plugin. Its behavior and reaction to the `PluginUIContext` are defined implicitly. It re-renders automatically every time `PluginUIContext` updates.
 
-* _Controlled plugin_ – plugin which behaving and reaction on `PluginUIContext` updates explicitly defined by a developer.
+* _Controlled plugin_ – plugin which behavior and reaction on `PluginUIContext` updates are explicitly defined by a developer.
 
-* _Development mode_ – special mode which shows `PlaceID` containers in DOM and makes the plugin write debug information in console. Accessible via the GET property `pluginDevelopmentMode=true`.
+* _Development mode_ – special mode which shows `PlaceID` containers in DOM and makes the plugin write debug information in the console. Accessible via the `GET` property `pluginDevelopmentMode=true`.
 
 ## Public API Reference
 
-`window.TeamcityReactAPI` is a set of handy tools, which will help you retrieve, update and manipulate plugins. It consists of:
+`window.TeamcityReactAPI` is a set of handy tools, which will help you retrieve, update, and manipulate plugins. It consists of:
 
-* _Components_ - set of React components, we are ready to expose. Right now there is only the one component AllBuilds. We are looking forward for your feedback on this.
-* _React_ - exposed React library. It’s vital to use the same React library version to integrate your Plugin into the TeamCity React vDOM tree. The full explanation is in the React Plugin section.
-* _ReactDOM_ - exposed ReactDOM library. It’s vital to use the same React library version to integrate your Plugin into the TeamCity React vDOM tree. The full explanation is in the React Plugin section.
-* _utils_- set of utilities
-  * `requestJSON` - function to request and parse a JSON from the Server. It already contains all the headers for the request and automatically parses the response.
-  * `requestTEXT` - function to request and parse a TEXT from the Server. It already contains all the headers for the request and automatically parses the response.
-* _Plugin_ - plugin constructor. It expects you to specify `PlaceID` and content options as arguments. We will look at this constructor later in the Advanced Plugins section.
-* `pluginRegistry` - plugin Registry, which you could use to find a certain instance of your plugin.
+* _Components_ - React components we are ready to expose. Right now, there is only the one component `AllBuilds`. We are looking forward to your [feedback](https://confluence.jetbrains.com/display/TW/Feedback) on this.
+* _React_ - exposed React library. It's vital to use the same React library version to integrate your plugin into the TeamCity React vDOM tree (see the [full explanation](spa-ui-plugins.md)).
+* _ReactDOM_ - exposed ReactDOM library. It's vital to use the same React library version to integrate your plugin into the TeamCity React vDOM tree (see the [full explanation](spa-ui-plugins.md)).
+* _utils_- set of utilities:
+  * `requestJSON` - function to request and parse a JSON from the server. It already contains all the headers for the request and automatically parses the response.
+  * `requestTEXT` - function to request and parse a TEXT from the server. It already contains all the headers for the request and automatically parses the response.
+* _Plugin_ - plugin constructor. It expects you to specify `PlaceID` and content options as arguments (read more about [controlled plugins](controlled-ui-plugins.md)).
+* `pluginRegistry` - plugin registry which you could use to find a certain instance of your plugin.
 
 Before starting the development, please checkout [this repository](https://github.com/JetBrains/teamcity-sakura-ui-plugins). It will help you to avoid tons of a boilerplate Java code.
 
 ## Types of Plugins
 
 There are three types of plugins you can write with the new API:
-* _Basic plugins_ rely on a simple JSP / HTML code that is requested automatically on every reload of a UI page.
-* _Controlled plugins_ use more sophisticated logics and adjustable behavior. 
+* _Basic plugins_ rely on a simple JSP/HTML code that is requested automatically on every reload of a UI page.
+* _Controlled plugins_ have more sophisticated logic and adjustable behavior. 
 * _(Single-page Application) SPA plugins_ based on React.
 
 You can read an introduction describing these types in our [blog post]().
