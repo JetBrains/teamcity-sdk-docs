@@ -1,9 +1,9 @@
 [//]: # (title: SPA UI Plugins)
 [//]: # (auxiliary-id: SPA+UI+Plugins.html)
 
-This guide explains how to create a basic UI plugin based on the new [front-end extensions](front-end-extensions.md) paradigm.
+This guide explains how to create a Single-page Application (SPA) UI plugin based on the new [front-end extensions](front-end-extensions.md) paradigm.
 
-Source branch with an example project: [example/react-plugin](https://github.com/JetBrains/teamcity-sakura-ui-plugins/tree/example/react-plugin).
+__Source branch with an example project: [example/react-plugin](https://github.com/JetBrains/teamcity-sakura-ui-plugins/tree/example/react-plugin)__.
 
 Nowadays modern JavaScript frameworks like Angular or libraries like React are dominating in web development, especially if you write rich application or Single Page Application. They help developers to concentrate on logics, not on the Code itself; they take care of performance and, generally, make the development easier. 
 

@@ -1,9 +1,9 @@
 [//]: # (title: Controlled UI Plugins)
 [//]: # (auxiliary-id: Controlled+UI+Plugins.html)
 
-This guide explains how to create a basic UI plugin based on the new [front-end extensions](front-end-extensions.md) paradigm.
+This guide explains how to create a controlled UI plugin based on the new [front-end extensions](front-end-extensions.md) paradigm.
 
-Source branch with an example project: [example/controlled-plugin](https://github.com/JetBrains/teamcity-sakura-ui-plugins/tree/example/controlled-plugin).
+__Source branch with an example project: [example/controlled-plugin](https://github.com/JetBrains/teamcity-sakura-ui-plugins/tree/example/controlled-plugin)__.
 
 Among the TeamCity Frontend team we call those plugins “Controlled plugins”, because this name explains the main advantage - a developer controls the Plugin behaviour. The Controlled Plugin knows how to react on the lifecycle events; It uses Plugin API to update its’ content, to subscribe and unsubscribe on events and to abort requests. In other words, Controlled Plugins offer an opportunity to write rich Applications within the TeamCity UI. And, in other hand, when Plugin Wrapper does know, that a Plugin is controlled by a developer, it stops requesting plugin content every time and reduce lifecycle events.
 

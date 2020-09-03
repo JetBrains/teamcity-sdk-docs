@@ -3,13 +3,15 @@
 
 This guide explains how to create a basic UI plugin based on the new [front-end extensions](front-end-extensions.md) paradigm.
 
-Source branch with an example project: [example/basic-plugin](https://github.com/JetBrains/teamcity-sakura-ui-plugins/tree/example/basic-plugin).
+## Version 1. Simple plugin
 
-Every TeamCity UI Plugin must contain at least two files: the Controller itself (`.java`) and a resource file JSP. Every time we create a Plugin, we create a relation between Place ID and plugin resources. Using the TeamCity Open API, we let the TeamCity Core know, that there is a newly registered plugin for a certain Place ID; Whenever TeamCity meets this Place ID in JSP / TAG source code, it should render the plugin content.
+__Source branch with the example project: [example/basic-plugin](https://github.com/JetBrains/teamcity-sakura-ui-plugins/tree/example/basic-plugin)__.
 
-Please, open the `src/main/java/com/demoDomain/teamcity/demoPlugin/controllers/SakuraUIPluginController.java` file.
+Every TeamCity UI plugin must contain at least two files: the controller itself (`.java`) and the resource JSP file. Every time we create a plugin, we create a relation between the `PlaceID` and plugin resources. Using the TeamCity Open API, we let the TeamCity Core know, that there is a newly registered plugin for a certain `PlaceID`. Whenever TeamCity meets this `PlaceID` in the JSP/TAG source code, it should render the plugin content.
 
-Here you’ll see the boilerplate, where the controller constructor creates a SimplePageExtension instance:
+To start the tutorial, open the `src/main/java/com/demoDomain/teamcity/demoPlugin/controllers/SakuraUIPluginController.java` file from the example project.
+
+Here you see the boilerplate code where the controller constructor creates a `SimplePageExtension` instance:
 
 ```java
 public class SakuraUIPluginController {
@@ -33,17 +35,24 @@ public class SakuraUIPluginController {
 
 ```
 
-This piece of code do the next things:
+This piece of code does the following things:
 
-1. It tells the TeamCity Core, that the plugin should be placed in `PlaceId.SAKURA_HEADER_NAVIGATION_AFTER`. Where is it? Just open your TeamCity instance with a GET param pluginDevelopmentMode=true. In our case this is `http://localhost:8111/bs/project/_Root?mode=builds&pluginDevelopmentMode=true`. The `PlaceID` is available both in Sakura UI and in Main UI:
+1\. It tells the TeamCity Core, that the plugin should be placed in `PlaceId.SAKURA_HEADER_NAVIGATION_AFTER`. To get there, just open your TeamCity instance with the `GET` parameter `pluginDevelopmentMode=true`. In our case, this is `http://localhost:8111/bs/project/_Root?mode=builds&pluginDevelopmentMode=true`. The `PlaceID` is available both in the Sakura and classic UI:
 
-[Image: image.png][Image: image.png]
+<img src="fe-extension-1.png"/>
 
-1. The UI Plugin will be named, as it defined in the Private constant PLUGIN_NAME. 
-2. This plugin uses a “basic-plugin.jsp” as an entry point. Next time Plugin Wrapper will try to load your Plugin, it will request [server]/plugins/SakuraUI-Plugin/basic-plugin.jsp as an entry point.
-3. <div class="basic-plugin-wrapper">Here is a basic plugin.</div>
-4. This plugin should load a “basic-plugin.css”
-5. @keyframes rainbow {
+<img src="fe-extension-2.png"/>
+
+2\. The UI plugin will be named as it is defined in the private constant `PLUGIN_NAME`. 
+3\. This plugin uses `basic-plugin.jsp` as an entry point. Next time Plugin Wrapper will try to load your plugin, it will request `[server]/plugins/SakuraUI-Plugin/basic-plugin.jsp` as an entry point.
+
+```html
+ <div class="basic-plugin-wrapper">Here is a basic plugin.</div>
+```
+4\. This plugin should load `basic-plugin.css`:
+
+```css
+ @keyframes rainbow {
       from {
         color: red;
       }
@@ -57,42 +66,58 @@ This piece of code do the next things:
         display: inline;
         word-break: break-all;
     }
+```
 
-*Note: *It’s not forbidden to add the JavaScript file (using the addJsFile) to this plugin and attach some logics like “make a request every time context updated”. For example, it could be a code snippet for advertisement systems to send a pageView event. Whatever you imagine. But keep in mind: if you attach any listeners, intervals, subscriptions, timeouts or make any async operations in this JavaScript file, they will be fired every time plugin re-renders. It would result in race conditions and memory leaks. Looking ahead: we have a solution for this type of plugins. It relies on Plugin Lifecycle event and we will describe in section “Advanced plugins”.
+>It's not forbidden to add a JavaScript file (using `addJsFile`) to this plugin and attach some logic like "_make a request every time context updated_". For example, it could be a code snippet for advertisement systems to send a `pageView` event.   
+Keep in mind: if you attach any listeners, intervals, subscriptions, timeouts or make any async operations in this JavaScript file, they will be fired every time the plugin re-renders. It would result in race conditions and memory leaks. Looking ahead, we have a solution for this type of plugins. It relies on the Plugin Lifecycle event and is described in the [Controlled UI Plugins](controlled-ui-plugins.md) section.
+>
+{type="tip"}
 
-Now you can compile your plugin using the Intellij IDEA Run Configuration “Build Plugin” or using  CLI command. 
+Now, you can compile your plugin using the Intellij IDEA run configuration _Build Plugin_ or using the CLI command:
+
+```shell script
 
 mvn package
 
-After a few seconds maven will output a *.zip archive. Then, simply add the plugin via the Administrator Panel.
+```
+
+After a few seconds, Maven will output a `*.zip` archive. Then, simply add the plugin via the Administrator Panel in TeamCity.
+
 That’s it. Your basic plugin is ready!
-[Image: image.png]
-This is a perfect place to hold on and investigate, how the plugin works under the hood. Please, open the page one more time, now in Development Mode. Then open the Browser Developer Tools. You will see a lot of debugging information for your plugin. 
 
-Usually, plugin goes through 4 lifecycle events:
+<img src="fe-extension-3.png"/>
 
-*ON_CREATE* - this is an internal phase, when TeamCity Core requests Plugin Metadata such as a Plugin Controller URL, attached CSS / JS files, parse JS / CSS.
+This is a perfect place to pause and explore how the plugin works under the hood. Please, open the page one more time, now in the Development Mode. Then open the Browser Developer Tools. You will see a lot of debugging information for your plugin.
 
-*ON_CONTENT_UPDATE* - during this phase Plugin Wrapper takes the content from the JSP file and puts it in the separate HTML container.
+Usually, a plugin goes through 4 lifecycle events:
 
-*ON_CONTEXT_UPDATE* - this event fires every time plugin receives new Plugin UI Context. In our case it receives it for the first time.
+* `ON_CREATE` –  internal phase when TeamCity Core requests the plugin metadata such as a Plugin Controller URL, attached CSS/JS files, parsed JS/CSS.
 
-*ON_MOUNT* - invokes, when HTML content is attached to the DOM. 
-[Image: image.png]Let’s go further. If you navigate to another Project / Build Configuration, you will notice, that plugin disappeared and then appeared again. At the same time, in console appeared few more lifecycle events:
-[Image: image.png]*ON_CONTEXT_UPDATE* - because you changed the navigation Context
+* `ON_CONTENT_UPDATE` – during this phase, Plugin Wrapper takes the content from the JSP file and puts it in a separate HTML container.
 
-*ON_DELETE* - this phase is opposite to the ON_CREATE phase. During this phase the Plugin Wrapper removes the plugin from the PluginRegistry and removes the HTML Elements for the plugin.
+* `ON_CONTEXT_UPDATE` – this event fires every time a plugin receives new Plugin UI Context. In our case, it receives it for the first time.
 
-Then follows ON_CREATE, ON_CONTENT_UPDATE, ON_CONTEXT_UPDATE, ON_MOUNT... Every time you change the location, the plugin is constructed from a scratch, by passing through the same steps.
+* `ON_MOUNT` – invokes when an HTML content is attached to the DOM.
 
+<img src="fe-extension-4.png"/>
 
-*Basic plugin (ver. 2, using PluginUIContext)*
+Let's go further. If you navigate to another TeamCity project / build configuration, you will notice that the plugin disappeared and then appeared again. At the same time, few more lifecycle events have appeared in the console:
 
-branch: example/basic-plugin-v2
+<img src="fe-extension-5.png"/>
 
-The basic plugin, we wrote a moment ago, provides not much benefits, unless yours the only goal is to draw kittens or rainbow texts in the header. In most cases plugin should provide useful data about the current selected entity, whether it is a Build Configuration ID, Project ID or other ID. The data, we use to fill the HTML elements, called Model. When we use a Basic plugin v.1, we have empty Model. Let’s fill it!
+* `ON_CONTEXT_UPDATE` – because you changed the navigation Context.
 
-src/main/java/com/demoDomain/teamcity/demoPlugin/controllers/SakuraUIPluginController.java
+* `ON_DELETE` – this phase is opposite to the `ON_CREATE` phase. During this phase, Plugin Wrapper removes the plugin from the Plugin Registry and removes the HTML elements for the plugin.
+
+Then follow `ON_CREATE`, `ON_CONTENT_UPDATE`, `ON_CONTEXT_UPDATE`, `ON_MOUNT`, and so on. Every time you change the location, the plugin is constructed from a scratch, by passing through the same steps.
+
+## Version 2. Using PluginUIContext
+
+__Source branch with the example project: [example/basic-plugin-v2](https://github.com/JetBrains/teamcity-sakura-ui-plugins/tree/example/basic-plugin-v2)__.
+
+The basic plugin we wrote in the first part does not provide much benefits, unless your only goal is to draw some text or symbols in the header. In most cases, a plugin should provide useful data about the currently selected entity, whether it is a build configuration ID, project ID or other ID. The data we use to fill into the HTML elements is called _Model_. When we used a basic plugin v.1, we have an empty Model. Let's fill it!
+
+To start the tutorial, open the `src/main/java/com/demoDomain/teamcity/demoPlugin/controllers/SakuraUIPluginController.java` file from the example project.
 
 ```java
 public class SakuraUIPluginController extends BaseController {
@@ -136,20 +161,21 @@ public class SakuraUIPluginController extends BaseController {
 
 ```
 
-The important change is: now the SakuraUIPluginController extends the BaseController. It makes the Plugin to override the method doHandle where the Controller gets access to a Request data.
+The important change is: now `SakuraUIPluginController` extends `BaseController`. It makes the plugin to override the method `doHandle` where the Controller gets access to a request data.
 
-So, let’s go step by step. Steps marked with asterisk are the multiline representation of a previous Controller. We changed PlaceID to SAKURA_BUILD_CONFIGURATION_BEFORE_CONTENT to make plugin appeared in a new place. 
+Let's go step by step. Steps marked with an asterisk are the multiline representation of the previous Controller. We changed `PlaceID` to `SAKURA_BUILD_CONFIGURATION_BEFORE_CONTENT` to make the plugin appear at a new place. 
 
-1. Instead of a basic-plugin.jsp we now use /demoPlugin.html. It makes plugin to register controller at the [server]/demoPlugin.html. 
-2. Every time a request comes to /demoPlugin.html, a method doHandle intercepts this request and processes it
-3. Plugin creates ModelAndView and passes the link to a View container. It’s the same JSP file we used before.
-4. PluginUIContext controller parses the Request parameters 
-5. Plugin receives current buildTypeId
-6. If buildTypeId is not empty, we ask the Core to find the build configuration data
-7. Plugin controller passes the build type to a JSP in a variable called “buildType” and return the result
+1. Instead of `basic-plugin.jsp`, we now use `/demoPlugin.html`. It makes the plugin to register a controller at `[server]/demoPlugin.html`. 
+2. Every time a request comes to `/demoPlugin.html`, the method `doHandle` intercepts this request and processes it.
+3. The plugin creates `ModelAndView` and passes the link to the View container. It's the same JSP file we used before.
+4. The `PluginUIContext` controller parses the request parameters.
+5. The plugin receives the current `buildTypeId`.
+6. If `buildTypeId` is not empty, we ask the Core to find the build configuration data.
+7. The plugin controller passes the build type to a JSP in a variable called `buildType` and returns the result.
 
-There is also a slight change in JSP. If there is a build configuration, then we show its’ name:
+There is also a slight change in JSP. If there is a build configuration, we show its name:
 
+```jsp
 <c:if test="${not empty buildType}">
     <div>
         The selected build configuration: <c:out value="${buildType.name}"/>
@@ -158,18 +184,22 @@ There is also a slight change in JSP. If there is a build configuration, then we
 
 <div class="dummy-plugin-wrapper">Here is a basic plugin.<c:out value="${param['pluginUIContext']}"></c:out></div>
 
-Let’s compile and update the plugin and then open any build configuration page:
+```
 
-[Image: image.png]It works the same to the previous Basic UI Plugin, but now it contains the data from a TeamCity Database. 
+Let's compile and update the plugin and then open any build configuration page:
 
-*What do we have now? *
+<img src="fe-extension-6.png"/>
 
-At this moment we have a simple plugin. In many cases it’s enough good: it integrates to the Sakura UI and to the Main UI, it could be fulfilled on a backend and it reacts on any Context Updates. If you wrote TeamCity UI Plugins before 2020.2, you may notice, that the major things that were changed - the Place ID and the brand-new PluginUIContext. So, if you have your own Plugin, try to update it in the same manner and, probably, it becomes “Sakura UI - ready” Plugin. 
+It works the same to the previous basic (simple) UI plugin, but now it contains the data from the TeamCity database.
 
-Actually, that was our the very first intention - just provide the way to integrate plugins in the Sakura UI with a minimum efforts. 
+## Basic vs. controlled plugins
 
-But it’s not ideal though. If you use your plugin in Header, you observe layout shifting. If you use JavaScript to enrich the default plugin behaviour - it’s not clear in what certain moment you should add the event handlers. There are some solutions come to mind: it’s possible to check the DOM every few seconds; or use Mutation Observer; For sure, there are many more ways to do that, but they have their limits and, to be fair, some of them should never come to the production.
+In many cases, a basic plugin is already good enough: it integrates to the Sakura UI and to the classic UI, it could be implemented in the backend, and it reacts on any context updates. If you had been writing TeamCity UI plugins before 2020.2, you may notice that the major changes are `PlaceID` and brand new `PluginUIContext`. If you have your own plugin, we recommend updating it in the same manner as shown in the tutorial and, most probably, it will become Sakura-ready. 
 
-And what to do, if you send the request, which should update the plugin content, but during the request execution you moved from one Build Configuration to another. For sure, if you didn’t cancel the Promise handling, it will be resolved and, depends on the logics and race conditions, you will receive a newly generated Plugin, filled with data from a previous request. 
+With basic plugins, we provide a way to integrate plugins in the Sakura UI with minimum efforts.
 
-We have an answer to all issues. That is the part, where controlled plugins come in front.
+However, its functionality can be quite limited. If you use your plugin in the header, you observe layout shifting. If you use JavaScript to enrich the default plugin behaviour - it's not clear in what moment you should add the event handlers. There are some solutions: for example, to check the DOM every few seconds, or use Mutation Observer. These methods have their limitations and it is better to avoid some of them in the production.
+
+There is also a  case when you send a request that should update the plugin content, but during the request execution you moved in UI from one build configuration to another. If you don't cancel the promise handling, it will be resolved and, depending on the logic and race conditions, you will receive a newly generated plugin, filled with data from the previous request.
+
+[Controlled plugins](controlled-ui-plugins.md) allow you to address all these issues and provide many more possibilities.

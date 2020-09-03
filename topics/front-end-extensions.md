@@ -52,15 +52,15 @@ Some of `PlaceID`'s are available only in the Sakura UI:
 
 * `PluginUIContext` – context object which represents the plugin location. It contains currently selected `projectId`, `buildId`, `buildTypeId`, `agentId`, `agentPoolId`, `agentTypeId`. TeamCity guarantees that each plugin will receive the latest context.
 
-* _Plugin lifecycle_ – set of events, each of them is invoked when the plugin content passes a certain step. For example, _the plugin is mounted to a DOM_, _context is updated_, _plugin is unmounted_.
+* _Plugin Lifecycle_ – set of events, each of them is invoked when the plugin content passes a certain step. For example, _the plugin is mounted to a DOM_, _context is updated_, _plugin is unmounted_.
 
-* _Plugin wrapper_ – Sakura UI entity, a React component which manages a certain `PlaceID`. It reacts on the plugin UI context changes, passes updates to a plugin and manages plugin lifecycles.
+* _Plugin Wrapper_ – Sakura UI entity, a React component which manages a certain `PlaceID`. It reacts on the plugin UI context changes, passes updates to a plugin and manages plugin lifecycles.
 
 * `TeamсityReactAPI` – publicly exposed JS toolset which helps developers to manage plugins.
 
-* _Plugin registry_ – JavaScript object which stores data about each rendered plugin. This register could be used to search, retrieve, and remove plugins.
+* _Plugin Registry_ – JavaScript object which stores data about each rendered plugin. This register could be used to search, retrieve, and remove plugins.
 
-* _Plugin constructor_ – JavaScript prototype used to create a plugin instance.
+* _Plugin Constructor_ – JavaScript prototype used to create a plugin instance.
 
 * _Basic plugin_ – simplest plugin. Its behavior and reaction to the `PluginUIContext` are defined implicitly. It re-renders automatically every time `PluginUIContext` updates.
 
@@ -97,3 +97,5 @@ The following documentation sections contain guides on how to create a plugin of
 * [Basic plugins](basic-ui-plugins.md)
 * [Controlled plugins](controlled-ui-plugins.md)
 * [SPA plugins](spa-ui-plugins.md)
+
+See also [Basic vs. controlled plugins](basic-ui-plugins.md#Basic+vs.+controlled+plugins).
