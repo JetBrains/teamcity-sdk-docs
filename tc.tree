@@ -28,7 +28,13 @@
         <toc-element id="agent-side-object-model.md"/>
         <toc-element id="extensions.md"/>
         <toc-element id="kotlin-dsl-extensions.md"/>
-        <toc-element id="web-ui-extensions.md"/>
+        <toc-element id="web-ui-extensions.md">
+            <toc-element id="front-end-extensions.md">
+                <toc-element id="basic-ui-plugins.md"/>
+                <toc-element id="controlled-ui-plugins.md"/>
+                <toc-element id="spa-ui-plugins.md"/>
+            </toc-element>
+        </toc-element>
         <toc-element id="development-environment.md"/>
         <toc-element id="developing-plugins-using-maven.md"/>
         <toc-element id="storing-plugin-state-and-settings.md"/>
