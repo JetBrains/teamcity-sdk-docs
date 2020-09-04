@@ -108,7 +108,7 @@ The same content goes to the `controlled-plugin-core.js`, but it has a different
 
 Let’s build a plugin and look at this behavior:
 
-<img src="controlled-plugin-1.gif" animated="true"/>
+<img src="controlled-plugin-1.png" animated="true"/>
 
 First of all, the console now looks a little different:
 
