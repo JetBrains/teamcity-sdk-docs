@@ -5,11 +5,12 @@ Initially, we shared our view on the TeamCity plugins and the motivation behind 
 This document explains the new way of the plugin development in TeamCity. The new plugin system lets you write any sophisticated plugin and integrate it both in the [experimental UI](https://www.jetbrains.com/help/teamcity/teamcity-experimental-ui.html) (code-named Sakura) and classic UI.   
 In addition to the previous plugin development workflow, we made a great improvement, concentrating on the front-end aspects of the plugin development.
 
->
+<note>
+
 This document is currently in the draft stage. We introduce the new plugin development approach in terms of our [Early Access Program](https://confluence.jetbrains.com/display/TW/TeamCity+EAP) (EAP) for TeamCity 2020.2. The new API will be improved constantly during the next few months. By the time of 2020.2 release, some API will have been changed. We will warn about any changes in this guide and in the relevant repositories. Feel free to report any known issues in [YouTrack](https://youtrack.jetbrains.com/issues/TW?q=tag:%20SakuraUI-Plugins%20) using the `SakuraUI-plugins` tag.   
 Although we are working on reducing boilerplate, currently we are concentrated on things like API stability, testing, and clear documentation.
->
-{type="note"}
+
+</note>
 
 We guarantee that previously written plugins will work as they worked before 2020.2 EAP. New plugins will work starting from TeamCity 2020.2 EAP1.
 
@@ -18,11 +19,11 @@ Before starting, you have to prepare your environment. The entire preparation co
 ## Key benefits
 
 Key features of the new plugin development approach:
-1. There is a way to integrate plugins to the Sakura UI and classic UI.
-2. All existing plugins continue to work as they worked before 2020.2.
-3. UI plugins could be written in a more frontend-centric way, which involves modern web techs.
-4. UI plugins are framework-agnostic, so you can use any library, framework, and bundler.
-5. For those who prefer React, we expose our internal components, so you can write a plugin composing existing components from the Sakura UI – not only by writing everything yourself.
+* There is a way to integrate plugins to the Sakura UI and classic UI.
+* All existing plugins continue to work as they worked before 2020.2.
+* UI plugins could be written in a more frontend-centric way, which involves modern web techs.
+* UI plugins are framework-agnostic, so you can use any library, framework, and bundler.
+* For those who prefer React, we expose our internal components, so you can write a plugin composing existing components from the Sakura UI – not only by writing everything yourself.
 
 ## Terminology
 
@@ -50,23 +51,23 @@ Some of `PlaceID`'s are available only in the Sakura UI:
 
 \* These `PlaceID`'s will be added to the classic UI later.
 
-* `PluginUIContext` – context object which represents the plugin location. It contains currently selected `projectId`, `buildId`, `buildTypeId`, `agentId`, `agentPoolId`, `agentTypeId`. TeamCity guarantees that each plugin will receive the latest context.
+`PluginUIContext` – context object which represents the plugin location. It contains currently selected `projectId`, `buildId`, `buildTypeId`, `agentId`, `agentPoolId`, `agentTypeId`. TeamCity guarantees that each plugin will receive the latest context.
 
-* _Plugin Lifecycle_ – set of events, each of them is invoked when the plugin content passes a certain step. For example, _the plugin is mounted to a DOM_, _context is updated_, _plugin is unmounted_.
+_Plugin Lifecycle_ – set of events, each of them is invoked when the plugin content passes a certain step. For example, _the plugin is mounted to a DOM_, _context is updated_, _plugin is unmounted_.
 
-* _Plugin Wrapper_ – Sakura UI entity, a React component which manages a certain `PlaceID`. It reacts on the plugin UI context changes, passes updates to a plugin and manages plugin lifecycles.
+_Plugin Wrapper_ – Sakura UI entity, a React component which manages a certain `PlaceID`. It reacts on the plugin UI context changes, passes updates to a plugin and manages plugin lifecycles.
 
-* `TeamсityReactAPI` – publicly exposed JS toolset which helps developers to manage plugins.
+TeamсityReactAPI` – publicly exposed JS toolset which helps developers to manage plugins.
 
-* _Plugin Registry_ – JavaScript object which stores data about each rendered plugin. This register could be used to search, retrieve, and remove plugins.
+_Plugin Registry_ – JavaScript object which stores data about each rendered plugin. This register could be used to search, retrieve, and remove plugins.
 
-* _Plugin Constructor_ – JavaScript prototype used to create a plugin instance.
+_Plugin Constructor_ – JavaScript prototype used to create a plugin instance.
 
-* _Basic plugin_ – simplest plugin. Its behavior and reaction to the `PluginUIContext` are defined implicitly. It re-renders automatically every time `PluginUIContext` updates.
+_Basic plugin_ – simplest plugin. Its behavior and reaction to the `PluginUIContext` are defined implicitly. It re-renders automatically every time `PluginUIContext` updates.
 
-* _Controlled plugin_ – plugin which behavior and reaction on `PluginUIContext` updates are explicitly defined by a developer.
+_Controlled plugin_ – plugin which behavior and reaction on `PluginUIContext` updates are explicitly defined by a developer.
 
-* _Development mode_ – special mode which shows `PlaceID` containers in DOM and makes the plugin write debug information in the console. Accessible via the `GET` property `pluginDevelopmentMode=true`.
+_Development mode_ – special mode which shows `PlaceID` containers in DOM and makes the plugin write debug information in the console. Accessible via the `GET` property `pluginDevelopmentMode=true`.
 
 ## Public API Reference
 
