@@ -49,7 +49,7 @@ mvn package
 
 Let's prepare a plugin and see the result. If you open the TeamCity with the latest plugin enabled, you will see the addition in the sidebar.
 
-<img src="spa-plugins-1.png" width="706" alt="Simple sidebar plugin"/>
+<img src="spa-plugins-1.png" thumbnail-same-file="true" thumbnail="true" alt="Simple sidebar plugin"/>
 
 As in the previous sections, we start with `SakuraUIPluginController.java`. Here we use the basic plugin with `PluginUIContext`.
 
@@ -152,7 +152,7 @@ Every operation in a browser which involves DOM manipulation (like inserting or 
 
 In some cases, there could be multiple VDOMs on one page. It could happen if you use different React instances or if two parts have no common ancestor. Those VDOMs have no connection to each other. If you write your React plugin using the separate React instance, this plugin will have no access to some features like a common vDOM or common React contexts. The React application crashes when it faces two different React instances.
 
-<img src="spa-plugins-2.png" width="706" alt="Application crash"/>
+<img src="spa-plugins-2.png" thumbnail-same-file="true" thumbnail="true" alt="Application crash"/>
 
 For plugin compatibility, we expose our internal React and ReactDOM instance via the Teamcity React API. The right usage of the TeamCity React instance is the key to writing a performant and safe plugin.
 
