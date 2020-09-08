@@ -9,11 +9,14 @@ This document is introduced in terms of [Early Access Program](https://confluenc
 
 This guide explains how to create a Single-page Application (SPA) UI plugin based on the new [front-end extensions](front-end-extensions.md) paradigm.
 
-__Source branch with an example project: [example/react-plugin](https://github.com/JetBrains/teamcity-sakura-ui-plugins/tree/example/react-plugin)__.
+__Source branch with an example project (FlowJS): [example/react-plugin](https://github.com/JetBrains/teamcity-sakura-ui-plugins/tree/example/react-plugin)__.
 
-Nowadays, modern JavaScript frameworks like Angular or libraries like React are dominating in the web development, especially if you write rich applications or Single Page Applications. They help developers to concentrate on logic – not on the code itself; they take care of the performance and, generally, make the development easier.
+__Source branch with an example project (TypeScript): [example/react-plugin-typescript](https://github.com/JetBrains/teamcity-sakura-ui-plugins/tree/example/react-plugin-typescript)__.
+
+Nowadays, modern JavaScript frameworks like Angular or libraries like React are dominating in the web development, especially if you write rich applications or Single Page Applications. They help developers to concentrate on a business logic – not on the code itself; they take care of the performance and, generally, make the development easier.
 
 In TeamCity, we use React. Every component in the Sakura UI is a React component. Moreover, many components in the classic UI are the same React components but aged visually for UI/UX consistency. React makes us reuse components.   
+
 Similarly to a building process, we build the UI using small panels and bricks called components. Our components are based on the [Ring UI](https://jetbrains.github.io/ring-ui/master/index.html) library. We compose library components to build every piece of the Sakura UI.
 
 Starting from TeamCity 2020.2 EAP1, we have decided to share our "bricks". We expose some of our internal components and give an opportunity to reuse the Ring UI in plugins. Therefore, if you decide to develop your UI plugin with React, there is no needing to stylize your own buttons or dialogs – you can reuse the components we use ourselves. Using them requires some knowledge on how React works, but it's easier than you might expect.
@@ -22,7 +25,7 @@ Starting from TeamCity 2020.2 EAP1, we have decided to share our "bricks". We ex
 
 Before we start, please prepare your environment. Usually, modern Web development requires you to install [Node JS](https://nodejs.org/) and Node Package Manager (NPM). It might be not very convenient if you are a Java Developer and make the very first step with the modern Web. For this case, we prepared the `Docker-compose.yml` which will take care of compiling/transpiling and bundling in the JS.
 
-To build your plugin, use
+To build your plugin within the Docker container, use
 
 ```shell script
 docker-compose run build
@@ -37,6 +40,8 @@ docker-compose run dev
 If you prefer to run scripts locally using your environment, simply use the Intellij Idea Run Configurations or use CLI:
 
 ```shell script
+cd frontend
+npm install
 npm run build
 npm run start
 ```
@@ -92,7 +97,7 @@ public class SakuraUIPluginController extends BaseController {
 
 There are some changes:
 
-1. `BUNDLE_DEV_URL` is the URL where Webpack hosts your JavaScript React App. It will be used later for live updates. This allows you to recompile the React App without reloading the plugin to update JS sources.
+1. `BUNDLE_DEV_URL` is the URL where Webpack hosts your JavaScript React App bundle. It will be used later for live updates. This allows you to recompile incrementally the React App without reloading the plugin to update JS sources.
 2. Inject the `ContentSecurity` policy configurator.
 3. Change `PlaceID` to `PlaceID.ALL_PAGES_FOOTER`. By doing this, we make the plugin code loading directly in HTML, skipping the Plugin Wrapper handling. See the note below.
 4. Tell the TeamCity core that `http://localhost:8080` is a trusted domain, so it allows Cross Origin Requests from TeamCity to the Webpack server.
@@ -107,7 +112,7 @@ There are some changes:
 
 __What is the difference between `PlaceID.ALL_PAGES_FOOTER` and `PlaceID.SAKURA_*`?__
 
-To understand it, let us explain the Plugin Wrapper workflow. In TeamCity 2020 EAP1, at the beginning of an HTML parsing, we send a request to [`[TEAMCITY_BASE_URL]/app/placeId/__ALL__`](http://localhost:8111/bs/app/placeId/__ALL__). The server responds with the mapping `PlaceID` → `Array<Plugins>`. Each entry in this map contains metadata about the plugin: name, controller URL, list of attached CSS, and JS files. That is how Plugin Wrapper understands that there are some plugins attached to its `PlaceID`. Then, Plugin Wrapper starts requesting every plugin. When the HTML is loaded, Plugin Wrapper creates a plugin using the HTML: `new Plugin(PlaceID, {content: HTML, ..., _onCreate: { loadScripts..., loadStyles...}_})`.   
+To understand it, let us explain the Plugin Wrapper workflow. In TeamCity 2020 EAP1, at the beginning of an HTML parsing, we send a request to [`[TEAMCITY_BASE_URL]/app/placeId/__ALL__`](http://localhost:8111/bs/app/placeId/__ALL__). The server responds with the mapping `PlaceID` → `Array<Plugins>`. Each entry in this map contains metadata about the plugin: name, controller URL, list of attached CSS, and JS files. That is how Plugin Wrappers understand that there are some plugins attached to theirs `PlaceID`. Then, every Plugin Wrapper starts requesting its' every plugin. When the HTML is loaded, Plugin Wrapper creates a plugin using the HTML: `new Plugin(PlaceID, {content: HTML, ..., _onCreate: { loadScripts..., loadStyles...}_})`.   
 In other words, the plugin creation consists of multiple steps: request HTML, parse HTML, create a plugin with parsed HTML, add subscription to the `ON_CREATE` event, where the styles and scripts are loaded asynchronously.
 
 It is possible to explain it as a dialog between Frontend App (F), Plugin Wrapper (PW), and Server (S):
@@ -147,8 +152,9 @@ Content of `React-plugin.jsp`:
 
 Using the `Choose` directive, we tell the TeamCity Core whether the plugin should load a JS file from the Webpack Server or use a bundled one. This is the last Java-related code we will see in this guide.
 
-From now, we are ready to the pure frontend. But before that, here's a brief description of React basics.   
-Every operation in a browser which involves DOM manipulation (like inserting or updating the content, removing and finding nodes) should be considered as the most expensive operation. React found its way to dramatically increase the performance: instead of directly updating the DOM, React *creates a simplified copy of this DOM* called VDOM ([Virtual Dom](https://reactjs.org/docs/faq-internals.html)). Whenever you update the UI, React checks which part of VDOM should be changed (this is the render phase) and, if something changed in VDOM, React reflects this change to the real DOM (this is the commit phase). Checking the VDOM is faster than manipulating the DOM because it is a plain JavaScript object. That is what made React so popular. 
+From now, we are ready to the pure frontend. But before that, here's a brief description of React basics.
+   
+Every operation in a browser which involves DOM manipulation (like inserting or updating the content, removing and finding nodes) should be considered as the most expensive operation. The React team found its way to dramatically increase the performance: instead of directly updating the DOM, React *creates a simplified copy of this DOM* called VDOM ([Virtual Dom](https://reactjs.org/docs/faq-internals.html)). Whenever you update the UI, React checks which part of VDOM should be changed (this is the render phase) and, if something changed in VDOM, React reflects this change to the real DOM (this is the commit phase). Checking the VDOM is faster than manipulating the 'real' DOM because it is a plain JavaScript object, which has tons of optimizations. That is what made React so popular. 
 
 In some cases, there could be multiple VDOMs on one page. It could happen if you use different React instances or if two parts have no common ancestor. Those VDOMs have no connection to each other. If you write your React plugin using the separate React instance, this plugin will have no access to some features like a common vDOM or common React contexts. The React application crashes when it faces two different React instances.
 
@@ -156,41 +162,34 @@ In some cases, there could be multiple VDOMs on one page. It could happen if you
 
 For plugin compatibility, we expose our internal React and ReactDOM instance via the Teamcity React API. The right usage of the TeamCity React instance is the key to writing a performant and safe plugin.
 
-As you can see, there is a new folder named `Frontend`. In this folder, we have a React application which uses [FlowJS](https://flow.org/en/docs/types/classes/). If you prefer static typed way of programming, you will definitely like FlowJS, but you are free to use any language (we use Flow JS, our Space team loves KotlinJS, most people all over the globe like TypeScript).
+> Speaking of [upcoming React v.17](https://reactjs.org/blog/2020/08/10/react-v17-rc.html): there is one important change we will see soon: it will be not required anymore to use the only one React version. But even the React Team explains, that the purpose of this update is to make migration between different React versions smoothier, not to compose different React Versions permanently. 
+{type="tip"}
+
+As you can see, there is a new folder named `Frontend`. In this folder, we have a React application which uses [Flow JS](https://flow.org/en/docs/types/classes/). If you prefer static typed way of programming, you will definitely like Flow JS, but you are free to use any language (we use Flow JS, our Space team loves [KotlinJS](https://play.kotlinlang.org/hands-on/Building%20Web%20Applications%20with%20React%20and%20Kotlin%20JS/01_Introduction), most people all over the globe like [TypeScript](https://www.typescriptlang.org/)).
 
 There are two mandatory actions you have to do:
 
-1. Install the npm module `@jetbrains/teamcity-api` (see in `package.json`).
+1. Install the npm module `@jetbrains/teamcity-api` (see in `package.json` and in [NPM](https://www.npmjs.com/package/@jetbrains/teamcity-api)).
 
 2. Configure the Webpack (`webpack.config.js`).
 
-In `webpack.config.js`, we point to the following lines:
+We tried to make the Webpack config as simple as we can do, so it simply extends the predefined config:
 
 ```js
 
 ...
-entry: './src/index.js',
-module: {
-    rules: [
-        ...ringUiConfig.config.module.rules, // 1
-        {
-            test: /\.js$/,
-            include: [srcPath],
-            exclude: [/node_modules/],
-            use: [babelLoader],
-        },
-    ]
-},
-...
-externals: {
-    'react': 'TeamCityAPI.React', // 2
-    'react-dom': 'TeamCityAPI.ReactDom',
-},
+const path = require('path')
+const getWebpackConfig = require('@jetbrains/teamcity-api/getWebpackConfig')
+
+module.exports = getWebpackConfig({
+    srcPath: path.join(__dirname, './src'),
+    outputPath: path.resolve(__dirname, '../demoPlugin-server/src/main/resources/buildServerResources'),
+    entry: './src/index.js',
+    useFlow: true,
+})
 ```
 
-1. To use the Ring UI library, we let the Webpack know how to process the specific Ring UI rules.
-
-2. We expose React and ReactDom directly from `TeamCityAPI.React`, so whenever you import React in your JavaScript/TypeScript, it is imported from TeamCity.
+Using the webpack, we expose global React and ReactDom objects directly from `TeamCityAPI.React`, so whenever you import React in your JavaScript/TypeScript, it is passed to your app through links from the TeamcityUI window object.  
 
 As you see in `webpack.config.js`, there is an "entry" item which points to a certain file from where we start our React journey.
 
@@ -245,13 +244,11 @@ export default App
 
 1. Import the Ring UI components. It could be buttons, dialogs, whatever you would find suitable your goal. For this tutorial, we selected the heading.
 2. Import type definitions from `@jetbrains/teamcity-api` to add typings to the App component.
-3. Importthe  CSS file. Depending on your Webpack config, styles could be included in JavaScript or added to a separate file. Here styles are added in JS.
+3. Import the  CSS file. Depending on your Webpack config, styles could be included in JavaScript or added to a separate file. Here styles are added in JS.
 4. Example of using the Ring UI H2 component.
-5. Our application receives only `PluginContext` as a parameter. Whenever the location updates, Plugin Wrapper lets the plugin know about the new PluginUI context. React starts checking what DOM nodes should be changed and then applies changes to the DOM. You can click on the name in the sidebar to expand the container and make sure that the React plugin has subscribed to the plugin context updates.
+5. Our application receives only the `PluginContext` as a parameter. Whenever the location updates, Plugin Wrapper lets the plugin know about the new PluginUI context. React starts checking what DOM nodes should be changed and then applies changes to the DOM. You can click on the name in the sidebar to expand the container and make sure that the React plugin has subscribed to the plugin context updates.
 
-Another plugin which would work with TeamCity UI component is called _All Builds.
-
-Add the following code to `src/index.js`:
+We also should highlight, that there is an opportunity to reuse not a Public Library Components, but the internal TeamCity components. For now we expose only the _All Builds_ component. In the next releases we will add Contexts and a few more components. To reuse internal TeamCity components, add the following code to `src/index.js`:
 
 ```js
 import AllBuilds from "./AllBuilds/AllBuilds";
