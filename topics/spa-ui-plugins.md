@@ -12,6 +12,8 @@ Similarly to a building process, we build the UI using small panels and bricks c
 
 Starting from TeamCity 2020.2 EAP1, we have decided to share our "bricks". We expose some of our internal components and give an opportunity to reuse the Ring UI in plugins. Therefore, if you decide to develop your UI plugin with React, there is no needing to stylize your own buttons or dialogs – you can reuse the components we use ourselves. Using them requires some knowledge on how React works, but it's easier than you might expect.
 
+## Composing SPA UI plugin
+
 Before we start, please prepare your environment. Usually, modern Web development requires you to install [Node JS](https://nodejs.org/) and Node Package Manager (NPM). It might be not very convenient if you are a Java Developer and make the very first step with the modern Web. For this case, we prepared the `Docker-compose.yml` which will take care of compiling/transpiling and bundling in the JS.
 
 To build your plugin, use

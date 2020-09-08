@@ -11,7 +11,9 @@ The name _controlled_ explains the main advantage of these plugins – a develop
 >
 {type="tip"}
 
-The plugin becomes a _controlled_ when you add a handler to the `ON_CONTEXT_UPDATE` lifecycle hook:
+## Composing controlled UI plugin
+
+The plugin becomes _controlled_ when you add a handler to the `ON_CONTEXT_UPDATE` lifecycle hook:
 
 ```java
 
@@ -42,7 +44,7 @@ public class SakuraUIPluginController {
 }
 ```
 
-The code is almost the same to the [basic plugin v.1](basic-ui-plugins.md#Version+1.+Simple+plugin). We've only explicitly added the JS file `controlled-plugin-core.js` with the following content:
+The code is almost similar to the [basic plugin v.1](basic-ui-plugins.md#Version+1.+Simple+plugin). We've only explicitly added the JS file `controlled-plugin-core.js` with the following content:
 
 ```jsp
 

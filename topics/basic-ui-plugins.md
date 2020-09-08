@@ -39,9 +39,9 @@ This piece of code does the following things:
 
 1\. It tells the TeamCity Core, that the plugin should be placed in `PlaceId.SAKURA_HEADER_NAVIGATION_AFTER`. To get there, just open your TeamCity instance with the `GET` parameter `pluginDevelopmentMode=true`. In our case, this is `http://localhost:8111/bs/project/_Root?mode=builds&pluginDevelopmentMode=true`. The `PlaceID` is available both in the Sakura and classic UI:
 
-<img src="fe-extension-1.png" width="1184"/>
+<img src="fe-extension-1.png"/>
 
-<img src="fe-extension-2.png" width="813"/>
+<img src="fe-extension-2.png"/>
 
 2\. The UI plugin will be named as it is defined in the private constant `PLUGIN_NAME`.
 
