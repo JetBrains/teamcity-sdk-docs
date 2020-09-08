@@ -19,7 +19,7 @@ The name _controlled_ explains the main advantage of these plugins – a develop
 
 ## Composing controlled UI plugin
 
-The plugin becomes _controlled_ when you add a handler to the `ON_CONTEXT_UPDATE` lifecycle hook:
+The `Plugin Wrapper` considers the plugin as a _controlled_ one, if it has an `ON_CONTEXT_UPDATE` handler or if it's a React Component. 
 
 ```java
 
@@ -30,8 +30,7 @@ get controlled() {
 }
 
 ```
-
-Let's start with the controller:
+We will get to React later. Now let's point at the `ON_CONTEXT_UPDATE`. Let's start with the controller:
 
 ```java
 
@@ -50,7 +49,7 @@ public class SakuraUIPluginController {
 }
 ```
 
-The code is almost similar to the [basic plugin v.1](basic-ui-plugins.md#Version+1.+Simple+plugin). We've only explicitly added the JS file `controlled-plugin-core.js` with the following content:
+The code is almost similar to the [basic plugin v.1](basic-ui-plugins.md#Version+1.+Simple+plugin). We've only explicitly added the JS file `controlled-plugin-core.js` and the JSP now contains the next code:
 
 ```jsp
 
@@ -77,7 +76,7 @@ The `<bs:linkScript>` helper generates a correct link to the script file (includ
 (() => {
     console.log("My Controlled plugin script from a Core file");
 
-    const plugin = TeamCityAPI.pluginRegistry.searchByPlaceId("SAKURA_HEADER_NAVIGATION_AFTER", "SakuraUI-Plugin") // 1
+    const plugin = TeamcityReactAPI.pluginRegistry.searchByPlaceId("SAKURA_HEADER_NAVIGATION_AFTER", "SakuraUI-Plugin") // 1
 
     const template = (context) => `<div class="controlled-plugin-wrapper">Here is a dummy plugin.${JSON.stringify(context)}</div>` // 2
 
@@ -91,6 +90,11 @@ The `<bs:linkScript>` helper generates a correct link to the script file (includ
 2. We prepare the ES6 template.
 3. We subscribe the plugin to the context update event. The subscription handler provides the last context as the first argument. Whenever the context changes, we ask the plugin to update the content with the new string generated at point 3.
 
+> Here and next we use the Global [window.]TeamcityReactAPI. Starting the 2020.2 EAP2 this variable will be called TeamCityAPI. We will keep the TeamcityReactAPI name in Global with a Deprecation warning till the 2020.2 Release ([The issue TW-67592](https://youtrack.jetbrains.com/issue/TW-67592)) 
+>
+{type="warning"}
+
+
 >As you can see, we use Arrow functions. Since 2020.2, TeamCity officially drops support for Internet Explorer, so you can safely use ES6 features.
 >
 {type="tip"}
@@ -102,7 +106,7 @@ The `<bs:linkScript>` helper generates a correct link to the script file (includ
 (() => {
     console.log("My Controlled plugin script from a JSP file");
 
-    const plugin = TeamCityAPI.pluginRegistry.searchByPlaceId("SAKURA_HEADER_NAVIGATION_AFTER", "SakuraUI-Plugin")
+    const plugin = TeamcityReactAPI.pluginRegistry.searchByPlaceId("SAKURA_HEADER_NAVIGATION_AFTER", "SakuraUI-Plugin")
 
     const template = (context) => `<div class="controlled-plugin-wrapper">Here is a dummy plugin.${JSON.stringify(context)}</div>`
 
@@ -128,12 +132,13 @@ _Plugin debugging. SakuraUI-Plugin / SAKURA_HEADER_NAVIGATION_AFTER. Subscribe t
 
 Then we go to navigation. Notice the major difference between the basic and controlled plugins here: Plugin Wrapper never recreate plugins from a scratch (`ON_CREATE`, `ON_DELETE`). Instead, it updates the content accordingly the new context. We used the Plugin API method `replaceContent` two times, and we also received a notification that the content has been updated two times. 
 
-If a component should disappear (for example, you develop a plugin not for the header but for `SAKURA_PROJECT_BEFORE_CONTENT`), it will be properly dismounted.   
+If a component should disappear (for example, you develop a plugin not for the header but for the `SAKURA_PROJECT_BEFORE_CONTENT`), it will be properly dismounted.   
+
 Let's change all `PlaceID`'s used in this plugin from `SAKURA_HEADER_NAVIGATION_AFTER` to `SAKURA_PROJECT_BEFORE_CONTENT`.
 
 <img src="controlled-plugin-3.png" thumbnail-same-file="true" thumbnail="true" alt="Plugin console inspection"/>
 
-Here we have a plugin in the new `PlaceID`. Every time we navigate, we also face the `ON_UNMOUNT` lifecycle event. Unmount happens every time the plugin should disappear from the screen. Or, in terms of frontend, Unmount happens whenever you remove a node from the DOM.
+Here we have a plugin in the new `PlaceID`. Every time we navigate, we also face the `ON_UNMOUNT` lifecycle event. Unmount happens every time the plugin should disappear from the screen. Or, in more specific terms of frontend, Unmount happens whenever you remove a node from the DOM.
 
 You can subscribe to any lifecycle hooks with the Plugin API:
 
@@ -161,7 +166,7 @@ That is what you get:
 
 <img src="controlled-plugin-4.png" thumbnail-same-file="true" thumbnail="true" alt="Plugin console inspection"/>
 
-As you see, right before the component is unmounted, Plugin Wrapper removes all handlers.
+As you see, right before the component is unmounted, Plugin Wrapper removes all handlers. Next time the Plugin will be mounted, all specified `ON_MOUNT` callbacks will be fired and the event listeners will be attached again.
 
 Every lifecycle event subscription takes a handler as an argument. This handler receives the current context. Every subscription returns an unsubscribe function, so if you do not want to keep receiving updates, just call the unsubscriber:
 
@@ -176,6 +181,6 @@ unsubscribe();
 
 ```
 
-We've learned how the lifecycle hooks work and how to consume them. Using this API, you can control async operations and event handling. This API is sufficient to build any complicated plugins for TeamCity. 
+We've learned how the lifecycle hooks work and how to consume them. Using this API, you can control async operations and event handling. This API is sufficient to build any complicated plugins for TeamCity. This is a path you can follow to build Plugin using your favorite UI Framework / Library. 
 
-In [this section](spa-ui-plugins.md) you can read about React-based plugins, learn more about internal plugin mechanisms and how to reuse ready components in your plugin.
+But if you do prefer React, we have a little more for you. In [this section](spa-ui-plugins.md) you can read about React-based plugins, learn more about internal plugin mechanisms and how to reuse our components in your plugin.

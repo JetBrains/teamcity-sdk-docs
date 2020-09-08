@@ -43,9 +43,10 @@ public class SakuraUIPluginController {
 
 This piece of code does the following things:
 
-1\. It tells the TeamCity Core, that the plugin should be placed in `PlaceId.SAKURA_HEADER_NAVIGATION_AFTER`. To get there, just open your TeamCity instance with the `GET` parameter `pluginDevelopmentMode=true`. In our case, this is `http://localhost:8111/bs/project/_Root?mode=builds&pluginDevelopmentMode=true`.
+1\. It tells the TeamCity Core, that the plugin should be placed in `PlaceId.SAKURA_HEADER_NAVIGATION_AFTER`. To get there, just open your TeamCity instance with the `GET` parameter `pluginDevelopmentMode=true`. In our case, this is a [localhost instance](http://localhost:8111/bs/project/_Root?mode=builds&pluginDevelopmentMode=true).
 
-`PlaceID` in the Sakura UI:
+
+The `PlaceID` in the Sakura UI:
 
 <img src="fe-extension-1.png" thumbnail-same-file="true" thumbnail="true" alt="PlaceID in Sakura UI"/>
 
@@ -125,7 +126,7 @@ Then follow `ON_CREATE`, `ON_CONTENT_UPDATE`, `ON_CONTEXT_UPDATE`, `ON_MOUNT`, a
 
 ## Version 2. Using PluginUIContext
 
-__Source branch with the example project: [example/basic-plugin-v2](https://github.com/JetBrains/teamcity-sakura-ui-plugins/tree/example/basic-plugin-v2)__.
+__Source branch with the example project: [example/basic-plugin-v2](https://github.com/JetBrains/teamcity-sakura-ui-plugins/tree/example/basic-plugin-with-context)__.
 
 The basic plugin we wrote in the first part does not provide much benefits, unless your only goal is to draw some text or symbols in the header. In most cases, a plugin should provide useful data about the currently selected entity, whether it is a build configuration ID, project ID or other ID. The data we use to fill into the HTML elements is called _Model_. When we used a basic plugin v.1, we have an empty Model. Let's fill it!
 
@@ -183,7 +184,7 @@ Let's go step by step. Steps marked with an asterisk are the multiline represent
 4. The `PluginUIContext` controller parses the request parameters.
 5. The plugin receives the current `buildTypeId`.
 6. If `buildTypeId` is not empty, we ask the Core to find the build configuration data.
-7. The plugin controller passes the build type to a JSP in a variable called `buildType` and returns the result.
+7. The plugin controller passes the build type to a JSP in a variable called `buildType` and returns the result a line after.
 
 There is also a slight change in JSP. If there is a build configuration, we show its name:
 
@@ -210,8 +211,8 @@ In many cases, a basic plugin is already good enough: it integrates to the Sakur
 
 With basic plugins, we provide a way to integrate plugins in the Sakura UI with minimum efforts.
 
-However, its functionality can be quite limited. If you use your plugin in the header, you observe layout shifting. If you use JavaScript to enrich the default plugin behaviour - it's not clear in what moment you should add the event handlers. There are some solutions: for example, to check the DOM every few seconds, or use Mutation Observer. These methods have their limitations and it is better to avoid some of them in the production.
+However, its functionality can be quite limited. If you use your plugin in the header, you observe layout shifting. If you use JavaScript to enrich the default plugin behaviour - it's not clear in what moment you should add the event handlers. There are some workarounds: for example, to check the DOM every few seconds, or use Mutation Observer. These methods have their limitations and it is better to avoid some of them in the production.
 
-There is also a  case when you send a request that should update the plugin content, but during the request execution you moved in UI from one build configuration to another. If you don't cancel the promise handling, it will be resolved and, depending on the logic and race conditions, you will receive a newly generated plugin, filled with data from the previous request.
+There is also a case when you send a request that should update the plugin content, but during the request execution you moved in UI from one build configuration to another. If you don't cancel the promise handling, it will be resolved and, depending on the logic and race conditions, you will receive a newly generated plugin, filled with data from the previous request.
 
 [Controlled plugins](controlled-ui-plugins.md) allow you to address all these issues and provide many more possibilities.
