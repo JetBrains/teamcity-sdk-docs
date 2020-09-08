@@ -13,5 +13,5 @@
     <categories src="c.list"/>
     <tags src="g.list"/>
     <product src="tc.tree" web-path="/docs/teamcity/"
-             teamcity-build-path="Documentation_Teamware_TeamCitySdkDocs" version="2020.1" keymaps-mode="none"/>
+             teamcity-build-path="Documentation_Teamware_TeamCitySdkDocs" keymaps-mode="none"/>
 </ihp>
