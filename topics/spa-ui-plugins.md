@@ -1,6 +1,12 @@
 [//]: # (title: SPA UI Plugins)
 [//]: # (auxiliary-id: SPA+UI+Plugins.html)
 
+<warning>
+
+This document is introduced in terms of [Early Access Program](https://confluence.jetbrains.com/display/TW/TeamCity+EAP) (EAP) for TeamCity 2020.2.
+
+</warning>
+
 This guide explains how to create a Single-page Application (SPA) UI plugin based on the new [front-end extensions](front-end-extensions.md) paradigm.
 
 __Source branch with an example project: [example/react-plugin](https://github.com/JetBrains/teamcity-sakura-ui-plugins/tree/example/react-plugin)__.

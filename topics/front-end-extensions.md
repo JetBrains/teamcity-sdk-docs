@@ -1,13 +1,19 @@
 [//]: # (title: Front-End Extensions)
 [//]: # (auxiliary-id: Front-End+Extensions.html)
 
-Initially, we shared our view on the TeamCity plugins and the motivation behind revising our plugin development approach in the [dedicated blog post]().   
+<warning>
+
+This document is introduced in terms of [Early Access Program](https://confluence.jetbrains.com/display/TW/TeamCity+EAP) (EAP) for TeamCity 2020.2.
+
+</warning>
+
+Initially, we shared our view on the TeamCity plugins and the motivation behind revising our plugin development approach in the [dedicated blog post](https://blog.jetbrains.com/teamcity/2020/09/teamcity-2020-2-updated-plugin-development).   
 This document explains the new way of the plugin development in TeamCity. The new plugin system lets you write any sophisticated plugin and integrate it both in the [experimental UI](https://www.jetbrains.com/help/teamcity/teamcity-experimental-ui.html) (code-named Sakura) and classic UI.   
 In addition to the previous plugin development workflow, we made a great improvement, concentrating on the front-end aspects of the plugin development.
 
 <note>
 
-This document is currently in the draft stage. We introduce the new plugin development approach in terms of our [Early Access Program](https://confluence.jetbrains.com/display/TW/TeamCity+EAP) (EAP) for TeamCity 2020.2. The new API will be improved constantly during the next few months. By the time of 2020.2 release, some API will have been changed. We will warn about any changes in this guide and in the relevant repositories. Feel free to report any known issues in [YouTrack](https://youtrack.jetbrains.com/issues/TW?q=tag:%20SakuraUI-Plugins%20) using the `SakuraUI-plugins` tag.   
+This document is currently in the draft stage. We introduce the new plugin development approach in terms of our 2020.2 EAP. The new API will be improved constantly during the next few months. By the time of 2020.2 release, some API will have been changed. We will warn about any changes in this guide and in the relevant repositories. Feel free to report any known issues in [YouTrack](https://youtrack.jetbrains.com/issues/TW?q=tag:%20SakuraUI-Plugins%20) using the `SakuraUI-plugins` tag.   
 Although we are working on reducing boilerplate, currently we are concentrated on things like API stability, testing, and clear documentation.
 
 </note>
@@ -91,7 +97,7 @@ There are three types of plugins you can write with the new API:
 * _Controlled plugins_ have more sophisticated logic and adjustable behavior. 
 * _(Single-page Application) SPA plugins_ based on React.
 
-You can read an introduction describing these types in our [blog post]().
+You can read an introduction describing these types in our [blog post](https://blog.jetbrains.com/teamcity/2020/09/teamcity-2020-2-updated-plugin-development).
 
 The following documentation sections contain guides on how to create a plugin of each type:
 
