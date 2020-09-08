@@ -160,7 +160,7 @@ As you can see, there is a new folder named `Frontend`. In this folder, we have 
 
 There are two mandatory actions you have to do:
 
-1. Install the npm module `@teamcity/react-api` (see in `package.json`).
+1. Install the npm module `@jetbrains/teamcity-api` (see in `package.json`).
 
 2. Configure the Webpack (`webpack.config.js`).
 
@@ -199,7 +199,7 @@ As you see in `webpack.config.js`, there is an "entry" item which points to a ce
 ```js
 
 // @flow strict - let the Flow compiler and Intellij Idea know, that there is a Flow typed file
-import {Plugin, React} from "@teamcity/react-api" // import npm-package to use the same React, Sakura UI uses
+import {Plugin, React} from "@jetbrains/teamcity-api" // import npm-package to use the same React, Sakura UI uses
 import App from './App/App' // import the main component
 
 new Plugin(Plugin.placeIds.SAKURA_SIDEBAR_TOP, { // register a UI Plugin for the Sidebar
@@ -214,8 +214,8 @@ new Plugin(Plugin.placeIds.SAKURA_SIDEBAR_TOP, { // register a UI Plugin for the
 
 import {H2, H3} from '@jetbrains/ring-ui/components/heading/heading' // 1
 
-import {React} from "@teamcity/react-api"
-import type {PluginContext} from "@teamcity/react-api"; // 2
+import {React} from "@jetbrains/teamcity-api"
+import type {PluginContext} from "@jetbrains/teamcity-api"; // 2
 
 import styles from './App.css' // 3
 
@@ -244,7 +244,7 @@ export default App
 ```
 
 1. Import the Ring UI components. It could be buttons, dialogs, whatever you would find suitable your goal. For this tutorial, we selected the heading.
-2. Import type definitions from `@teamcity/react-api` to add typings to the App component.
+2. Import type definitions from `@jetbrains/teamcity-api` to add typings to the App component.
 3. Importthe  CSS file. Depending on your Webpack config, styles could be included in JavaScript or added to a separate file. Here styles are added in JS.
 4. Example of using the Ring UI H2 component.
 5. Our application receives only `PluginContext` as a parameter. Whenever the location updates, Plugin Wrapper lets the plugin know about the new PluginUI context. React starts checking what DOM nodes should be changed and then applies changes to the DOM. You can click on the name in the sidebar to expand the container and make sure that the React plugin has subscribed to the plugin context updates.
@@ -272,8 +272,8 @@ Create `./AllBuilds/AllBuilds.js`:
 import Loader from '@jetbrains/ring-ui/components/loader/loader'
 import {H1} from '@jetbrains/ring-ui/components/heading/heading'
 import {Content}  from '@jetbrains/ring-ui/components/island/island'
-import {React} from '@teamcity/react-api'
-import {AllBuilds as SakuraUIAllBuilds} from '@teamcity/react-api/components'
+import {React} from '@jetbrains/teamcity-api'
+import {AllBuilds as SakuraUIAllBuilds} from '@jetbrains/teamcity-api/components'
 
 const AllBuilds = () => {
     const [count, setCount] = React.useState(3);
@@ -292,6 +292,6 @@ const AllBuilds = () => {
 export default React.memo(AllBuilds)
 ```
 
-After the initialization, this component renders a Ring UI loader which will be shown for the next 3 second. After 3 seconds, it starts rendering the Sakura UI AllBuilds components which we imported from `@teamcity/react-api/components`.
+After the initialization, this component renders a Ring UI loader which will be shown for the next 3 second. After 3 seconds, it starts rendering the Sakura UI AllBuilds components which we imported from `@jetbrains/teamcity-api/components`.
 
 This was an example of how to compose Ring UI components with TeamCity Sakura UI components and add your own code. At the moment, we have one exposed component (AllBuilds) but the list of exposed components will grow soon.

@@ -33,7 +33,7 @@ Key features of the new plugin development approach:
 
 ## Terminology
 
-`PlaceID` – ID of a containter that will comprise the plugin. Since 2020.2 EAP1, we provide a new set of PlaceIDs, which have a prefix `SAKURA_`. For example, `SAKURA_HEADER_RIGHT`. The full list of `PlaceID`'s is available in the NPM module `@teamcity/react-api`.   
+`PlaceID` – ID of a containter that will comprise the plugin. Since 2020.2 EAP1, we provide a new set of PlaceIDs, which have a prefix `SAKURA_`. For example, `SAKURA_HEADER_RIGHT`. The full list of `PlaceID`'s is available in the NPM module `@jetbrains/teamcity-api`.   
 This list is not final. We are open to get [feedback](https://confluence.jetbrains.com/display/TW/Feedback) about your expectations and needs.
 
 The following `PlaceID`'s work both in the Sakura and classic UI:
