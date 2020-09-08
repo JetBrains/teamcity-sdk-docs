@@ -116,11 +116,11 @@ The same content goes to the `controlled-plugin-core.js`, but it has a different
 
 Let’s build a plugin and look at this behavior:
 
-<img src="controlled-plugin-1.png" width="1000" animated="true"/>
+<img src="controlled-plugin-1.png" width="1000" animated="true" alt="Plugin behavior"/>
 
 First of all, the console now looks a little different:
 
-<img src="controlled-plugin-2.png"/>
+<img src="controlled-plugin-2.png" width="706" alt="Plugin console inspection"/>
 
 During the `ON_CREATE` phase, Plugin Wrapper starts loading all attached scripts and styles. Script loading is an asynchronous function, so all scripts getting loaded after the synchronous `ON_MOUNT`. We used two JavaScript files, both added a subscription. That's why we see 2 subscription lines after ON_MOUNT:
 
@@ -131,7 +131,7 @@ Then we go to navigation. Notice the major difference between the basic and cont
 If a component should disappear (for example, you develop a plugin not for the header but for `SAKURA_PROJECT_BEFORE_CONTENT`), it will be properly dismounted.   
 Let's change all `PlaceID`'s used in this plugin from `SAKURA_HEADER_NAVIGATION_AFTER` to `SAKURA_PROJECT_BEFORE_CONTENT`.
 
-<img src="controlled-plugin-3.png"/>
+<img src="controlled-plugin-3.png" width="706" alt="Plugin console inspection"/>
 
 Here we have a plugin in the new `PlaceID`. Every time we navigate, we also face the `ON_UNMOUNT` lifecycle event. Unmount happens every time the plugin should disappear from the screen. Or, in terms of frontend, Unmount happens whenever you remove a node from the DOM.
 
@@ -159,7 +159,7 @@ Here, we use the Plugin API method `registerEventHandler` to add the click handl
 
 That is what you get:
 
-<img src="controlled-plugin-4.png"/>
+<img src="controlled-plugin-4.png" width="706" alt="Plugin console inspection"/>
 
 As you see, right before the component is unmounted, Plugin Wrapper removes all handlers.
 

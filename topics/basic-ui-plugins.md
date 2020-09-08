@@ -43,11 +43,15 @@ public class SakuraUIPluginController {
 
 This piece of code does the following things:
 
-1\. It tells the TeamCity Core, that the plugin should be placed in `PlaceId.SAKURA_HEADER_NAVIGATION_AFTER`. To get there, just open your TeamCity instance with the `GET` parameter `pluginDevelopmentMode=true`. In our case, this is `http://localhost:8111/bs/project/_Root?mode=builds&pluginDevelopmentMode=true`. The `PlaceID` is available both in the Sakura and classic UI:
+1\. It tells the TeamCity Core, that the plugin should be placed in `PlaceId.SAKURA_HEADER_NAVIGATION_AFTER`. To get there, just open your TeamCity instance with the `GET` parameter `pluginDevelopmentMode=true`. In our case, this is `http://localhost:8111/bs/project/_Root?mode=builds&pluginDevelopmentMode=true`.
 
-<img src="fe-extension-1.png"/>
+`PlaceID` in the Sakura UI:
 
-<img src="fe-extension-2.png"/>
+<img src="fe-extension-1.png" width="706" alt="PlaceID in Sakura UI"/>
+
+`PlaceID` in the classic UI:
+
+<img src="fe-extension-2.png" width="706" alt="Place ID in classic UI"/>
 
 2\. The UI plugin will be named as it is defined in the private constant `PLUGIN_NAME`.
 
@@ -93,7 +97,7 @@ After a few seconds, Maven will output a `*.zip` archive. Then, simply add the p
 
 That’s it. Your basic plugin is ready!
 
-<img src="fe-extension-3.png"/>
+<img src="fe-extension-3.png" width="706" alt="Basic plugin"/>
 
 This is a perfect place to pause and explore how the plugin works under the hood. Please, open the page one more time, now in the Development Mode. Then open the Browser Developer Tools. You will see a lot of debugging information for your plugin.
 
@@ -107,11 +111,11 @@ Usually, a plugin goes through 4 lifecycle events:
 
 * `ON_MOUNT` – invokes when an HTML content is attached to the DOM.
 
-<img src="fe-extension-4.png"/>
+<img src="fe-extension-4.png" width="706" alt="Debugging Sakura UI plugin"/>
 
 Let's go further. If you navigate to another TeamCity project / build configuration, you will notice that the plugin disappeared and then appeared again. At the same time, few more lifecycle events have appeared in the console:
 
-<img src="fe-extension-5.png"/>
+<img src="fe-extension-5.png" width="706" alt="Lifecycle events"/>
 
 * `ON_CONTEXT_UPDATE` – because you changed the navigation Context.
 
@@ -196,7 +200,7 @@ There is also a slight change in JSP. If there is a build configuration, we show
 
 Let's compile and update the plugin and then open any build configuration page:
 
-<img src="fe-extension-6.png"/>
+<img src="fe-extension-6.png" width="706" alt="Build configuration page"/>
 
 It works the same to the previous basic (simple) UI plugin, but now it contains the data from the TeamCity database.
 
