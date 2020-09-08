@@ -183,14 +183,14 @@ module: {
 },
 ...
 externals: {
-    'react': 'TeamcityReactAPI.React', // 2
-    'react-dom': 'TeamcityReactAPI.ReactDom',
+    'react': 'TeamCityAPI.React', // 2
+    'react-dom': 'TeamCityAPI.ReactDom',
 },
 ```
 
 1. To use the Ring UI library, we let the Webpack know how to process the specific Ring UI rules.
 
-2. We expose React and ReactDom directly from `TeamcityReactAPI.React`, so whenever you import React in your JavaScript/TypeScript, it is imported from TeamCity.
+2. We expose React and ReactDom directly from `TeamCityAPI.React`, so whenever you import React in your JavaScript/TypeScript, it is imported from TeamCity.
 
 As you see in `webpack.config.js`, there is an "entry" item which points to a certain file from where we start our React journey.
 

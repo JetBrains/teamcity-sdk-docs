@@ -77,7 +77,7 @@ _Development mode_ – special mode which shows `PlaceID` containers in DOM and 
 
 ## Public API Reference
 
-`window.TeamcityReactAPI` is a set of handy tools, which will help you retrieve, update, and manipulate plugins. It consists of:
+`window.TeamCityAPI` is a set of handy tools, which will help you retrieve, update, and manipulate plugins. It consists of:
 
 * _Components_ - React components we are ready to expose. Right now, there is only the one component `AllBuilds`. We are looking forward to your [feedback](https://confluence.jetbrains.com/display/TW/Feedback) on this.
 * _React_ - exposed React library. It's vital to use the same React library version to integrate your plugin into the TeamCity React vDOM tree (see the [full explanation](spa-ui-plugins.md)).

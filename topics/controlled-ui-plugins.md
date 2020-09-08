@@ -77,7 +77,7 @@ The `<bs:linkScript>` helper generates a correct link to the script file (includ
 (() => {
     console.log("My Controlled plugin script from a Core file");
 
-    const plugin = TeamcityReactAPI.pluginRegistry.searchByPlaceId("SAKURA_HEADER_NAVIGATION_AFTER", "SakuraUI-Plugin") // 1
+    const plugin = TeamCityAPI.pluginRegistry.searchByPlaceId("SAKURA_HEADER_NAVIGATION_AFTER", "SakuraUI-Plugin") // 1
 
     const template = (context) => `<div class="controlled-plugin-wrapper">Here is a dummy plugin.${JSON.stringify(context)}</div>` // 2
 
@@ -102,7 +102,7 @@ The `<bs:linkScript>` helper generates a correct link to the script file (includ
 (() => {
     console.log("My Controlled plugin script from a JSP file");
 
-    const plugin = TeamcityReactAPI.pluginRegistry.searchByPlaceId("SAKURA_HEADER_NAVIGATION_AFTER", "SakuraUI-Plugin")
+    const plugin = TeamCityAPI.pluginRegistry.searchByPlaceId("SAKURA_HEADER_NAVIGATION_AFTER", "SakuraUI-Plugin")
 
     const template = (context) => `<div class="controlled-plugin-wrapper">Here is a dummy plugin.${JSON.stringify(context)}</div>`
 
