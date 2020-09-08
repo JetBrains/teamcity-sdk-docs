@@ -8,10 +8,10 @@
     <module name="teamcity-docs"/>
     <vars src="v.list"/>
     <topics dir="topics"/>
-    <images dir="images" teamcity-build-path="Documentation_Teamware_TeamCitySdkDocs"
+    <images dir="images" version="2020.2"
             web-path="/docs/teamcity/"/>
     <categories src="c.list"/>
     <tags src="g.list"/>
     <product src="tc.tree" web-path="/docs/teamcity/"
-             teamcity-build-path="Documentation_Teamware_TeamCitySdkDocs" keymaps-mode="none"/>
+             teamcity-build-path="Documentation_Teamware_TeamCitySdkDocs" version="2020.2" keymaps-mode="none"/>
 </ihp>
