@@ -76,7 +76,7 @@ The `<bs:linkScript>` helper generates a correct link to the script file (includ
 (() => {
     console.log("My Controlled plugin script from a Core file");
 
-    const plugin = TeamcityReactAPI.pluginRegistry.searchByPlaceId("SAKURA_HEADER_NAVIGATION_AFTER", "SakuraUI-Plugin") // 1
+    const plugin = TeamCityAPI.pluginRegistry.searchByPlaceId("SAKURA_HEADER_NAVIGATION_AFTER", "SakuraUI-Plugin") // 1
 
     const template = (context) => `<div class="controlled-plugin-wrapper">Here is a dummy plugin.${JSON.stringify(context)}</div>` // 2
 
@@ -90,11 +90,6 @@ The `<bs:linkScript>` helper generates a correct link to the script file (includ
 2. We prepare the ES6 template.
 3. We subscribe the plugin to the context update event. The subscription handler provides the last context as the first argument. Whenever the context changes, we ask the plugin to update the content with the new string generated at point 3.
 
-> Here and next we use the Global [window.]TeamcityReactAPI. Starting the 2020.2 EAP2 this variable will be called TeamCityAPI. We will keep the TeamcityReactAPI name in Global with a Deprecation warning till the 2020.2 Release ([The issue TW-67592](https://youtrack.jetbrains.com/issue/TW-67592)) 
->
-{type="warning"}
-
-
 >As you can see, we use Arrow functions. Since 2020.2, TeamCity officially drops support for Internet Explorer, so you can safely use ES6 features.
 >
 {type="tip"}
@@ -106,7 +101,7 @@ The `<bs:linkScript>` helper generates a correct link to the script file (includ
 (() => {
     console.log("My Controlled plugin script from a JSP file");
 
-    const plugin = TeamcityReactAPI.pluginRegistry.searchByPlaceId("SAKURA_HEADER_NAVIGATION_AFTER", "SakuraUI-Plugin")
+    const plugin = TeamCityAPI.pluginRegistry.searchByPlaceId("SAKURA_HEADER_NAVIGATION_AFTER", "SakuraUI-Plugin")
 
     const template = (context) => `<div class="controlled-plugin-wrapper">Here is a dummy plugin.${JSON.stringify(context)}</div>`
 
