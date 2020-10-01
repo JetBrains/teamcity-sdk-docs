@@ -47,18 +47,23 @@ The following `PlaceID`'s work both in the Sakura and classic UI:
 * `SAKURA_HEADER_USERNAME_BEFORE`
 * `SAKURA_HEADER_RIGHT`
 * `SAKURA_FOOTER_RIGHT`
+* `SAKURA_BUILD_CONFIGURATION_BEFORE_CONTENT` \*
+* `SAKURA_AGENTS_OVERVIEW_BEFORE_CONTENT` \*
+* `SAKURA_AGENTS_UNAUTHORIZED_BEFORE_CONTENT` \*
+* `SAKURA_AGENT_BEFORE_CONTENT` \*
 
 Some of `PlaceID`'s are available only in the Sakura UI:
 * `SAKURA_SIDEBAR_TOP`
 * `SAKURA_PROJECT_TRENDS`
 * `SAKURA_PROJECT_BUILDS`
 * `SAKURA_BUILD_CONFIGURATION_TREND_CARD`
-* `SAKURA_BUILD_CONFIGURATION_BEFORE_CONTENT` \*
 * `SAKURA_BUILD_CONFIGURATION_BUILDS`
 * `SAKURA_BUILD_CONFIGURATION_BRANCHES`
-* `SAKURA_BUILD_LINE_EXPANDED` \*
+* `SAKURA_BUILD_LINE_EXPANDED`
+* `SAKURA_AGENT_CLOUD_IMAGE_BEFORE_CONTENT` \*
+* `SAKURA_AGENT_POOL_BEFORE_CONTENT` \*
 
-\* These `PlaceID`'s will be added to the classic UI later.
+PlaceIDs marked with Asterisk (\*) will be available starting the TeamCity 2020.2 EAP 3
 
 `PluginUIContext` – context object which represents the plugin location. It contains currently selected `projectId`, `buildId`, `buildTypeId`, `agentId`, `agentPoolId`, `agentTypeId`. TeamCity guarantees that each plugin will receive the latest context.
 
