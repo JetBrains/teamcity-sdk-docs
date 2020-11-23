@@ -1,12 +1,6 @@
 [//]: # (title: Basic UI Plugins)
 [//]: # (auxiliary-id: Basic+UI+Plugins.html)
 
-<warning>
-
-This document is introduced in terms of [Early Access Program](https://confluence.jetbrains.com/display/TW/TeamCity+EAP) (EAP) for TeamCity 2020.2.
-
-</warning>
-
 This guide explains how to create a basic UI plugin based on the new [front-end extensions](front-end-extensions.md) paradigm.
 
 ## Version 1. Simple plugin

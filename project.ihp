@@ -8,7 +8,7 @@
     <module name="teamcity-docs"/>
     <vars src="v.list"/>
     <topics dir="topics"/>
-    <images dir="images" version="2020.1"
+    <images dir="images" version="2020.2"
             web-path="/docs/teamcity/"/>
     <categories src="c.list"/>
     <tags src="g.list"/>

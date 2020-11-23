@@ -1,12 +1,6 @@
 [//]: # (title: Front-End Extensions)
 [//]: # (auxiliary-id: Front-End+Extensions.html)
 
-<warning>
-
-This document is introduced in terms of [Early Access Program](https://confluence.jetbrains.com/display/TW/TeamCity+EAP) (EAP) for TeamCity 2020.2.
-
-</warning>
-
 Initially, we shared our view on the TeamCity plugins and the motivation behind revising our plugin development approach in the [dedicated blog post](https://blog.jetbrains.com/teamcity/2020/09/teamcity-2020-2-updated-plugin-development).
    
 This document explains the new way of the plugin development in TeamCity. The updated plugin system lets you write any sophisticated plugin and integrate it both in the [experimental UI](https://www.jetbrains.com/help/teamcity/teamcity-experimental-ui.html) (code-named Sakura) and classic UI.   
