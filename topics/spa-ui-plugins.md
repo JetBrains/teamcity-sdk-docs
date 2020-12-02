@@ -87,7 +87,7 @@ public class SakuraUIPluginController extends BaseController {
 }
 ```
 
-### How Plugins are loaded?
+### How Plugins are loaded
 
 What is the difference between `PlaceID.ALL_PAGES_FOOTER_PLUGIN_CONTAINER` and `PlaceID.SAKURA_*`?
 

@@ -22,7 +22,7 @@ We guarantee that previously written plugins will work as they worked before 202
 - [Feedback and issue reporting](https://youtrack.jetbrains.com/issues/TW?q=tag:%20SakuraUI-Plugins%20)
 - [Demo Plugin repository](https://github.com/JetBrains/teamcity-sakura-ui-plugins) – a repo with 5 dedicated branches, explaining Basic, Controlled, and React plugins
 - [NPM module](https://github.com/JetBrains/teamcity-api-js) – a Node Package Manager module suitable to build rich UI plugins
-- [Explanation how plugins are loaded](spa-ui-plugins.md#How+Plugins+are+loaded?)
+- [Explanation how plugins are loaded](spa-ui-plugins.md#How+Plugins+are+loaded)
 
 ## Key benefits
 
