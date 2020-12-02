@@ -11,9 +11,9 @@ Nowadays, modern JavaScript frameworks like Angular or libraries like React are 
 
 In TeamCity, we use React. Every component in the Sakura UI is a React component. Moreover, many components in the classic UI are the same React components but aged visually for UI/UX consistency.   
 
-Similarly to a building process, we build the UI using small panels and bricks called components. Our components are based on the [Ring UI](https://jetbrains.github.io/ring-ui/master/index.html) library. We compose library components in order to build our UI.
+Similarly to a building process, we build the UI using small panels and bricks called components. Our components are based on the [Ring UI](https://jetbrains.github.io/ring-ui/master/index.html) library. We compose library components to build our UI.
 
-Starting from TeamCity 2020.2 we share our "bricks". We expose some of our internal components and give an opportunity to use the Ring UI Library in plugins, as well, as other React UI Kits. Therefore, if you decide to develop your UI plugin with React, there is no needing to stylize your own buttons or dialogs – you can reuse the components we use ourselves.
+Starting from TeamCity 2020.2 we share our "bricks". We expose some of our internal components and give an opportunity to use the Ring UI library in plugins, as well, as other React UI kits. Therefore, if you decide to develop your UI plugin with React, there is no needing to stylize your own buttons or dialogs – you can reuse the components we use ourselves.
 
 ## Composing SPA UI plugin
 
@@ -48,7 +48,7 @@ The production building process for React components is different from other com
 mvn package
 ```
 
-Let's build the Demo plugin and see the result and apply it to the TeamCity. You will see the addition in the sidebar.
+Let's build the Demo plugin and apply it to the TeamCity. You will see the addition in the sidebar.
 
 <img src="spa-plugins-1.png" thumbnail-same-file="true" thumbnail="true" alt="Simple sidebar plugin"/>
 
@@ -88,13 +88,12 @@ public class SakuraUIPluginController extends BaseController {
 ```
 
 ### How Plugins are loaded?
-<tip>
 
 What is the difference between `PlaceID.ALL_PAGES_FOOTER_PLUGIN_CONTAINER` and `PlaceID.SAKURA_*`?
 
-To understand it, let us explain the Plugin Wrapper workflow. In TeamCity 2020, at the time of DOMContentLoaded, we send a request to [`[TEAMCITY_BASE_URL]/app/placeId/__ALL__`](http://localhost:8111/bs/app/placeId/__ALL__). The server responds with the mapping `PlaceID` → `Array<Plugins>`. Each entry in this map contains metadata about the plugin: name, controller URL, list of attached CSS, and JS files.
+To understand it, let us explain the Plugin Wrapper workflow. In TeamCity 2020, at the time of `DOMContentLoaded`, we send a request to [`[TEAMCITY_BASE_URL]/app/placeId/__ALL__`](http://localhost:8111/bs/app/placeId/__ALL__). The server responds with the mapping `PlaceID` → `Array<Plugins>`. Each entry in this map contains metadata about the plugin: name, controller URL, list of attached CSS, and JS files.
 
-Using this mapping, Plugin Wrappers understand, that there are some plugins attached to theirs `PlaceID`. Then, for each plugin, Plugin Wrapper starts requesting content from the Entrypoint. The content is the text/html - when it's loaded, Plugin Wrapper passes the given HTML to the JavaScript Plugin Constructor: 
+Using this mapping, Plugin Wrappers understand that there are some plugins attached to theirs `PlaceID`. Then, for each plugin, Plugin Wrapper starts requesting the content from the Entrypoint. The content is Text/HTML. When it's loaded, Plugin Wrapper passes the given HTML to the JavaScript Plugin Constructor: 
 ```javascript
 new Plugin(PlaceID, {
     content: withoutScripts(HTML),
@@ -109,11 +108,11 @@ new Plugin(PlaceID, {
 })
 ```
 
-During the constructing, the Plugin Constructor checks some minimal requirements (such as PlaceID is specified, and the plugin with the same ID doesn't exist) and, if all tests are passed, invokes the onCreate. As you see, the onCreate handler loads the CSS and JavaScript files. 
+During the constructing, Plugin Constructor checks some minimal requirements (for example, that `PlaceID` is specified and the plugin with the same ID doesn't exist) and, if all tests are passed, invokes `onCreate`. As you see, the `onCreate` handler loads the CSS and JavaScript files. 
 
 In other words, the plugin creation consists of multiple steps: request list of Plugins, request plugin HTML, parse HTML, create a plugin with parsed HTML, add subscription to the `ON_CREATE` event, where the styles and scripts are loaded asynchronously.
 
-```
+<tip>
 It is possible to explain it as a dialog between Frontend App (F), Plugin Wrapper (PW), and Server (S):
 
 F: Server, give me the full list of plugins for the SAKURA `PlaceID`.
@@ -127,8 +126,7 @@ PW: Hey, S! I know that you have Plugin X for me in this URL. Please, give me th
 S: Here you are (gives HTML).
 PW: Ok. Now I parse the HTML, extract JavaScript files, and create the plugin. Whenever the plugin is created, I'd like to load CSS and JS files.
 
-As you can see, there is a few intermediate steps between the plugin HTML loading and actual JS/CSS applying to the page. You can avoid them by simply adding the plugin to `ALL_PAGES_FOOTER_PLUGIN_CONTAINER`. This is a `PlaceIDs` which works in both UIs. It is not processed by the Plugin Wrapper. 
-```
+There is a few intermediate steps between the plugin HTML loading and actual JS/CSS applying to the page. You can avoid them by simply adding the plugin to `ALL_PAGES_FOOTER_PLUGIN_CONTAINER`. This is a `PlaceIDs` which works in both UIs. It is not processed by the Plugin Wrapper. 
 </tip>
 
 
@@ -150,7 +148,7 @@ And the JSP File:
   </c:otherwise>
 </c:choose>
 ```
-As you see, we use internal property `teamcity.plugins.SakuraUI-Plugin.bundleUrl` to understand, if we should load the JavaScript from the TeamCity itself, or somewhere else. It's required for incremental Webpack compilation and livetime updates we will touch later. This is the last Java-related code we will see in this guide.
+We use internal property `teamcity.plugins.SakuraUI-Plugin.bundleUrl` to understand if we should load the JavaScript from the TeamCity itself or from somewhere else. It's required for incremental Webpack compilation and livetime updates we will describe later. This is the last Java-related code in this guide.
 
 From now, we are ready to the pure frontend. Here's a brief description of React basics.
    
