@@ -13,7 +13,7 @@ The name _controlled_ explains the main advantage of these plugins – a develop
 
 ## Composing controlled UI plugin
 
-The main principle of Controlled plugin - you load your JSP and JavaScripts into a hidden container (PlaceId.ALL_PAGES_FOOTER_PLUGIN_CONTAINER) and then, at the time of DOM Ready, you start manipulate the content using the JavaScript API. It's possible to convert your Basic plugin to the Controlled one by simply adding the subscription to ON_CONTEXT_UPDATE.
+The main principle of Controlled plugins is that you load your JSP and JavaScripts into a hidden container (`PlaceId.ALL_PAGES_FOOTER_PLUGIN_CONTAINER`) and then, at the time of DOM Ready, you start manipulating the content using the JavaScript API. It's possible to convert your Basic plugin to the Controlled one by simply adding the subscription to `ON_CONTEXT_UPDATE`.
 
 The `Plugin Wrapper` considers the plugin as a _controlled_ one, if it has an `ON_CONTEXT_UPDATE` handler or if it's a React Component. 
 
@@ -25,7 +25,7 @@ isControlled() {
 }
 ```
 
-Let's start from the Java Controller: 
+Let's start with the Java Controller: 
 
 ```java
 public class SakuraUIPluginController {
@@ -46,7 +46,7 @@ public class SakuraUIPluginController {
 }
 ```
 
-The code is pretty close to the [basic plugin v.1](basic-ui-plugins.md#Version+1.+Simple+plugin). We've only changed the PlaceId to `PlaceId.ALL_PAGES_FOOTER_PLUGIN_CONTAINER` and explicitly added the JS file `controlled-plugin-core.js`; the JSP now contains the next code:
+The code is pretty close to the [basic plugin v.1](basic-ui-plugins.md#Version+1.+Simple+plugin). We've only changed `PlaceId` to `PlaceId.ALL_PAGES_FOOTER_PLUGIN_CONTAINER` and explicitly added the JS file `controlled-plugin-core.js`; the JSP now contains the next code:
 
 ```jsp
 
@@ -60,7 +60,7 @@ The code is pretty close to the [basic plugin v.1](basic-ui-plugins.md#Version+1
 
 ```
 
-Please, note, that we load two different JavaScript files using two approaches. The first one - using the addJSFile in the JavaController, the second one - using the `<bs:linkScript>` in JSP. `<bs:linkScript>` helper generates a resolved path to the script file (including `base_url`). 
+Please note that we load two different JavaScript files using two approaches. The first one is to use `addJSFile` in the JavaController, the second one is to use `<bs:linkScript>` in JSP. The `<bs:linkScript>` helper generates a resolved path to the script file (including `base_url`).
 
 There are no reasons to use one loader prior to other, except that .addJsFile() files are loaded and invoked before the content of a plugin is rendered. Apart from that, we at JetBrains consider using <bs:linkScript> as a more clear frontend-centric way of adding script files. 
 
@@ -105,7 +105,7 @@ There are no reasons to use one loader prior to other, except that .addJsFile() 
 
 ```
 
-1. Using `TeamCityAPI`, we create the JavaScript plugin for two placeIds - Sakura UI and Classic UI respectively. We use the DOM element from the JSP as a container.
+1. Using `TeamCityAPI`, we create the JavaScript plugin for two PlaceIds: Sakura UI and Classic UI respectively. We use the DOM element from the JSP as a container.
 2. We prepare the ES6 template.
 3. We subscribe the plugin to the context update event. The subscription handler provides the last context as the first argument. Whenever the context changes, we ask the plugin to update the content with the new string generated at point 3.
 
@@ -123,11 +123,11 @@ First, the console now looks a little different:
 
 During the `ON_CREATE` phase, Plugin Wrapper starts loading all attached scripts and styles. Script loading is an asynchronous function, so all scripts getting loaded after the synchronous `ON_MOUNT`. 
 
-After scripts been initialized, we call a subscription. That's why we see subscription lines after ON_MOUNT:
+After scripts are initialized, we call a subscription. That's why we see subscription lines after `ON_MOUNT`:
 
 _Plugin debugging. SakuraUI-Plugin / SAKURA_BUILD_OVERVIEW. Subscribe to Lifecycle. ON_CONTEXT_UPDATE_ 
 
-Now, try to select another build, you'll trigger the context update. Notice the major difference between the basic and controlled plugins here: Plugin Wrapper never recreate controlled plugins from a scratch (skipping `ON_CREATE`, `ON_DELETE`). Instead, it updates the content accordingly the new context using the `ON_CONTEXT_UPDATE` handlers. We used the Plugin API method `replaceContent`, so we also received a notification that the content has been updated. 
+Now, if you try to select another build, you'll trigger the context update. There is a major difference between the basic and controlled plugins here: Plugin Wrapper never recreates controlled plugins from a scratch (skipping `ON_CREATE`, `ON_DELETE`). Instead, it updates the content accordingly to the new context using the `ON_CONTEXT_UPDATE` handlers. We used the Plugin API method `replaceContent`, so we also received a notification that the content has been updated.
 
 <img src="controlled-plugin-3.png" thumbnail-same-file="true" thumbnail="true" alt="Plugin console inspection"/>
 
