@@ -5,7 +5,7 @@ This guide explains how to create a controlled UI plugin based on the new [front
 
 __Source branch with the example project: [example/controlled-plugin](https://github.com/JetBrains/teamcity-sakura-ui-plugins/tree/example/controlled-plugin)__.
 
-The name _controlled_ explains the main advantage of these plugins – a developer controls the plugin behavior. A controlled plugin knows how to react on the lifecycle events. It uses the Plugin API to update its content, to subscribe and unsubscribe to events, and to abort requests. In other words, controlled plugins allow creating rich applications within the TeamCity UI. Moreover, when Plugin Wrapper knows that a plugin is controlled by a developer, it stops requesting the plugin content every time and reduce lifecycle events.
+The name _controlled_ explains the main advantage of these plugins – a developer controls the plugin behavior. A controlled plugin knows how to react on the lifecycle events. It uses the Plugin API to update its content, to subscribe and unsubscribe to events, and to abort requests. In other words, controlled plugins allow creating rich applications within the TeamCity UI. Moreover, when the Plugin Wrapper knows that a plugin is controlled by a developer, it stops requesting the plugin content every time and reduce lifecycle events.
 
 >Sakura UI is a bundled TeamCity plugin. You can see that in the Plugins menu: it's listed here under the name "Overview Plugin". The Sakura UI plugin registers few endpoints and provides JavaScript. So, from some perspective, Sakura UI is a controlled plugin itself.
 >
@@ -13,21 +13,21 @@ The name _controlled_ explains the main advantage of these plugins – a develop
 
 ## Composing controlled UI plugin
 
+The main principle of Controlled plugin - you load your JSP and JavaScripts into a hidden container (PlaceId.ALL_PAGES_FOOTER_PLUGIN_CONTAINER) and then, at the time of DOM Ready, you start manipulate the content using the JavaScript API. It's possible to convert your Basic plugin to the Controlled one by simply adding the subscription to ON_CONTEXT_UPDATE.
+
 The `Plugin Wrapper` considers the plugin as a _controlled_ one, if it has an `ON_CONTEXT_UPDATE` handler or if it's a React Component. 
 
-```java
-
-get controlled() {
+```javascript
+isControlled() {
   return (
     this.callbacks.ON_CONTEXT_UPDATE.length > 0 || isValidPluginReactElementType(this?.content)
   )
 }
-
 ```
-We will get to React later. Now let's point at the `ON_CONTEXT_UPDATE`. Let's start with the controller:
+
+Let's start from the Java Controller: 
 
 ```java
-
 public class SakuraUIPluginController {
     private static final String PLUGIN_NAME = "SakuraUI-Plugin";
 
@@ -35,15 +35,18 @@ public class SakuraUIPluginController {
             @NotNull PluginDescriptor descriptor,
             @NotNull PagePlaces places
     ) {
-        new SimplePageExtension(places, PlaceId.SAKURA_HEADER_NAVIGATION_AFTER, PLUGIN_NAME, descriptor.getPluginResourcesPath("controlled-plugin.jsp"))
+        new SimplePageExtension(places, PlaceId.ALL_PAGES_FOOTER_PLUGIN_CONTAINER, PLUGIN_NAME, descriptor.getPluginResourcesPath("controlled-plugin.jsp"))
                 .addCssFile("controlled-plugin.css")
+                // There is an option to load the script using the Java Controller's 'addJsFile'.
+                // We recommend to use the JSP based loading (see the controlled-plugin.jsp) though
+                // to make it more clear where the script came from.
                 .addJsFile("controlled-plugin-core.js")
                 .register();
     }
 }
 ```
 
-The code is almost similar to the [basic plugin v.1](basic-ui-plugins.md#Version+1.+Simple+plugin). We've only explicitly added the JS file `controlled-plugin-core.js` and the JSP now contains the next code:
+The code is pretty close to the [basic plugin v.1](basic-ui-plugins.md#Version+1.+Simple+plugin). We've only changed the PlaceId to `PlaceId.ALL_PAGES_FOOTER_PLUGIN_CONTAINER` and explicitly added the JS file `controlled-plugin-core.js`; the JSP now contains the next code:
 
 ```jsp
 
@@ -57,30 +60,52 @@ The code is almost similar to the [basic plugin v.1](basic-ui-plugins.md#Version
 
 ```
 
-The `<bs:linkScript>` helper generates a correct link to the script file (including `base_url`). You can load the scripts via the Java Controller or in the JSP file. Files registered in the Java Controller should be requested before any other JavaScript file listed in the JSP.
+Please, note, that we load two different JavaScript files using two approaches. The first one - using the addJSFile in the JavaController, the second one - using the `<bs:linkScript>` in JSP. `<bs:linkScript>` helper generates a resolved path to the script file (including `base_url`). 
 
->In 2020 EAP1 build, the script loading order is not correct. The scripts files provided in the JSP via `<bs:linkScript>` are getting loaded before the JavaScript files specified in Java Controller. This logic will be inverted in the next EAP builds.
->
-{type="warning"}
+There are no reasons to use one loader prior to other, except that .addJsFile() files are loaded and invoked before the content of a plugin is rendered. Apart from that, we at JetBrains consider using <bs:linkScript> as a more clear frontend-centric way of adding script files. 
 
 `controlled-plugin-core.js`:
 
-```jsp
+```javascript
+(() => console.log("Controlled Plugin. Script invoked from the controlled-plugin-core.js"))()
+```
+`controlled-plugin-jsp.js`:
 
+```javascript
 (() => {
-    console.log("My Controlled plugin script from a Core file");
+    console.log("Controlled Plugin. Script invoked from the controlled-plugin-jsp.js");
+    const name = "SakuraUI-Plugin";
+    const container = document.getElementById(name);
 
-    const plugin = TeamCityAPI.pluginRegistry.searchByPlaceId("SAKURA_HEADER_NAVIGATION_AFTER", "SakuraUI-Plugin") // 1
+    const plugin =  new TeamCityAPI.Plugin(["SAKURA_BUILD_OVERVIEW", "BUILD_RESULTS_FRAGMENT"], {
+        name,
+        content: container,
+        options: {debug:true},
+    })
 
-    const template = (context) => `<div class="controlled-plugin-wrapper">Here is a dummy plugin.${JSON.stringify(context)}</div>` // 2
+    const template = (context) => `<div>There is a location context: ${JSON.stringify(context)}</div>`
 
-    plugin.onContextUpdate((context) => { // 3
-        plugin.replaceContent(template(context))
+    plugin.onContextUpdate((context) => {
+        container.classList.remove("hidden");
+        const dynamicPart = container.querySelector(".js-dynamic-part");
+
+        if (dynamicPart == null) {
+            return;
+        }
+
+        while (dynamicPart.firstChild) {
+            dynamicPart.firstChild.remove();
+        }
+
+
+        console.log("Controlled Plugin. On Context Update event fired.")
+        dynamicPart.insertAdjacentHTML('afterbegin', template(context));
     })
 })()
+
 ```
 
-1. Using `pluginRegistry`, we find the pugin instance by specifying `PlaceID` and the plugin name.
+1. Using `TeamCityAPI`, we create the JavaScript plugin for two placeIds - Sakura UI and Classic UI respectively. We use the DOM element from the JSP as a container.
 2. We prepare the ES6 template.
 3. We subscribe the plugin to the context update event. The subscription handler provides the last context as the first argument. Whenever the context changes, we ask the plugin to update the content with the new string generated at point 3.
 
@@ -88,46 +113,25 @@ The `<bs:linkScript>` helper generates a correct link to the script file (includ
 >
 {type="tip"}
 
-`controlled-plugin-jsp.js`:
-
-```js
-
-(() => {
-    console.log("My Controlled plugin script from a JSP file");
-
-    const plugin = TeamCityAPI.pluginRegistry.searchByPlaceId("SAKURA_HEADER_NAVIGATION_AFTER", "SakuraUI-Plugin")
-
-    const template = (context) => `<div class="controlled-plugin-wrapper">Here is a dummy plugin.${JSON.stringify(context)}</div>`
-
-    plugin.onContextUpdate((context) => {
-        plugin.replaceContent(template(context))
-    })
-})()
-```
-
-The same content goes to the `controlled-plugin-core.js`, but it has a different `console.log` at the top of IIFE (Immediately Invoked Function Expression).
-
 Let’s build a plugin and look at this behavior:
 
 <img src="controlled-plugin-1.png" width="1000" animated="true" alt="Plugin behavior"/>
 
-First of all, the console now looks a little different:
+First, the console now looks a little different:
 
 <img src="controlled-plugin-2.png" thumbnail-same-file="true" thumbnail="true" alt="Plugin console inspection"/>
 
-During the `ON_CREATE` phase, Plugin Wrapper starts loading all attached scripts and styles. Script loading is an asynchronous function, so all scripts getting loaded after the synchronous `ON_MOUNT`. We used two JavaScript files, both added a subscription. That's why we see 2 subscription lines after ON_MOUNT:
+During the `ON_CREATE` phase, Plugin Wrapper starts loading all attached scripts and styles. Script loading is an asynchronous function, so all scripts getting loaded after the synchronous `ON_MOUNT`. 
 
-_Plugin debugging. SakuraUI-Plugin / SAKURA_HEADER_NAVIGATION_AFTER. Subscribe to Lifecycle._
+After scripts been initialized, we call a subscription. That's why we see subscription lines after ON_MOUNT:
 
-Then we go to navigation. Notice the major difference between the basic and controlled plugins here: Plugin Wrapper never recreate plugins from a scratch (`ON_CREATE`, `ON_DELETE`). Instead, it updates the content accordingly the new context. We used the Plugin API method `replaceContent` two times, and we also received a notification that the content has been updated two times. 
+_Plugin debugging. SakuraUI-Plugin / SAKURA_BUILD_OVERVIEW. Subscribe to Lifecycle. ON_CONTEXT_UPDATE_ 
 
-If a component should disappear (for example, you develop a plugin not for the header but for the `SAKURA_PROJECT_BEFORE_CONTENT`), it will be properly dismounted.   
-
-Let's change all `PlaceID`'s used in this plugin from `SAKURA_HEADER_NAVIGATION_AFTER` to `SAKURA_PROJECT_BEFORE_CONTENT`.
+Now, try to select another build, you'll trigger the context update. Notice the major difference between the basic and controlled plugins here: Plugin Wrapper never recreate controlled plugins from a scratch (skipping `ON_CREATE`, `ON_DELETE`). Instead, it updates the content accordingly the new context using the `ON_CONTEXT_UPDATE` handlers. We used the Plugin API method `replaceContent`, so we also received a notification that the content has been updated. 
 
 <img src="controlled-plugin-3.png" thumbnail-same-file="true" thumbnail="true" alt="Plugin console inspection"/>
 
-Here we have a plugin in the new `PlaceID`. Every time we navigate, we also face the `ON_UNMOUNT` lifecycle event. Unmount happens every time the plugin should disappear from the screen. Or, in more specific terms of frontend, Unmount happens whenever you remove a node from the DOM.
+Every time we navigate, we also face the `ON_UNMOUNT` lifecycle event. Unmount happens every time the plugin should disappear from the screen. Or, in more specific terms of frontend, Unmount happens whenever you remove a node from the DOM.
 
 You can subscribe to any lifecycle hooks with the Plugin API:
 
@@ -149,7 +153,7 @@ plugin.onMount((context) => {
 });
 ```
 
-Here, we use the Plugin API method `registerEventHandler` to add the click handler. We recommend using this method because it guarantees that the handler will be detached before `ON_UNMOUNT` and attached again next time the component is `ON_MOUNT`.
+Using the code above, we call the Plugin API method `registerEventHandler` to add the click handler. We recommend using this method because it guarantees that the handler will be detached before `ON_UNMOUNT` and attached again next time the component is `ON_MOUNT`. Hence, you can avoid memory leaks and dead callbacks.
 
 That is what you get:
 
