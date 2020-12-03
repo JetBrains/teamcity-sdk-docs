@@ -39,7 +39,7 @@ public class SakuraUIPluginController {
                 .addCssFile("controlled-plugin.css")
                 // There is an option to load the script using the Java Controller's 'addJsFile'.
                 // We recommend to use the JSP based loading (see the controlled-plugin.jsp) though
-                // to make it more clear where the script came from.
+                // to make it clearer where the script came from.
                 .addJsFile("controlled-plugin-core.js")
                 .register();
     }
@@ -62,7 +62,7 @@ The code is pretty close to the [basic plugin v.1](basic-ui-plugins.md#Version+1
 
 Please note that we load two different JavaScript files using two approaches. The first one is to use `addJSFile` in the JavaController, the second one is to use `<bs:linkScript>` in JSP. The `<bs:linkScript>` helper generates a resolved path to the script file (including `base_url`).
 
-There are no reasons to use one loader prior to other, except that .addJsFile() files are loaded and invoked before the content of a plugin is rendered. Apart from that, we at JetBrains consider using `<bs:linkScript>` as a more clear frontend-centric way of adding script files. 
+There are no reasons to use one loader prior to other, except that .addJsFile() files are loaded and invoked before the content of a plugin is rendered. Apart from that, we at JetBrains consider using `<bs:linkScript>` as a clearer frontend-centric way of adding script files. 
 
 `controlled-plugin-core.js`:
 

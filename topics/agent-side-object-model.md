@@ -1,8 +1,6 @@
 [//]: # (title: Agent-side Object Model)
 [//]: # (auxiliary-id: Agent-side+Object+Model.html)
 
-
-
 On the agent side agent is represented by [`jetbrains.buildServer.agent.BuildAgent`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/agent/BuildAgent.html) interface. BuildAgent is available as a Spring bean and can be obtained by autowiring.
 
 Build agent configuration can be read from the [`jetbrains.buildServer.agent.BuildAgentConfiguration`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/agent/BuildAgentConfiguration.html), it can be obtained from the __BuildAgent#getConfiguration()__ method.
