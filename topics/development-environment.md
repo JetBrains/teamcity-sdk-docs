@@ -5,7 +5,7 @@
 
 ### Plugin Debugging
 
-You can debug your plugin in a running TeamCity just like a regular Java application debug: start TeamCity server with debug\-enabling JVM options and then connect to a remote debug port from the IDE. If you start TeamCity server from outside of your IDE, in IntelliJ IDE you can use "Remote" run configuration, check related [external blog post](http://jaketrent.com/post/debugging-remote-tomcat-intellij/). The JVM options for the server can be set via [TEAMCITY_SERVER_OPTS](https://www.jetbrains.com/help/teamcity/?configuring-teamcity-server-startup-properties) environment variable.
+You can debug your plugin in a running TeamCity just like a regular Java application debug: start TeamCity server with debug\-enabling JVM options and then connect to a remote debug port from the IDE. If you start TeamCity server from outside of your IDE, in IntelliJ IDE you can use "Remote" run configuration, check related [external blog post](https://www.jetbrains.com/help/idea/tutorial-remote-debug.html). The JVM options for the server can be set via [TEAMCITY_SERVER_OPTS](https://www.jetbrains.com/help/teamcity/?configuring-teamcity-server-startup-properties) environment variable.
 
 ### Plugin Reloading
 
