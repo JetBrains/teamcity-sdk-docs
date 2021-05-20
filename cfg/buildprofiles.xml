@@ -22,6 +22,9 @@
         <config-sideblocks>true</config-sideblocks>
         <config-search-scopes-provider>https://data.services.jetbrains.com/search/</config-search-scopes-provider>
         <force-resources-app-url>true</force-resources-app-url>
+        <noindex-content-in-deprecated>true</noindex-content-in-deprecated>
+        <noindex-content-in-eap>true</noindex-content-in-eap>
+        <noindex-content-in-release>true</noindex-content-in-release>
     </variables>
 
     <build-profile product="tc"/>
