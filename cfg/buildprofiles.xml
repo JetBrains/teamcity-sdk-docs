@@ -25,6 +25,7 @@
         <noindex-content-in-deprecated>true</noindex-content-in-deprecated>
         <noindex-content-in-eap>true</noindex-content-in-eap>
         <noindex-content-in-release>true</noindex-content-in-release>
+        <product-web-url>https://plugins.jetbrains.com/teamcity</product-web-url>
     </variables>
 
     <build-profile product="tc"/>
