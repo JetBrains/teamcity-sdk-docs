@@ -30,7 +30,7 @@ Plugins with the same name (for example, a newer version) located in `<TeamCity 
 ## Plugins Loading
 
 TeamCity creates a child Spring Framework context per plugin. There are two options to load plugins classes: __standalone__ and __shared__:
-* Standalone classloading (__recommeneded__) allows loading every plugin to a separate classloader. This approach allows a plugin to have additional libraries without the risk of affecting the server or other plugins.
+* Standalone classloading (__recommended__) allows loading every plugin to a separate classloader. This approach allows a plugin to have additional libraries without the risk of affecting the server or other plugins.
 * Shared classloading allows loading all plugins into same classloader. It is not allowed to override any libraries here.
 You may specify desired the classloading mode in the `teamcity-plugin.xml` file, see the [section below](#Plugin+Descriptor).
 
