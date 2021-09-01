@@ -26,7 +26,7 @@
         <noindex-content-in-eap>true</noindex-content-in-eap>
         <noindex-content-in-release>false</noindex-content-in-release>
         <product-web-url>https://plugins.jetbrains.com/teamcity</product-web-url>
-        <web-root>https://www.jetbrains.com/help</web-root>
+        <web-root>https://plugins.jetbrains.com/docs</web-root>
     </variables>
 
     <build-profile product="tc"/>
