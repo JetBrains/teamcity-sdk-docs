@@ -1,7 +1,17 @@
 [//]: # (title: Open API Changes)
 [//]: # (auxiliary-id: Open+API+Changes.html)
 
+## Changes from 2021.1 to 2021.2
 
+No noteworthy changes.
+
+## Changes from 2020.2 to 2021.1
+
+No noteworthy changes.
+
+## Changes from 2020.1 to 2020.2
+
+No noteworthy changes.
 
 ## Changes from 2019.2 to 2020.1
 
