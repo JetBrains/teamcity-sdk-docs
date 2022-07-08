@@ -21,7 +21,7 @@ To add an extension to a plugin:
 This is a recommended approach which covers most use cases and can be properly processed by TeamCity.
 
 If your plugin implements a major addition to the TeamCity functionality and requires an arbitrary DSL extension that cannot be expressed using the recommended approach, you have an option to write a completely custom extension. For this, add a `*.jar` file with your code to the same `kotlin-dsl` directory.   
-Note that TeamCity will not be able to generate DSL code using the syntax provided by your extension if you employ this approach; it will generate standard Kotlin DSL code instead. Use this method only if the recommended approach lacks flexibility for your purposes.
+Note that TeamCity will not be able to generate DSL code using the syntax provided by your extension if you employ this approach; it will generate standard Kotlin DSL code instead. This means that your DSL code won't be available when a user clicks the 'View as code' button or when an initial commit is performed when enabling versioned settings in a project. Use this method only if the recommended approach lacks flexibility for your purposes.
 
 ## Declaring DSL Extension
 
