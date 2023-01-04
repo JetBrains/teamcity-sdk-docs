@@ -2,11 +2,6 @@
 [//]: # (auxiliary-id: Web+UI+Extensions.html)
 
 
-<tip>
-
-You can use source code of the existing plugins as a reference, for example, [Server Profiling](https://plugins.jetbrains.com/plugin/8979-server-profiling).
-</tip>
-
 ## Getting Started
 
 The simplest way of adding your own custom tab is to derive from one of the classes:
