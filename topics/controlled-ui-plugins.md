@@ -144,7 +144,7 @@ You can subscribe to any lifecycle hooks with the Plugin API:
 The newly added handler for `ON_MOUNT` event fires at least one time, even if `ON_MOUNT` has been triggered before.   
 This hook is a good place to add event listeners because it fires right after the moment the content has been applied to the DOM tree. Try to add this code to the plugin's JS:
 
-```js
+```javascript
 
 plugin.onMount((context) => {
    plugin.registerEventHandler(plugin.container, "click", () => {
@@ -163,7 +163,7 @@ As you see, right before the component is unmounted, Plugin Wrapper removes all 
 
 Every lifecycle event subscription takes a handler as an argument. This handler receives the current context. Every subscription returns an unsubscribe function, so if you do not want to keep receiving updates, just call the unsubscriber:
 
-```js
+```javascript
 
 const unsubscribe = plugin.onContextUpdate((context) => {
     plugin.replaceContent(template(context))
@@ -171,7 +171,6 @@ const unsubscribe = plugin.onContextUpdate((context) => {
 
 // After a while    
 unsubscribe();
-
 ```
 
 We've learned how the lifecycle hooks work and how to consume them. Using this API, you can control async operations and event handling. This API is sufficient to build any complicated plugins for TeamCity. This is a path you can follow to build Plugin using your favorite UI Framework / Library. 

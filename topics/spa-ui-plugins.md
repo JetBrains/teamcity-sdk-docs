@@ -173,7 +173,7 @@ Unless you've decided to use Docker container, there are two mandatory actions y
 
 We tried to make the Webpack config as simple as we can do, so it simply extends the predefined config:
 
-```js
+```javascript
 const path = require('path')
 const getWebpackConfig = require('@jetbrains/teamcity-api/getWebpackConfig')
 
@@ -189,7 +189,7 @@ As you see in `webpack.config.js`, there is an "entry" item which points to a ce
 
 `src/index.js`:
 
-```js
+```javascript
 
 // @flow strict - let the Flow compiler and Intellij Idea know, that there is a Flow typed file
 import {Plugin, React} from "@jetbrains/teamcity-api"
@@ -204,7 +204,7 @@ new Plugin([Plugin.placeIds.SAKURA_SIDEBAR_TOP, Plugin.placeIds.BEFORE_CONTENT],
 
 `src/App/App.js`:
 
-```js
+```javascript
 
 import {H2, H3} from '@jetbrains/ring-ui/components/heading/heading' // 1
 
@@ -245,7 +245,7 @@ export default App
 
 We also should highlight, that there is an opportunity to reuse not a Public Library Components, but the internal TeamCity components. For now, we expose only the _All Builds_ component. In the next releases we will add Contexts and a few more components. To reuse internal TeamCity components, add the following code to `src/index.js`:
 
-```js
+```javascript
 import AllBuilds from "./AllBuilds/AllBuilds";
 ...
 ...
@@ -258,7 +258,7 @@ new Plugin(Plugin.placeIds.SAKURA_PROJECT_BEFORE_CONTENT, {
 
 Create `./AllBuilds/AllBuilds.js`:
 
-```js
+```javascript
 
 // @flow strict
 import Loader from '@jetbrains/ring-ui/components/loader/loader'
