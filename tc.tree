@@ -24,7 +24,7 @@
         <toc-element id="open-api-changes.md"/>
         <toc-element id="plugin-types-in-teamcity.md"/>
         <toc-element id="plugins-packaging.md"/>
-        <toc-element id="Implement_Cloud_Support.md"/>
+        <toc-element id="implement-cloud-support.md" accepts-web-file-names="implement-cloud-support.html"/>
         <toc-element id="server-side-object-model.md"/>
         <toc-element id="agent-side-object-model.md"/>
         <toc-element id="extensions.md"/>
