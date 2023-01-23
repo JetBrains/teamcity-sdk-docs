@@ -146,7 +146,7 @@ The `CloudClientEx` interface is inherited from the base `jetbrains.buildServer.
 
 * `getImages()` &mdash; Returns a list of all images registered for the cloud client.
 
-* `getErrorInfo()` &mdash; If any communication error(s) occured, this method returns information about these errors.
+* `getErrorInfo()` &mdash; If any communication error(s) occurred, this method returns information about these errors.
 
 * `canStartNewInstance(CloudImage image)` &mdash; TeamCity calls this method to check whether it is possible to start one mode instance of the provided image. If this method returns `true`, TeamCity schedules the `startNewInstance` method.
 
@@ -172,7 +172,7 @@ An instance has one of the following states:
 |--------------------|-----------------------------------------------------------------|
 | UNKNOWN            | The implementation fails to determine the status                |
 | SCHEDULED_TO_START | Use this status for a newly created instance                    |
-| STARTING           | The cloud system has reported a machine as startin              |
+| STARTING           | The cloud system has reported a machine as starting             |
 | RUNNING            | The cloud system has reported a machine as running (booted)     |
 | RESTARTING         | A machine is restarting                                         |
 | SCHEDULED_TO_STOP  | Use this status for instances that received the stop request.   |
