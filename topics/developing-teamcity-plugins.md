@@ -12,7 +12,7 @@ Aside from this documentation, refer to the following sources:
 
 If you need more information or have a question regarding the API, please do not hesitate to post your question into [TeamCity Plugins forum](https://teamcity-support.jetbrains.com/hc/en-us/community/topics/200366719-TeamCity-Plugin-Development). Use the search before posting to avoid possible duplication of discussions.
 
-Consider making your plugin public and submit it to the [TeamCity plugins repository](https://plugins.jetbrains.com/teamcity).
+Consider making your plugin public and submit it to [JetBrains Marketplace](https://plugins.jetbrains.com).
 
 Please refer to corresponding section for further details.
 
