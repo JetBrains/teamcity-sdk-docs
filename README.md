@@ -1,3 +1,5 @@
+[![official JetBrains project](https://jb.gg/badges/official-flat-square.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
+
 # TeamCity Plugin Development Documentation
 
 Welcome to the source repository of the [TeamCity Plugin Development Help](https://plugins.jetbrains.com/docs/teamcity/developing-teamcity-plugins.html) site.
