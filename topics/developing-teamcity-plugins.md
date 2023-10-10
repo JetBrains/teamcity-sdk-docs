@@ -79,7 +79,7 @@ Allows TeamCity to parse XML-based report files produced by external tools and d
 <dt><b>Shared Resources</b></dt>
 <dd>
 <p>Allows you to limit the number of running builds that use the same shared resource (for example, an external database or a server with a limited number of connections).</p>
-<p><a href="https://www.jetbrains.com/help/teamcity/shared-resources.html">Sources on GitHub</a> | <a href="https://www.jetbrains.com/help/teamcity/shared-resources.html">TeamCity Documentation</a></p>
+<p><a href="https://github.com/JetBrains/teamcity-shared-resources">Sources on GitHub</a> | <a href="https://www.jetbrains.com/help/teamcity/shared-resources.html">TeamCity Documentation</a></p>
 </dd>
 
 
