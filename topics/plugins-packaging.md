@@ -230,7 +230,7 @@ TeamCity versions of 2024.03 and older supported an experimental feauture that a
 
 
 
-The `<include name='path_to_a_file' />` line specifies the path to a file that needs to be made executable on Linux/Unix/Mac agents. The path is relative to your tool folder (e.g. `<Agent home>/tools/<your tool name>`). Note that wildcards are not supported. See the [TW-21673](https://youtrack.jetbrains.com/issue/TW-21673/Support-plugins-tools-packing-for-executable-bits-support#focus=Comments-27-8345002.0-0) YouTrack ticket for more information. for proper solution.
+The `<include name='path_to_a_file' />` line specifies the path to a file that needs to be made executable on Linux/Unix/Mac agents. The path is relative to your tool folder (e.g. `<Agent home>/tools/<your tool name>`). Note that wildcards are not supported. See the [TW-21673](https://youtrack.jetbrains.com/issue/TW-21673/Support-plugins-tools-packing-for-executable-bits-support#focus=Comments-27-8345002.0-0) YouTrack ticket for more information.
 
 Although this approach remains functional, specifying executable bits manually is no longer required in TeamCity 2024.03 and newer. Instead, make sure that all files have required permissions, and that permissions are preserved when files are archived. When a tool is unpacked on an agent machine, these permissions will be in effect automatically.
 
