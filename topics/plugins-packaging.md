@@ -215,17 +215,16 @@ TeamCity versions of 2024.03 and older supported an experimental feauture that a
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-        <teamcity-agent-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                         xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
-          <tool-deployment>
-            <layout>
-              <executable-files>
+<teamcity-agent-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
+    <tool-deployment>
+        <layout>
+            <executable-files>
                 <include name='path_to_a_file'/>
-              </executable-files>
-            </layout>
-          </tool-deployment>
-        </teamcity-agent-plugin>
-
+            </executable-files>
+        </layout>
+    </tool-deployment>
+</teamcity-agent-plugin>
 ```
 
 
@@ -248,18 +247,16 @@ Example of the server\-side plugin descriptor using plugin dependencies:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <teamcity-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-plugin-v1-xml">
-  <info>
-
-  <name>Plugin Name</name>
-  <!-- Some tags skipped -->
-  </info>
-  <deployment use-separate-classloader="true"/>
+        xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-plugin-v1-xml">
+    <info>
+        <name>Plugin Name</name>
+        <!-- Some tags skipped -->
+    </info>
+    <deployment use-separate-classloader="true"/>
     <dependencies>
-  <plugin name="dotNetRunners"/>
-  </dependencies>
+        <plugin name="dotNetRunners"/>
+    </dependencies>
 </teamcity-plugin>
-
 ```
 
 
@@ -270,14 +267,13 @@ Example of agent\-side plugin descriptor:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <teamcity-agent-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
-  <plugin-deployment use-separate-classloader="true"/>
+        xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
+    <plugin-deployment use-separate-classloader="true"/>
     <dependencies>
-      <tool name="ant"/>
-      <plugin name="ant-runner"/>
+        <tool name="ant"/>
+        <plugin name="ant-runner"/>
     </dependencies>
 </teamcity-agent-plugin>
-
 ```
 
 
