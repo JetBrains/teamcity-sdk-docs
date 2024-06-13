@@ -27,8 +27,8 @@ __The agent\-side part__ is optional and only responsible for checking out and u
 <tip>
 
 You can use the source code of the existing VCS plugins as a reference, for example:
-* [Git plugin](https://plugins.jetbrains.com/plugin/8887-git)
-* [Mercurial plugin](https://plugins.jetbrains.com/plugin/8888-mercurial)
+* [Git plugin](https://github.com/JetBrains/teamcity-git)
+* [Mercurial plugin](https://hg.jetbrains.org/hg/mercurial/file/default)
 For more information on TeamCity plugins, please refer to the [TeamCity Plugins](https://plugins.jetbrains.com/teamcity) section.
 </tip>
 
