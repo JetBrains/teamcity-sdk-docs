@@ -135,7 +135,9 @@ The `CloudClientEx` interface is inherited from the base `jetbrains.buildServer.
 
 * `startNewInstace(CloudImage image, CloudInstanceUserData tag)` &mdash; Returns a CloudInstance object in the SCHEDULED_TO_START, or STARTING, or RUNNING state. If an instance requires a significant amount of time to start, implement the `ClouldClientEx` interface asynchronously. The `CloudInstanceUserData` parameter contains properties to be set into a build agent that is runs on the virtual machine.
 
-    > The `CloudInstanceUserData` object includes the `AuthToken` property that stores a unique single-use authorization token. This value should match the agent `teamcity.agent.startingInstanceId` parameter. Otherwise, the agent will fail to pass authorization on a TeamCity server.
+    > For security reasons, TeamCity generates unique auth tokens for each cloud instance. Agents that correspond to these instances must have the same token values written to their `teamcity.agent.startingInstanceId` parameters. Otherwise, the agent will be unable to pass the TeamCity authorization.
+    >
+    > When implementing a custom cloud agent support, you need to manually implement the token transfer logic. To do that, call the `CloudInstanceUserData.getAgentConfigurationParameter` to get a token and write it to the agent configuration using the `BuildAgentConfiguration.addConfigurationParameter` method.
     >
     {type="warning"}
 
