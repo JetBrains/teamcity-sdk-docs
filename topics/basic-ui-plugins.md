@@ -80,7 +80,7 @@ The `PlaceID` in the Sakura UI:
 >It's not forbidden to add a JavaScript file (using `addJsFile`) to this plugin and attach some logic like "_make a request every time context updated_". For example, it could be a code snippet for advertisement systems to send a `pageView` event.   
 Keep in mind: if you attach any listeners, intervals, subscriptions, timeouts or make any async operations in this JavaScript file, they will be fired every time the plugin re-renders. It would result in race conditions and memory leaks. Looking ahead, we have a solution for this type of plugin. It relies on the Plugin Lifecycle event and is described in the [Controlled UI Plugins](controlled-ui-plugins.md) section.
 >
-{type="tip"}
+{style="tip"}
 
 You can compile your plugin using the Intellij IDEA run configuration _Build Plugin_ or using the CLI command:
 

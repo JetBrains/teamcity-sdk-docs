@@ -1,46 +1,44 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE product-profile
-        SYSTEM "http://helpserver.labs.intellij.net/help/product-profile.dtd">
-<product-profile xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                 id="tc" name="TeamCity Plugin Development Help" start-page="developing-teamcity-plugins.md" status="release">
-    <toc-element id="developing-teamcity-plugins.md">
-        <toc-element id="getting-started-with-plugin-development.md"/>
-        <toc-element id="typical-plugins.md">
-            <toc-element id="build-runner-plugin.md"/>
-            <toc-element id="risk-tests-reordering-in-custom-test-runner.md"/>
-            <toc-element id="custom-build-trigger.md"/>
-            <toc-element id="build-features.md"/>
-            <toc-element id="extending-notification-templates-model.md"/>
-            <toc-element id="issue-tracker-integration-plugin.md"/>
-            <toc-element id="version-control-system-plugin.md"/>
-            <toc-element id="custom-authentication-module.md"/>
-            <toc-element id="custom-notifier.md"/>
-            <toc-element id="custom-statistics.md"/>
-            <toc-element id="custom-server-health-report.md"/>
-            <toc-element id="extending-highlighting-for-web-diff-view.md"/>
-            <toc-element id="external-storage-implementation-guide.md"/>
-        </toc-element>
-        <toc-element id="bundled-development-package.md"/>
-        <toc-element id="open-api-changes.md"/>
-        <toc-element id="plugin-types-in-teamcity.md"/>
-        <toc-element id="plugins-packaging.md"/>
-        <toc-element id="implement-cloud-support.md"/>
-        <toc-element id="server-side-object-model.md"/>
-        <toc-element id="agent-side-object-model.md"/>
-        <toc-element id="extensions.md"/>
-        <toc-element id="kotlin-dsl-extensions.md"/>
-        <toc-element id="web-ui-extensions.md">
-            <toc-element id="front-end-extensions.md">
-                <toc-element id="basic-ui-plugins.md"/>
-                <toc-element id="controlled-ui-plugins.md"/>
-                <toc-element id="spa-ui-plugins.md"/>
-            </toc-element>
-        </toc-element>
-        <toc-element id="development-environment.md"/>
-        <toc-element id="developing-plugins-using-maven.md"/>
-        <toc-element id="storing-plugin-state-and-settings.md"/>
-        <toc-element id="plugin-development-faq.md"/>
-    </toc-element>
-    <toc-element toc-title="Open API Javadoc" href="http://javadoc.jetbrains.net/teamcity/openapi/current/"/>
-    <toc-element toc-title="TeamCity Product Documentation" href="https://www.jetbrains.com/help/teamcity/teamcity-documentation.html"/>
-</product-profile>
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE instance-profile SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+<instance-profile xmlns:xs="http://www.w3.org/2001/XMLSchema" id="tc" name="TeamCity Plugin Development Help" start-page="developing-teamcity-plugins.md" status="release">
+	<toc-element topic="developing-teamcity-plugins.md">
+		<toc-element topic="getting-started-with-plugin-development.md"/>
+		<toc-element topic="typical-plugins.md">
+			<toc-element topic="build-runner-plugin.md"/>
+			<toc-element topic="risk-tests-reordering-in-custom-test-runner.md"/>
+			<toc-element topic="custom-build-trigger.md"/>
+			<toc-element topic="build-features.md"/>
+			<toc-element topic="extending-notification-templates-model.md"/>
+			<toc-element topic="issue-tracker-integration-plugin.md"/>
+			<toc-element topic="version-control-system-plugin.md"/>
+			<toc-element topic="custom-authentication-module.md"/>
+			<toc-element topic="custom-notifier.md"/>
+			<toc-element topic="custom-statistics.md"/>
+			<toc-element topic="custom-server-health-report.md"/>
+			<toc-element topic="extending-highlighting-for-web-diff-view.md"/>
+			<toc-element topic="external-storage-implementation-guide.md"/>
+		</toc-element>
+		<toc-element topic="bundled-development-package.md"/>
+		<toc-element topic="open-api-changes.md"/>
+		<toc-element topic="plugin-types-in-teamcity.md"/>
+		<toc-element topic="plugins-packaging.md"/>
+		<toc-element topic="implement-cloud-support.md"/>
+		<toc-element topic="server-side-object-model.md"/>
+		<toc-element topic="agent-side-object-model.md"/>
+		<toc-element topic="extensions.md"/>
+		<toc-element topic="kotlin-dsl-extensions.md"/>
+		<toc-element topic="web-ui-extensions.md">
+			<toc-element topic="front-end-extensions.md">
+				<toc-element topic="basic-ui-plugins.md"/>
+				<toc-element topic="controlled-ui-plugins.md"/>
+				<toc-element topic="spa-ui-plugins.md"/>
+			</toc-element>
+		</toc-element>
+		<toc-element topic="development-environment.md"/>
+		<toc-element topic="developing-plugins-using-maven.md"/>
+		<toc-element topic="storing-plugin-state-and-settings.md"/>
+		<toc-element topic="plugin-development-faq.md"/>
+	</toc-element>
+	<toc-element toc-title="Open API Javadoc" href="http://javadoc.jetbrains.net/teamcity/openapi/current/"/>
+	<toc-element toc-title="TeamCity Product Documentation" href="https://www.jetbrains.com/help/teamcity/teamcity-documentation.html"/>
+</instance-profile>

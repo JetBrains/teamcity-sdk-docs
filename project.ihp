@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE ihp
-        SYSTEM "https://resources.jetbrains.com/stardust/ihp.dtd">
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE ihp SYSTEM "https://resources.jetbrains.com/stardust/ihp.dtd">
 <ihp version="2.0">
     <settings>
         <id-generator-method>URL_ENCODE_PLUS</id-generator-method>
@@ -8,10 +7,7 @@
     <module name="teamcity-docs"/>
     <vars src="v.list"/>
     <topics dir="topics"/>
-    <images dir="images" version="2021.2"
-            web-path="/docs/teamcity/"/>
+    <images dir="images" version="2021.2" web-path="/docs/teamcity/"/>
     <categories src="c.list"/>
     <tags src="g.list"/>
-    <product src="tc.tree" web-path="/docs/teamcity/"
-             teamcity-build-path="Documentation_Teamware_TeamCitySdkDocs" keymaps-mode="none"/>
-</ihp>
+    </ihp>
