@@ -70,6 +70,9 @@ There is also an artifact to support plugin tests:
 
 ```
 
+> Note that the value of the `<version>` tag must be in the `major.minor` format, excluding the bugfix number. For example, specify `2021.2` instead of `2021.2.2`.
+>
+{type="note"}
 
 
 ## Maven Archetypes
