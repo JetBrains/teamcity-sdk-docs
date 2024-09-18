@@ -16,7 +16,7 @@ Consider making your plugin public and submit it to the [TeamCity plugins reposi
 
 Please refer to corresponding section for further details.
 
-[//]: # (See "Developing TeamCity Pluginsd118e57.txt" for more information.)    
+<!--[//]: # (See "Developing TeamCity Pluginsd118e57.txt" for more information.)-->
 
 ## Plugin Quick Start
 

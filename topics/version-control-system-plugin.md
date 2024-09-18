@@ -64,7 +64,7 @@ Checkout rules allow to map the path in repository to another path on agent or t
 Checkout rules consist of include and exclude rules. Include rule can have "from" and "to" parts ("to" part allows to map path in repository to another path on agent). Mapping is performed by TeamCity itself and VCS plugin should not worry about it. However a VCS plugin can use checkout rules to speedup changes retrieval and patch building since checkout rules usually narrow a VCS Root to some its subset.
 
 
-[//]: # (See "Version Control System Plugind348e147.txt" for more information.)    
+<!--[//]: # (See "Version Control System Plugind348e147.txt" for more information.)-->    
 
 
 
@@ -74,7 +74,7 @@ Checkout rules consist of include and exclude rules. Include rule can have "from
 
 
 
-[//]: # (See "Version Control System Plugind348e155.txt" for more information.)    
+<!--[//]: # (See "Version Control System Plugind348e155.txt" for more information.)-->    
 
 
 
@@ -84,16 +84,17 @@ Checkout rules consist of include and exclude rules. Include rule can have "from
 
 
 
-[//]: # (See "Version Control System Plugind348e163.txt" for more information.)    
+<!--[//]: # (See "Version Control System Plugind348e163.txt" for more information.)-->    
 
 
  When implementing include rule policies, it is important to understand how they work with Checkout Rules and paths. Let's consider an example with collecting changes.
 
 Suppose, we have a VCS Root pointing to `vcs://repository/project/`. The project root contains the following directory structure: 
+
 ![vcsPluginOldStyleDiagram1.png](vcsPluginOldStyleDiagram1.png)
 
 
-[//]: # (See "Version Control System Plugind348e180.txt" for more information.)    
+<!--[//]: # (See "Version Control System Plugind348e180.txt" for more information.)-->    
 
 
 We want to monitor changes only in `module1` and `module2`. Therefore we've configured the following checkout rules:
@@ -109,24 +110,27 @@ We want to monitor changes only in `module1` and `module2`. Therefore we've conf
 
 
 When `collectBuildChanges(...)` is invoked, it will receive a `VcsRoot` instance that corresponds to `vcs://repository/project/` and a `CheckoutRules` instance with two `IncludeRules`: one for "module1" and the other for "module2". 
+
 ![vcsPluginOldStyleDiagram2.png](vcsPluginOldStyleDiagram2.png)
 
 
-[//]: # (See "Version Control System Plugind348e220.txt" for more information.)    
+<!--[//]: # (See "Version Control System Plugind348e220.txt" for more information.)-->    
 
 
  If `collectBuildChanges(...)` utilizes `VcsSupportUtil.collectBuildChanges(...)`, it transforms the invocation into two separate calls of `CollectChangesByIncludeRule.collectBuildChange(...)`. If you have implemented `CollectChangesByIncludeRule` in the way described in the listing above, you will have the following interaction. 
+
  ![vcsPluginOldStyleDiagram3.png](vcsPluginOldStyleDiagram3.png)
 
 
-[//]: # (See "Version Control System Plugind348e245.txt" for more information.)    
+<!--[//]: # (See "Version Control System Plugind348e245.txt" for more information.)-->    
 
 
  Now let's assume we've got a couple of changes in our sample repository, made by different users. 
- ![vcsPluginOldStyleDiagram4.png](vcsPluginOldStyleDiagram4.png)
+ 
+![vcsPluginOldStyleDiagram4.png](vcsPluginOldStyleDiagram4.png)
 
 
-[//]: # (See "Version Control System Plugind348e258.txt" for more information.)    
+<!--[//]: # (See "Version Control System Plugind348e258.txt" for more information.)-->    
 
 
  The collection of `ModificationData` returned by `VcsSupport.collectBuildChanges(...)` should then be like this: 
@@ -136,7 +140,7 @@ When `collectBuildChanges(...)` is invoked, it will receive a `VcsRoot` instance
 ![vcsPluginOldStyleDiagram5.png](vcsPluginOldStyleDiagram5.png)
 
 
-[//]: # (See "Version Control System Plugind348e276.txt" for more information.)    
+<!--[//]: # (See "Version Control System Plugind348e276.txt" for more information.)-->    
 
 
  But this is not a simple union of collections, returned by two calls of `CollectChangesByIncludeRule.collectBuildChange(...)`. To see why let's have a closer look at the first calls. 
@@ -146,7 +150,7 @@ When `collectBuildChanges(...)` is invoked, it will receive a `VcsRoot` instance
 ![vcsPluginOldStyleDiagram6.png](vcsPluginOldStyleDiagram6.png)
 
 
-[//]: # (See "Version Control System Plugind348e292.txt" for more information.)    
+<!--[//]: # (See "Version Control System Plugind348e292.txt" for more information.)-->    
 
 
  As you can see, the paths in the resulting change must be relative to the path presented by the include rule, rather than the path in the VCS Root.
@@ -162,7 +166,7 @@ Assume both changes in the example above are done by the same user within the sa
 ![vcsPluginOldStyleDiagram7.png](vcsPluginOldStyleDiagram7.png)
 
 
-[//]: # (See "Version Control System Plugind348e326.txt" for more information.)    
+<!--[//]: # (See "Version Control System Plugind348e326.txt" for more information.)-->    
 
 
 Changes corresponding to different include rules cannot be aggregated under the same `ModificationData` instance even if they logically relate to the same commit transaction. This means a user will see these changes in separate change lists, which may be confusing. Experience shows that it's not very common situation when a user commits to directories monitored with different include rules. However, if the duplication is extremely undesirable an implementation should not utilize `VcsSupportUtil.collectBuildChanges(...)` and control `CheckoutRules` itself.
@@ -172,7 +176,7 @@ Another limitation is complete ignorance of exclude rules. As it said before thi
 All above is applicable to building patches using `VcsSupportUtil.buildPatch(...)` including the path relativity aspect.
 
 
-[//]: # (See "Version Control System Plugind348e353.txt" for more information.)    
+<!--[//]: # (See "Version Control System Plugind348e353.txt" for more information.)-->    
 
 
 
@@ -186,7 +190,7 @@ By default, the server caches clean patches created by VCS plugins, because clea
 
 
 
-[//]: # (See "Version Control System Plugind348e371.txt" for more information.)    
+<!--[//]: # (See "Version Control System Plugind348e371.txt" for more information.)-->    
 
 
 

@@ -3,13 +3,13 @@
 
 > The described API may be changed in future TeamCity releases.
 >
-{type="note"}
+{style="note"}
 
 This page explains how to create a plugin that allows you to run TeamCity agents on a cloud. You can use the open-source [Google Cloud Agents](https://github.com/JetBrains/teamcity-google-agent) plugin as a reference.
 
 > We are looking to improve this documentation and API. Feel free to post comments with questions and suggestions.
 >
-{type="note"}
+{style="note"}
 
 
 
@@ -129,7 +129,7 @@ The `CloudClientEx` interface is inherited from the base `jetbrains.buildServer.
 
 > TeamCity expects high performance from methods of your custom `CloudClientEx` implementation. To match these performance expectations, we recommend that your custom implementation has its own thread/thread pool that allows methods to operate asynchronously and update the cloud state.
 >
-{type="tip"}
+{style="tip"}
 
 ### Action Methods
 
@@ -139,7 +139,7 @@ The `CloudClientEx` interface is inherited from the base `jetbrains.buildServer.
     >
     > When implementing a custom cloud agent support, you need to manually implement the token transfer logic. To do that, call the `CloudInstanceUserData.getAgentConfigurationParameter` to get a token and write it to the agent configuration using the `BuildAgentConfiguration.addConfigurationParameter` method.
     >
-    {type="warning"}
+    {style="warning"}
 
 * `terminateInstance(CloudInstance instance)` &mdash; Stops a cloud instance.
 
