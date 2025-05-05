@@ -210,27 +210,28 @@ To deploy a tool, use the following `teamcity-plugin.xml` file:
 
 #### Making File Executable
 
- There is experimental ability (can be removed in the future versions!) to set executable bit to some files after unpacking on the agent. Watch [TW-21673](https://youtrack.jetbrains.com/issue/TW-21673) for proper solution. To make some files of a tool executable, use the following `teamcity-plugin.xml` file:
+TeamCity versions of 2024.03 and older supported an experimental feauture that allowed you to set the executable bit for specific files after unpacking on the agent. To do this, you needed to specify the `executable-files` section of the `teamcity-plugin.xml` file:
 
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-        <teamcity-agent-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                         xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
-          <tool-deployment>
-            <layout>
-              <executable-files>
+<teamcity-agent-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
+    <tool-deployment>
+        <layout>
+            <executable-files>
                 <include name='path_to_a_file'/>
-              </executable-files>
-            </layout>
-          </tool-deployment>
-        </teamcity-agent-plugin>
-
+            </executable-files>
+        </layout>
+    </tool-deployment>
+</teamcity-agent-plugin>
 ```
 
 
 
-where `<include name='path_to_a_file' />` relative to your tool folder (e.g. `<Agent home>/tools/<your tool name>`) specifies the list of files to be made executable on Linux/Unix/Mac. Note that wildcards are not supported.
+The `<include name='path_to_a_file' />` line specifies the path to a file that needs to be made executable on Linux/Unix/Mac agents. The path is relative to your tool folder (e.g. `<Agent home>/tools/<your tool name>`). Note that wildcards are not supported. See the [TW-21673](https://youtrack.jetbrains.com/issue/TW-21673/Support-plugins-tools-packing-for-executable-bits-support#focus=Comments-27-8345002.0-0) YouTrack ticket for more information.
+
+Although this approach remains functional, specifying executable bits manually is no longer required in TeamCity 2024.03 and newer. Instead, make sure that all files have required permissions, and that permissions are preserved when files are archived. When a tool is unpacked on an agent machine, these permissions will be in effect automatically.
 
 See [Installing Agent Tools](https://www.jetbrains.com/help/teamcity/?installing-agent-tools) for installation instructions.
 
@@ -246,18 +247,16 @@ Example of the server\-side plugin descriptor using plugin dependencies:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <teamcity-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-plugin-v1-xml">
-  <info>
-
-  <name>Plugin Name</name>
-  <!-- Some tags skipped -->
-  </info>
-  <deployment use-separate-classloader="true"/>
+        xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-plugin-v1-xml">
+    <info>
+        <name>Plugin Name</name>
+        <!-- Some tags skipped -->
+    </info>
+    <deployment use-separate-classloader="true"/>
     <dependencies>
-  <plugin name="dotNetRunners"/>
-  </dependencies>
+        <plugin name="dotNetRunners"/>
+    </dependencies>
 </teamcity-plugin>
-
 ```
 
 
@@ -268,14 +267,13 @@ Example of agent\-side plugin descriptor:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <teamcity-agent-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
-  <plugin-deployment use-separate-classloader="true"/>
+        xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-agent-plugin-v1-xml">
+    <plugin-deployment use-separate-classloader="true"/>
     <dependencies>
-      <tool name="ant"/>
-      <plugin name="ant-runner"/>
+        <tool name="ant"/>
+        <plugin name="ant-runner"/>
     </dependencies>
 </teamcity-agent-plugin>
-
 ```
 
 

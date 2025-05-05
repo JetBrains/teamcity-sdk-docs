@@ -28,7 +28,7 @@ If a plugin only shows information in the UI, these measures should be sufficien
 If a plugin needs to perform any actions, it should check the context of its assigned responsibilities. This API is still in progress – see [TW-58322](https://youtrack.jetbrains.com/issue/TW-58322) for details.
 
 
-[//]: # (See "Plugin Development FAQd251e83.txt" for more information.)    
+<!--[//]: # (See "Plugin Development FAQd251e83.txt" for more information.)-->    
 
 
 

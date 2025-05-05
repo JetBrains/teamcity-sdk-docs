@@ -16,7 +16,7 @@ To add an extension to a plugin:
 
 >Each extension must be described in its own `*.xml` file inside the `kotlin-dsl` directory.
 >
-{type="tip"}
+{style="tip"}
 
 This is a recommended approach which covers most use cases and can be properly processed by TeamCity.
 

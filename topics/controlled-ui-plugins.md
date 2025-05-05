@@ -9,7 +9,7 @@ The name _controlled_ explains the main advantage of these plugins – a develop
 
 >Sakura UI is a bundled TeamCity plugin. You can see that in the Plugins menu: it's listed here under the name "Overview Plugin". The Sakura UI plugin registers few endpoints and provides JavaScript. So, from some perspective, Sakura UI is a controlled plugin itself.
 >
-{type="tip"}
+{style="tip"}
 
 ## Composing controlled UI plugin
 
@@ -111,7 +111,7 @@ There are no reasons to use one loader prior to other, except that .addJsFile() 
 
 >As you can see, we use Arrow functions. Since 2020.2, TeamCity officially drops support for Internet Explorer, so you can safely use ES6 features.
 >
-{type="tip"}
+{style="tip"}
 
 Let’s build a plugin and look at this behavior:
 

@@ -161,7 +161,7 @@ In some cases, there could be multiple VDOMs on one page. It could happen if you
 For plugin compatibility, we expose our internal React and ReactDOM instances via the Teamcity React API. The right usage of the TeamCity React instance is the key to writing a performant and safe plugin.
 
 > Speaking of [upcoming React v.17](https://reactjs.org/blog/2020/08/10/react-v17-rc.html): there is one important change we will see soon: it will be not required anymore to use the only one React version. And yet, even the React Team explains, that the purpose of this update is to facilitate migration between different React versions, not to compose different React Versions permanently. 
-{type="tip"}
+{style="tip"}
 
 As you can see, there is a new folder named `Frontend`. In this folder, we have a React application which uses [Flow JS](https://flow.org/en/docs/types/classes/). If you prefer static typed way of programming, you will definitely like Flow JS, but you are free to use any language (we use Flow JS, our Space team loves [KotlinJS](https://play.kotlinlang.org/hands-on/Building%20Web%20Applications%20with%20React%20and%20Kotlin%20JS/01_Introduction), most people all over the globe like [TypeScript](https://www.typescriptlang.org/)).
 

@@ -103,7 +103,7 @@ An example how a custom data storage can be used with a build configuration (cod
 
 
 ```shell
-SBuldType bt = ...
+SBuildType bt = ...
 CustomDataStorage pluginData = bt.getCustomDataStorage("my-plugin-data");
 pluginData.putValue("some key", "some value");
 

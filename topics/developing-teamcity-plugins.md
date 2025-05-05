@@ -12,11 +12,11 @@ Aside from this documentation, refer to the following sources:
 
 If you need more information or have a question regarding the API, please do not hesitate to post your question into [TeamCity Plugins forum](https://teamcity-support.jetbrains.com/hc/en-us/community/topics/200366719-TeamCity-Plugin-Development). Use the search before posting to avoid possible duplication of discussions.
 
-Consider making your plugin public and submit it to the [TeamCity plugins repository](https://plugins.jetbrains.com/teamcity).
+Consider making your plugin public and submit it to [JetBrains Marketplace](https://plugins.jetbrains.com).
 
 Please refer to corresponding section for further details.
 
-[//]: # (See "Developing TeamCity Pluginsd118e57.txt" for more information.)    
+<!--[//]: # (See "Developing TeamCity Pluginsd118e57.txt" for more information.)-->
 
 ## Plugin Quick Start
 
@@ -79,7 +79,7 @@ Allows TeamCity to parse XML-based report files produced by external tools and d
 <dt><b>Shared Resources</b></dt>
 <dd>
 <p>Allows you to limit the number of running builds that use the same shared resource (for example, an external database or a server with a limited number of connections).</p>
-<p><a href="https://www.jetbrains.com/help/teamcity/shared-resources.html">Sources on GitHub</a> | <a href="https://www.jetbrains.com/help/teamcity/shared-resources.html">TeamCity Documentation</a></p>
+<p><a href="https://github.com/JetBrains/teamcity-shared-resources">Sources on GitHub</a> | <a href="https://www.jetbrains.com/help/teamcity/shared-resources.html">TeamCity Documentation</a></p>
 </dd>
 
 
