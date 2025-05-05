@@ -4,7 +4,7 @@
 __Since TeamCity 2017.1,__ an API is provided to enable writing TeamCity plugins which can store TeamCity build artifacts in a custom storage. This guide details implementation of support for an external storage system as a TeamCity plugin.
 
 You can use the following plugins from JetBrains as implementation examples:
-* [S3 Artifact Storage](https://plugins.jetbrains.com/plugin/9623-s3-artifact-storage)
+* [S3 Artifact Storage](https://github.com/JetBrains/teamcity-s3-artifact-storage-plugin)
 * [Azure Artifact Storage](https://plugins.jetbrains.com/plugin/9617-azure-artifact-storage)
 * [Google Cloud Artifact Storage](https://plugins.jetbrains.com/plugin/9634-google-artifact-storage)
 
