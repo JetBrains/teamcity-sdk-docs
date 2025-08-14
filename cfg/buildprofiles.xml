@@ -28,6 +28,7 @@
 		<noindex-content-in-deprecated>true</noindex-content-in-deprecated>
 		<noindex-content-in-eap>true</noindex-content-in-eap>
 		<noindex-content-in-release>false</noindex-content-in-release>
+		<noindex-content>false</noindex-content>
 		<product-web-url>https://plugins.jetbrains.com/teamcity</product-web-url>
 		<web-root>https://plugins.jetbrains.com/docs</web-root>
 	</variables>
