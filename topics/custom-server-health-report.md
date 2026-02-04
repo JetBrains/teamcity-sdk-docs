@@ -37,7 +37,7 @@ There are the following places in the Web UI where Server Health items could be 
 
 * the report page (__Administration | Server Health__)
 * the notes section at the top of all pages (global items with severity more than 'info')
-* in\-place (in the popups appearing on some pages).
+* in-place (in the popups appearing on some pages).
 
 To define in what display mode a server health item is presented, use [`jetbrains.buildServer.web.openapi.healthStatus.HealthStatusItemDisplayMode`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/web/openapi/healthStatus/HealthStatusItemDisplayMode.html). The `HealthStatusItemDisplayMode.GLOBAL` value is passed to the request when an item is shown on the report page, `HealthStatusItemDisplayMode_INPLACE` is used in other cases.
 

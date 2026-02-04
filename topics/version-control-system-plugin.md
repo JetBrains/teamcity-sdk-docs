@@ -5,11 +5,11 @@
 
 In TeamCity a plugin for Version Control System (VCS) is seen as a set of interface implementations grouped together by instances of
 
-[`jetbrains.buildServer.vcs.VcsSupportContext`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/VcsSupportContext.html) (server\-side part) and [`jetbrains.buildServer.agent.vcs.AgentVcsSupportContext`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/agent/vcs/AgentVcsSupportContext.html) (agent\-side part). 
+[`jetbrains.buildServer.vcs.VcsSupportContext`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/VcsSupportContext.html) (server-side part) and [`jetbrains.buildServer.agent.vcs.AgentVcsSupportContext`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/agent/vcs/AgentVcsSupportContext.html) (agent-side part). 
 
  
 
-__The server\-side part of a VCS plugin__ is responsible the following major operations:
+__The server-side part of a VCS plugin__ is responsible the following major operations:
 
 * collecting changes between versions
 * building of a patch from version to version
@@ -20,7 +20,7 @@ There are also optional parts:
 * labeling / tagging
 * personal builds, which require corresponding support in IDE. This dependency may be eliminated in the future.
     
-__The agent\-side part__ is optional and only responsible for checking out and updating project sources on agents. In contrast to server\-side checkout it offers a traditional approach to interacting between a CI system and VCS – when source code is checked out into the same location where it's built. For pros &amp; cons of both solutions see [VCS Checkout Mode](https://www.jetbrains.com/help/teamcity/?vcs-checkout-mode).
+__The agent-side part__ is optional and only responsible for checking out and updating project sources on agents. In contrast to server-side checkout it offers a traditional approach to interacting between a CI system and VCS – when source code is checked out into the same location where it's built. For pros &amp; cons of both solutions see [VCS Checkout Mode](https://www.jetbrains.com/help/teamcity/?vcs-checkout-mode).
 
  
 
@@ -199,4 +199,4 @@ By default, the server caches clean patches created by VCS plugins, because clea
 
 Agent part of VCS plugin is optional, if it is provided then checkout can also be performed on the agent itself. This kind of checkout usually works faster but it may require additional configuration efforts, for example, if VCS plugin uses command line client then this client must be installed on all agents.
 
-To enable agent\-side checkout, be sure to include [`jetbrains.buildServer.agent.vcs.AgentVcsSupportContext`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/agent/vcs/AgentVcsSupportContext.html) into agent plugin part and also enable agent\-side checkout via `jetbrains.buildServer.vcs.VcsSupportConfig`.
+To enable agent-side checkout, be sure to include [`jetbrains.buildServer.agent.vcs.AgentVcsSupportContext`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/agent/vcs/AgentVcsSupportContext.html) into agent plugin part and also enable agent-side checkout via `jetbrains.buildServer.vcs.VcsSupportConfig`.

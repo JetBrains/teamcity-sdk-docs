@@ -17,7 +17,7 @@ There are two ways to register custom extension:
 2. register your extension at runtime in the [`jetbrains.buildServer.ExtensionHolder`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/ExtensionHolder.html) service (can be obtained by Spring autowiring feature)
 ## Available extensions
 
-__Server\-side extensions__
+__Server-side extensions__
 
 <table><tr>
 
@@ -195,7 +195,7 @@ Allows adding additional parameters available for a build. It differs from __Par
 
 <td>
 
-Provides a human\-readable description for a parameter, see also __BuildParametersProvider__.
+Provides a human-readable description for a parameter, see also __BuildParametersProvider__.
 
 
 </td></tr><tr>

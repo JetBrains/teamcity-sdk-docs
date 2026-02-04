@@ -45,28 +45,28 @@ With the introduction of default templates the following changes have been made:
 * ServerVersionInfo.getDisplayVersionMajor and ServerVersionInfo.getDisplayVersionMinor now return int instead of byte
 
 ## Changes from 9.1 to 10.0
-* UptodateValue:TimeToLiveProvider#getTimeToLiveMillis since 10.0 has a parameter \- value to be cached, so the cache time can depend on the cached value
+* UptodateValue:TimeToLiveProvider#getTimeToLiveMillis since 10.0 has a parameter - value to be cached, so the cache time can depend on the cached value
 
 * AgentLifeCycleListener and AgentLifeCycleAdapter have two new methods:
-    * dependenciesDownloaded \- called when all artifact dependencies of the build have been successfully resolved and downloaded
-    * preparationFinished \- called when all preparations for the build are finished (sources checkout, personal patch, artifact dependencies, free disk space requirement, etc) 
-* jetbrains.buildServer.web.openapi.healthStatus.suggestions.ProjectSuggestion class can be used as base class for project\-level suggestions
+    * dependenciesDownloaded - called when all artifact dependencies of the build have been successfully resolved and downloaded
+    * preparationFinished - called when all preparations for the build are finished (sources checkout, personal patch, artifact dependencies, free disk space requirement, etc) 
+* jetbrains.buildServer.web.openapi.healthStatus.suggestions.ProjectSuggestion class can be used as base class for project-level suggestions
 
-* Service messages\-related classes are no longer available in common\-api.jar. serviceMessages.jar is now essential part of Common API. 
-This change only affects compile time (already compiled binaries will work as is). To fix compile\-time "NoClassDefFound" errors, add serviceMessages.jar to your project's library.
+* Service messages-related classes are no longer available in common-api.jar. serviceMessages.jar is now essential part of Common API. 
+This change only affects compile time (already compiled binaries will work as is). To fix compile-time "NoClassDefFound" errors, add serviceMessages.jar to your project's library.
 
 * Methods SRunningBuild.addBuildMessage and SRunningBuild.addBuildMessages are deprecated and cannot be used in version 10.
 
 The plugins using these methods should be rewritten to use jetbrains.buildServer.serverSide.buildLog.BuildLog methods (see SRunningBuild.getBuildLog).
 
-* BuildServerListener.messageReceived event will not work in two\-node configuration, and will be removed in the future.
+* BuildServerListener.messageReceived event will not work in two-node configuration, and will be removed in the future.
 
 Consider using some other approach. For instance, a plugin can obtain an Iterator from build log (BuildLog.getMessagesIterator) and tail it periodically in background.
 
 * Signature of jetbrains.buildServer.messages.BuildMessagesTranslator.translateMessages method has been changed, now it accepts list of messages instead of single message: List&lt;BuildMessage1&gt; translateMessages(SRunningBuild build, List&lt;BuildMessage1&gt; messages)
 
 * jetbrains.buildServer.BuildAgent has new method int getAgentPoolId()
-* jetbrains.buildServer.clouds.CloudImage has new method Integer getAgentPoolId() \- it represents the agent pool that instances from this image will fall into. The value is nullable, which means that agent pool for the instances can be configured manually in Agents\-&gt;Pools UI
+* jetbrains.buildServer.clouds.CloudImage has new method Integer getAgentPoolId() - it represents the agent pool that instances from this image will fall into. The value is nullable, which means that agent pool for the instances can be configured manually in Agents-&gt;Pools UI
 
 ## Changes from 9.0 to 9.1
 
@@ -96,7 +96,7 @@ Consider using some other approach. For instance, a plugin can obtain an Iterato
 ### Server API changes
 {id="server-api-changes-1"}
 
-* Added `jetbrains.buildServer.serverSide.SProject#getPluginDataDirectory` that returns per\-project plugin data directory
+* Added `jetbrains.buildServer.serverSide.SProject#getPluginDataDirectory` that returns per-project plugin data directory
 * `jetbrains.buildServer.serverSide.BuildTypeSettings#addBuildRunner` not accepts `jetbrains.buildServer.serverSide.BuildRunnerDescriptor` instead of \*S\*BuildRunnerDescriptor
 * `jetbrains.buildServer.serverSide.TeamCityProperties` no longer contains static methods to compute TeamCity Data Directory. Use `jetbrains.buildServer.serverSide.ServerPaths` spring bean instead
 * `jetbrains.buildServer.serverSide.buildDistribution.AgentsFilterContext` now contains `getCustomData` and `setCustomData` methods. Agent filters can now store data there to be used during distribution/filtering process
@@ -122,10 +122,10 @@ You need now call `jetbrains.buildServer.serverSide.auth.ServerPrincipal#setCrea
 ### VCS API changes
 
 #### General
-* Non\-required VcsManager::registerVcsSupport method have been removed.
-* tests\-related constructors from `jetbrains.buildServer.vcs.ModificationData` were moved to `jetbrains.buildServer.vcs.ModificationDataForTest`
+* Non-required VcsManager::registerVcsSupport method have been removed.
+* tests-related constructors from `jetbrains.buildServer.vcs.ModificationData` were moved to `jetbrains.buildServer.vcs.ModificationDataForTest`
 * most methods from `jetbrains.buildServer.vcs.VcsSupportUtil` moved to parent class `jetbrains.buildServer.vcs.utils.VcsSupportUtil`
-* `VcsException` class no longer have `setRoot`, `getRoot`, `prependMessage` methods that are not designed to be used for vcs\-plugins, in core\-related tasks use `jetbrains.buildServer.vcs.VcsRootVcsException`
+* `VcsException` class no longer have `setRoot`, `getRoot`, `prependMessage` methods that are not designed to be used for vcs-plugins, in core-related tasks use `jetbrains.buildServer.vcs.VcsRootVcsException`
 * added method `jetbrains.buildServer.vcs.VcsSupportContext#getVcsExtension` for Vcs plugin context, override this method to provide additional services from plugin
 * `jetbrains.buildServer.vcs.VcsSupport#ignoreServerCachesFor` no longer be called, please migrate to post TeamCity 4.5 API
 #### Patch building
@@ -209,15 +209,15 @@ Vcs API is split into two parts: __VCS plugin api__, which is used to implement 
 
 ## Changes from 6.5 to 7.0
 * new API calls: `BuildStatistics.findTestBy(TestName)` and `BuildStatistics.getAllTests()`
-* event\-method `projectCreated` of `j.b.serverSide.BuildServerListener` and `j.b.serverSide.BuildServerAdapter` now receives two parameters: `projectId` and `user`.
+* event-method `projectCreated` of `j.b.serverSide.BuildServerListener` and `j.b.serverSide.BuildServerAdapter` now receives two parameters: `projectId` and `user`.
 * no longer publish `AntTaskExtension*`, `AntUtil`, `TestNGUtil`, `ElementPatch`, `JavaTaskExtensionHelper` classes to the openapi package. Those classes can still be found in `<teamcity>/webapps/ROOT/WEB-INF/plugins/ant/agent/antPlugin.zip!antPlugin/ant-runtime.jar`
 * `Notificator` interface: methods `notifyResponsibleChanged` and `notifyResponsibleAssigned` changed second parameter from `j.b.serverSide.ResponsibilityInfo` to `j.b.responsibility.ResponsibilityEntry` (due to ResponsibilityInfo deprecation).
-* `j.b.serverSide.BuildServerListener` \- we've deprecated `responsibleChanged` method which used `j.b.serverSide.ResponsibilityInfo` parameter and added a similar method which uses `j.b.responsibility.ResponsibilityEntry`
+* `j.b.serverSide.BuildServerListener` - we've deprecated `responsibleChanged` method which used `j.b.serverSide.ResponsibilityInfo` parameter and added a similar method which uses `j.b.responsibility.ResponsibilityEntry`
 * new API calls: `j.b.agent.AgentRunningBuild.getBuildFeatures()` and `j.b.agent.AgentRunningBuild.getBuildFeaturesOfType(String)`. With help of these methods you can access build features enabled for the current build with all parameters properly resolved.
 * new API calls: `j.b.serverSide.BuildTypeSettings.isEnabled(String)` and `j.b.serverSide.BuildTypeSettings.setEnabled(String, boolean)`. These calls allow to enable / disable a setting with specified id (build runner, trigger or build feature), or check if it is enabled.
-* Classes from serviceMessages.jar no longer depend on `j.b.messages.Status` class. If you used some of the classes (for example, `j.b.messages.serviceMessages.BuildStatus` class) and want to make your code compatible with TeamCity versions 6.0 \- 7.0, please use `j.b.messages.serviceMessages.ServiceMessage.asString(...)` methods.
+* Classes from serviceMessages.jar no longer depend on `j.b.messages.Status` class. If you used some of the classes (for example, `j.b.messages.serviceMessages.BuildStatus` class) and want to make your code compatible with TeamCity versions 6.0 - 7.0, please use `j.b.messages.serviceMessages.ServiceMessage.asString(...)` methods.
 * new API extension point to filter all build messages: `j.b.messages.BuildMessagesTranslator`
-* `j.b.serverSide.BuildServerListener` \- we've removed `beforeBuildFinish(SRunningBuild, boolean)` method which was deprecated since TeamCity 3.1, there is another method `beforeBuildFinish(SRunningBuild)` which can be used instead.
+* `j.b.serverSide.BuildServerListener` - we've removed `beforeBuildFinish(SRunningBuild, boolean)` method which was deprecated since TeamCity 3.1, there is another method `beforeBuildFinish(SRunningBuild)` which can be used instead.
 
 ## Changes from 6.0 to 6.5
 * Classes `j.b.serverSide.TestBlockBean`, `j.b.serverSide.TestInProject`, `j.b.serverSide.FailedTestBean,` `j.b.TestNameBean` are removed from the Open API. Interfaces `j.b.serverSide.STest`, `j.b.serverSide.STestRun` should be used instead.

@@ -20,7 +20,7 @@ Notifications are only delivered if there is at least one subscribed user for gi
 <tip>
 
 Use source code of the existing plugins as a reference:
-* [Create Teamcity Notifier](http://code.google.com/p/buildbunny/wiki/CreateTeamcityNotifier) \- instructions, source code at [GitHub](https://github.com/mendhak/buildbunny)
+* [Create Teamcity Notifier](http://code.google.com/p/buildbunny/wiki/CreateTeamcityNotifier) - instructions, source code at [GitHub](https://github.com/mendhak/buildbunny)
 * [tcgrowl](https://github.com/ndrake/tcgrowl)
 </tip>
 

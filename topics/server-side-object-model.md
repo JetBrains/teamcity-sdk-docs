@@ -52,9 +52,9 @@ TeamCity server constantly polls version control systems to determine whether a 
 A change is represented by [`jetbrains.buildServer.vcs.SVcsModification`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/SVcsModification.html) class. Each detected change has unique id and is associated with concrete version of the VCS root. A change also belongs to one or more build configurations (these are build configurations where VCS root was attached when change was detected), see __getRelatedConfigurations()__ method.
 
 There are several methods allowing to obtain VCS changes:
-1. `SBuildType#getPendingChanges()` \- use this method to find pending changes of the some build configuration (i.e. changes which are not yet associated with a build)
-2. `SBuild#getContainingChanges()` \- use this method to obtain changes associated with a build, i.e. changes since previous build
-3. [`jetbrains.buildServer.vcs.VcsModificationHistory`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/VcsModificationHistory.html) \- use this service to obtain arbitrary changes stored in the changes history, find change by id and so on.
+1. `SBuildType#getPendingChanges()` - use this method to find pending changes of the some build configuration (i.e. changes which are not yet associated with a build)
+2. `SBuild#getContainingChanges()` - use this method to obtain changes associated with a build, i.e. changes since previous build
+3. [`jetbrains.buildServer.vcs.VcsModificationHistory`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/vcs/VcsModificationHistory.html) - use this service to obtain arbitrary changes stored in the changes history, find change by id and so on.
 <note>
 
 If not mentioned specifically the returned collections of changes are always sorted in reverse order, with the most recent change coming first.

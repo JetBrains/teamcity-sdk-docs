@@ -11,7 +11,7 @@ You can use the following plugins from JetBrains as implementation examples:
 
 ## TeamCity Artifacts Overview
 
-TeamCity provides the following artifacts\-related features:
+TeamCity provides the following artifacts-related features:
 * Artifacts upload
 
 * Individual artifacts download and browsing of build artifacts in a web browser and via the [REST API](https://www.jetbrains.com/help/teamcity/?rest-api)
@@ -24,7 +24,7 @@ Uploaded data is displayed in the TeamCity web UI as an artifacts tree in the po
 
 TeamCity can also deliver artifacts of one build to another build with the help of [Artifacts dependencies](https://www.jetbrains.com/help/teamcity/?Artifact+Dependencies). Artifact dependency configuration includes the source build settings (build configuration, version), artifact patterns for matching the source build artifacts, and destination paths on the target agent. Downloaded artifact dependencies are cached on build agents to reduce the download time.
 
-Build artifacts also contain a number of [internal artifacts](https://www.jetbrains.com/help/teamcity/?Build+Artifact#BuildArtifact-HiddenArtifacts). They include (but not limited to) build logs, build properties, coverage reports, etc. These artifacts are required for TeamCity features to function properly, and unless specified explicitly, they are not removed by clean\-up and not downloaded as dependencies.
+Build artifacts also contain a number of [internal artifacts](https://www.jetbrains.com/help/teamcity/?Build+Artifact#BuildArtifact-HiddenArtifacts). They include (but not limited to) build logs, build properties, coverage reports, etc. These artifacts are required for TeamCity features to function properly, and unless specified explicitly, they are not removed by clean-up and not downloaded as dependencies.
 
 Build artifacts can be cleaned up according to [Cleanup Rules](https://www.jetbrains.com/help/teamcity/?Clean-Up#Clean-Up-ProjectClean-upRules).
 
@@ -57,9 +57,9 @@ To access artifact content via HTTP requests, the plugin should provide an imple
 
 ### Cleanup
 
-For cleanup, the plugin is expected to have a Spring bean implementing `jetbrains.buildServer.serverSide.cleanup.CleanupExtension`. It is recommended to make this bean [PositionAware](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/util/positioning/PositionAware.html) and place it [first](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/util/positioning/PositionConstraint.html#first()) to make sure the extension is called before the default TeamCity clean\-up procedures (that will remove builds and data stored on the disk).
+For cleanup, the plugin is expected to have a Spring bean implementing `jetbrains.buildServer.serverSide.cleanup.CleanupExtension`. It is recommended to make this bean [PositionAware](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/util/positioning/PositionAware.html) and place it [first](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/util/positioning/PositionConstraint.html#first()) to make sure the extension is called before the default TeamCity clean-up procedures (that will remove builds and data stored on the disk).
 
-The implementation should use `jetbrains.buildServer.serverSide.cleanup.BuildCleanupContext#getErrorReporter` to report errors which occurred during the clean\-up, and `jetbrains.buildServer.serverSide.artifacts.ServerArtifactHelper#removeFromArtifactList` to remove artifacts which were successfully cleaned up from the storage from the artifact list stored in the TeamCity.
+The implementation should use `jetbrains.buildServer.serverSide.cleanup.BuildCleanupContext#getErrorReporter` to report errors which occurred during the clean-up, and `jetbrains.buildServer.serverSide.artifacts.ServerArtifactHelper#removeFromArtifactList` to remove artifacts which were successfully cleaned up from the storage from the artifact list stored in the TeamCity.
 
  
 

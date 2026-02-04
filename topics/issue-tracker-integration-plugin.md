@@ -29,7 +29,7 @@ When the server is going to render the user comment (VCS commit, or build commen
 
 
 
-The provider has a number of parameters, configured from admin UI. These parameters are passed using the properties map (a map string \-&gt; string). Commonly used properties include provider name, credentials to communicate with ITS, or regular expression to parse issue ids. You don't have to worry about storing the properties in XML files, server does that.
+The provider has a number of parameters, configured from admin UI. These parameters are passed using the properties map (a map string -&gt; string). Commonly used properties include provider name, credentials to communicate with ITS, or regular expression to parse issue ids. You don't have to worry about storing the properties in XML files, server does that.
 
 
 
@@ -66,7 +66,7 @@ Common code of Jira, Bugzilla and YouTrack plugins can be found in `Abstract*` c
 	
 * [`jetbrains.buildServer.issueTracker.AbstractIssueProvider`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/AbstractIssueProvider.html)
 	
-* [`jetbrains.buildServer.issueTracker.AbstractIssueFetcher`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/AbstractIssueFetcher.html): a helper entity which encapsulates fetch\-related logic
+* [`jetbrains.buildServer.issueTracker.AbstractIssueFetcher`](http://javadoc.jetbrains.net/teamcity/openapi/current/jetbrains/buildServer/issueTracker/AbstractIssueFetcher.html): a helper entity which encapsulates fetch-related logic
 
 
 
@@ -133,7 +133,7 @@ public class MyIssueProviderFactory extends AbstractIssueProviderFactory {
 
 
 
-IssueFetcher is usually the central class performing plugin\-specific logic. You have to implement `getIssue` method, which connects to the ITS remotely (via HTTP, XML\-RPC, etc), passes authentication, retrieves the issue data and returns it, or reports an error. Example:
+IssueFetcher is usually the central class performing plugin-specific logic. You have to implement `getIssue` method, which connects to the ITS remotely (via HTTP, XML-RPC, etc), passes authentication, retrieves the issue data and returns it, or reports an error. Example:
 
 
 

@@ -1,7 +1,7 @@
 [//]: # (title: Extending Highlighting for Web diff view)
 [//]: # (auxiliary-id: Extending+Highlighting+for+Web+diff+view.html)
 
-TeamCity uses [JHighlight](https://jhighlight.dev.java.net/) library to render the code on [Difference Viewer](https://www.jetbrains.com/help/teamcity/?difference-viewer) page. Essentially what JHighlight is doing is it takes plain source code, recognizes the language by extension, parses it, and in case of success renders the HTML output where the tokens are highlighted according to the specified settings. Unfortunately JHighlight supports relatively small subset of languages out\-of\-the\-box (major ones like Java, C\+\+, XML, and several more). Here we'd like to present you a HOWTO on adding the support for more languages.
+TeamCity uses [JHighlight](https://jhighlight.dev.java.net/) library to render the code on [Difference Viewer](https://www.jetbrains.com/help/teamcity/?difference-viewer) page. Essentially what JHighlight is doing is it takes plain source code, recognizes the language by extension, parses it, and in case of success renders the HTML output where the tokens are highlighted according to the specified settings. Unfortunately JHighlight supports relatively small subset of languages out-of-the-box (major ones like Java, C\+\+, XML, and several more). Here we'd like to present you a HOWTO on adding the support for more languages.
 
 
 
@@ -113,7 +113,7 @@ WhiteSpace = [ \t\f]
 
 
 Our simple lexer has two states: initial (`YYINITIAL`, predefined) and `IN_VALUE`. In each of these states we try to handle the next character (or a group of characters) using regexp rules. 
-The rules are applied from the top to the bottom, the first one that matches non\-empty string is used. Each rule is associated with the action to be performed on runtime. Here we have only simple actions that return the token constant and sometimes change the state.
+The rules are applied from the top to the bottom, the first one that matches non-empty string is used. Each rule is associated with the action to be performed on runtime. Here we have only simple actions that return the token constant and sometimes change the state.
 
 
 

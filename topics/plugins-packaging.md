@@ -9,11 +9,11 @@ This page is intended for plugin developers and explains how to package TeamCity
 
 To write a TeamCity plugin, the knowledge of [Spring Framework](http://static.springsource.org/spring/docs/3.0.x/reference/beans.html) is beneficial.
 
-There are [server-side and agent-side](plugin-types-in-teamcity.md) plugins in TeamCity. Server\-side and agent\-side plugins are initialized in their own Spring containers; this means that every plugin needs a Spring bean definition file describing the main services of the plugin. Bean definition files are to be placed into the `META-INF` folder of the JAR archive containing the plugin classes.
+There are [server-side and agent-side](plugin-types-in-teamcity.md) plugins in TeamCity. Server-side and agent-side plugins are initialized in their own Spring containers; this means that every plugin needs a Spring bean definition file describing the main services of the plugin. Bean definition files are to be placed into the `META-INF` folder of the JAR archive containing the plugin classes.
 
 There is a convention for naming the definition file:
-* __build\-server\-plugin\-&lt;plugin name&gt;__\*.xml — for server\-side plugins
-* __build\-agent\-plugin\-&lt;plugin name&gt;__\*.xml — for agent\-side plugins, where the asterisk can be replaced with any text, for example: __build\-server\-plugin\-cvs.xml__.
+* __build-server-plugin-&lt;plugin name&gt;__\*.xml — for server-side plugins
+* __build-agent-plugin-&lt;plugin name&gt;__\*.xml — for agent-side plugins, where the asterisk can be replaced with any text, for example: __build-server-plugin-cvs.xml__.
 
 <tip>
 
@@ -43,7 +43,7 @@ The plugin zip file will be automatically unpacked to a temporary directory on t
 
 ## Server-Side Plugins
 
-A server\-side plugin may affect the server only, or may include a number of agent\-side plugins that will be automatically distributed to all build agents.
+A server-side plugin may affect the server only, or may include a number of agent-side plugins that will be automatically distributed to all build agents.
 
 ### Plugin Structure
 
@@ -58,11 +58,11 @@ If you use a _separate folder_:
 The plugin zip archive/directory includes:
 * the `agent` directory containing `<agent plugin zip>` if your plugin affects agents too, see the [section below](#Plugin+Structure).
 * `teamcity-plugin.xml` containing meta information about the plugin, like its name and version, see the [section below](#Plugin+Descriptor).
-* the `server` directory containing the server\-side part of the plugin, i.e, a number of jar files.
+* the `server` directory containing the server-side part of the plugin, i.e, a number of jar files.
 
 The plugin directory should have the following structure:
 
-The server\-only plugin:
+The server-only plugin:
 
 
 
@@ -96,9 +96,13 @@ It is a good practice to put all resources into a separate .jar file.
 
 ### Plugin Descriptor
 
-The `teamcity-plugin.xml` file must be located in the root of the plugin directory or .zip file. You can refer to the XSD schema for this file which is unpacked to `<TeamCity data directory>/config/teamcity-plugin-descriptor.xsd`
+The `teamcity-plugin.xml` file must be located in the root of the plugin directory or .zip file. The sample below illustrates an example of this file:
 
-An example of __teamcity\-plugin.xml__:
+<!--You can refer to the XSD schema for this file which is unpacked to `<TeamCity data directory>/config/teamcity-plugin-descriptor.xsd`
+
+An example of __teamcity-plugin.xml__:
+
+-->
 
 
 ```xml
@@ -123,7 +127,7 @@ An example of __teamcity\-plugin.xml__:
 ```
 
 
-It is recommended to set the `use-separate-classloader="true"` parameter to `true` for server\-side plugins. To reload the plugin without the server restart, use the `allow-runtime-reload="true"` parameter for deployment.
+It is recommended to set the `use-separate-classloader="true"` parameter to `true` for server-side plugins. To reload the plugin without the server restart, use the `allow-runtime-reload="true"` parameter for deployment.
 
 The plugin parameters can be accessed via the `jetbrains.buildServer.web.openapi.PluginDescriptor#getParameterValue(String)` method.
 
@@ -172,11 +176,11 @@ agent-plugin-name.zip
 ### Plugin Descriptor
 {id="plugin-descriptor-1"}
 
-It is required to have the `teamcity-plugin.xml` file under the root of the agent plugin `.zip` file. The agent tries to validate the plugin\-provided `teamcity-plugin.xml` file against the xml schema. If `teamcity-plugin.xml` is not valid, the plugin will be loaded, but some data from the descriptor may be lost.
+It is required to have the `teamcity-plugin.xml` file under the root of the agent plugin `.zip` file. The agent tries to validate the plugin-provided `teamcity-plugin.xml` file against the xml schema. If `teamcity-plugin.xml` is not valid, the plugin will be loaded, but some data from the descriptor may be lost.
 
 #### Plugins
 
-This `teamcity-plugin.xml` file provides the plugin description (same as it is done on the server\-side):
+This `teamcity-plugin.xml` file provides the plugin description (same as it is done on the server-side):
 
 
 ```xml
@@ -241,7 +245,7 @@ Plugin dependencies are present on both the server and agent side: some componen
 
 To use plugin dependencies, add the \`dependencies\` tag into the plugin xml descriptor:
 
-Example of the server\-side plugin descriptor using plugin dependencies:
+Example of the server-side plugin descriptor using plugin dependencies:
 
 
 ```xml
@@ -261,7 +265,7 @@ Example of the server\-side plugin descriptor using plugin dependencies:
 
 
 
-Example of agent\-side plugin descriptor:
+Example of agent-side plugin descriptor:
 
 
 ```xml
@@ -283,7 +287,7 @@ Example of agent\-side plugin descriptor:
 Using separate classloader is required (and will be enforced) to use dependencies. Transitive dependencies are not supported, you should specify all dependencies.
 </note>
 
-The names of the bundled tools and plugins are just the names of the corresponding folders in `<TeamCity Home>/webapps/ROOT/WEB-INF/plugins` for the server\-side plugins and `<Agent home>/plugins/` or `<Agent home>/tools/` for the agent\-side plugins and tools.
+The names of the bundled tools and plugins are just the names of the corresponding folders in `<TeamCity Home>/webapps/ROOT/WEB-INF/plugins` for the server-side plugins and `<Agent home>/plugins/` or `<Agent home>/tools/` for the agent-side plugins and tools.
 
 <note>
 
